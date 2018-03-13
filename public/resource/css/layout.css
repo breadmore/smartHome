@@ -1,0 +1,119 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+
+.col-sm-9.col-md-6.col-lg-8.col-xl-8,.col-sm-3.col-md-6.col-lg-4.col-xl-4,.menu_list {
+    background-color: #2f3742;
+}
+
+.image {
+    float: left;
+
+}
+
+.layout_title {
+    padding-left: 10px;
+    padding-top: 10px;
+    float: left;
+    color: white;
+    font-size: 27pt;
+    font-weight: bolder;
+}
+
+.layout_title2 {
+    float: left;
+    color: white;
+    font-weight: bolder;
+    font-size: 10pt;
+    padding-top: 34px;
+    padding-left: 10px;
+}
+
+.col-sm-9.col-md-6.col-lg-8.col-xl-8 {
+    display: inline-block;
+    padding: 25px;
+}
+
+.col-sm-9.col-md-6.col-lg-8.col-xl-8 img{
+    width: 100px;
+    height: 65px;
+}
+
+.col-sm-3.col-md-6.col-lg-4.col-xl-4 > div{
+    float: left;
+    margin-top: 35px;
+    margin-right: 15px;
+}
+
+.profile_auth {
+    margin-top: 5px;
+    color: white;
+    font-size: 10pt;
+    font-weight: bolder;
+
+}
+
+.profile_auth_name {
+    width: 100px;
+}
+
+.profile_image{
+    margin-left: 50px;
+}
+
+.profile_name {
+    color: white;
+    font-size: 13pt;
+    font-weight: bolder;
+}
+
+.profile_logout > button {
+    outline: 0;
+    margin-left: 10px;
+    margin-top: 20px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #2f3742;
+}
+
+.col-sm-3.col-md-6.col-lg-4.col-xl-4 {
+    display: inline-block;
+}
+
+.profile_image > img {
+    width: 50px;
+    height: 50px;
+}
+
+.menu_list {
+    color: white;
+    font-size: 9pt;
+    text-align: center;
+    font-weight: bolder;
+    width: 12%;
+}
+
+.menu_list > div {
+    padding-bottom: 10px;
+}
+
+.menu_list p {
+    margin: 0;
+}
+
+.menu_list img {
+    margin-top: 15px;
+    margin-bottom: 7px;
+    width: 50px;
+    height: 50px;
+}
+
+.content {
+    width: 88%;
+    border-right: 1px solid #2f3742;
+    border-bottom: 1px solid #2f3742;
+    background-color: white;
+}

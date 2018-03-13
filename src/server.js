@@ -37,7 +37,6 @@ const fs = require("fs");
 const bodyParser = require('body-parser');
 const httpLogger = require('morgan');
 
-
 // you can set a default credential secret for storing node's credentials within node red
 // normally this is secret is generated randomly and stored in the user directory (config)
 // if you are sharing your flows over different systems  (e.g. windows, linux etc)
@@ -63,14 +62,21 @@ if (process.env.npm_package_config_nr_title) {
 
 // Create an Express app
 var app = express();
+var path = require('path');
 
 // app http settings.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(httpLogger('dev'));
+app.set('views', path.join(__dirname, '../public/view'));
+app.set('view engine', 'jade');
+var resourcePath = path.join(__dirname, '../public/resource');
+app.use(express.static(resourcePath));
 
 // Add a simple route for static content served from './public'
-app.use("/", express.static("./public/view"));
+
+// app.use("/", express.static("./public/view"));
+app.use("/", require('./web/controller/page'));
 app.use("/api", require('./web/controller/api'));
 
 // Add static route for bower components from './bower_components'

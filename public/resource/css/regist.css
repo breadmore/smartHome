@@ -1,0 +1,184 @@
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+
+body {
+    /*display: table-cell;*/
+    /*font-family: 'Jeju Gothic', sans-serif;*/
+    font-family: "Nanum Gothic", sans-serif;
+    background-color: #2f3742;
+    align-items: center;
+    color: white;
+    vertical-align: middle;
+
+}
+
+.title > span > img {
+    width: 120px;
+    height: 80px;
+}
+
+.title {
+    text-align: center;
+    margin: 50px;
+}
+
+.title1 {
+    font-weight: bolder;
+    font-size: 27pt;
+    margin-right: 12px;
+}
+
+.title2 {
+    font-size: 12pt;
+}
+
+.sign_in {
+    margin: auto;
+    background-color: white;
+    height: 635px;
+    width: 700px;
+    border-radius: 14px;
+}
+
+a:link {
+    text-decoration : none;
+    color: black;
+}
+
+.existing {
+    font-weight: bolder;
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 50px;
+    font-size: 13pt;
+    color: black;
+}
+
+.sign_in_title {
+    display: inline-block;
+    width: 99%;
+    margin-right: 5px;
+    margin-left: 5px;
+    border-bottom: 2px solid lightgray;
+    color: #2f3742;
+}
+
+.text {
+    font-weight: bolder;
+    display: inline-block;
+    float: left;
+    margin: 15px;
+    font-size: 26pt;
+}
+
+.button {
+    font-weight: bolder;
+    text-align: center;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 180px;
+    /*border-radius: 7px;*/
+    /*border: 1px solid #2f3742;*/
+    float: right;
+    margin: 15px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    font-size: 13pt;
+}
+
+.sign_in_content {
+    color: #2f3742;
+    margin: 30px;
+    text-align: center;
+}
+
+
+
+form > div > p{
+    color: black;
+    font-weight: bolder;
+    margin-left: 50px;
+    text-align: left;
+}
+
+form > div > input {
+    /*align-items: center;*/
+}
+
+
+
+.sign_in_content > img {
+    width: 130px;
+    height: 130px;
+    margin: 10px;
+}
+
+form > div > input{
+    padding: 13px;
+    font-size: 13pt;
+    margin-bottom: 15px;
+    width: 80%;
+    height: 20px;
+    border-radius: 7px;
+    border: 1px solid lightgray;
+}
+
+.remember_me {
+    font-weight: bolder;
+    align-items: center;
+    text-align: left;
+    margin: auto;
+    width: 85%;
+    /*height: 15px;*/
+    color: #2f3742;
+}
+
+.remember_me > input {
+    padding: 10px;
+    font-size: 13pt;
+    margin: 10px;
+    width: 20px;
+}
+
+.submit {
+    text-align: right;
+    margin-right: 50px;
+}
+
+.submit > .cancel {
+    border-radius: 4px;
+    border: 1px solid lightgray;
+    width: 150px;
+    font-size: 18pt;
+    font-weight: bolder;
+    color: lightgray;
+    padding: 8px;
+    margin-right: 20px;
+    /*height: 20px;*/
+}
+
+.submit > .confirm {
+    background-color: #2f3742;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+    width: 150px;
+    font-size: 18pt;
+    font-weight: bolder;
+    color: white;
+    padding: 8px;
+}
+
+.company {
+    font-size: 12pt;
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.alert {
+    color: red;
+    padding-left: 35px;
+    font-size: 10pt;
+}
