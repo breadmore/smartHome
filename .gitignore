@@ -5,6 +5,7 @@
 # IntelliJ project files
 .idea
 *.iml
+
 out
 gen### Node template
 # Logs
@@ -116,4 +117,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#node-red
+.nodered
+nodes
+
+#Test Folder
+test
+.flows.json.backup
 

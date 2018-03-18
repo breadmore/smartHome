@@ -1,0 +1,71 @@
+{
+  "_from": "node-red-contrib-mi-devices",
+  "_id": "node-red-contrib-mi-devices@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-L2+o1IG4fvWN/EwTjMakzipg1vWD2K9vLe1N3fZpwlXPzCos9AjohNGq8mMWiUmLIEyj/ixMztwOULL6aEjk2Q==",
+  "_location": "/node-red-contrib-mi-devices",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "node-red-contrib-mi-devices",
+    "name": "node-red-contrib-mi-devices",
+    "escapedName": "node-red-contrib-mi-devices",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/node-red-contrib-mi-devices/-/node-red-contrib-mi-devices-1.1.0.tgz",
+  "_shasum": "fc3d7d0ebdd6e771a27d287609b014d6aac4a121",
+  "_spec": "node-red-contrib-mi-devices",
+  "_where": "/Users/jongho/dev/workspace/IoT_Security/source/IoT_Security_Interface",
+  "author": {
+    "name": "Pierre CLEMENT"
+  },
+  "bugs": {
+    "url": "https://github.com/pierrecle/node-red-contrib-mi-devices/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "cryptojs": "^2.5.3",
+    "miio": "0.13.0",
+    "yeelight2": "^1.3.5"
+  },
+  "deprecated": false,
+  "description": "A set of nodes to control some of the popular Xiaomi sensors which are connected to the Xiaomi Gateway, and the Gateway itself.",
+  "engines": {
+    "node": ">=4.4.5"
+  },
+  "homepage": "https://github.com/pierrecle/node-red-contrib-mi-devices#readme",
+  "keywords": [
+    "Xiaomi",
+    "Aqara",
+    "node-red"
+  ],
+  "license": "MIT",
+  "name": "node-red-contrib-mi-devices",
+  "node-red": {
+    "nodes": {
+      "xiaomi-ht": "node-red-contrib-xiaomi-ht/xiaomi-ht.js",
+      "xiaomi-magnet": "node-red-contrib-xiaomi-magnet/xiaomi-magnet.js",
+      "xiaomi-motion": "node-red-contrib-xiaomi-motion/xiaomi-motion.js",
+      "xiaomi-switch": "node-red-contrib-xiaomi-switch/xiaomi-switch.js",
+      "xiaomi-socket": "node-red-contrib-xiaomi-socket/xiaomi-socket.js",
+      "xiaomi-socket-wifi": "node-red-contrib-xiaomi-socket-wifi/xiaomi-socket-wifi.js",
+      "xiaomi-all": "node-red-contrib-xiaomi-all/xiaomi-all.js",
+      "xiaomi-configurator": "node-red-contrib-xiaomi-configurator/xiaomi-configurator.js",
+      "xiaomi-gateway": "node-red-contrib-xiaomi-gateway/xiaomi-gateway.js",
+      "xiaomi-actions": "node-red-contrib-xiaomi-actions/xiaomi-actions.js",
+      "xiaomi-yeelight": "node-red-contrib-xiaomi-yeelight/xiaomi-yeelight.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pierrecle/node-red-contrib-mi-devices.git"
+  },
+  "version": "1.1.0"
+}

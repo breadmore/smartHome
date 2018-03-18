@@ -1,7 +1,7 @@
 {
-  "name": "node-red-template-embedded",
-  "version": "0.0.7",
-  "description": "A template project for Node-Red in embedded mode allowing multiple instances",
+  "name": "IoT-Secure-Interface",
+  "version": "1.0.0",
+  "description": "IoT Home Secure Interface building and implements. Smart home device with xiaomi & local devices management and control.",
   "private": true,
   "readme": "README.md",
   "keywords": [
@@ -11,19 +11,19 @@
   ],
   "contributors": [
     {
-      "name": "Julian Knight",
-      "url": "https://it.knightnet.org.uk"
+      "name": "jongho by classact",
+      "url": ""
     },
-    "sebastian.barwe@gmail.com"
+    "strider8796@gmail.com"
   ],
   "repository": "sbarwe/node-red-template-embedded",
   "author": {
-    "name": "Julian Knight (TotallyInformation)",
-    "url": "https://www.totallyinformation.com"
+    "name": "Myeung Jongho(Classact)",
+    "url": ""
   },
-  "homepage": "https://github.com/sbarwe/node-red-template-embedded",
-  "license": "MIT",
-  "bugs": "https://github.com/sbarwe/node-red-template-embedded/issues",
+  "homepage": "",
+  "license": "Classact",
+  "bugs": "",
   "main": "server.js",
   "config": {
     "http_port": "1880",
@@ -32,11 +32,11 @@
     "nr_userfolder": "./.nodered",
     "nr_flowfile": "./flows.json",
     "nr_credentialsecret": null,
-    "nr_title": "Node RED Embedded"
+    "nr_title": "IoT Secure Interface"
   },
   "scripts": {
     "start": "node src/server.js",
-    "ssl": "npm start --node-red-template-embedded:http_port=1882 --node-red-template-embedded:use_https=true",
+    "ssl": "npm start --IoT-Secure-Interface:http_port=1882 --IoT-Secure-Interface:use_https=true",
     "debug": "cross-env NODE_ENV=development \"nodemon --config .nodemonrc.json --debug src/server.js\"",
     "admin": "node-red-admin",
     "adminauth": "node -e \"console.log(require('bcryptjs').hashSync(process.argv[1], 8));\"",
@@ -51,15 +51,15 @@
     "bcryptjs": "^2.4.0"
   },
   "dependencies": {
+    "aes-js": "^3.1.0",
     "body-parser": "^1.18.2",
     "express": "4.*",
     "jade": "^1.11.0",
     "morgan": "^1.9.0",
     "node-red": ">=0.17.3",
-    "node-red-contrib-contextbrowser": ">=0.0.4",
-    "node-red-dashboard": "^2.7.0",
     "paint-console": "0.0.1",
-    "syslog-client": "^1.1.0"
+    "syslog-client": "^1.1.0",
+    "node-red-contrib-mi-devices": "./plugins/node-red-contrib-mi-devices"
   },
   "engines": {
     "node": ">=4.0.0"

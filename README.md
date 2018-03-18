@@ -1,3 +1,21 @@
+# IoT Secure Home Interface Implement by Node Red
+## Develop
+  1. clone this repository. npm install & npm start
+  2. node-red flow : http://localhost:1880/admin (default account : admin // admin)
+  3. gui server by express : http://localhost:1880
+  4. api gateway by node js : http://localhost:1880/api
+  
+## Code Structure
+  - main node js file : ./src/server.js
+  - node red settings : reference below
+  - web/api controller : ./src/web
+  - web view : ./public
+  - additional module : ./plugins 
+  
+## Support Device
+  - Legacy devices(Arduino)
+  - Xiaomi Smart Home Gateway devices
+
 # node-red-template-embedded
 A template project for running Node-Red in "embedded" mode which is great if you want to run multiple instances of Node-Red or work collaboratively with others. Also lets you take control of the ExpressJS server.
 
