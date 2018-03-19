@@ -58,9 +58,10 @@
     "log4js": "^2.5.3",
     "morgan": "^1.9.0",
     "node-red": ">=0.17.3",
-    "node-red-contrib-mi-devices": "./plugins/node-red-contrib-mi-devices",
+    "node-red-contrib-mi-devices": "./src/library/node-red-contrib-mi-devices",
     "paint-console": "0.0.1",
-    "syslog-client": "^1.1.0",
+    "socket.io": "^2.0.4",
+    "syslog-client": "^1.1.0"
   },
   "engines": {
     "node": ">=4.0.0"

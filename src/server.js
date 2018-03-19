@@ -66,24 +66,26 @@ if (process.env.npm_package_config_nr_title) {
 // Create an Express app
 var app = express();
 var path = require('path');
+var socket = require('socket.io');
+
+var resourcePath = path.join(__dirname, '../resource');
 
 // app http settings.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(log4js.connectLogger(log4js.getLogger("http"), {level: 'auto'}));
-
 // app.use(httpLogger('dev'));
-app.set('views', path.join(__dirname, '../public/view'));
+
 app.set('view engine', 'jade');
-var resourcePath = path.join(__dirname, '../public/resource');
-app.use(express.static(resourcePath));
+app.set('views', path.join(resourcePath + '/view'));
+app.use(express.static(resourcePath + '/public'));
 
 // Add a simple route for static content served from './public'
 
 // app.use("/", express.static("./public/view"));
-app.use("/", require('./web/controller/page'));
-app.use("/api", require('./web/controller/api'));
+app.use("/", require('./web/ViewController'));
+app.use("/api", require('./web/ApiContoller'));
 
 // Add static route for bower components from './bower_components'
 app.use("/bower_components", express.static("./bower_components"));
@@ -100,6 +102,14 @@ if (use_https) {
 var httpServer = use_https
   ? http.createServer(credentials, app)
   : http.createServer(app);
+
+var io = socket(httpServer);
+module.exports.io = io;
+io.use(function(socket, next) {
+    console.info('SOCKETIO SESSION START');
+    next();
+});
+io.on('connection', require('./web/SocketController'));
 
 // Initialise the runtime with a server and settings
 // @see http://nodered.org/docs/configuration.html
@@ -120,7 +130,6 @@ httpServer.listen(http_port, listening_address, function() {
     nrSettings.httpAdminRoot
   );
 });
-
 
 // Start the runtime
 RED.start().then(function() {

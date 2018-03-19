@@ -145,7 +145,7 @@ You provide connection string to address the syslog server in the form of `[tcp|
       syslogserver: "udp://nas:514/NR", // syslog server [tcp|udp]://host[:port]/program
       rfc3164: true, //set to false to use RFC 5424 syslog header format; default is true for the older RFC 3164 format.
       facility: "Local0", //  Kernel, User, System, Audit, Alert, Local0 - Local7
-      handler: require("./src/logger_syslog.js")
+      handler: require(javascript)
     }
 ```
 

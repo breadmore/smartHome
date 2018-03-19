@@ -1,0 +1,669 @@
+extends layout
+
+append head
+    link(href='./css/iotdevice.css' rel='stylesheet')
+    script(src="/javascript/iotdevice.js")
+
+
+
+block content
+    .modal.fade#tempModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_temp
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value 8℃
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Temperature sensor(1)
+                        div
+                            span.name Device name
+                            span.value SG001-Temp001
+                            span.name Device ID(EID)
+                            span.value 65934
+                        div
+                            span.name Vendor
+                            span.value ETRI
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value 12965934
+                        div
+                            span.name Object ID(OID)
+                            span.value 0.2.481.1.10.100.3030.10011.65934
+                        div
+                            span.name Session ID(SID)
+                            span.value 54708
+                        div
+                            span.name Authorization
+                            span.value Not authorized(0)
+                        div
+                            span.name Policy deployment
+                            span.value Not OK(0)
+                        div
+                            span.name Registration
+                            span.value Not Registered(0)
+                        div
+                            span.name Access control
+                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
+                        div
+                            span.name Policy target
+                            span.value Device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .modal.fade#humModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_hum
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value 8℃
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Humidity sensor(2)
+                        div
+                            span.name Device name
+                            span.value SG001-Hum001
+                            span.name Device ID(EID)
+                            span.value 65935
+                        div
+                            span.name Vendor
+                            span.value ETRI
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value 12965934
+                        div
+                            span.name Object ID(OID)
+                            span.value 0.2.481.1.10.100.3030.10011.65934
+                        div
+                            span.name Session ID(SID)
+                            span.value 54708
+                        div
+                            span.name Authorization
+                            span.value Not authorized(0)
+                        div
+                            span.name Policy deployment
+                            span.value Not OK(0)
+                        div
+                            span.name Registration
+                            span.value Not Registered(0)
+                        div
+                            span.name Access control
+                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
+                        div
+                            span.name Policy target
+                            span.value Device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .modal.fade#luxModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_lux
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value 100 Lx
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Smart lighting(3)
+                        div
+                            span.name Device name
+                            span.value SG001-Lx001
+                            span.name Device ID(EID)
+                            span.value 65935
+                        div
+                            span.name Vendor
+                            span.value ETRI
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value 12965934
+                        div
+                            span.name Object ID(OID)
+                            span.value 0.2.481.1.10.100.3030.10011.65934
+                        div
+                            span.name Session ID(SID)
+                            span.value 54708
+                        div
+                            span.name Authorization
+                            span.value Not authorized(0)
+                        div
+                            span.name Policy deployment
+                            span.value Not OK(0)
+                        div
+                            span.name Registration
+                            span.value Not Registered(0)
+                        div
+                            span.name Access control
+                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
+                        div
+                            span.name Policy target
+                            span.value Device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .modal.fade#registModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_regist
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value 50℃
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Humidity sensor(2)
+                        div
+                            span.name Device name
+                            span.value SG001-Hum001
+                            span.name Device ID(EID)
+                            span.value 65935
+                        div
+                            span.name Vendor
+                            span.value ETRI
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value 12965934
+                        div
+                            span.name Object ID(OID)
+                            span.value 0.2.481.1.10.100.3030.10011.65934
+                        div
+                            span.name Session ID(SID)
+                            span.value 54708
+                        div
+                            span.name Authorization
+                            span.value Not authorized(0)
+                        div
+                            span.name Policy deployment
+                            span.value Not OK(0)
+                        div
+                            span.name Registration
+                            span.value Not Registered(0)
+                        div
+                            span.name Access control
+                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
+                        div
+                            span.name Policy target
+                            span.value Device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .modal.fade#cameraModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_camera
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value
+                            .camera
+                                img(src="/image/maxresdefault.jpg")
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Home CCTV(10)
+                        div
+                            span.name Device name
+                            span.value SG001-IDWC001
+                            span.name Device ID(EID)
+                            span.value 65935
+                        div
+                            span.name Vendor
+                            span.value Xiaomi
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value Not supported
+                        div
+                            span.name Object ID(OID)
+                            span.value Not supported
+                        div
+                            span.name Session ID(SID)
+                            span.value Not supported
+                        div
+                            span.name Authorization
+                            span.value Not supported
+                        div
+                            span.name Policy deployment
+                            span.value Not supported
+                        div
+                            span.name Registration
+                            span.value Not supported
+                        div
+                            span.name Access control
+                            span.value Not supported
+                        div
+                            span.name Policy target
+                            span.value Not supported
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .modal.fade#gasModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_gas
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value Gas leakaged
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Gas detector(6)
+                        div
+                            span.name Device name
+                            span.value SG001-GasLM001
+                            span.name Device ID(EID)
+                            span.value 65939
+                        div
+                            span.name Vendor
+                            span.value ETRI
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value 12965934
+                        div
+                            span.name Object ID(OID)
+                            span.value 0.2.481.1.10.100.3030.10011.65934
+                        div
+                            span.name Session ID(SID)
+                            span.value 54708
+                        div
+                            span.name Authorization
+                            span.value Not authorized(0)
+                        div
+                            span.name Policy deployment
+                            span.value Not OK(0)
+                        div
+                            span.name Registration
+                            span.value Not Registered(0)
+                        div
+                            span.name Access control
+                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
+                        div
+                            span.name Policy target
+                            span.value Device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .modal.fade#addsensorModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                        .device_name Device name
+                            div
+                                input(type="text")
+                        .select_device_vendor Select device vendor
+                            div
+                                select
+                                    option ETRI
+                        .select_device_type Selecte device type
+                            div
+                                select
+                                    option Temperature sensor
+                        .select_gateway Select gateway
+                            div
+                                select
+                                    option ETRI-SG-001
+                        .device_id Device ID(EID)
+                            div
+                                input(type="text")
+                        .preshared_key Preshared key(PSK)
+                            div
+                                input(type="text")
+                        .access_control_policy Access control policy
+                            div
+                                span
+                                    input(type="checkbox")
+                                span.access_name create(C)
+                                span
+                                    input(type="checkbox")
+                                span.access_name read(R)
+                                span
+                                    input(type="checkbox")
+                                span.access_name update(U)
+                                span
+                                    input(type="checkbox")
+                                span.access_name delete(D)
+                                span
+                                    input(type="checkbox")
+                                span.access_name notify(N)
+
+                        .access_control_policy_target Access control policy target
+                            div
+                                span
+                                    input(type="radio")
+                                span.access_name server
+                                span
+                                    input(type="radio")
+                                span.access_name device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+    .content_title
+        img(src="/image/shareWhite.png")
+        div IoT Devices Management
+    .content_body
+        .content_body_title Select home gateway
+        .content_body_subtitle
+            select
+                option ETRI-SG-001 ---- http://192.168.255.254:20000
+        .content_body_content
+            img(src="/image/homeImage.png")
+            .body_title
+                .title ETRI-SG-001
+                .title2 Home gateway information
+            button.add_sensor(data-target="#addsensorModal" data-toggle="modal") Add sensor
+        .content_body_card_list
+            .content_body_profile_card
+                .content_body_card_title Profile
+                .profile_card_body
+                    .profile_body_title MQTT IP
+                    .profile_body_vaule 192.168.255.254
+                .profile_card_body
+                    .profile_body_title MQTT Port
+                    .profile_body_vaule 20000
+                .profile_card_body
+                    .profile_body_title Security
+                    .profile_body_vaule ETRI Security v1.0
+                .profile_card_body
+                    .profile_body_title Uptime
+                    .profile_body_vaule 1231H 11M 30S
+                .profile_card_body
+                    .profile_body_title Uplink
+                    .profile_body_vaule 15.03 GB
+                .profile_card_body
+                    .profile_body_title Downlink
+                    .profile_body_vaule 15 GB
+            .content_body_profile_card2
+                .content_body_card_title Up/Downlink Statistics
+                    span ETRI-SG-001
+                .profile_card_body
+                    img(src="/image/networkgraph.png")
+        .content_body_title Connectivity
+            span 13 home sensors connected
+        .environment_sensors Environment sensors ▲
+        .connect_card_list
+            .content_body_card
+                .content_body_card_title SG00-Lx001
+                .content_body_card_subtitle ETRI Light / Illuminance
+                .content_body_card_body
+                    img(src="/image/luxWhite.png")
+                    .cotent_body_card_body_value#lx001 100Lx
+                .content_body_card_event No event occured
+                .content_body_card_details(data-target="#luxModal" data-toggle="modal") Click to view details
+            .content_body_card
+                .content_body_card_title SG001-Temp001
+                .content_body_card_subtitle ETRI Temperature
+                .content_body_card_body
+                    img(src="/image/temperatureWhite.png")
+                    .cotent_body_card_body_value#temp001 8℃
+                .content_body_card_event No event occured
+                .content_body_card_details(data-target="#tempModal" data-toggle="modal") Click to view details
+            .content_body_card
+                .content_body_card_title SG001-Hum001
+                .content_body_card_subtitle ETRI Humidity
+                .content_body_card_body
+                    img(src="/image/humidityWhite.png")
+                    .cotent_body_card_body_value#hum001 50%
+                .content_body_card_event No event occured
+                .content_body_card_details(data-target="#humModal" data-toggle="modal") Click to view details
+        .gas_leakage_sensors Gas leakage sensors ▲
+        .connect_card_list
+            .content_body_card
+                .content_body_card_title SG001-GasLM001
+                .content_body_card_subtitle ETRI  Gas leakage alarm
+                .content_body_card_body
+                    img(src="/image/instrusionAlarmWhite.png")
+                    .cotent_body_card_body_value#lm001 Alert
+                .content_body_card_event Gas leakaged
+                .content_body_card_details(data-target="#gasModal" data-toggle="modal") Click to view details
+            .content_body_card
+                .content_body_card_title SG001-GasLC001
+                .content_body_card_subtitle ETRI  Gas leakage controller
+                .content_body_card_body
+                    img(src="/image/gasDetectWhite.png")
+                    .cotent_body_card_body_value#gaslc001
+                        .value1 Leakaged
+                        .value2 Gas Blocked
+                .content_body_card_event Gas leakaged
+                .content_body_card_details Click to view details
+        .etri_Intrusion_detection_sensors ETRI Intrusion detection sensors ▲
+        .connect_card_list
+            .content_body_card
+                .content_body_card_title SG001-IDA001
+                .content_body_card_subtitle ETRI intrusion detection alarm
+                .content_body_card_body
+                    img(src="/image/alarmWhite.png")
+                    .cotent_body_card_body_value#ida001
+                        .value1
+                            span.toggle
+                                p.off(style="display:none;") OFF
+                                p ON
+                            label.switch
+                                input(type="checkbox" checked=1)
+                                span.slider.round
+                        .value2 Intrusion
+                .content_body_card_event Intrusion detected
+                .content_body_card_details Click to view details
+            .content_body_card
+                .content_body_card_title SG001-IDHS001
+                .content_body_card_subtitle ETRI  Human dection
+                .content_body_card_body
+                    img(src="/image/humansensor.png")
+                    .cotent_body_card_body_value#idhs001 Detected
+                .content_body_card_event Intrusion detected
+                .content_body_card_details Click to view details
+            .content_body_card
+                .content_body_card_title SG001-IDW001
+                .content_body_card_subtitle ETRI  Window sensor
+                .content_body_card_body
+                    img(src="/image/windowsensor.png")
+                    .cotent_body_card_body_value#idw001 No event
+                .content_body_card_event Intrusion detected
+                .content_body_card_details Click to view details
+        .xiaomi_intrusion_detection_sensors XIAOMI Intrusion detection sensors ▲
+        .connect_card_list
+            .content_body_card
+                .content_body_card_title SG001-IDA002
+                .content_body_card_subtitle XIAOMI  intrusion detection alarm
+                .content_body_card_body
+                    img(src="/image/alarmWhite.png")
+                    .cotent_body_card_body_value#ida002
+                        .value1
+                            span.toggle
+                                p.off(style="display:none;") OFF
+                                p ON
+                            label.switch
+                                input(type="checkbox" checked=1)
+                                span.slider.round
+                        .value2 Intrusion
+                .content_body_card_event Intrusion detected
+                .content_body_card_details Click to view details
+            .content_body_card
+                .content_body_card_title SG001-IDWC001
+                .content_body_card_subtitle XIAOMI  Home CCTV
+                .content_body_card_body
+                    img(src="/image/IDSWhite.png")
+                    .cotent_body_card_body_value#idwc001 Recording
+                .content_body_card_event No event occured
+                .content_body_card_details Click to view details
+            .content_body_card
+                .content_body_card_title SG001-IDHS002
+                .content_body_card_subtitle XIAOMI Human dection
+                .content_body_card_body
+                    img(src="/image/humansensor.png")
+                    .cotent_body_card_body_value#idhs002 Detected
+                .content_body_card_event No event occured
+                .content_body_card_details Click to view details
+            .content_body_card
+                .content_body_card_title SG001-IDW002
+                .content_body_card_subtitle XIAOMI  Window sensor
+                .content_body_card_body
+                    img(src="/image/windowsensor.png")
+                    .cotent_body_card_body_value#idw002 No event
+                .content_body_card_event No event occured
+                .content_body_card_details Click to view details
+        .xiaomi_power_control_sensors XIAOMI power control sensors ▲
+        .connect_card_list
+            .content_body_card
+                .content_body_card_title SG001-PO001
+                .content_body_card_subtitle XIAOMI  power outlet
+                .content_body_card_body
+                    img(src="/image/PoweroutletWhite.png")
+                    .cotent_body_card_body_value#po001
+                        .value1
+                            span.toggle
+                                p.off(style="display:none;") OFF
+                                p ON
+                            label.switch
+                                input(type="checkbox" checked=1)
+                                span.slider.round
+                        .value2 Connected
+                .content_body_card_event No event occured
+                .content_body_card_details(data-target="#cameraModal" data-toggle="modal") Click to view details
+        .width_bar
+        .sensor_event_log
+            .log_title Sensor event log
+            table
+                thead
+                    tr
+                        td Event date
+                        td Event level
+                        td Sensor type / name
+                        td Activity message
+                tbody
+                    tr
+                        td 02-25-2018 18:00.31
+                        td Log
+                        td ETRI Humidity sensor / Hum001
+                        td Humidity sensor is connected
