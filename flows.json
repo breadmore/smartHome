@@ -7,9 +7,18 @@
         "info": ""
     },
     {
+        "id": "943f007.ccb33",
+        "type": "tab",
+        "label": "Legacy Device with Dummy Data",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "edcab44d.6b6218",
         "type": "tab",
-        "label": "Flow 1"
+        "label": "Test Flow",
+        "disabled": false,
+        "info": ""
     },
     {
         "id": "5b2bfd65.8a7c14",
@@ -33,7 +42,8 @@
         "id": "965972a.373469",
         "type": "mqtt-broker",
         "z": "",
-        "broker": "10.0.0.22",
+        "name": "",
+        "broker": "10.0.4.3",
         "port": "1883",
         "clientid": "",
         "usetls": false,
@@ -79,6 +89,58 @@
         "key": "lg9ocmqwbhcojgd9"
     },
     {
+        "id": "b552ffd9.d1553",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "147b3dc9.b76cd2",
+        "type": "ui_group",
+        "z": "943f007.ccb33",
+        "name": "Default",
+        "tab": "9f5df09.c58fb1",
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "186afc7c.1e3cb4",
+        "type": "ui_tab",
+        "z": "943f007.ccb33",
+        "name": "MQTT",
+        "icon": "dashboard"
+    },
+    {
+        "id": "f176f662.2913d8",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
         "id": "e475d55b.7deac8",
         "type": "inject",
         "z": "edcab44d.6b6218",
@@ -89,8 +151,8 @@
         "repeat": "300",
         "crontab": "",
         "once": false,
-        "x": 635,
-        "y": 159,
+        "x": 570,
+        "y": 80,
         "wires": [
             [
                 "e2e5bfa3.6f0fc"
@@ -105,8 +167,8 @@
         "method": "GET",
         "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.csv",
         "tls": "",
-        "x": 805,
-        "y": 159,
+        "x": 740,
+        "y": 80,
         "wires": [
             [
                 "8a1be4a3.27c648"
@@ -124,8 +186,8 @@
         "multi": "one",
         "ret": "\\n",
         "temp": "",
-        "x": 975,
-        "y": 159,
+        "x": 910,
+        "y": 80,
         "wires": [
             [
                 "21244116.aae50e",
@@ -140,8 +202,8 @@
         "name": "",
         "active": false,
         "complete": false,
-        "x": 1135,
-        "y": 159,
+        "x": 1070,
+        "y": 80,
         "wires": []
     },
     {
@@ -160,8 +222,8 @@
         ],
         "checkall": "true",
         "outputs": 1,
-        "x": 1015,
-        "y": 219,
+        "x": 950,
+        "y": 140,
         "wires": [
             [
                 "a7fd21ff.19aff"
@@ -187,8 +249,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1155,
-        "y": 279,
+        "x": 1090,
+        "y": 200,
         "wires": [
             [
                 "82efb853.673c28"
@@ -202,8 +264,8 @@
         "name": "",
         "active": false,
         "complete": false,
-        "x": 1255,
-        "y": 219,
+        "x": 1190,
+        "y": 140,
         "wires": []
     },
     {
@@ -215,8 +277,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 1173.5,
-        "y": 546,
+        "x": 1108.5,
+        "y": 467,
         "wires": [
             [
                 "efc9585d.7c3e78"
@@ -231,8 +293,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 1342.5,
-        "y": 543,
+        "x": 1277.5,
+        "y": 464,
         "wires": []
     },
     {
@@ -246,8 +308,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 229.5,
-        "y": 627,
+        "x": 164.5,
+        "y": 548,
         "wires": [
             [
                 "b1efc73b.1bb768"
@@ -263,8 +325,8 @@
         "ret": "txt",
         "url": "localhost:1880/api/time",
         "tls": "",
-        "x": 451.5,
-        "y": 612,
+        "x": 386.5,
+        "y": 533,
         "wires": [
             [
                 "eb205e18.f8f5d"
@@ -279,8 +341,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 651.5,
-        "y": 603,
+        "x": 586.5,
+        "y": 524,
         "wires": []
     },
     {
@@ -291,8 +353,8 @@
         "topic": "mosquitto/test/1/on",
         "qos": "2",
         "broker": "965972a.373469",
-        "x": 172.5,
-        "y": 247,
+        "x": 107.5,
+        "y": 168,
         "wires": [
             [
                 "91081cd2.91bda",
@@ -309,8 +371,8 @@
         "ret": "txt",
         "url": "localhost:1880/api/time",
         "tls": "",
-        "x": 456,
-        "y": 432,
+        "x": 391,
+        "y": 353,
         "wires": [
             [
                 "3131759.5ebd78a"
@@ -325,8 +387,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 670,
-        "y": 432,
+        "x": 605,
+        "y": 353,
         "wires": []
     },
     {
@@ -334,11 +396,11 @@
         "type": "debug",
         "z": "edcab44d.6b6218",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "payload",
-        "x": 580.5,
-        "y": 336,
+        "x": 515.5,
+        "y": 257,
         "wires": []
     },
     {
@@ -347,8 +409,8 @@
         "z": "edcab44d.6b6218",
         "name": "",
         "pretty": true,
-        "x": 230.5,
-        "y": 385,
+        "x": 165.5,
+        "y": 306,
         "wires": [
             [
                 "f530c36e.574d4"
@@ -364,8 +426,8 @@
         "qos": "",
         "retain": "",
         "broker": "965972a.373469",
-        "x": 657.5,
-        "y": 509,
+        "x": 765,
+        "y": 441,
         "wires": []
     },
     {
@@ -376,7 +438,7 @@
         "gateway": "ba1d673a.6332e8",
         "ip": "10.1.0.77",
         "x": 80,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "db0dd765.3b48d8",
@@ -397,7 +459,7 @@
         "name": "",
         "sid": null,
         "x": 320,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -412,7 +474,7 @@
         "name": "",
         "sid": "158d000209079a",
         "x": 340,
-        "y": 180,
+        "y": 160,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -430,7 +492,7 @@
         "nomotionmsg": "",
         "output": "0",
         "x": 310,
-        "y": 220,
+        "y": 200,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -445,7 +507,7 @@
         "name": "",
         "sid": "158d00020dd2ce",
         "x": 340,
-        "y": 260,
+        "y": 240,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -459,7 +521,7 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "x": 340,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "c1a6d714.bc9b38"
@@ -477,7 +539,7 @@
         "offmsg": "",
         "output": "0",
         "x": 310,
-        "y": 320,
+        "y": 300,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -495,7 +557,7 @@
         "tostatus": false,
         "complete": "payload",
         "x": 710,
-        "y": 240,
+        "y": 220,
         "wires": []
     },
     {
@@ -797,7 +859,7 @@
         "name": "Filter incoming",
         "info": "",
         "x": 340,
-        "y": 40,
+        "y": 20,
         "wires": []
     },
     {
@@ -891,7 +953,7 @@
         ],
         "excludedSids": [],
         "x": 320,
-        "y": 100,
+        "y": 80,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -978,9 +1040,7 @@
             [
                 "df53c1.b65dbc4"
             ],
-            [
-                "c920a52e.78ec18"
-            ]
+            []
         ],
         "outputLabels": [
             "Click",
@@ -996,8 +1056,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 670,
-        "y": 900,
+        "x": 970,
+        "y": 980,
         "wires": []
     },
     {
@@ -1060,7 +1120,7 @@
         "repair": false,
         "outputs": 2,
         "x": 490,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "dfad2e03.af33f"
@@ -1079,7 +1139,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 670,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "42207ae0.001d94"
@@ -1135,7 +1195,7 @@
         "console": "false",
         "complete": "payload",
         "x": 870,
-        "y": 380,
+        "y": 360,
         "wires": []
     },
     {
@@ -1219,8 +1279,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 710,
-        "y": 540,
+        "x": 510,
+        "y": 480,
         "wires": []
     },
     {
@@ -1233,7 +1293,7 @@
         "motionmsg": "",
         "nomotionmsg": "",
         "output": "0",
-        "x": 180,
+        "x": 240,
         "y": 1040,
         "wires": [
             [
@@ -1249,7 +1309,7 @@
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
         "ip": "10.1.0.77",
-        "x": 20,
+        "x": 80,
         "y": 1040,
         "wires": [
             [
@@ -1261,15 +1321,15 @@
         "id": "8430f0cf.daa5d",
         "type": "function",
         "z": "7441ed9a.98d394",
-        "name": "",
-        "func": "if (msg.payload.data.status == \"motion\") {\n    return msg;    \n}\nelse {\n    return null;\n}\n",
+        "name": "Is Motion Detected",
+        "func": "if (msg.payload.data.status == \"motion\") {\n    msg.sid = \"7811dce16bc4\";\n    msg.model = \"gateway\"\n    msg.token = global.get(\"token\");\n    return msg;  \n}\nelse {\n    return null;\n}\n\n\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 390,
+        "x": 450,
         "y": 1040,
         "wires": [
             [
-                "3df01b4c.b4d544"
+                "ec054e10.5adf4"
             ]
         ]
     },
@@ -1283,8 +1343,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 410,
-        "y": 1100,
+        "x": 430,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1294,8 +1354,8 @@
         "name": "",
         "mid": "4",
         "volume": "50",
-        "x": 730,
-        "y": 1040,
+        "x": 1170,
+        "y": 1140,
         "wires": [
             [
                 "d72bf58b.ed09d8",
@@ -1310,8 +1370,8 @@
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
         "ip": "10.1.0.77",
-        "x": 900,
-        "y": 1040,
+        "x": 1340,
+        "y": 1140,
         "wires": []
     },
     {
@@ -1320,8 +1380,8 @@
         "z": "7441ed9a.98d394",
         "gateway": "ba1d673a.6332e8",
         "name": "",
-        "x": 540,
-        "y": 1040,
+        "x": 980,
+        "y": 1140,
         "wires": [
             [
                 "bc313ebf.19e56",
@@ -1339,8 +1399,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 660,
-        "y": 1120,
+        "x": 1100,
+        "y": 1220,
         "wires": []
     },
     {
@@ -1353,8 +1413,1233 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 870,
-        "y": 1120,
+        "x": 1310,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ec054e10.5adf4",
+        "type": "xiaomi-actions gateway_light",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "brightness": "0",
+        "hexRgbColor": "#7aa1ff",
+        "color": {
+            "red": 122,
+            "green": 161,
+            "blue": 255
+        },
+        "x": 660,
+        "y": 1040,
+        "wires": [
+            [
+                "918b5dab.1ec18"
+            ]
+        ]
+    },
+    {
+        "id": "918b5dab.1ec18",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 840,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "1eaae40c.a7618c",
+        "type": "xiaomi-actions read",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 230,
+        "y": 1320,
+        "wires": [
+            [
+                "76da858.4b3037c"
+            ]
+        ]
+    },
+    {
+        "id": "16de7bb7.7b0b54",
+        "type": "xiaomi-gateway in",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 80,
+        "y": 1320,
+        "wires": [
+            [
+                "1eaae40c.a7618c"
+            ]
+        ]
+    },
+    {
+        "id": "76da858.4b3037c",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 390,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "28a5a8aa.03ada8",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 540,
+        "y": 600,
+        "wires": [
+            [
+                "64a8437d.7986cc"
+            ]
+        ]
+    },
+    {
+        "id": "793ec33b.966f3c",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 960,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "64a8437d.7986cc",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 600,
+        "wires": [
+            [
+                "793ec33b.966f3c"
+            ]
+        ]
+    },
+    {
+        "id": "c22dc45d.5f9cc8",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/detect",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "811c0a0b.3dd298"
+            ]
+        ]
+    },
+    {
+        "id": "811c0a0b.3dd298",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "00",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "01",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "10",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "11",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "20",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "21",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "22",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 7,
+        "x": 572,
+        "y": 182,
+        "wires": [
+            [
+                "c566f56c.09bfe8"
+            ],
+            [
+                "9dd160a8.c498c"
+            ],
+            [
+                "76e8960.d3f376c"
+            ],
+            [
+                "ba58cf6a.498d3"
+            ],
+            [
+                "5b2b6ab0.4b5d04"
+            ],
+            [
+                "4f5dbf9d.b0848"
+            ],
+            [
+                "76fe992c.3b6978"
+            ]
+        ]
+    },
+    {
+        "id": "7fb9f075.122dd",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "1byte split",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "0.",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "1.",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 520,
+        "wires": [
+            [
+                "ce31b345.c73fb"
+            ],
+            [
+                "eedf8dba.25728"
+            ]
+        ]
+    },
+    {
+        "id": "b0394c96.f50ea",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 1270,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d34aa2a5.a2acb",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1090,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ce31b345.c73fb",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "온도 ADC 값",
+        "func": "var payload = {};\npayload.type = \"temperature\";\npayload.value = msg.payload.substring(1);\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 910,
+        "y": 480,
+        "wires": [
+            [
+                "d34aa2a5.a2acb"
+            ]
+        ]
+    },
+    {
+        "id": "c566f56c.09bfe8",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "창문 코드 Undetected [00]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 40,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "9dd160a8.c498c",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "창문 코드 Detected [01]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 891,
+        "y": 80,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "76e8960.d3f376c",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "인체 코드 Undetected [10]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 892,
+        "y": 119,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "ba58cf6a.498d3",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "인체 코드 Detected [11]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 893,
+        "y": 158,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "5b2b6ab0.4b5d04",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "재실 코드 Jaesil [20]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "In room (Jaesil)",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 884,
+        "y": 198,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "4f5dbf9d.b0848",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "재실 코드 Detected [21]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 895,
+        "y": 237,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "76fe992c.3b6978",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "재실 코드 Undetected [22]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 896,
+        "y": 277,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "bb7302f1.4ced7",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "침입 감지",
+        "info": "",
+        "x": 660,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "a6118a45.984dc8",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "온습도",
+        "info": "",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "32f60751.c3e408",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/ondo",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 590,
+        "y": 520,
+        "wires": [
+            [
+                "7fb9f075.122dd"
+            ]
+        ]
+    },
+    {
+        "id": "eedf8dba.25728",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "습도 ADC 값",
+        "func": "var payload = {};\npayload.type = \"humidity\";\npayload.value = msg.payload.substring(1);\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 910,
+        "y": 560,
+        "wires": [
+            [
+                "d34aa2a5.a2acb"
+            ]
+        ]
+    },
+    {
+        "id": "cecb3028.e88ee",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "조도(기기->서버)",
+        "info": "",
+        "x": 620,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "24370886.7cda88",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "1byte split",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "0.",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "1.",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 770,
+        "y": 1380,
+        "wires": [
+            [
+                "87e9b956.1cb308"
+            ],
+            [
+                "a268ce1b.a4eca"
+            ]
+        ]
+    },
+    {
+        "id": "11c3cd8b.b2a172",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1170,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "87e9b956.1cb308",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "밝은 조도 ADC 값",
+        "func": "var temp = msg.payload;\nmsg.payload = temp.substring(1);\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 960,
+        "y": 1360,
+        "wires": [
+            [
+                "11c3cd8b.b2a172"
+            ]
+        ]
+    },
+    {
+        "id": "3760df79.d9896",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/jodo",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 630,
+        "y": 1380,
+        "wires": [
+            [
+                "24370886.7cda88"
+            ]
+        ]
+    },
+    {
+        "id": "a268ce1b.a4eca",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "어두운 조도 ADC 값",
+        "func": "var temp = msg.payload;\nmsg.payload = temp.substring(1);\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 970,
+        "y": 1402,
+        "wires": [
+            [
+                "11c3cd8b.b2a172"
+            ]
+        ]
+    },
+    {
+        "id": "3e5727e4.8c7158",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "조도(서버->기기)",
+        "info": "",
+        "x": 120,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "4a05c2e2.926d0c",
+        "type": "ui_switch",
+        "z": "943f007.ccb33",
+        "name": "",
+        "label": "2=OFF,3=ON",
+        "group": "e487712a.c74ee",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "3",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "2",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 136,
+        "y": 1593,
+        "wires": [
+            [
+                "25a493e9.86b83c"
+            ]
+        ]
+    },
+    {
+        "id": "25a493e9.86b83c",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "topic/jodo",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 717,
+        "y": 1595,
+        "wires": []
+    },
+    {
+        "id": "5c5ffcf3.515744",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "가스 탐지기",
+        "info": "",
+        "x": 700,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "f693197e.859998",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/gas",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 610,
+        "y": 760,
+        "wires": [
+            [
+                "df3b378d.27cca8"
+            ]
+        ]
+    },
+    {
+        "id": "df3b378d.27cca8",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 750,
+        "y": 760,
+        "wires": [
+            [
+                "a7baec7c.73e69"
+            ],
+            [
+                "d2ff3054.9dd9e"
+            ],
+            [
+                "c273b94b.935b98"
+            ],
+            [
+                "412c2d5a.00d104"
+            ]
+        ]
+    },
+    {
+        "id": "ba1c78cd.a0b748",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 1230,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a7baec7c.73e69",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "0: 가스 차단이 안된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas shut off failed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 700,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "d2ff3054.9dd9e",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "1: 가스 차단된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas shut off successed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 740,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "c273b94b.935b98",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "2: 가스 탐지가 안된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 780,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "412c2d5a.00d104",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "3: 가스 탐지된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 820,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "a0b50bc5.5fcd48",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/detect",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 280,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "303ce9a6.2f4806",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "00",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 60,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "79dd631f.79881c",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "01",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 100,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "1366bade.7a5775",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "10",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 140,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "d73df263.53ed4",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "11",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 180,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "be208891.17c1b8",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "20",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 220,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "5beea796.7aeac8",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "21",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 260,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "67948a80.c56c64",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "22",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 300,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "23d22adf.a790b6",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "온습도 측정기",
+        "func": "\nif (msg.payload == '0') {\n    var temperture = Math.round((Math.random() * 100)%30);\n    msg.payload += temperture.toString();    \n}\nelse if (msg.payload == '1') {\n    var humidity = Math.round(Math.random() * 100);\n    msg.payload += humidity.toString();\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 520,
+        "wires": [
+            [
+                "1555033f.70834d"
+            ]
+        ]
+    },
+    {
+        "id": "5260550a.77b67c",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "온도",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 520,
+        "wires": [
+            [
+                "23d22adf.a790b6"
+            ]
+        ]
+    },
+    {
+        "id": "1555033f.70834d",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/ondo",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 410,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "54a8e295.7ef79c",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "습도",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "23d22adf.a790b6"
+            ]
+        ]
+    },
+    {
+        "id": "b9c4f399.ede33",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 700,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "831be31c.80f91",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 740,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "29af1d44.4ceb72",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "2",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "c626b83e.498538",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "3",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 820,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "8ae3adb4.4bf04",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/gas",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 270,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "ee368e2e.3eb47",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "detect dummy",
+        "info": "",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b1f224e.f1158d8",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "environment dummy",
+        "info": "",
+        "x": 270,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2e303076.6d596",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "gas dummy",
+        "info": "",
+        "x": 290,
+        "y": 720,
         "wires": []
     }
 ]

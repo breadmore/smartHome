@@ -1,6 +1,13 @@
 var router = require('express').Router();
 var logger = require('log4js').getLogger("page.js");
 
+router.get('/*', function(req, res, next){
+    logger.debug(new Date().toString());
+    // res.setHeader('Last-Modified', (new Date()).toString());
+    // res.setHeader('Date', (new Date()).toString());
+    next();
+});
+
 router.get('/', function (req, res) {
     res.render('index');
 });

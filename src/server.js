@@ -83,7 +83,10 @@ app.use(express.static(resourcePath + '/public'));
 
 // Add a simple route for static content served from './public'
 
-// app.use("/", express.static("./public/view"));
+// app.get('/*', function(req, res, next){
+//     res.setHeader('Last-Modified', (new Date()).toUTCString());
+//     next();
+// });
 app.use("/", require('./web/ViewController'));
 app.use("/api", require('./web/ApiContoller'));
 
@@ -121,7 +124,9 @@ app.use(nrSettings.httpAdminRoot, RED.httpAdmin);
 // Serve the http nodes from /
 app.use(nrSettings.httpNodeRoot, RED.httpNode);
 
-httpServer.listen(http_port, listening_address, function() {
+
+// httpServer.listen(http_port, listening_address, function() {
+httpServer.listen(http_port, function() {
   console.info(
     "Express 4 https server listening on http%s://%s:%d%s, serving node-red",
     use_https ? "s" : "",

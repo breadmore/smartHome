@@ -1,4 +1,5 @@
 const miDevicesUtils = require('../src/utils');
+var logger = require('log4js').getLogger('xiaomi-action.js');
 
 module.exports = (RED) => {
     /*********************************************
@@ -70,22 +71,48 @@ module.exports = (RED) => {
         this.brightness = config.brightness;
 
         this.on('input', (msg) => {
-            let color = msg.color || this.color;
-            let brightness = msg.brightness || this.brightness;
-            if(msg.sid) {
-                let rgb = miDevicesUtils.computeColorValue(color.red, color.green, color.blue, brightness);
-                msg.payload = {
-                    cmd: "write",
-                    data: { rgb: rgb, sid: msg.sid }
-                };
+            var key = "";
+            if (msg.token) {
+                key = encryptToken(msg.token);
+                let color = msg.color || this.color;
+                let brightness = msg.brightness || this.brightness;
+                if(msg.sid) {
+                    let rgb = miDevicesUtils.computeColorValue(color.red, color.green, color.blue, brightness);
+                    msg.payload = {
+                        key: key,
+                        model: msg.model,
+                        sid: msg.sid,
+                        cmd: "write",
+                        data: { rgb: rgb, sid: msg.sid }
+                    };
+                }
+                else {
+                    msg.payload = {
+                        color: miDevicesUtils.computeColorValue(color.red, color.green, color.blue),
+                        brightness: brightness
+                    };
+                }
+                logger.info('send msg :', msg);
+                this.send(msg);
             }
-            else {
-                msg.payload = {
-                    color: miDevicesUtils.computeColorValue(color.red, color.green, color.blue),
-                    brightness: brightness
-                };
-            }
-            this.send(msg);
+
+
+            // let color = msg.color || this.color;
+            // let brightness = msg.brightness || this.brightness;
+            // if(msg.sid) {
+            //     let rgb = miDevicesUtils.computeColorValue(color.red, color.green, color.blue, brightness);
+            //     msg.payload = {
+            //         cmd: "write",
+            //         data: { rgb: rgb, sid: msg.sid }
+            //     };
+            // }
+            // else {
+            //     msg.payload = {
+            //         color: miDevicesUtils.computeColorValue(color.red, color.green, color.blue),
+            //         brightness: brightness
+            //     };
+            // }
+            // this.send(msg);
         });
     }
     RED.nodes.registerType("xiaomi-actions gateway_light", XiaomiActionGatewayLight);
@@ -119,6 +146,11 @@ module.exports = (RED) => {
         RED.nodes.createNode(this, config);
 
         this.on('input', (msg) => {
+            var key = "";
+            if (msg.token) {
+                key = encryptToken(msg.token);
+            }
+
             msg.payload = {
                 cmd: "write",
                 data: { mid: 1000, sid: msg.sid }
@@ -229,8 +261,6 @@ module.exports = (RED) => {
 
         return new Uint8Array(a);
     }
-
-
 
     RED.nodes.registerType("xiaomi-actions toggle", XiaomiActionToggle);
 }
