@@ -375,8 +375,8 @@
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
         "ip": "10.1.0.77",
-        "x": 133,
-        "y": 227,
+        "x": 80,
+        "y": 240,
         "wires": [
             [
                 "db0dd765.3b48d8",
@@ -396,7 +396,7 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "sid": null,
-        "x": 420,
+        "x": 320,
         "y": 140,
         "wires": [
             [
@@ -411,7 +411,7 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "sid": "158d000209079a",
-        "x": 440,
+        "x": 340,
         "y": 180,
         "wires": [
             [
@@ -429,7 +429,7 @@
         "motionmsg": "",
         "nomotionmsg": "",
         "output": "0",
-        "x": 410,
+        "x": 310,
         "y": 220,
         "wires": [
             [
@@ -444,7 +444,7 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "sid": "158d00020dd2ce",
-        "x": 440,
+        "x": 340,
         "y": 260,
         "wires": [
             [
@@ -458,8 +458,8 @@
         "z": "7441ed9a.98d394",
         "gateway": "ba1d673a.6332e8",
         "name": "",
-        "x": 434,
-        "y": 310,
+        "x": 340,
+        "y": 380,
         "wires": [
             [
                 "c1a6d714.bc9b38"
@@ -476,8 +476,8 @@
         "onmsg": "",
         "offmsg": "",
         "output": "0",
-        "x": 409,
-        "y": 369,
+        "x": 310,
+        "y": 320,
         "wires": [
             [
                 "e332ffe3.ceafd"
@@ -494,8 +494,8 @@
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 1240,
-        "y": 262,
+        "x": 710,
+        "y": 240,
         "wires": []
     },
     {
@@ -505,8 +505,8 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "sid": null,
-        "x": 445,
-        "y": 1200,
+        "x": 520,
+        "y": 1540,
         "wires": [
             [
                 "32f11830.20e2e8"
@@ -520,8 +520,8 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "sid": "158d000209079a",
-        "x": 465,
-        "y": 1240,
+        "x": 540,
+        "y": 1580,
         "wires": [
             [
                 "32f11830.20e2e8"
@@ -538,8 +538,8 @@
         "motionmsg": "",
         "nomotionmsg": "",
         "output": "0",
-        "x": 465,
-        "y": 1280,
+        "x": 540,
+        "y": 1620,
         "wires": [
             [
                 "32f11830.20e2e8"
@@ -553,8 +553,8 @@
         "gateway": "ba1d673a.6332e8",
         "name": "",
         "sid": "158d00020dd2ce",
-        "x": 465,
-        "y": 1340,
+        "x": 540,
+        "y": 1680,
         "wires": [
             [
                 "32f11830.20e2e8",
@@ -569,8 +569,8 @@
         "z": "7441ed9a.98d394",
         "gateway": "ba1d673a.6332e8",
         "name": "",
-        "x": 465,
-        "y": 1400,
+        "x": 540,
+        "y": 1740,
         "wires": [
             [
                 "32f11830.20e2e8",
@@ -592,8 +592,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 65,
-        "y": 1340,
+        "x": 140,
+        "y": 1680,
         "wires": [
             [
                 "e75064bb.86cbd8",
@@ -621,8 +621,8 @@
         "onmsg": "",
         "offmsg": "",
         "output": "0",
-        "x": 455,
-        "y": 1460,
+        "x": 530,
+        "y": 1800,
         "wires": [
             [
                 "32f11830.20e2e8",
@@ -636,8 +636,8 @@
         "type": "xiaomi-actions read",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 775,
-        "y": 1220,
+        "x": 850,
+        "y": 1560,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -649,8 +649,8 @@
         "type": "xiaomi-actions get_id_list",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 785,
-        "y": 1440,
+        "x": 860,
+        "y": 1780,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -669,8 +669,8 @@
             "green": 255,
             "blue": 255
         },
-        "x": 785,
-        "y": 1480,
+        "x": 860,
+        "y": 1820,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -684,8 +684,8 @@
         "name": "",
         "mid": "",
         "volume": "",
-        "x": 795,
-        "y": 1520,
+        "x": 870,
+        "y": 1860,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -697,8 +697,8 @@
         "type": "xiaomi-actions gateway_stop_sound",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 795,
-        "y": 1560,
+        "x": 870,
+        "y": 1900,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -710,8 +710,8 @@
         "type": "xiaomi-actions on",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 785,
-        "y": 1620,
+        "x": 860,
+        "y": 1960,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -723,8 +723,8 @@
         "type": "xiaomi-actions off",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 785,
-        "y": 1660,
+        "x": 860,
+        "y": 2000,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -736,8 +736,8 @@
         "type": "xiaomi-actions click",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 775,
-        "y": 1320,
+        "x": 850,
+        "y": 1660,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -749,8 +749,8 @@
         "type": "xiaomi-actions double_click",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 795,
-        "y": 1360,
+        "x": 870,
+        "y": 1700,
         "wires": [
             [
                 "a0583f37.aa206"
@@ -764,8 +764,8 @@
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
         "ip": "10.1.0.77",
-        "x": 1145,
-        "y": 1420,
+        "x": 1220,
+        "y": 1760,
         "wires": []
     },
     {
@@ -773,8 +773,8 @@
         "type": "xiaomi-actions on",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 245,
-        "y": 1500,
+        "x": 320,
+        "y": 1840,
         "wires": [
             []
         ]
@@ -784,8 +784,8 @@
         "type": "xiaomi-actions off",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 245,
-        "y": 1540,
+        "x": 320,
+        "y": 1880,
         "wires": [
             []
         ]
@@ -796,7 +796,7 @@
         "z": "7441ed9a.98d394",
         "name": "Filter incoming",
         "info": "",
-        "x": 420,
+        "x": 340,
         "y": 40,
         "wires": []
     },
@@ -806,8 +806,8 @@
         "z": "7441ed9a.98d394",
         "name": "Outgoing",
         "info": "",
-        "x": 385,
-        "y": 1140,
+        "x": 560,
+        "y": 1460,
         "wires": []
     },
     {
@@ -817,8 +817,8 @@
         "name": "",
         "ip": "",
         "port": 55443,
-        "x": 455,
-        "y": 1680,
+        "x": 530,
+        "y": 2020,
         "wires": []
     },
     {
@@ -826,8 +826,8 @@
         "type": "xiaomi-actions on",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 245,
-        "y": 1620,
+        "x": 320,
+        "y": 1960,
         "wires": [
             [
                 "71bbbb4a.8e4b24"
@@ -839,8 +839,8 @@
         "type": "xiaomi-actions off",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 245,
-        "y": 1660,
+        "x": 320,
+        "y": 2000,
         "wires": [
             [
                 "71bbbb4a.8e4b24"
@@ -852,8 +852,8 @@
         "type": "xiaomi-actions toggle",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 255,
-        "y": 1700,
+        "x": 330,
+        "y": 2040,
         "wires": [
             [
                 "71bbbb4a.8e4b24"
@@ -872,8 +872,8 @@
             "green": 255,
             "blue": 255
         },
-        "x": 245,
-        "y": 1740,
+        "x": 320,
+        "y": 2080,
         "wires": [
             [
                 "71bbbb4a.8e4b24"
@@ -890,7 +890,7 @@
             "magnet,sensor_magnet.aq2"
         ],
         "excludedSids": [],
-        "x": 420,
+        "x": 320,
         "y": 100,
         "wires": [
             [
@@ -905,8 +905,8 @@
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
         "ip": "10.1.0.77",
-        "x": 119,
-        "y": 557,
+        "x": 60,
+        "y": 840,
         "wires": [
             [
                 "fcdf63de.04c87"
@@ -920,8 +920,8 @@
         "gateway": "ba1d673a.6332e8",
         "name": "switch",
         "sid": "158d00020dd2ce",
-        "x": 286,
-        "y": 557,
+        "x": 190,
+        "y": 840,
         "wires": [
             [
                 "81980f75.264cd"
@@ -936,8 +936,8 @@
         "func": "if(msg.payload.cmd === \"report\") {\n    return msg;\n}\nreturn null;",
         "outputs": "1",
         "noerr": 0,
-        "x": 432,
-        "y": 553,
+        "x": 310,
+        "y": 840,
         "wires": [
             [
                 "cfe0b6e8.418ca8"
@@ -948,7 +948,7 @@
         "id": "cfe0b6e8.418ca8",
         "type": "switch",
         "z": "7441ed9a.98d394",
-        "name": "&& msg.payload.data.status == \"click\"",
+        "name": "Event Seletor",
         "property": "payload.data.status",
         "propertyType": "msg",
         "rules": [
@@ -967,9 +967,10 @@
             }
         ],
         "checkall": "true",
+        "repair": false,
         "outputs": 3,
-        "x": 602.5,
-        "y": 653,
+        "x": 450,
+        "y": 840,
         "wires": [
             [
                 "927a2ed0.e6772"
@@ -980,6 +981,11 @@
             [
                 "c920a52e.78ec18"
             ]
+        ],
+        "outputLabels": [
+            "Click",
+            "Double Click",
+            "Otherwise"
         ]
     },
     {
@@ -990,19 +996,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 887.5,
-        "y": 782,
-        "wires": []
-    },
-    {
-        "id": "6da12fc6.eac56",
-        "type": "xiaomi-gateway out",
-        "z": "7441ed9a.98d394",
-        "name": "gateway",
-        "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
-        "x": 1374.5,
-        "y": 649,
+        "x": 670,
+        "y": 900,
         "wires": []
     },
     {
@@ -1010,8 +1005,8 @@
         "type": "xiaomi-actions on",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 1097.5,
-        "y": 635,
+        "x": 840,
+        "y": 820,
         "wires": [
             [
                 "6da12fc6.eac56"
@@ -1024,37 +1019,25 @@
         "z": "7441ed9a.98d394",
         "name": "todo: get device sid",
         "info": "",
-        "x": 918.5,
-        "y": 552,
+        "x": 670,
+        "y": 780,
         "wires": []
     },
     {
         "id": "927a2ed0.e6772",
         "type": "function",
         "z": "7441ed9a.98d394",
-        "name": "get Plug Sid",
+        "name": "Click",
         "func": "msg.sid = \"158d0001bc39a1\";\nmsg.model = \"plug\"\nmsg.token = global.get(\"token\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 901.5,
-        "y": 594,
+        "x": 650,
+        "y": 820,
         "wires": [
             [
                 "ab33a887.87ab18"
             ]
         ]
-    },
-    {
-        "id": "6f48f4b8.0d7d7c",
-        "type": "debug",
-        "z": "7441ed9a.98d394",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 1322.5,
-        "y": 528,
-        "wires": []
     },
     {
         "id": "c1a6d714.bc9b38",
@@ -1074,30 +1057,14 @@
             }
         ],
         "checkall": "false",
+        "repair": false,
         "outputs": 2,
-        "x": 572.5,
-        "y": 394,
+        "x": 490,
+        "y": 380,
         "wires": [
             [
-                "dfad2e03.af33f",
-                "42207ae0.001d94"
+                "dfad2e03.af33f"
             ],
-            [
-                "f209ba87.cb7808"
-            ]
-        ]
-    },
-    {
-        "id": "f209ba87.cb7808",
-        "type": "function",
-        "z": "7441ed9a.98d394",
-        "name": "",
-        "func": "if(msg.payload.cmd == \"heartbeat\") {\n    return null;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1067.5,
-        "y": 318,
-        "wires": [
             [
                 "e332ffe3.ceafd"
             ]
@@ -1107,38 +1074,28 @@
         "id": "dfad2e03.af33f",
         "type": "function",
         "z": "7441ed9a.98d394",
-        "name": "",
+        "name": "Set Gateway Token",
         "func": "global.set(\"token\", msg.payload.token);",
         "outputs": 1,
         "noerr": 0,
-        "x": 871.5,
-        "y": 408,
+        "x": 670,
+        "y": 380,
         "wires": [
-            []
+            [
+                "42207ae0.001d94"
+            ]
         ]
-    },
-    {
-        "id": "42207ae0.001d94",
-        "type": "debug",
-        "z": "7441ed9a.98d394",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "payload",
-        "x": 764.5,
-        "y": 455,
-        "wires": []
     },
     {
         "id": "df53c1.b65dbc4",
         "type": "function",
         "z": "7441ed9a.98d394",
-        "name": "get Plug Sid",
+        "name": "Double Click",
         "func": "msg.sid = \"158d0001bc39a1\";\nmsg.model = \"plug\"\nmsg.token = global.get(\"token\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 901,
-        "y": 687,
+        "x": 670,
+        "y": 860,
         "wires": [
             [
                 "3f1be265.8fec8e"
@@ -1150,12 +1107,254 @@
         "type": "xiaomi-actions off",
         "z": "7441ed9a.98d394",
         "name": "",
-        "x": 1125.5,
-        "y": 708,
+        "x": 840,
+        "y": 860,
         "wires": [
             [
                 "6da12fc6.eac56"
             ]
         ]
+    },
+    {
+        "id": "6da12fc6.eac56",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 1000,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "42207ae0.001d94",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "payload",
+        "x": 870,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "af502f0b.553a3",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "Switch Event",
+        "info": "",
+        "x": 70,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "9ec071b7.1f8c6",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "get Plug Status",
+        "topic": "",
+        "payload": "{\"cmd\":\"read\",\"sid\":\"158d0001bc39a1\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 540,
+        "wires": [
+            [
+                "a5f54dc6.f968e"
+            ]
+        ]
+    },
+    {
+        "id": "a5f54dc6.f968e",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 380,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "588b66f6.bcb518",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "get Gateway Status",
+        "topic": "",
+        "payload": "{\"cmd\":\"read\",\"sid\":\"7811dce16bc4\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 580,
+        "wires": [
+            [
+                "a5f54dc6.f968e"
+            ]
+        ]
+    },
+    {
+        "id": "76d4c837.bec328",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "Status Checker",
+        "info": "",
+        "x": 100,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d43665f2.c1b9c8",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 710,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "7f570267.f3fc7c",
+        "type": "xiaomi-motion",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": "158d00020e6b8c",
+        "motionmsg": "",
+        "nomotionmsg": "",
+        "output": "0",
+        "x": 180,
+        "y": 1040,
+        "wires": [
+            [
+                "53ecd754.8a4598",
+                "8430f0cf.daa5d"
+            ]
+        ]
+    },
+    {
+        "id": "7cb068d3.bb2ee8",
+        "type": "xiaomi-gateway in",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 20,
+        "y": 1040,
+        "wires": [
+            [
+                "7f570267.f3fc7c"
+            ]
+        ]
+    },
+    {
+        "id": "8430f0cf.daa5d",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "func": "if (msg.payload.data.status == \"motion\") {\n    return msg;    \n}\nelse {\n    return null;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 1040,
+        "wires": [
+            [
+                "3df01b4c.b4d544"
+            ]
+        ]
+    },
+    {
+        "id": "53ecd754.8a4598",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 410,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "bc313ebf.19e56",
+        "type": "xiaomi-actions gateway_sound",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "mid": "4",
+        "volume": "50",
+        "x": 730,
+        "y": 1040,
+        "wires": [
+            [
+                "d72bf58b.ed09d8",
+                "f2584f53.5d4ee"
+            ]
+        ]
+    },
+    {
+        "id": "d72bf58b.ed09d8",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 900,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "3df01b4c.b4d544",
+        "type": "xiaomi-gateway",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "x": 540,
+        "y": 1040,
+        "wires": [
+            [
+                "bc313ebf.19e56",
+                "6b76aa67.576cf4"
+            ]
+        ]
+    },
+    {
+        "id": "6b76aa67.576cf4",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 660,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "f2584f53.5d4ee",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 870,
+        "y": 1120,
+        "wires": []
     }
 ]

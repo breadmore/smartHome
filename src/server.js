@@ -35,7 +35,10 @@ var nrSettings = require("../settings.js"); // Node-Red settings file
 const fs = require("fs");
 
 const bodyParser = require('body-parser');
-const httpLogger = require('morgan');
+// const httpLogger = require('morgan');
+
+var log4js = require('log4js');
+log4js.configure('./config/logger/log4js.json');
 
 // you can set a default credential secret for storing node's credentials within node red
 // normally this is secret is generated randomly and stored in the user directory (config)
@@ -67,7 +70,10 @@ var path = require('path');
 // app http settings.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(httpLogger('dev'));
+
+app.use(log4js.connectLogger(log4js.getLogger("http"), {level: 'auto'}));
+
+// app.use(httpLogger('dev'));
 app.set('views', path.join(__dirname, '../public/view'));
 app.set('view engine', 'jade');
 var resourcePath = path.join(__dirname, '../public/resource');
@@ -114,6 +120,7 @@ httpServer.listen(http_port, listening_address, function() {
     nrSettings.httpAdminRoot
   );
 });
+
 
 // Start the runtime
 RED.start().then(function() {

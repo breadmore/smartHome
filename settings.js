@@ -145,7 +145,7 @@ module.exports = {
             level: "debug",
             metrics: false,
             audit: false,
-            handler: require("./src/logger_con.js")
+            handler: require("./config/logger/logger_con.js")
         },
 
         // file logger
@@ -156,7 +156,7 @@ module.exports = {
             logfilename: path.join(process.cwd(), "nr.log"), // the default logfile
             divider: "\t", // col divider
             newline: "\n", // newline characters typically \r\n (CRLF) or \n (LF)
-            handler: require("./src/logger_file.js")
+            handler: require("./config/logger/logger_file.js")
         },
 
         /*

@@ -124,7 +124,7 @@ $RECYCLE.BIN/
 nodes
 
 #Test Folder
-test
+test/
 .flows.json.backup
 
 
