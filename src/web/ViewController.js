@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var logger = require('log4js').getLogger("page.js");
 
-router.get('/*', function(req, res, next){
+router.get('/*', function (req, res, next) {
     // logger.debug(new Date().toString());
     res.setHeader('Last-Modified', (new Date()).toString());
     res.setHeader('Date', (new Date()).toString());
@@ -17,7 +17,7 @@ router.get('/dashboard', function (req, res) {
 });
 
 router.get('/regist', function (req, res) {
-    res.render('regis');
+    res.render('regist');
 });
 
 router.get('/gateway', function (req, res) {

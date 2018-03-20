@@ -6,7 +6,6 @@ function reportService(model, data, cb) {
     switch (model) {
         case "gateway":
             logger.info(model, "in reportService");
-
             break;
         case "switch":
             logger.info(model, "in reportService");

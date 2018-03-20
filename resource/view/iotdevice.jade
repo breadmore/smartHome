@@ -525,7 +525,9 @@ block content
                 .content_body_card_subtitle ETRI Temperature
                 .content_body_card_body
                     img(src="/image/temperatureWhite.png")
-                    .cotent_body_card_body_value#temp001 8℃
+                    .cotent_body_card_body_value#temp001
+                        .value#value_1 &nbsp
+                        .value#value_2 ℃
                 .content_body_card_event No event occured
                 .content_body_card_details(data-target="#tempModal" data-toggle="modal") Click to view details
             .content_body_card
@@ -533,7 +535,9 @@ block content
                 .content_body_card_subtitle ETRI Humidity
                 .content_body_card_body
                     img(src="/image/humidityWhite.png")
-                    .cotent_body_card_body_value#hum001 50%
+                    .cotent_body_card_body_value#hum001
+                        .value#value_1 &nbsp
+                        .value#value_2 %
                 .content_body_card_event No event occured
                 .content_body_card_details(data-target="#humModal" data-toggle="modal") Click to view details
         .gas_leakage_sensors Gas leakage sensors ▲
@@ -543,7 +547,7 @@ block content
                 .content_body_card_subtitle ETRI  Gas leakage alarm
                 .content_body_card_body
                     img(src="/image/instrusionAlarmWhite.png")
-                    .cotent_body_card_body_value#lm001 Alert
+                    .cotent_body_card_body_value#lm001
                 .content_body_card_event Gas leakaged
                 .content_body_card_details(data-target="#gasModal" data-toggle="modal") Click to view details
             .content_body_card
@@ -552,8 +556,8 @@ block content
                 .content_body_card_body
                     img(src="/image/gasDetectWhite.png")
                     .cotent_body_card_body_value#gaslc001
-                        .value1 Leakaged
-                        .value2 Gas Blocked
+                        //.value1 Leakaged
+                        .value2
                 .content_body_card_event Gas leakaged
                 .content_body_card_details Click to view details
         .etri_Intrusion_detection_sensors ETRI Intrusion detection sensors ▲
@@ -579,7 +583,7 @@ block content
                 .content_body_card_subtitle ETRI  Human dection
                 .content_body_card_body
                     img(src="/image/humansensor.png")
-                    .cotent_body_card_body_value#idhs001 Detected
+                    .cotent_body_card_body_value#idhs001
                 .content_body_card_event Intrusion detected
                 .content_body_card_details Click to view details
             .content_body_card
@@ -587,7 +591,23 @@ block content
                 .content_body_card_subtitle ETRI  Window sensor
                 .content_body_card_body
                     img(src="/image/windowsensor.png")
-                    .cotent_body_card_body_value#idw001 No event
+                    .cotent_body_card_body_value#idw001
+                .content_body_card_event Intrusion detected
+                .content_body_card_details Click to view details
+            .content_body_card
+                .content_body_card_title JS001-JSM001
+                .content_body_card_subtitle ETRI Jaesil mode
+                .content_body_card_body
+                    img(src="/image/home.png")
+                    .cotent_body_card_body_value#jaesil001
+                        .value1
+                            span.toggle
+                                p.off(style="display:none;") OFF
+                                p ON
+                            label.switch
+                                input(type="checkbox" checked=1)
+                                span.slider.round
+                        .value2 Intrusion
                 .content_body_card_event Intrusion detected
                 .content_body_card_details Click to view details
         .xiaomi_intrusion_detection_sensors XIAOMI Intrusion detection sensors ▲

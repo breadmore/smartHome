@@ -6,11 +6,6 @@ function testService(socket, url, data) {
 }
 
 
-
-
-
-
-
 module.exports = {
     testService : testService
 };

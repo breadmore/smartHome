@@ -201,6 +201,7 @@ select {
 }
 
 .cotent_body_card_body_value {
+    display : inline-block;
     text-align: center;
     width: 150px;
     font-size: 38pt;
@@ -209,6 +210,7 @@ select {
     float: left;
     color: #d72a42;
 }
+
 .content_body_card_event {
     margin: auto;
     border-radius: 5px;
@@ -258,6 +260,11 @@ select {
     font-size: 30px;
 }
 
+#lm001 {
+    padding-top: 10px;
+    font-size: 21pt;
+}
+
 #lx001 {
     color: #e2721f;
 }
@@ -272,6 +279,7 @@ select {
     width: 100%;
     font-size: 16pt;
 }
+
 
 
 /*토글 스위치*/
@@ -527,4 +535,24 @@ thead > tr > td {
 
 input {
     /*outline: 0;*/
+}
+
+
+
+#value_1, #value_2 {
+    float: left;
+    font-size: 38pt;
+    margin-bottom: 0px;
+}
+
+#value_1 {
+    width: 88px;
+}
+
+#value_2 {
+    width: auto;
+}
+
+#gaslc001 {
+    font-size: 20pt;
 }
