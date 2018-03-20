@@ -255,6 +255,10 @@ select {
     font-size: 30px;
 }
 
+#idhs002 {
+    color: #23a455;
+}
+
 #idwc001 {
     padding-top: 10px;
     font-size: 30px;
@@ -273,6 +277,11 @@ select {
     color: #23a455;
     padding-top: 10px;
     font-size: 30px;
+}
+
+#idw002 {
+    font-size: 33pt;
+    padding-top: 0px;
 }
 
 .value1, .value2 {
@@ -555,4 +564,10 @@ input {
 
 #gaslc001 {
     font-size: 20pt;
+}
+
+#po002 {
+    color: #23a455;
+    padding-top: 10px;
+    font-size: 25px;
 }

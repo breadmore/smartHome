@@ -641,7 +641,7 @@ block content
                 .content_body_card_subtitle XIAOMI Human dection
                 .content_body_card_body
                     img(src="/image/humansensor.png")
-                    .cotent_body_card_body_value#idhs002 Detected
+                    .cotent_body_card_body_value#idhs002 Undetected
                 .content_body_card_event No event occured
                 .content_body_card_details Click to view details
             .content_body_card
@@ -649,7 +649,7 @@ block content
                 .content_body_card_subtitle XIAOMI  Window sensor
                 .content_body_card_body
                     img(src="/image/windowsensor.png")
-                    .cotent_body_card_body_value#idw002 No event
+                    .cotent_body_card_body_value#idw002
                 .content_body_card_event No event occured
                 .content_body_card_details Click to view details
         .xiaomi_power_control_sensors XIAOMI power control sensors ▲
@@ -662,14 +662,21 @@ block content
                     .cotent_body_card_body_value#po001
                         .value1
                             span.toggle
-                                p.off(style="display:none;") OFF
-                                p ON
+                                p.off OFF
                             label.switch
-                                input(type="checkbox" checked=1)
+                                input(type="checkbox" )
                                 span.slider.round
                         .value2 Connected
                 .content_body_card_event No event occured
                 .content_body_card_details(data-target="#cameraModal" data-toggle="modal") Click to view details
+            .content_body_card
+                .content_body_card_title SG001-PO002
+                .content_body_card_subtitle XIAOMI  switch
+                .content_body_card_body
+                    img(src="/image/PoweroutletWhite.png")
+                    .cotent_body_card_body_value#po002
+                .content_body_card_event No event occured
+                .content_body_card_details Click to view details
         .width_bar
         .sensor_event_log
             .log_title Sensor event log
