@@ -1,0 +1,112 @@
+extends layout
+
+append head
+    link(href='../css/dashboard.css' rel='stylesheet')
+
+
+block content
+    .content_title
+        img(src="/image/dashboardWhite.png")
+        div Dashboard
+    .content_body
+        .content_body_title Overview
+        .content_body_subtitle Summary
+        .content_body_card_list
+            .content_body_card
+                .content_body_card_title Secure Gateways
+                .content_body_card_body
+                    img(src="/image/gatewayWhite.png")
+                    .cotent_body_card_body_count_regist
+                        .content_body_card_body_count 4
+                        .content_body_card_body_regist REGISTERED
+                .content_body_card_event No event occured
+            .content_body_card
+                .content_body_card_title Secure Gateways
+                .content_body_card_body
+                    img(src="/image/shareWhite.png")
+                    .cotent_body_card_body_count_regist
+                        .content_body_card_body_count 12
+                        .content_body_card_body_regist REGISTERED
+                .content_body_card_event No event occured
+            .content_body_card
+                .content_body_card_title Secure Gateways
+                .content_body_card_body
+                    img(src="/image/keyWhite.png")
+                    .cotent_body_card_body_count_regist
+                        .content_body_card_body_count 4
+                        .content_body_card_body_regist REGISTERED
+                .content_body_card_event No event occured
+            .content_body_card
+                .content_body_card_title Secure Gateways
+                .content_body_card_body
+                    img(src="/image/accountWhite.png")
+                    .cotent_body_card_body_count_regist
+                        .content_body_card_body_count 20
+                        .content_body_card_body_regist REGISTERED
+                .content_body_card_event No event occured
+        .content_body_title Secure Gateway
+        .content_body_subtitle Resource overview
+        .content_body_card_subtitle
+            .content_body_card_subtitle2 ETRI-SG-001
+            .content_body_card_event2 No event
+        .content_body_card_list
+            .content_body_profile_card
+                .content_body_card_title Profile
+                .profile_card_body
+                    .profile_body_title MQTT URL
+                    .profile_body_vaule http://192.168.255.254:20000
+                .profile_card_body
+                    .profile_body_title Inter IP
+                    .profile_body_vaule 192.168.255.254
+                .profile_card_body
+                    .profile_body_title Inter Port
+                    .profile_body_vaule 21111
+                .profile_card_body
+                    .profile_body_title Devices
+                    .profile_body_vaule 6
+                .profile_card_body
+                    .profile_body_title Uptime
+                    .profile_body_vaule 1231H 11M 30S
+                .profile_card_body
+                    .profile_body_title Uplink
+                    .profile_body_vaule 15.03 GB
+                .profile_card_body
+                    .profile_body_title Downlink
+                    .profile_body_vaule 15 GB
+            .content_body_profile_card2
+                .content_body_card_title Up/Downlink Statistics
+                    span ETRI-SG-001
+                .profile_card_body
+                    img(src="/image/networkgraph.png")
+            .content_body_card_subtitle
+                .content_body_card_subtitle2 ETRI-SG-002
+                .content_body_card_event2 4 Erros occured
+            .content_body_card_list
+                .content_body_profile_card
+                    .content_body_card_title Profile
+                    .profile_card_body
+                        .profile_body_title MQTT URL
+                        .profile_body_vaule http://192.168.255.254:20000
+                    .profile_card_body
+                        .profile_body_title Inter IP
+                        .profile_body_vaule 192.168.255.254
+                    .profile_card_body
+                        .profile_body_title Inter Port
+                        .profile_body_vaule 21111
+                    .profile_card_body
+                        .profile_body_title Devices
+                        .profile_body_vaule 6
+                    .profile_card_body
+                        .profile_body_title Uptime
+                        .profile_body_vaule 1231H 11M 30S
+                    .profile_card_body
+                        .profile_body_title Uplink
+                        .profile_body_vaule 15.03 GB
+                    .profile_card_body
+                        .profile_body_title Downlink
+                        .profile_body_vaule 15 GB
+                .content_body_profile_card2
+                    .content_body_card_title Up/Downlink Statistics
+                        span ETRI-SG-002
+                    .profile_card_body
+                        img(src="/image/networkgraph.png")

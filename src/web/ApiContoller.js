@@ -18,11 +18,12 @@ router.route('/login')
     .post(function (req, res) {
         res.redirect('/dashboard');
     });
+router.post('/login/demo', function (req, res)  {
+   res.redirect('/new/dashboard');
+});
 
 // todo : remove me! test controller
 router.use('/time', require('./api/time'));
-
-
 
 
 module.exports = router;

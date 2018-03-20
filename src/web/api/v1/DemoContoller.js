@@ -16,23 +16,23 @@ router.route('/xiaomi')
     .post(function (req, res) {
         switch (req.body.cmd) {
             case "report":
-                logger.info("report command by", req.body.model);
-                logger.info(req.body);
+                // logger.info("report command by", req.body.model);
+                // logger.info(req.body);
                 app.clientSocket('/xiaomi/report', req.body);
                 break;
             case "read_ack":
-                logger.info("read_ack command by", req.body.model);
-                logger.info(req.body);
+                // logger.info("read_ack command by", req.body.model);
+                // logger.info(req.body);
                 app.clientSocket('/xiaomi/read', req.body);
                 break;
             case "write_ack":
-                logger.info("write_ack command by", req.body.model);
+                // logger.info("write_ack command by", req.body.model);
                 break;
             case "heartbeat":
-                logger.info("heartbeat command by", req.body.model);
+                // logger.info("heartbeat command by", req.body.model);
                 break;
             default:
-                logger.error("Error: not matched case", req.body);
+                // logger.error("Error: not matched case", req.body);
                 break;
         }
         res.sendStatus(202);
