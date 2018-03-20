@@ -54,6 +54,15 @@ $(function () {
 
     });
 
+    //todo : reporting data.  check model, status!
+    socket.on('/xiaomi/report', function (data) {
+        console.log(data);
 
+    });
+
+    //todo : read data.  check model, status!
+    socket.on('xiaomi/read', function (data) {
+        console.log(data);
+    });
 
 });

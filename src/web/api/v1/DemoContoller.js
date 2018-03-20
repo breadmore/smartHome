@@ -2,7 +2,7 @@ var router = require('express').Router();
 let logger = require('log4js').getLogger('DemoController.js');
 
 // var socket = require('../../SocketController');
-var server = require('../../../server');
+var app = require('../../../server');
 
 var demoService = require('../../../service/api/v1/DemoService');
 
@@ -17,9 +17,13 @@ router.route('/xiaomi')
         switch (req.body.cmd) {
             case "report":
                 logger.info("report command by", req.body.model);
+                logger.info(req.body);
+                app.clientSocket('/xiaomi/report', req.body);
                 break;
             case "read_ack":
                 logger.info("read_ack command by", req.body.model);
+                logger.info(req.body);
+                app.clientSocket('/xiaomi/read', req.body);
                 break;
             case "write_ack":
                 logger.info("write_ack command by", req.body.model);
@@ -37,7 +41,7 @@ router.route('/xiaomi')
 
 router.route('/legacy/detect')
     .post(function (req, res) {
-        server.clientSocket('/legacy', req.body);
+        app.clientSocket('/legacy', req.body);
         // socket.emit("/socket/devices", req.body);
         // demoService.jaesilService(socket, "/socket/devices", req.body.status);
         // switch (req.body.status) {
@@ -63,7 +67,7 @@ router.route('/legacy/detect')
 
 router.route('/legacy/temhum')
     .post(function (req, res) {
-        server.clientSocket('/legacy', req.body);
+        app.clientSocket('/legacy', req.body);
         // switch (req.body.type) {
         //     case "temperature":
         //         break;
@@ -77,7 +81,7 @@ router.route('/legacy/temhum')
 
 router.route('/legacy/gas')
     .post(function (req, res) {
-        server.clientSocket('/legacy', req.body);
+        app.clientSocket('/legacy', req.body);
         // switch (req.body.status) {
         //     case "0":
         //         break;

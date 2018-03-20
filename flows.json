@@ -1,0 +1,2861 @@
+[
+    {
+        "id": "7441ed9a.98d394",
+        "type": "tab",
+        "label": "Mi Devices Overview",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "943f007.ccb33",
+        "type": "tab",
+        "label": "Legacy Device with Dummy Data",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "edcab44d.6b6218",
+        "type": "tab",
+        "label": "Test Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5b2bfd65.8a7c14",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "965972a.373469",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "10.0.4.3",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "ba1d673a.6332e8",
+        "type": "xiaomi-configurator",
+        "z": "",
+        "name": "gateway",
+        "ip": "10.1.0.77",
+        "sid": "7811dce16bc4",
+        "deviceList": [
+            {
+                "sid": "158d00020dd2ce",
+                "desc": "switch",
+                "model": "switch"
+            },
+            {
+                "sid": "158d000209079a",
+                "desc": "windows",
+                "model": "magnet"
+            },
+            {
+                "sid": "158d00020e6b8c",
+                "desc": "motion",
+                "model": "motion"
+            },
+            {
+                "sid": "158d0001bc39a1",
+                "desc": "plug",
+                "model": "plug"
+            }
+        ],
+        "key": "lg9ocmqwbhcojgd9"
+    },
+    {
+        "id": "b552ffd9.d1553",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "147b3dc9.b76cd2",
+        "type": "ui_group",
+        "z": "943f007.ccb33",
+        "name": "Default",
+        "tab": "9f5df09.c58fb1",
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "186afc7c.1e3cb4",
+        "type": "ui_tab",
+        "z": "943f007.ccb33",
+        "name": "MQTT",
+        "icon": "dashboard"
+    },
+    {
+        "id": "f176f662.2913d8",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "6c33d900.996918",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "186afc7c.1e3cb4",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "e475d55b.7deac8",
+        "type": "inject",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "x": 570,
+        "y": 80,
+        "wires": [
+            [
+                "e2e5bfa3.6f0fc"
+            ]
+        ]
+    },
+    {
+        "id": "e2e5bfa3.6f0fc",
+        "type": "http request",
+        "z": "edcab44d.6b6218",
+        "name": "Recent Quakes",
+        "method": "GET",
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.csv",
+        "tls": "",
+        "x": 740,
+        "y": 80,
+        "wires": [
+            [
+                "8a1be4a3.27c648"
+            ]
+        ]
+    },
+    {
+        "id": "8a1be4a3.27c648",
+        "type": "csv",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "x": 910,
+        "y": 80,
+        "wires": [
+            [
+                "21244116.aae50e",
+                "cd3d4090.5c636"
+            ]
+        ]
+    },
+    {
+        "id": "21244116.aae50e",
+        "type": "debug",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "active": false,
+        "complete": false,
+        "x": 1070,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cd3d4090.5c636",
+        "type": "switch",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "property": "payload.mag",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "7",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 1,
+        "x": 950,
+        "y": 140,
+        "wires": [
+            [
+                "a7fd21ff.19aff"
+            ]
+        ]
+    },
+    {
+        "id": "a7fd21ff.19aff",
+        "type": "change",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "PANIC!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 200,
+        "wires": [
+            [
+                "82efb853.673c28"
+            ]
+        ]
+    },
+    {
+        "id": "82efb853.673c28",
+        "type": "debug",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "active": false,
+        "complete": false,
+        "x": 1190,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ed5d238a.20174",
+        "type": "http in",
+        "z": "edcab44d.6b6218",
+        "name": "Test",
+        "url": "localhost:1880/api",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1108.5,
+        "y": 467,
+        "wires": [
+            [
+                "efc9585d.7c3e78"
+            ]
+        ]
+    },
+    {
+        "id": "efc9585d.7c3e78",
+        "type": "debug",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 1277.5,
+        "y": 464,
+        "wires": []
+    },
+    {
+        "id": "80ac2dec.abd1b",
+        "type": "inject",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "topic": "",
+        "payload": "{\"name\":\"asd\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 164.5,
+        "y": 548,
+        "wires": [
+            [
+                "b1efc73b.1bb768"
+            ]
+        ]
+    },
+    {
+        "id": "b1efc73b.1bb768",
+        "type": "http request",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/time",
+        "tls": "",
+        "x": 386.5,
+        "y": 533,
+        "wires": [
+            [
+                "eb205e18.f8f5d"
+            ]
+        ]
+    },
+    {
+        "id": "eb205e18.f8f5d",
+        "type": "debug",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 586.5,
+        "y": 524,
+        "wires": []
+    },
+    {
+        "id": "579a7cf8.d981a4",
+        "type": "mqtt in",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "topic": "mosquitto/test/1/on",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 107.5,
+        "y": 168,
+        "wires": [
+            [
+                "91081cd2.91bda",
+                "468ba13b.854a3"
+            ]
+        ]
+    },
+    {
+        "id": "f530c36e.574d4",
+        "type": "http request",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/time",
+        "tls": "",
+        "x": 391,
+        "y": 353,
+        "wires": [
+            [
+                "3131759.5ebd78a"
+            ]
+        ]
+    },
+    {
+        "id": "3131759.5ebd78a",
+        "type": "debug",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 605,
+        "y": 353,
+        "wires": []
+    },
+    {
+        "id": "91081cd2.91bda",
+        "type": "debug",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 515.5,
+        "y": 257,
+        "wires": []
+    },
+    {
+        "id": "468ba13b.854a3",
+        "type": "json",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 165.5,
+        "y": 306,
+        "wires": [
+            [
+                "f530c36e.574d4"
+            ]
+        ]
+    },
+    {
+        "id": "dcb33978.723c88",
+        "type": "mqtt out",
+        "z": "edcab44d.6b6218",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 765,
+        "y": 441,
+        "wires": []
+    },
+    {
+        "id": "7ac91e25.b132e",
+        "type": "xiaomi-gateway in",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 80,
+        "y": 220,
+        "wires": [
+            [
+                "db0dd765.3b48d8",
+                "4113bfb5.0a02e",
+                "f6d5b6db.a61c98",
+                "858bbca5.41d12",
+                "89b46e3b.ae298",
+                "61180940.54fa68",
+                "1035b862.537be8"
+            ]
+        ]
+    },
+    {
+        "id": "db0dd765.3b48d8",
+        "type": "xiaomi-ht",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": null,
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "4113bfb5.0a02e",
+        "type": "xiaomi-magnet",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": "158d000209079a",
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "f6d5b6db.a61c98",
+        "type": "xiaomi-motion",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "motion",
+        "sid": "158d00020e6b8c",
+        "motionmsg": "",
+        "nomotionmsg": "",
+        "output": "0",
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "858bbca5.41d12",
+        "type": "xiaomi-switch",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": "158d00020dd2ce",
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "89b46e3b.ae298",
+        "type": "xiaomi-gateway",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "c1a6d714.bc9b38"
+            ]
+        ]
+    },
+    {
+        "id": "61180940.54fa68",
+        "type": "xiaomi-plug",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "plug",
+        "sid": "158d0001bc39a1",
+        "onmsg": "",
+        "offmsg": "",
+        "output": "0",
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "e332ffe3.ceafd",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 870,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e75064bb.86cbd8",
+        "type": "xiaomi-ht",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": null,
+        "x": 520,
+        "y": 1540,
+        "wires": [
+            [
+                "32f11830.20e2e8"
+            ]
+        ]
+    },
+    {
+        "id": "b95a3f90.e9e85",
+        "type": "xiaomi-magnet",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": "158d000209079a",
+        "x": 540,
+        "y": 1580,
+        "wires": [
+            [
+                "32f11830.20e2e8"
+            ]
+        ]
+    },
+    {
+        "id": "d495de03.6105a",
+        "type": "xiaomi-motion",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": null,
+        "motionmsg": "",
+        "nomotionmsg": "",
+        "output": "0",
+        "x": 540,
+        "y": 1620,
+        "wires": [
+            [
+                "32f11830.20e2e8"
+            ]
+        ]
+    },
+    {
+        "id": "32b9d1e6.29a80e",
+        "type": "xiaomi-switch",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": "158d00020dd2ce",
+        "x": 540,
+        "y": 1680,
+        "wires": [
+            [
+                "32f11830.20e2e8",
+                "73467d7c.f60714",
+                "b79db334.23f75"
+            ]
+        ]
+    },
+    {
+        "id": "9565688f.3ef7a8",
+        "type": "xiaomi-gateway",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "x": 540,
+        "y": 1740,
+        "wires": [
+            [
+                "32f11830.20e2e8",
+                "f4dc715e.23171",
+                "f4ae5d71.99a92",
+                "74e38af8.cff9b4",
+                "30823aaa.e843c6"
+            ]
+        ]
+    },
+    {
+        "id": "66ffbc35.d61a74",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 140,
+        "y": 1680,
+        "wires": [
+            [
+                "e75064bb.86cbd8",
+                "b95a3f90.e9e85",
+                "d495de03.6105a",
+                "32b9d1e6.29a80e",
+                "9565688f.3ef7a8",
+                "d9681417.f7b258",
+                "c1d683cf.9eef4",
+                "29da16f3.55e5fa",
+                "d7909c35.6e196",
+                "b80129d7.2b0d18",
+                "96eb3f6f.a10e9",
+                "988f6c6f.46a13"
+            ]
+        ]
+    },
+    {
+        "id": "d9681417.f7b258",
+        "type": "xiaomi-plug",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": null,
+        "onmsg": "",
+        "offmsg": "",
+        "output": "0",
+        "x": 530,
+        "y": 1800,
+        "wires": [
+            [
+                "32f11830.20e2e8",
+                "6a6b95e6.8e5e5c",
+                "1fe72a13.a18796"
+            ]
+        ]
+    },
+    {
+        "id": "32f11830.20e2e8",
+        "type": "xiaomi-actions read",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 850,
+        "y": 1560,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "f4dc715e.23171",
+        "type": "xiaomi-actions get_id_list",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 860,
+        "y": 1780,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "f4ae5d71.99a92",
+        "type": "xiaomi-actions gateway_light",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "brightness": 100,
+        "hexRgbColor": "#ffffff",
+        "color": {
+            "red": 255,
+            "green": 255,
+            "blue": 255
+        },
+        "x": 860,
+        "y": 1820,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "74e38af8.cff9b4",
+        "type": "xiaomi-actions gateway_sound",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "mid": "",
+        "volume": "",
+        "x": 870,
+        "y": 1860,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "30823aaa.e843c6",
+        "type": "xiaomi-actions gateway_stop_sound",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 870,
+        "y": 1900,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "6a6b95e6.8e5e5c",
+        "type": "xiaomi-actions on",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 860,
+        "y": 1960,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "1fe72a13.a18796",
+        "type": "xiaomi-actions off",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 860,
+        "y": 2000,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "73467d7c.f60714",
+        "type": "xiaomi-actions click",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 850,
+        "y": 1660,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "b79db334.23f75",
+        "type": "xiaomi-actions double_click",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 870,
+        "y": 1700,
+        "wires": [
+            [
+                "a0583f37.aa206"
+            ]
+        ]
+    },
+    {
+        "id": "a0583f37.aa206",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 1220,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "c1d683cf.9eef4",
+        "type": "xiaomi-actions on",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 320,
+        "y": 1840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29da16f3.55e5fa",
+        "type": "xiaomi-actions off",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 320,
+        "y": 1880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3cf91fa9.81288",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "Filter incoming",
+        "info": "",
+        "x": 340,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "422564ac.284c8c",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "Outgoing",
+        "info": "",
+        "x": 560,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "71bbbb4a.8e4b24",
+        "type": "xiaomi-yeelight out",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "ip": "",
+        "port": 55443,
+        "x": 530,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "d7909c35.6e196",
+        "type": "xiaomi-actions on",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 320,
+        "y": 1960,
+        "wires": [
+            [
+                "71bbbb4a.8e4b24"
+            ]
+        ]
+    },
+    {
+        "id": "b80129d7.2b0d18",
+        "type": "xiaomi-actions off",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 320,
+        "y": 2000,
+        "wires": [
+            [
+                "71bbbb4a.8e4b24"
+            ]
+        ]
+    },
+    {
+        "id": "96eb3f6f.a10e9",
+        "type": "xiaomi-actions toggle",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 330,
+        "y": 2040,
+        "wires": [
+            [
+                "71bbbb4a.8e4b24"
+            ]
+        ]
+    },
+    {
+        "id": "988f6c6f.46a13",
+        "type": "xiaomi-actions gateway_light",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "brightness": 100,
+        "hexRgbColor": "#ffffff",
+        "color": {
+            "red": 255,
+            "green": 255,
+            "blue": 255
+        },
+        "x": 320,
+        "y": 2080,
+        "wires": [
+            [
+                "71bbbb4a.8e4b24"
+            ]
+        ]
+    },
+    {
+        "id": "1035b862.537be8",
+        "type": "xiaomi-all",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "onlyModels": [
+            "magnet,sensor_magnet.aq2"
+        ],
+        "excludedSids": [],
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "af6ffc36.3ff8a",
+        "type": "xiaomi-gateway in",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 60,
+        "y": 840,
+        "wires": [
+            [
+                "fcdf63de.04c87"
+            ]
+        ]
+    },
+    {
+        "id": "fcdf63de.04c87",
+        "type": "xiaomi-switch",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "switch",
+        "sid": "158d00020dd2ce",
+        "x": 190,
+        "y": 840,
+        "wires": [
+            [
+                "81980f75.264cd"
+            ]
+        ]
+    },
+    {
+        "id": "81980f75.264cd",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "is click",
+        "func": "if(msg.payload.cmd === \"report\") {\n    return msg;\n}\nreturn null;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 310,
+        "y": 840,
+        "wires": [
+            [
+                "cfe0b6e8.418ca8"
+            ]
+        ]
+    },
+    {
+        "id": "cfe0b6e8.418ca8",
+        "type": "switch",
+        "z": "7441ed9a.98d394",
+        "name": "Event Seletor",
+        "property": "payload.data.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "click",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "double_click",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 450,
+        "y": 840,
+        "wires": [
+            [
+                "927a2ed0.e6772"
+            ],
+            [
+                "df53c1.b65dbc4"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "Click",
+            "Double Click",
+            "Otherwise"
+        ]
+    },
+    {
+        "id": "c920a52e.78ec18",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 970,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "ab33a887.87ab18",
+        "type": "xiaomi-actions on",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 840,
+        "y": 820,
+        "wires": [
+            [
+                "6da12fc6.eac56"
+            ]
+        ]
+    },
+    {
+        "id": "b613bea4.e87fc",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "todo: get device sid",
+        "info": "",
+        "x": 670,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "927a2ed0.e6772",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "Click",
+        "func": "msg.sid = \"158d0001bc39a1\";\nmsg.model = \"plug\"\nmsg.token = global.get(\"token\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 650,
+        "y": 820,
+        "wires": [
+            [
+                "ab33a887.87ab18"
+            ]
+        ]
+    },
+    {
+        "id": "c1a6d714.bc9b38",
+        "type": "switch",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "property": "payload.cmd",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "heartbeat",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 360,
+        "wires": [
+            [
+                "dfad2e03.af33f"
+            ],
+            [
+                "e332ffe3.ceafd",
+                "4b6a5b9d.9aa974"
+            ]
+        ]
+    },
+    {
+        "id": "dfad2e03.af33f",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "Set Gateway Token",
+        "func": "global.set(\"token\", msg.payload.token);",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "42207ae0.001d94"
+            ]
+        ]
+    },
+    {
+        "id": "df53c1.b65dbc4",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "Double Click",
+        "func": "msg.sid = \"158d0001bc39a1\";\nmsg.model = \"plug\"\nmsg.token = global.get(\"token\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 860,
+        "wires": [
+            [
+                "3f1be265.8fec8e"
+            ]
+        ]
+    },
+    {
+        "id": "3f1be265.8fec8e",
+        "type": "xiaomi-actions off",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 840,
+        "y": 860,
+        "wires": [
+            [
+                "6da12fc6.eac56"
+            ]
+        ]
+    },
+    {
+        "id": "6da12fc6.eac56",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 1000,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "42207ae0.001d94",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "payload",
+        "x": 870,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "af502f0b.553a3",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "Switch Event",
+        "info": "",
+        "x": 70,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "9ec071b7.1f8c6",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "get Plug Status",
+        "topic": "",
+        "payload": "{\"cmd\":\"read\",\"sid\":\"158d0001bc39a1\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 540,
+        "wires": [
+            [
+                "a5f54dc6.f968e"
+            ]
+        ]
+    },
+    {
+        "id": "a5f54dc6.f968e",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 380,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "588b66f6.bcb518",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "get Gateway Status",
+        "topic": "",
+        "payload": "{\"cmd\":\"read\",\"sid\":\"7811dce16bc4\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 580,
+        "wires": [
+            [
+                "a5f54dc6.f968e"
+            ]
+        ]
+    },
+    {
+        "id": "76d4c837.bec328",
+        "type": "comment",
+        "z": "7441ed9a.98d394",
+        "name": "Status Checker",
+        "info": "",
+        "x": 100,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d43665f2.c1b9c8",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 510,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "7f570267.f3fc7c",
+        "type": "xiaomi-motion",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "sid": "158d00020e6b8c",
+        "motionmsg": "",
+        "nomotionmsg": "",
+        "output": "0",
+        "x": 240,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7cb068d3.bb2ee8",
+        "type": "xiaomi-gateway in",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 80,
+        "y": 1040,
+        "wires": [
+            [
+                "7f570267.f3fc7c"
+            ]
+        ]
+    },
+    {
+        "id": "8430f0cf.daa5d",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "Is Motion Detected",
+        "func": "if (msg.payload.data.status == \"motion\") {\n    msg.sid = \"7811dce16bc4\";\n    msg.model = \"gateway\"\n    msg.token = global.get(\"token\");\n    return msg;  \n}\nelse {\n    return null;\n}\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 1040,
+        "wires": [
+            [
+                "ec054e10.5adf4"
+            ]
+        ]
+    },
+    {
+        "id": "53ecd754.8a4598",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 430,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "bc313ebf.19e56",
+        "type": "xiaomi-actions gateway_sound",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "mid": "4",
+        "volume": "50",
+        "x": 1170,
+        "y": 1140,
+        "wires": [
+            [
+                "d72bf58b.ed09d8",
+                "f2584f53.5d4ee"
+            ]
+        ]
+    },
+    {
+        "id": "d72bf58b.ed09d8",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 1340,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "3df01b4c.b4d544",
+        "type": "xiaomi-gateway",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "",
+        "x": 980,
+        "y": 1140,
+        "wires": [
+            [
+                "bc313ebf.19e56",
+                "6b76aa67.576cf4"
+            ]
+        ]
+    },
+    {
+        "id": "6b76aa67.576cf4",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1100,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "f2584f53.5d4ee",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1310,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ec054e10.5adf4",
+        "type": "xiaomi-actions gateway_light",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "brightness": "0",
+        "hexRgbColor": "#7aa1ff",
+        "color": {
+            "red": 122,
+            "green": 161,
+            "blue": 255
+        },
+        "x": 620,
+        "y": 1040,
+        "wires": [
+            [
+                "918b5dab.1ec18"
+            ]
+        ]
+    },
+    {
+        "id": "918b5dab.1ec18",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 760,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "1eaae40c.a7618c",
+        "type": "xiaomi-actions read",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 230,
+        "y": 1320,
+        "wires": [
+            [
+                "76da858.4b3037c"
+            ]
+        ]
+    },
+    {
+        "id": "16de7bb7.7b0b54",
+        "type": "xiaomi-gateway in",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 80,
+        "y": 1320,
+        "wires": [
+            [
+                "1eaae40c.a7618c"
+            ]
+        ]
+    },
+    {
+        "id": "76da858.4b3037c",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 390,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "28a5a8aa.03ada8",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 540,
+        "y": 600,
+        "wires": [
+            [
+                "64a8437d.7986cc"
+            ]
+        ]
+    },
+    {
+        "id": "793ec33b.966f3c",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.0.77",
+        "x": 960,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "64a8437d.7986cc",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 600,
+        "wires": [
+            [
+                "793ec33b.966f3c"
+            ]
+        ]
+    },
+    {
+        "id": "c22dc45d.5f9cc8",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/detect",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "811c0a0b.3dd298",
+                "9747edc3.4d75f"
+            ]
+        ]
+    },
+    {
+        "id": "811c0a0b.3dd298",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "00",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "01",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "10",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "11",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "20",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "21",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "22",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 7,
+        "x": 572,
+        "y": 182,
+        "wires": [
+            [
+                "c566f56c.09bfe8"
+            ],
+            [
+                "9dd160a8.c498c"
+            ],
+            [
+                "76e8960.d3f376c"
+            ],
+            [
+                "ba58cf6a.498d3"
+            ],
+            [
+                "5b2b6ab0.4b5d04"
+            ],
+            [
+                "4f5dbf9d.b0848"
+            ],
+            [
+                "76fe992c.3b6978"
+            ]
+        ]
+    },
+    {
+        "id": "7fb9f075.122dd",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "1byte split",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "0.",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "1.",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 520,
+        "wires": [
+            [
+                "ce31b345.c73fb"
+            ],
+            [
+                "eedf8dba.25728"
+            ]
+        ]
+    },
+    {
+        "id": "b0394c96.f50ea",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1270,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d34aa2a5.a2acb",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1130,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ce31b345.c73fb",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "온도 ADC 값",
+        "func": "var payload = {};\npayload.type = \"temperature\";\npayload.value = msg.payload.substring(1);\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 910,
+        "y": 480,
+        "wires": [
+            [
+                "d34aa2a5.a2acb",
+                "50ecb0d2.e15ec"
+            ]
+        ]
+    },
+    {
+        "id": "c566f56c.09bfe8",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "창문 코드 Undetected [00]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 40,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "9dd160a8.c498c",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "창문 코드 Detected [01]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 891,
+        "y": 80,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "76e8960.d3f376c",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "인체 코드 Undetected [10]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 892,
+        "y": 119,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "ba58cf6a.498d3",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "인체 코드 Detected [11]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 893,
+        "y": 158,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "5b2b6ab0.4b5d04",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "재실 코드 Jaesil [20]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "In room (Jaesil)",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 884,
+        "y": 198,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "4f5dbf9d.b0848",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "재실 코드 Detected [21]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 895,
+        "y": 237,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "76fe992c.3b6978",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "재실 코드 Undetected [22]",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 896,
+        "y": 277,
+        "wires": [
+            [
+                "b0394c96.f50ea"
+            ]
+        ]
+    },
+    {
+        "id": "bb7302f1.4ced7",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "침입 감지",
+        "info": "",
+        "x": 660,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "a6118a45.984dc8",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "온습도",
+        "info": "",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "32f60751.c3e408",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/ondo",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 590,
+        "y": 520,
+        "wires": [
+            [
+                "7fb9f075.122dd"
+            ]
+        ]
+    },
+    {
+        "id": "eedf8dba.25728",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "습도 ADC 값",
+        "func": "var payload = {};\npayload.type = \"humidity\";\npayload.value = msg.payload.substring(1);\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 910,
+        "y": 560,
+        "wires": [
+            [
+                "d34aa2a5.a2acb",
+                "50ecb0d2.e15ec"
+            ]
+        ]
+    },
+    {
+        "id": "cecb3028.e88ee",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "조도(기기->서버)",
+        "info": "",
+        "x": 620,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "24370886.7cda88",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "1byte split",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "0.",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "1.",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 770,
+        "y": 1380,
+        "wires": [
+            [
+                "87e9b956.1cb308"
+            ],
+            [
+                "a268ce1b.a4eca"
+            ]
+        ]
+    },
+    {
+        "id": "11c3cd8b.b2a172",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1170,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "87e9b956.1cb308",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "밝은 조도 ADC 값",
+        "func": "var temp = msg.payload;\nmsg.payload = temp.substring(1);\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 960,
+        "y": 1360,
+        "wires": [
+            [
+                "11c3cd8b.b2a172"
+            ]
+        ]
+    },
+    {
+        "id": "3760df79.d9896",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/jodo",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 630,
+        "y": 1380,
+        "wires": [
+            [
+                "24370886.7cda88"
+            ]
+        ]
+    },
+    {
+        "id": "a268ce1b.a4eca",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "어두운 조도 ADC 값",
+        "func": "var temp = msg.payload;\nmsg.payload = temp.substring(1);\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 970,
+        "y": 1402,
+        "wires": [
+            [
+                "11c3cd8b.b2a172"
+            ]
+        ]
+    },
+    {
+        "id": "3e5727e4.8c7158",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "조도(서버->기기)",
+        "info": "",
+        "x": 120,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "4a05c2e2.926d0c",
+        "type": "ui_switch",
+        "z": "943f007.ccb33",
+        "name": "",
+        "label": "2=OFF,3=ON",
+        "group": "6c33d900.996918",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "3",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "2",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 136,
+        "y": 1593,
+        "wires": [
+            [
+                "25a493e9.86b83c"
+            ]
+        ]
+    },
+    {
+        "id": "25a493e9.86b83c",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "topic/jodo",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 717,
+        "y": 1595,
+        "wires": []
+    },
+    {
+        "id": "5c5ffcf3.515744",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "가스 탐지기",
+        "info": "",
+        "x": 700,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "f693197e.859998",
+        "type": "mqtt in",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/gas",
+        "qos": "2",
+        "broker": "965972a.373469",
+        "x": 610,
+        "y": 760,
+        "wires": [
+            [
+                "df3b378d.27cca8",
+                "99f27961.e30e58"
+            ]
+        ]
+    },
+    {
+        "id": "df3b378d.27cca8",
+        "type": "switch",
+        "z": "943f007.ccb33",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 750,
+        "y": 760,
+        "wires": [
+            [
+                "a7baec7c.73e69"
+            ],
+            [
+                "d2ff3054.9dd9e"
+            ],
+            [
+                "c273b94b.935b98"
+            ],
+            [
+                "412c2d5a.00d104"
+            ]
+        ]
+    },
+    {
+        "id": "ba1c78cd.a0b748",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1230,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a7baec7c.73e69",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "0: 가스 차단이 안된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas shut off failed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 700,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "d2ff3054.9dd9e",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "1: 가스 차단된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas shut off successed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 740,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "c273b94b.935b98",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "2: 가스 탐지가 안된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas undetected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 780,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "412c2d5a.00d104",
+        "type": "change",
+        "z": "943f007.ccb33",
+        "name": "3: 가스 탐지된 상태",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "gas detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 820,
+        "wires": [
+            [
+                "ba1c78cd.a0b748"
+            ]
+        ]
+    },
+    {
+        "id": "a0b50bc5.5fcd48",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/detect",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 280,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "303ce9a6.2f4806",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "00",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 60,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "79dd631f.79881c",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "01",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 100,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "1366bade.7a5775",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "10",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 140,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "d73df263.53ed4",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "11",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 180,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "be208891.17c1b8",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "20",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 220,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "5beea796.7aeac8",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "21",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 260,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "67948a80.c56c64",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "22",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 300,
+        "wires": [
+            [
+                "a0b50bc5.5fcd48"
+            ]
+        ]
+    },
+    {
+        "id": "23d22adf.a790b6",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "온습도 측정기",
+        "func": "\nif (msg.payload == '0') {\n    var temperture = Math.round((Math.random() * 100)%30);\n    msg.payload += temperture.toString();    \n}\nelse if (msg.payload == '1') {\n    var humidity = Math.round(Math.random() * 100);\n    msg.payload += humidity.toString();\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 520,
+        "wires": [
+            [
+                "1555033f.70834d"
+            ]
+        ]
+    },
+    {
+        "id": "5260550a.77b67c",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "온도",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 520,
+        "wires": [
+            [
+                "23d22adf.a790b6"
+            ]
+        ]
+    },
+    {
+        "id": "1555033f.70834d",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/ondo",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 410,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "54a8e295.7ef79c",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "습도",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "23d22adf.a790b6"
+            ]
+        ]
+    },
+    {
+        "id": "b9c4f399.ede33",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 700,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "831be31c.80f91",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 740,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "29af1d44.4ceb72",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "2",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "c626b83e.498538",
+        "type": "inject",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "",
+        "payload": "3",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 820,
+        "wires": [
+            [
+                "8ae3adb4.4bf04"
+            ]
+        ]
+    },
+    {
+        "id": "8ae3adb4.4bf04",
+        "type": "mqtt out",
+        "z": "943f007.ccb33",
+        "name": "",
+        "topic": "/gas",
+        "qos": "",
+        "retain": "",
+        "broker": "965972a.373469",
+        "x": 270,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "ee368e2e.3eb47",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "detect dummy",
+        "info": "",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b1f224e.f1158d8",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "environment dummy",
+        "info": "",
+        "x": 270,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2e303076.6d596",
+        "type": "comment",
+        "z": "943f007.ccb33",
+        "name": "gas dummy",
+        "info": "",
+        "x": 290,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "145eb307.75c8ed",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "get Magnet Status",
+        "topic": "",
+        "payload": "{\"cmd\":\"read\",\"sid\":\"158d000209079a\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "658797c6.010128",
+        "type": "inject",
+        "z": "7441ed9a.98d394",
+        "name": "get Motion Status",
+        "topic": "",
+        "payload": "{\"cmd\":\"read\",\"sid\":\"158d00020e6b8c\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9747edc3.4d75f",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "",
+        "func": "var payload = {}\npayload.status = msg.payload;\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [
+                "6687ccec.9abee4"
+            ]
+        ]
+    },
+    {
+        "id": "6687ccec.9abee4",
+        "type": "http request",
+        "z": "943f007.ccb33",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/v1/demo/legacy/detect",
+        "tls": "",
+        "x": 770,
+        "y": 340,
+        "wires": [
+            [
+                "7e7d32d0.80a2bc"
+            ]
+        ]
+    },
+    {
+        "id": "7e7d32d0.80a2bc",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "50ecb0d2.e15ec",
+        "type": "http request",
+        "z": "943f007.ccb33",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/v1/demo/legacy/temhum",
+        "tls": "",
+        "x": 1130,
+        "y": 560,
+        "wires": [
+            [
+                "fec9537b.d3df9"
+            ]
+        ]
+    },
+    {
+        "id": "fec9537b.d3df9",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1310,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "99f27961.e30e58",
+        "type": "function",
+        "z": "943f007.ccb33",
+        "name": "",
+        "func": "var payload = {}\npayload.status = msg.payload;\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 840,
+        "wires": [
+            [
+                "dadf3190.425e6"
+            ]
+        ]
+    },
+    {
+        "id": "dadf3190.425e6",
+        "type": "http request",
+        "z": "943f007.ccb33",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/v1/demo/legacy/gas",
+        "tls": "",
+        "x": 970,
+        "y": 880,
+        "wires": [
+            [
+                "efa85665.46e4a8"
+            ]
+        ]
+    },
+    {
+        "id": "efa85665.46e4a8",
+        "type": "debug",
+        "z": "943f007.ccb33",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1170,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "4b6a5b9d.9aa974",
+        "type": "http request",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/v1/demo/xiaomi",
+        "tls": "",
+        "x": 790,
+        "y": 60,
+        "wires": [
+            [
+                "7e9146ea.9a23c8"
+            ]
+        ]
+    },
+    {
+        "id": "7e9146ea.9a23c8",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 970,
+        "y": 60,
+        "wires": []
+    }
+]
