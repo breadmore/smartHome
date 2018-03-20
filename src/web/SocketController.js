@@ -15,7 +15,8 @@ module.exports = function (socket) {
         socketService.testService(socket, '/topic/test', data);
     });
 
-    // socket.on('/topic/',function() {
-    //
-    // })
+    socket.on('/socket/devices',function() {
+        logger.info("socket/devices");
+    })
+
 };

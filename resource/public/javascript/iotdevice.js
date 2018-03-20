@@ -9,4 +9,25 @@ $(function () {
         }
     });
 
+    /**
+     * open socket.
+     */
+    let socket = io.connect('/');
+    socket.emit('/socket/devices');
+    socket.on('/socket/devices', function(data) {
+        console.log(data);
+    });
+
+
+    /**
+     * todo: socket connected by express.
+     * legacy device socket. be fill with data.
+     */
+    socket.on('/legacy', function(data) {
+       console.log('lagacy data \n');
+       console.log(data);
+    });
+
+
+
 });

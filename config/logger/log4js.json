@@ -43,6 +43,6 @@
   },
   "categories": {
     "default": { "appenders": [ "app", "app_console", "errors"], "level" : "DEBUG" },
-    "http": { "appenders": [ "access", "access_console", "access_filter"], "level" : "DEBUG" }
+    "http": { "appenders": [ "access", "access_console", "access_filter"], "level" : "ERROR" }
   }
 }

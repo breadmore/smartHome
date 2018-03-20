@@ -107,6 +107,9 @@ var httpServer = use_https
   : http.createServer(app);
 
 var io = socket(httpServer);
+exports.clientSocket = function (url, data) {
+    io.sockets.emit(url, data);
+};
 module.exports.io = io;
 io.use(function(socket, next) {
     console.info('SOCKETIO SESSION START');
@@ -125,8 +128,8 @@ app.use(nrSettings.httpAdminRoot, RED.httpAdmin);
 app.use(nrSettings.httpNodeRoot, RED.httpNode);
 
 
-// httpServer.listen(http_port, listening_address, function() {
-httpServer.listen(http_port, function() {
+httpServer.listen(http_port, listening_address, function() {
+// httpServer.listen(http_port, function() {
   console.info(
     "Express 4 https server listening on http%s://%s:%d%s, serving node-red",
     use_https ? "s" : "",
