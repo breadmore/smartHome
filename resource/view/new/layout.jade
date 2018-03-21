@@ -9,49 +9,80 @@ html
         script(src='http://code.jquery.com/jquery-1.10.1.min.js')
         script(src="/plugin/jquery/dist/jquery.js")
         script(src="/javascript/layout.js")
-        link(rel="stylesheet" href="/css/layout.css")
+        link(rel="stylesheet" href="/css/new/layout.css")
+        link(href='/css/common.css', rel='stylesheet')
         title SecureHome
         block head
     body
         .container
+            .row.layout-top-bar.no-padding
+                .col-sm-9.title-logo.no-padding
+                    .title-logo-content#menu-logo
+                        img.title-logo-img(src="/image/SIotLogo.png")
+                        span.title-logo-text
+                            span SecureHome
+                            | ETRISECURE GATEWAY SOLUTION
+                .row.col-sm-3.title-user-info.no-padding
+                    .col-sm-3.no-padding
+                        img.user-img(src="/image/login.png").center-img
+                    .col-sm-5.no-padding
+                        .col-sm-12.no-padding
+                            span#user-role Admin
+                        .col-sm-12.no-padding
+                            span#user-name Hong 길동
+                    .col-sm-4.no-padding(style='margin: auto')
+                        .btn#logout-btn Log out
             .row
-                .col-sm-9.col-md-6.col-lg-8.col-xl-8
-                    .image
-                        img(src="/image/SIoTLogo.png")
-                    .layout_title SecureHome
-                    .layout_title2 ETRI SECURE GATEWAY SOLUTION
-                .col-sm-3.col-md-6.col-lg-4.col-xl-4
-                    .profile_image
-                        img(src="/image/login.png")
-                    .profile_auth_name
-                        .profile_auth Admin
-                        .profile_name Hong 길동
-                    .profile_logout
-                        button Log out
-            .row
-                .menu_list
-                    .dashboard
-                        img(src="/image/dashboardWhite.png")
-                        p Dashboard
-                    .gateway
-                        img(src="/image/gatewayWhite.png")
-                        p Gateway
-                        p Management
-                    .iot_device
-                        img(src="/image/shareWhite.png")
-                        p Iot Devices
-                        p Management
-                    .security
-                        img(src="/image/keyWhite.png")
-                        p Security
-                        p Management
-                    .account
-                        img(src="/image/accountWhite.png")
-                        p Account
-                        P Management
-                    .event_logger
-                        img(src="/image/alarmWhite.png")
-                        P Event Logger
-                        p Management
-                .content
+                .col-sm-1.no-padding.menu-bar
+                    .col-sm-12.no-padding.menu-item#menu-dashboard
+                        img.menu-img(src="/image/dashboardWhite.png").center-img
+                        .menu-name Dashboard
+                    .col-sm-12.no-padding.menu-item#menu-gateway
+                        img.menu-img(src="/image/gatewayWhite.png").center-img
+                        .menu-name
+                            |Gateway
+                            br
+                            |Management
+                    .col-sm-12.no-padding.menu-item#menu-device
+                        img.menu-img(src="/image/shareWhite.png").center-img
+                        .menu-name
+                            |Iot Devices
+                            br
+                            |Management
+                    .col-sm-12.no-padding.menu-item#menu-security
+                        img.menu-img(src="/image/keyWhite.png").center-img
+                        .menu-name
+                            |Security
+                            br
+                            |Management
+                    .col-sm-12.no-padding.menu-item#menu-account
+                        img.menu-img(src="/image/accountWhite.png").center-img
+                        .menu-name
+                            |Account
+                            br
+                            |Management
+                    .col-sm-12.no-padding.menu-item#menu-event
+                        img.menu-img(src="/image/alarmWhite.png").center-img
+                        .menu-name
+                            |EventLogger
+                            br
+                            |Management
+                .col-sm-11.content.no-padding
                     block content
+
+                    //.width_bar
+                    //    .sensor_event_log
+                    //        .log_title Sensor event log
+                    //        table
+                    //            thead
+                    //                tr
+                    //                    td Event date
+                    //                    td Event level
+                    //                    td Sensor type / name
+                    //                    td Activity message
+                    //            tbody
+                    //                tr
+                    //                    td 02-25-2018 18:00.31
+                    //                    td Log
+                    //                    td ETRI Humidity sensor / Hum001
+                    //                    td Humidity sensor is connected

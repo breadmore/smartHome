@@ -7,5 +7,201 @@ body, li, p {
 
 body * {
     padding: 0;
+    /*margin: auto;*/
+}
+
+.no-padding {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.center-img {
+    display: block;
+    width: auto;
+    height: auto;
     margin: auto;
+}
+
+
+/******************Title logo*******************/
+.title-logo {
+    color: #ffffff;
+    font-weight: bold;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.title-logo-content {
+    height: auto;
+    width: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.title-logo-img {
+    vertical-align: bottom;
+    width: auto;
+    height: auto;
+}
+
+.title-logo-text {
+    bottom: 0;
+    position: absolute;
+    line-height: 1;
+    font-size: 11px;
+}
+
+.title-logo-text span {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 35px;
+}
+/******************Title logo*******************/
+
+
+
+
+/******************Content Title*******************/
+.content-title {
+    margin: auto;
+    background-color: #f85457;
+}
+
+.content-title img {
+    max-width: 35px;
+    max-height: 35px;
+    width: auto;
+    margin: 10px;
+}
+
+.content-title span {
+    font-size: 24px;
+    color: rgb(255,255,255);
+    font-weight: bold;
+    margin: 10px;
+    vertical-align: middle;
+}
+/******************Content Title*******************/
+
+
+
+
+
+
+/******************Content Header*******************/
+.content-header {
+    /*margin: auto;*/
+    margin: 20px;
+    border-bottom: solid lightgray 2px;
+}
+
+.content-header h2 {
+    font-weight: bold;
+}
+
+.content-header h5 {
+    font-weight: 400;
+}
+/******************Content Header*******************/
+
+
+
+
+
+/******************Content contents*******************/
+.content-contents {
+    margin: 10px 10px 50px;
+}
+/******************Content contents*******************/
+
+
+/******************Contents Attributes*******************/
+.card-frame {
+    box-shadow: 5px 5px 15px;
+    border-radius: 7px;
+    border: 1px solid lightgray;
+    /*max-width: 240px;*/
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+
+.profile-card {
+    max-width: 400px;
+}
+
+.profile-card tr {
+    margin: 10px;
+}
+
+.profile-card tr td {
+    font-size: 22px;
+    padding: 5px;
+}
+
+.profile-card .key {
+    color: red;
+}
+
+.gateway-title {
+    font-size: 17px;
+
+}
+
+.gateway-name {
+    float: left;
+    font-weight: 600;
+}
+
+.gateway-event {
+    float: right;
+    text-align: center;
+    color: white;
+    padding: 2px 25px;
+    background-color: #23a455;
+    border-radius: 5px;
+}
+
+.gateway-event.error {
+    background: red;
+}
+
+.card-title {
+    margin: auto;
+    border-bottom: solid lightgray 2px;
+}
+
+.card-title h4 {
+    margin: 10px 15px;
+}
+
+.card-body {
+    margin: 10px auto;
+    padding: 0;
+    width: 90%;
+}
+
+.card-img {
+
+}
+
+
+.card-event {
+    margin: 10px auto;
+    border-radius: 5px;
+    /*text-align: center;*/
+    color: white;
+    /*font-weight: bold;*/
+    /*font-size: 13pt;*/
+    width: 90%;
+    background-color: #2f3742;
+}
+
+.card-event p {
+    margin: 5px auto;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+
 }

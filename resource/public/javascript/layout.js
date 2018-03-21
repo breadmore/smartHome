@@ -34,4 +34,53 @@ $(function () {
         $(".account").css("background-color", "#848484");
         $(".account > p").css("background-color", "#848484");
     }
+
+
+
+
+    $('#menu-logo').on('click', function(e){
+        console.log(e.currentTarget.id);
+    });
+
+    $('.menu-item').on('click', function(e) {
+        requestPage(e.currentTarget.id);
+    });
+
+
+
+
+
+
+
 });
+
+function requestPage(page) {
+    console.log(page);
+    var url = '/';
+    switch (page) {
+        case 'menu-dashboard':
+            url = '/new/dashboard';
+            break;
+        case 'menu-gateway':
+            url = '/new/gateway';
+            break;
+        case 'menu-device':
+            url = '/new/iotdevices';
+            break;
+        case 'menu-security':
+            url = '/new/security';
+            break;
+        case 'menu-account':
+            url = '/new/account';
+            break;
+        case 'menu-event':
+            url = '/new/event';
+            break;
+        default:
+            url = '/';
+            break;
+    }
+    // console.log(url);
+    location.href = url;
+
+}

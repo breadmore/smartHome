@@ -1,0 +1,73 @@
+.layout-top-bar {
+    background:rgb(51, 51, 51);
+    min-height: 100px;
+    padding: 0;
+    color: rgb(255,255,255);
+}
+
+.title-logo-content {
+    margin-left: 20px;
+    margin-top:auto;
+    margin-bottom: auto;
+}
+
+.title-logo {
+    padding: 0;
+}
+
+.title-logo-img {
+    max-width: 80px;
+    max-height: 50px;
+}
+
+.title-user-info {
+    padding: 0;
+    margin: auto;
+}
+
+
+.user-img {
+    max-width:45px;
+    max-height:45px;
+    margin: auto;
+}
+
+.content {
+    padding: 0;
+}
+
+.menu-bar {
+    background:rgb(51, 51, 51);
+    min-height: 100px;
+    color: rgb(255,255,255);
+}
+
+.menu-item {
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
+    padding: 10px;
+}
+.menu-img {
+    max-width: 60px;
+}
+
+.menu-name {
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+}
+
+#logout-btn {
+    outline: 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #2f3742;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    padding: 10px;
+}
+
+
+

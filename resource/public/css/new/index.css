@@ -1,69 +1,28 @@
-/*@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');*/
-
-/*body, li, p {*/
-    /*font-family: 'Noto Sans KR', sans-serif;*/
-/*!important;*/
-/*}*/
-
-/*body * {*/
-    /*padding: 0;*/
-    /*margin: auto;*/
-/*}*/
-
 .center {
     margin: auto;
     width: 35%;
 }
 
 .center-img {
-    display: block;
-    width: auto;
-    height: auto;
-    margin: auto;
-}
+     display: block;
+     width: auto;
+     height: auto;
+     margin: auto;
+ }
 
-
-/*top down*/
 
 .title-logo {
     width: 85%;
-    color: #ffffff;
-    font-weight: bold;
-    margin: auto;
-    overflow: hidden;
     padding-top: 40px;
     padding-bottom: 40px;
-    position: relative;
-
-}
-
-.title-logo-content {
-    height: auto;
-    width: auto;
-    overflow: hidden;
-    position: relative;
 }
 
 .title-logo-img {
     max-width: 100px;
     max-height: 80px;
-    vertical-align: bottom;
-    width: auto;
-    height: auto;
 }
 
-.title-logo-text {
-    bottom: 0;
-    position: absolute;
-    font-size: 11px;
-    line-height: 1;
-}
 
-.title-logo-text span {
-    font-size: 35px;
-    margin-right: 5px;
-    margin-left: 5px;
-}
 
 
 .index-content {
