@@ -1,14 +1,5 @@
 $(function () {
-    $(".switch > input").on("click", function () {
-        var id = $(this).parents("div").parents("div").attr("id");
-        var id2 = $(this).parents("span").parents("div").attr("id");
-        if (id == null) {
-            $("#" + id2 + " .toggle > p").toggle();
-        } else {
-            $("#" + id + " .toggle > p").toggle();
-        }
-    });
-
+   
     /**
      * open socket.
      */
@@ -27,67 +18,82 @@ $(function () {
         console.log('lagacy data \n');
         console.log(data);
         if (data.type == "temperature") {
-            $("#temp001 > #value_1").text(data.value);
+            $("#etri-temperature-value").text(data.value + " ℃");
         }
         if (data.type == "humidity") {
-            $("#hum001 > #value_1").text(data.value);
+            $("#etri-humidity-value").text(data.value + " %");
         }
         if (data.status == "00") {
-            $("#idw001").text("Undetected").css("color", "#23a455");
+            $("#etri-window-detect").text("Undetected").css("color", "#23a455");
         } else if (data.status == "01") {
-            $("#idw001").text("Detected").css("color", "#d72a42");
+            $("#etri-window-detect").text("Detected").css("color", "#d72a42");
         } else if (data.status == "10") {
-            $("#idhs001").text("Undetected").css("color", "#23a455");
+            $("#etri-human-detect").text("Undetected").css("color", "#23a455");
         } else if (data.status == "11") {
-            $("#idhs001").text("Detected").css("color", "#d72a42");
-        } else if (data.status == "2") {
-            $("#lm001").text("Undetected").css("color", "#23a455");
-        } else if (data.status == "3") {
-            $("#lm001").text("Detected").css("color", "#d72a42");
+            $("#etri-human-detect").text("Detected").css("color", "#d72a42");
         } else if (data.status == "0") {
-            $("#gaslc001 > div").text("Gas Blocked").css("color", "#23a455").css("padding-top", "15px");
+            $("#etri-gas-alram").text("Undetected").css("color", "#23a455");
         } else if (data.status == "1") {
-            $("#gaslc001 > div").text("Gas None Blocked").css("color", "#d72a42").css("padding-top", "0px");
+            $("#etri-gas-alram").text("Detected").css("color", "#d72a42");
+        } else if (data.status == "2") {
+            $("#etri-gas-leackage").text("Gas Blocked").css("color", "#23a455").css("padding-top", "15px");
+        } else if (data.status == "3") {
+            $("#etri-gas-leackage").text("Gas None Blocked").css("color", "#d72a42").css("padding-top", "0px");
         } else if (data.status == "21" || data.status == "20" || data.status == "22") {
-            $("#jaesil001 > .value2").text("Detected");
+            jaesil_data = true;
+            jaesil_true_false = false;
+            $("#etri-jaesil-alram").siblings().find("input").attr("checked", true);
+            $("#etri-jaesil-alram").text("Detected").css("color","#d72a42");
         }
 
     });
 
     var motion_data;
+    var jaesil_data;
 
     //todo : reporting data.  check model, status!
     socket.on('/xiaomi/report', function (data) {
         console.log(data);
         if (data.model == "magnet") {
-            $("#idw002").text(data.data.status);
+            $("#xiaomi-window-detect").text(data.data.status);
         } else if (data.model == "switch") {
             $("#po002").text(data.data.status);
         } else if (data.model == "plug") {
             if (data.data.status == "on") {
-                $("#po001 input").attr("checked",true);
-                $("#po001 > .value1 > .toggle > .off").text("ON");
+                $("#xiaomi-plug-state").siblings().find("input").attr("checked", true);
+                $("#xiaomi-plug-state").text("ON CLICK");
             } else if (data.data.status == "off") {
-                $("#po001 input").attr("checked",false);
-                $("#po001 > .value1 > .toggle > .off").text("OFF");
+                $("#xiaomi-plug-state").siblings().find("input").attr("checked", false);
+                $("#xiaomi-plug-state").text("OFF DOUBLE_CLICK");
             }
         } else if (data.model == "motion") {
             true_false = false;
             motion_data = data.model;
-            $("#idhs002").text("Detected").css("color","#d72a42");
+            $("#xiaomi-human-detect").text("Detected").css("color","#d72a42");
         }
     });
 
     var count = 0;
+    var jaesil_count = 0;
     var true_false = false;
+    var jaesil_true_false = false;
 
     setInterval(function() {
         if (motion_data == "motion" && true_false == false) {
             count++;
             if(count == 30) {
                 true_false = true;
-                $("#idhs002").text("Undetected").css("color","#23a455");
+                $("#xiaomi-human-detect").text("Undetected").css("color","#23a455");
                 count = 0;
+            }
+        }
+        if (jaesil_data == true && jaesil_true_false == false) {
+            jaesil_count++;
+            if (jaesil_count == 30) {
+                jaesil_true_false = true;
+                $("#etri-jaesil-alram").text("Undetected").css("color","#23a455");
+                $("#etri-jaesil-alram").siblings().find("input").attr("checked", false);
+                jaesil_count = 0;
             }
         }
     }, 1000);
