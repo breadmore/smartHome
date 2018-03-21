@@ -57,14 +57,14 @@ $(function () {
         if (data.model == "magnet") {
             $("#xiaomi-window-detect").text(data.data.status);
         } else if (data.model == "switch") {
-            $("#po002").text(data.data.status);
+            $("#xiaomi-switch-state").text(data.data.status);
         } else if (data.model == "plug") {
             if (data.data.status == "on") {
                 $("#xiaomi-plug-state").siblings().find("input").attr("checked", true);
-                $("#xiaomi-plug-state").text("ON CLICK");
+                $("#xiaomi-plug-state").text("ON");
             } else if (data.data.status == "off") {
                 $("#xiaomi-plug-state").siblings().find("input").attr("checked", false);
-                $("#xiaomi-plug-state").text("OFF DOUBLE_CLICK");
+                $("#xiaomi-plug-state").text("OFF");
             }
         } else if (data.model == "motion") {
             true_false = false;

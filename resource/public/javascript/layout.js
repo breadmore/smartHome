@@ -74,7 +74,7 @@ function requestPage(page) {
             url = '/new/account';
             break;
         case 'menu-event':
-            url = '/new/event';
+            // url = '/new/event';
             break;
         default:
             url = '/';

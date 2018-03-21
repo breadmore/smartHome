@@ -67,13 +67,22 @@
     font-weight: 400;
 }
 
-.card-device-status {
+#collapse1 .card-device-status {
     margin: auto;
     font-size: 40px;
     /*text-align: end;*/
 }
 
-.card-frame {
+.card-device-status {
+    margin: auto;
+    font-size: 23px;
+}
+
+.with-switch p {
+    margin: auto;
+}
+
+.summary-card {
     max-width: 240px;
 }
 
@@ -83,6 +92,12 @@
 
 #etri-temperature-value, #etri-humidity-value {
     color: #2d8dd6;
+}
+
+.card-body .card-img {
+    max-width: 60px;
+    max-height: 60px;
+    min-height: 60px;
 }
 
 
@@ -98,14 +113,33 @@
     color: #23a455;;
 }
 
-.card-section-title {
-    margin: auto;
+.card-collapse {
+    margin: 20px auto;
 }
 
-.card-section-title h4 {
+.card-collapse h4 {
     margin: 10px 15px;
+    color: red;
 }
 
+.card-collapse a card-collapse   {
+    color: red;
+    text-decoration: none;
+}
+.card-collapse a:link {
+    color: red;
+    text-decoration: none;
+}
+
+.card-collapse a:visited {
+    color: red;
+    text-decoration: none;
+}
+
+.card-collapse a:hover {
+    color: red;
+    text-decoration: none;
+}
 
 /*.content_title {*/
     /*width: 100%;*/
