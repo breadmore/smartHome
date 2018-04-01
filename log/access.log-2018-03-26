@@ -1,0 +1,4 @@
+[2018-03-26T22:16:37.701] [ERROR] http - ::1 - - "GET / HTTP/1.1" 500 1476 "" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+[2018-03-26T22:16:49.845] [ERROR] http - ::1 - - "GET /admin/ HTTP/1.1" 500 1476 "" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+[2018-03-26T22:18:06.377] [ERROR] http - ::1 - - "GET /admin/settings?_=1522070286194 HTTP/1.1" 401 - "http://localhost:1880/admin/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+[2018-03-26T22:18:15.602] [ERROR] http - ::1 - - "GET /admin/settings?_=1522070295420 HTTP/1.1" 401 - "http://localhost:1880/admin/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"

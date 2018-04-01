@@ -1,0 +1,2 @@
+[2018-03-24T14:25:24.256] [ERROR] http - ::1 - - "GET /ui/ HTTP/1.1" 500 1476 "" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+[2018-03-24T14:25:24.609] [ERROR] http - ::1 - - "GET /favicon.ico HTTP/1.1" 500 1476 "http://localhost:1880/ui/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"

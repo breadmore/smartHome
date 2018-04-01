@@ -61,7 +61,9 @@
     "node-red-contrib-mi-devices": "./src/library/node-red-contrib-mi-devices",
     "node-red-dashboard": "^2.8.2",
     "paint-console": "0.0.1",
+    "sequelize": "^4.37.4",
     "socket.io": "^2.0.4",
+    "sqlite3": "^4.0.0",
     "syslog-client": "^1.1.0"
   },
   "engines": {
