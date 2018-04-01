@@ -78,6 +78,7 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 
     db = new sqlite3.Database(dbPath);
 
+    // sync process creating table.
     db.serialize(() => {
       let init_database = require('./db/init_database')
       db.run(init_database.initDevice());
