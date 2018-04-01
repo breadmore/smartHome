@@ -72,10 +72,11 @@ var socket = require('socket.io');
 // get the db file path
 const dbPath = path.join(__dirname, "db/test.db");
 
+// validate db existence
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-  if (err) {
+  if (err) { 
     console.error('could not find test database. Making it...');
-
+    //make db
     db = new sqlite3.Database(dbPath);
 
     // sync process creating table.
