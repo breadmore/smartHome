@@ -2,44 +2,59 @@ extends layout
 
 append head
     link(rel="stylesheet" href="/css/dashboard.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
+    script(src="/javascript/dashboard.js")
 
 append title
-    span.col-xl-2.content-title DASHBOARD
+    span.col-xl-2.content-title.no-padding DASHBOARD
 
 block content
-    .content-head-2 Device Monitor
+    .col-12.content-head-2.no-padding Device Monitor
     .row.card-box
         .card.device-monitor.temp-humi
             .card-body
                 .card-title
                     span.big-title T
                     span.small-title emperature / Humidity
+                    span 001
                 .card-text
-                    div
+                    .row
                         span
                             img(src="/image/temperatureWhite.png").card-img
                         span 23%
-                        span 그래프
-                    div
+                        span
+                            canvas#myChart
+                    .row
                         span
                             img(src="/image/humidityWhite.png").card-img
                         span 50%
-                        span 그래프
+                        span
+                            canvas#myChart2
+
         .card.device-monitor.luminance
             .card-body
                 .card-title
                     span.big-title L
                     span.small-title uminance
+                    span 001
                 .card-text.text-center
                     section.lumi.model-1
                         .graph
-                            span 23
-                            span ℃
+                            span &nbsp;
+                                img(src="/image/luxWhite.png")
+                        .row
+                            .start_value 0
+                            .finish_value 100
+                        .lux
+                            span.lux_value 100
+                            span Lux
         .card.device-monitor.home-security-1
             .card-body
                 .card-title
                     span.big-title H
                     span.small-title ome security
+                    span 001
                 .card-text
                     div
                         span
@@ -61,6 +76,7 @@ block content
                 .card-title
                     span.big-title H
                     span.small-title ome security
+                    span 002
                 .card-text
                     div
                         span
@@ -82,6 +98,7 @@ block content
                 .card-title
                     span.big-title IP
                     span.small-title Camera
+                    span 001
                 .card-text
                     img(src="/image/maxresdefault.jpg").camera-img
         .card.device-monitor.gas-mgnmt
@@ -89,6 +106,7 @@ block content
                 .card-title
                     span.big-title G
                     span.small-title as mgmt
+                    span 001
                 .card-text
                     div
                         span
@@ -113,19 +131,55 @@ block content
                 .card-title
                     span.big-title H
                     span.small-title ome security service
-                .card-text Some quick example
-        .card.device-monitor.device-control-1
+                    span 001
+                .card-text
+                    .occupied_mode
+                        span Occupied Mode
+                    .row.security-service
+                        .security-name Security Service
+                        .security-number 001
+                        label.switch
+                            input(type="checkbox")
+                            div.slider.round
+                        p ON
+                    .row.security-service
+                        .security-name Security Service
+                        .security-number 002
+                        label.switch
+                            input(type="checkbox")
+                            div.slider.round
+                        p ON
+        .card.device-monitor.device-control
             .card-body
                 .card-title
                     span.big-title D
                     span.small-title evice control
-                .card-text Some quick example
-        .card.device-monitor.device-control-2
-            .card-body
-                .card-title
-                    span.big-title D
-                    span.small-title evice control
-                .card-text Some quick example
+                    span 001
+                .card-text.more-padding
+                    .row.device-control-content
+                        img(src="/image/lightWhite.png")
+                        .device-name Smart Light
+                        .device-number 001
+                        label.switch
+                            input(type="checkbox")
+                            div.slider.round
+                        p ON
+                    .row.device-control-content
+                        img(src="/image/PoweroutletWhite.png")
+                        .device-name Power Outlet
+                        .device-number 001
+                        label.switch
+                            input(type="checkbox")
+                            div.slider.round
+                        p ON
+                    .row.device-control-content
+                        img(src="/image/camera.png")
+                        .device-name IP Camera
+                        .device-number 001
+                        label.switch
+                            input(type="checkbox")
+                            div.slider.round
+                        p ON
     .content-head-2 Service / Device Event
         table
             thead

@@ -1,34 +1,69 @@
-
-
 $(function () {
-    console.log("asd");
-    function temp(temp_p) {
-        $('section.temp.model-1 > div').before("<style> .temp.model-1 .graph:before {\n" +
-            "    transform: rotate(" + temp_p*1.8 + "deg);\n" +
-            "}" +
-            "</style>");
-    };
 
-    temp(23);
+    var ctx = $("#myChart");
 
-    function humi(humi_p) {
-        $('section.humi.model-1 > div').before("<style> .humi.model-1 .graph:before {\n" +
-            "    transform: rotate(" + humi_p*1.8 + "deg);\n" +
-            "}" +
-            "</style>");
-    };
+    Chart.defaults.global.legend.display = false;
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+            datasets: [{
+                tension: 0,
+                radius: 0,
+                label: 'apples',
+                borderColor: "rgba(35, 189, 252)",
+                data: [1,2,2.1,2,2.1,2,2.2,2,2.3,1.9,2.1,2.3,2.7,2.8,2.6,2.8,3.1,2.3,2.4,2.3,2,2.1,1.9],
+                backgroundColor: "transparent"
+            }]
+        },
+        options: {
+            scales:
+                {
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }]
+                }
+        }
+    });
 
-    humi(50);
+    var ctx2 = $("#myChart2");
 
-    function lumi(lumi_p) {
-        $('section.lumi.model-1 > div').before("<style> .lumi.model-1 .graph:before {\n" +
-            "    transform: rotate(" + lumi_p*1.8 + "deg);\n" +
-            "}" +
-            "</style>");
-    };
+    Chart.defaults.global.legend.display = false;
+    var myChart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+            datasets: [{
+                tension: 0,
+                radius: 0,
+                label: 'apples',
+                borderColor: "rgba(41, 209, 51)",
+                data: [1,1,1.1,1,1.1,1,1.2,1,1.3,0.9,1.1,1.3,1.7,1.8,1.6,1.8,2.1,1.3,1.4,1.3,1,1.1,0.9],
+                backgroundColor: "transparent"
+            }]
+        },
+        options: {
+            scales:
+                {
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }]
+                }
+        }
+    });
 
-    lumi(100);
-
-
-    // $("section .changed").after().css("transform","rotate(180deg)");
 });

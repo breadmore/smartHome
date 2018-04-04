@@ -1,50 +1,48 @@
 $(function () {
-    $(".menu_list > div").on("click", function () {
-        var url = $(this).attr("class");
-        if (url == "gateway") {
-            location.href = "/gateway";
-        } else if (url == "iot_device") {
-            location.href = "/iotdevices";
-        } else if (url == "account") {
-            location.href = "/account";
-        } else if (url == "security") {
-            location.href = "/security";
-        } else if (url == "dashboard") {
+
+    $(".menu-text > div").on("click", function () {
+        var name = $(this).attr('class');
+        if (name == "dashboard") {
             location.href = "/dashboard";
+        } else if ( name == "gateway") {
+            location.href = "/gateway";
+        } else if ( name == "iotdevices") {
+            location.href = "/iotdevices";
+        } else if ( name == "security") {
+            location.href = "/security";
+        } else if ( name == "account") {
+            location.href = "/account";
         }
-    });
+
+    })
+
 
     var para = document.location.href.split("/");
 
     console.log(para[3])
 
     if (para[3] == "dashboard") {
-        $(".dashboard").css("background-color", "#848484");
-        $(".dashboard > p").css("background-color", "#848484");
+        $(".dashboard").css("background-color", "rgb(52, 63, 75)");
     } else if (para[3] == "gateway") {
-        $(".gateway").css("background-color", "#848484");
-        $(".gateway > p").css("background-color", "#848484");
+        $(".gateway").css("background-color", "rgb(52, 63, 75)");
     } else if (para[3] == "iotdevices") {
-        $(".iot_device").css("background-color", "#848484");
-        $(".iot_device > p").css("background-color", "#848484");
+        $(".iotdevices").css("background-color", "rgb(52, 63, 75)");
     } else if (para[3] == "security") {
-        $(".security").css("background-color", "#848484");
-        $(".security > p").css("background-color", "#848484");
+        $(".security").css("background-color", "rgb(52, 63, 75)");
     } else if (para[3] == "account") {
-        $(".account").css("background-color", "#848484");
-        $(".account > p").css("background-color", "#848484");
+        $(".account").css("background-color", "rgb(52, 63, 75)");
     }
 
 
 
 
-    $('#menu-logo').on('click', function(e){
-        console.log(e.currentTarget.id);
-    });
-
-    $('.menu-item').on('click', function(e) {
-        requestPage(e.currentTarget.id);
-    });
+    // $('#menu-logo').on('click', function(e){
+    //     console.log(e.currentTarget.id);
+    // });
+    //
+    // $('.menu-item').on('click', function(e) {
+    //     requestPage(e.currentTarget.id);
+    // });
 
 
 
@@ -54,6 +52,7 @@ $(function () {
 
 });
 
+/*
 function requestPage(page) {
     console.log(page);
     var url = '/';
@@ -83,4 +82,4 @@ function requestPage(page) {
     // console.log(url);
     location.href = url;
 
-}
+}*/

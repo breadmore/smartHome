@@ -1,36 +1,36 @@
+@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+
+body, li, p {
+    font-family: 'Noto Sans KR', sans-serif;
+/important;
+}
+
 .container {
     min-width: 1200px;
 }
 
 .title-bar {
-    padding: 0px;
     min-height: 50px;
     margin: 0px;
 }
 
 .menu-bar {
-    padding-top: 15px;
+    margin: 0px;
     min-height: 60px;
     background-color: #1f2d3d;
     color: white;
-    margin: 0px;
+    /*margin-top: 15px;*/
 }
 
 .menu-bar > div > div > div{
-    padding-top: 5px;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
+
 .content {
-    padding-right: 0px;
-    /*padding-left: 0px;*/
     margin-top: 10px;
 }
 
-.login-bar {
-    padding-left: 35px;
-    padding-right: 0px;
-}
 
 .title-logo img {
     width: 100px;
@@ -41,19 +41,22 @@
     font-weight: 700;
     font-size: 24px;
     line-height: 20px;
-    padding-left: 0px;
 }
 
 .menu-logo img {
+    margin-top: 15px;
+    margin-left: 40px;
     width: 45px;
     height: 30px;
 }
 
-.menu-logo > div {
+.menu-logo > div > div {
+    margin-top: 20px;
     margin-left: 10px;
 }
 
 .login {
+    margin-left: 10px;
     margin-top: 10px;
     margin-right: 20px;
     width: 30px;
@@ -66,16 +69,17 @@
 }
 
 .name {
+    margin-top: -5px;
+    height: 15px;
     font-size: 14px;
     font-weight: bold;
 }
 
 .login-bar > div {
-    padding-top: 5px;
+    margin-top: 10px;
 }
 
 .logout {
-    padding: 0px;
     border-radius: 4px;
     margin-top: 10px;
     margin-left: 35px;
@@ -87,3 +91,29 @@
     background-color: #3498db;
 }
 
+.content-hr > hr {
+    background-color: rgb(51,51,51);
+}
+
+.menu-text > div {
+    padding-top: 22px;
+    float: right;
+    text-align: center;
+    width: 80px;
+    height: 60px;
+    float: right;
+    /*background-color: rgb(52, 63, 75);*/
+}
+
+.menu-text {
+    margin: 0px;
+    padding-left: 100px;
+    /*padding-top: 15px;*/
+    font-size: 12px;
+    font-weight: 700;
+    width: 100%;
+}
+
+.content-head {
+    padding-right: 0px;
+}

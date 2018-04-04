@@ -13,18 +13,9 @@
     font-size: 14px;
     font-weight: 400;
     width: 175px;
-    height: 120px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-}
-
-.card-text span {
-    padding-top: 10px;
 }
 
 .card-text > div > span:nth-child(2) {
-    padding-left: 3px;
     display: inline-block;
     height: 20px;
     width: 75px;
@@ -34,64 +25,68 @@
     color: #e74c3c;
 }
 
+.home-security-2 .card-text > div > span:nth-child(3) {
+    color: rgb(46, 204, 113);
+}
+
+.content {
+    margin-top: 20px;
+}
+
 .content-title {
     font-size: 24px;
     font-weight: 700;
 }
 
 .content-head {
-    padding: 0px;
     color: #404040;
     font-size: 16px;
     font-weight: 700;
-    /*padding-top: 20px;*/
     margin-bottom: 10px;
 }
 
 .content-head-2 {
-    padding: 0px;
     color: #404040;
     font-size: 16px;
     font-weight: 700;
-    /*padding-top: 20px;*/
     margin-bottom: 10px;
 }
 
-.device-monitor {
-    min-width: 180px;
-    min-height: 180px;
-}
-
-.menu-text {
-    padding-left: 60px;
-    font-size: 12px;
-    font-weight: 700;
+.card-title {
 }
 
 .temp-humi {
     min-width: 240px;
-    min-height: 180px;
 }
 
 .card-body {
-    padding: 0px;
+    margin: 0px;
+}
+
+.temp-humi > .card-body {
+    width: 243px;
 }
 
 .temp-humi .card-title {
-    padding: 0px;
+    min-width: 243px;
     background-color: #3498db;
+}
+
+.temp-humi .card-text {
+    /*max-width: 243px;*/
+    width: 243px;
+    /*max-height: 135px;*/
+    /*height: 135px;*/
 }
 
 .card .card-title {
     color: white;
-    /*min-height: 50px;*/
     max-height: 50px;
     max-width: 240px;
-    /*padding: 8px;*/
-    padding-left: 10px;
 }
 
 .big-title {
+    margin-left: 10px;
     font-size: 32px;
     font-weight: 700;
 }
@@ -101,16 +96,38 @@
     font-weight: 600;
 }
 
+.luminance .card-body, .home-security-1 .card-body, .home-security-2 .card-body, .ip-camera .card-body, .gas-mgnmt .card-body {
+    width: 180px;
+}
+
+.luminance .card-text, .home-security-1 .card-text, .home-security-2 .card-text, .ip-camera .card-text, .gas-mgnmt .card-text  {
+    width: 180px;
+    /*max-width: 180px;*/
+    /*height: 135px;*/
+    /*max-height: 135px;*/
+}
+
+.home-security-1 .card-text > div, .home-security-2 .card-text > div, .gas-mgnmt .card-text > div {
+    padding-top: 15px;
+}
+
 .luminance .card-title {
+    width: 180px;
     background-color: #ff9900;
 }
 
 .home-security-1 .card-title, .home-security-2 .card-title, .gas-mgnmt .card-title {
+    width: 180px;
     background-color: #ff3366;
 }
 
 .ip-camera .card-title {
+    width: 180px;
     background-color: #009999;
+}
+
+.ip-camera .card-text {
+    margin-right: 0px;
 }
 
 .home-security-service {
@@ -118,19 +135,34 @@
     min-height: 180px;
 }
 
-.device-control-1 {
-    min-width: 300px;
-    min-height: 180px;
+.home-security-service .card-text {
+    /*margin-top: 10px;*/
+    width: 260px;
+    /*height: 130px;*/
+}
+
+.device-control {
+    min-width: 260px;
+    /*min-height: 180px;*/
+}
+
+.home-security-service .card-body {
+    width: 260px;
 }
 
 .home-security-service .card-title {
     min-width: 260px;
     background-color: #3498db;
+    /*margin-bottom: 20px;*/
 }
 
-.device-control-1 .card-title, .device-control-2 .card-title {
-    min-width: 300px;
+.device-control .card-title {
+    min-width: 260px;
     background-color: #333366;
+}
+
+.device-control .card-text {
+    width: 260px;
 }
 
 table {
@@ -153,15 +185,102 @@ td {
 .card-img {
     width: 20px;
     height: 20px;
+    margin-left: 10px;
+    margin-right: 5px;
 }
 
 .camera-img {
+    padding-top: 13px;
+    padding-bottom: 10px;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
 }
 
 td:nth-child(1) {
     width: 37px;
+}
+
+.temp-humi .row {
+    margin: 0px;
+    padding-top: 17px;
+    width: 240px;
+}
+
+
+.temp-humi .row > span:nth-child(1) > img {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.temp-humi .row > span:nth-child(2) {
+    color: rgb(52,152,219);
+    font-weight: bold;
+    width: 60px;
+    font-size: 24px;
+}
+
+.temp-humi .row > span:nth-child(3) {
+    width: 140px;
+    height: 35px;
+}
+
+.card-title > span > span {
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+}
+
+.device-control .card-title > span:nth-child(3) {
+    display: inline-block;
+    text-align: right;
+    width: 130px;
+}
+
+.temp-humi .card-title > span:nth-child(3) {
+    display: inline-block;
+    text-align: right;
+    width: 46px;
+}
+
+.home-security-1 .card-title > span:nth-child(3), .home-security-2 .card-title > span:nth-child(3){
+    display: inline-block;
+    text-align: right;
+    width: 47px;
+}
+
+.luminance .card-title > span:nth-child(3) {
+    display: inline-block;
+    text-align: right;
+    width: 76px;
+}
+
+.ip-camera .card-title > span:nth-child(3) {
+    display: inline-block;
+    text-align: right;
+    width: 76px;
+}
+
+.gas-mgnmt .card-title > span:nth-child(3) {
+    display: inline-block;
+    text-align: right;
+    width: 78px;
+}
+
+.home-security-service .card-title > span:nth-child(3) {
+    display: inline-block;
+    text-align: right;
+    width: 75px;
+}
+
+.gas-mgnmt span > span {
+    width: 80px;
+    text-align: right;
+}
+
+canvas {
+    max-width: 150px;
+    max-height: 35px;
 }
 
 /*여기부터 도넛 차트*/
@@ -182,14 +301,14 @@ section {
 
 
 .graph {
-    width: 150px;
-    height: 75px;
+    width: 120px;
+    height: 60px;
     position: relative;
     margin: auto;
     text-align: center;
     color: #fff;
     font-size: 16pt;
-    line-height: 130px;
+    line-height: 85px;
     font-weight: bolder;
     border-radius: 150px 150px 0 0;
     overflow: hidden;
@@ -197,9 +316,9 @@ section {
 }
 .graph:before, .graph:after {
     content: '';
-    width: 150px;
-    height: 75px;
-    border: 30px solid #0ff;
+    width: 120px;
+    height: 60px;
+    border: 23px solid #0ff;
     border-top: none;
     position: absolute;
     -webkit-transition: 0.3s;
@@ -234,7 +353,7 @@ section {
 }
 .model-1 .graph:before {
     /*-webkit-transform: rotate(180deg);*/
-    transform: rotate(170deg);
+    transform: rotate(120deg);
     border-color: #fc6403;
 }
 
@@ -258,3 +377,176 @@ section {
         transform: rotate(180deg);
     }
 }
+
+.graph img {
+    width: 30px;
+    height: 30px;
+}
+
+.lumi.model-1 {
+    padding-top: 10px;
+}
+
+.lumi.model-1 > .row > div {
+    font-size: 8pt;
+    color: rgb(217, 217, 217);
+    width: 87px;
+}
+
+.start_value {
+    padding-left: 38px;
+    text-align: left;
+}
+
+.finish_value {
+    text-align: right;
+    padding-right: 27px;
+}
+
+.lux {
+    color: #fc6403;
+    font-size: 26px;
+    font-weight: 700;
+    width: 100%;
+    /*margin-bottom: 10px;*/
+    /*height: 25px;*/
+    /*padding-bottom: 10px;*/
+}
+
+.lux > span {
+}
+
+
+
+/*여기가 스위치*/
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 15px;
+    margin-top: 3px;
+    margin-right: 8px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 11px;
+    width: 20.5px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input:checked + .slider {
+    background-color: rgb(46,204,113);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px rgb(46,204,113);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 16px;
+}
+
+.slider.round:before {
+    border-radius: 38%;
+}
+
+.security-service {
+    width: 260px;
+    height: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+    /*margin: 0px;*/
+    /*margin-bottom: 20px;*/
+    /*margin-left: 15px;*/
+}
+.security-service > p {
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.security-name, .security-number {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.security-number {
+    width: 35px;
+}
+
+.security-name {
+    width: 110px;
+    color: rgb(52, 152, 219);
+}
+
+.occupied_mode {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 120px;
+    /*height: 40px;*/
+    margin-top: 15px;
+    /*margin-bottom: 15px;*/
+    margin-left: 15px;
+    background-color: rgb(127, 127, 127);
+}
+
+.device-name {
+    width: 95px;
+}
+
+.device-number {
+    width: 40px;
+}
+
+.device-control-content {
+    margin: 0px;
+    width: 293px;
+    height: 28px;
+    margin-left: 15px;
+    margin-top: 12px;
+}
+
+.device-control-content > img {
+    width: 20px;
+    height: 20px;
+}
+
+.device-control-content > p {
+    margin-top: 4px;
+    font-size: 10px;
+}
+
+
