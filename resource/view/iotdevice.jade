@@ -13,77 +13,67 @@ append title
     span.col-xl-2.content-title.no-padding IoT DEVICE
 
 block content
-    .modal.fade#registModal(role="dialog")
+    .modal.fade#modifyModal(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title RESGISTRATION
+                    //div
+                    //    button modify
+                .modal-body
+                    .device-info
+                        .gateway-id Gateway ID
+                        input(type="text")
+                        .product-id Product ID
+                        input(type="text")
+                        .Device-id Device ID
+                        input(type="text")
+                        .pre-shared-key Pre Shared Key
+                        input(type="text")
+                        .object-id Object ID
+                        input(type="text")
+                        .session-id Session ID
+                        input(type="text")
+                        .type Type
+                        input(type="text")
+                        .connected Connected
+                        input(type="text")
+                        .authenticate Authenticate
+                        input(type="text")
+                        .policy Policy
+                        input(type="text")
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal") Close
+    .modal.fade#addModal(role="dialog")
         .modal-dialog
             .modal-content
                 .modal-header
-                    .modal-title DETAILS
-                    div
-                        button modify
-                        div IoT Device
+                    .modal-title RESGISTRATION
+                    //div
+                    //    button modify
                 .modal-body
-                    .monitor_control_panel
-                        .monitor_title Monitor / control panel
-                        #modal_regist
-                            span.name Power Control
-                            span.value
-                                span.toggle
-                                    p.off(style="display:none;") OFF
-                                    p ON
-                                label.switch
-                                    input(type="checkbox" checked=1)
-                                    span.slider.round
-                        div
-                            span.name Connection
-                            span.value Connected
-                        div
-                            span.name Sensor data
-                            span.value 50℃
-                        .monitor_title Device profile
-                        div
-                            span.name Gateway
-                            span.value ETRI-SG-001
-                            span.name Device type
-                            span.value Humidity sensor(2)
-                        div
-                            span.name Device name
-                            span.value SG001-Hum001
-                            span.name Device ID(EID)
-                            span.value 65935
-                        div
-                            span.name Vendor
-                            span.value ETRI
-                        .monitor_title Security features
-                        div
-                            span.name Product ID(DID)
-                            span.value 12965934
-                        div
-                            span.name Object ID(OID)
-                            span.value 0.2.481.1.10.100.3030.10011.65934
-                        div
-                            span.name Session ID(SID)
-                            span.value 54708
-                        div
-                            span.name Authorization
-                            span.value Not authorized(0)
-                        div
-                            span.name Policy deployment
-                            span.value Not OK(0)
-                        div
-                            span.name Registration
-                            span.value Not Registered(0)
-                        div
-                            span.name Access control
-                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
-                        div
-                            span.name Policy target
-                            span.value Device
+                    .device-info
+                        .device-name Device Name
+                        input(type="text")
+                        .select-device-type Select device type
+                        select
+                            option Temperature sensor
+                            option Temperature sensor2
+                            option Temperature sensor3
+                        .select-gateway Select gateway
+                        select
+                            option ETRI-SG-001
+                            option ETRI-SG-002
+                            option ETRI-SG-003
+                        .device-id Device ID(EID)
+                        input(type="text")
                 .modal-footer
-                    button.btn.btn-default(data-dismiss="modal") Close
+                    button.modal-cancel(data-dismiss="modal") Cancel
+                    button.modal-confirm(data-dismiss="modal") Confirm
     .col-12.no-padding
         input.btn.btn-primary(type='button', value='Delete')#deleteButton
-        input.btn.btn-primary(type='button', value='Modify', onclick="deleteRow('dataTable')")
-        input.btn.btn-primary(type='button', value='Add' data-target="#registModal" data-toggle="modal")#addButton
+        input.btn.btn-primary(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+        input.btn.btn-primary(type='button', value='Add' data-target="#addModal" data-toggle="modal")#addButton
     table#dataTable.table.table-striped.no-padding(style='width:100%;')
         thead
             tr

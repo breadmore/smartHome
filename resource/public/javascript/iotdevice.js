@@ -121,12 +121,14 @@ $(function () {
      * Select One Table Row Function
      */
     $('#dataTable tbody').on('click', 'tr', function () {
+
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
         }
         else {
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
+            // console.log(table.row('.selected').data());
         }
     });
 
@@ -135,8 +137,15 @@ $(function () {
      * todo: delete database. & reload
      */
     $('#deleteButton').click(function () {
-        console.log(table.row('.selected'));
+        console.log(table.row('.selected').data);
         table.row('.selected').remove().draw(false);
+    });
+
+
+    $('#modifyModal').on('show.bs.modal', function (e) {
+        var btn = $(e.relatedTarget);
+        // console.log(btn);
+        console.log(table.row('.selected').data());
     });
 
 });
