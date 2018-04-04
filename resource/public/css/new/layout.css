@@ -70,4 +70,25 @@
 }
 
 
+#weblog-table {
+    margin: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+#weblog-table thead td {
+    background: lightgray;
+    text-align: center;
+    border: solid darkgrey 2px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#weblog-table tbody tr td {
+    border: solid darkgrey 2px;
+    text-indent: 10px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
 
