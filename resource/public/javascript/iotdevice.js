@@ -124,10 +124,12 @@ $(function () {
 
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
+            enableButton(false);
         }
         else {
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
+            enableButton(true);
             // console.log(table.row('.selected').data());
         }
     });
@@ -139,6 +141,8 @@ $(function () {
     $('#deleteButton').click(function () {
         console.log(table.row('.selected').data);
         table.row('.selected').remove().draw(false);
+        enableButton(false);
+
     });
 
 
@@ -159,5 +163,18 @@ $(function () {
         $("#policy").val(data[9]);
 
     });
+
+    enableButton(false);
+
+    function enableButton(isEnabled) {
+        if (isEnabled) {
+            $('#modifyButton').removeAttr('disabled');
+            $('#deleteButton').removeAttr('disabled');
+        }
+        else {
+            $('#modifyButton').attr('disabled', 'disabled');
+            $('#deleteButton').attr('disabled', 'disabled');
+        }
+    }
 
 });

@@ -6,6 +6,7 @@ append head
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
     script(src='/javascript/iotdevice.js')
     link(rel='stylesheet', type='text/css', href='/css/iotdevice.css')
+    link(rel='stylesheet', type='text/css', href='/css/common.css')
 
     style(type='text/css').
 
@@ -18,10 +19,12 @@ block content
             .modal-content
                 .modal-header
                     .modal-title RESGISTRATION
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
                     //div
                     //    button modify
                 .modal-body
-                    .device-info
+                    .modal-body-content
                         p Gateway ID
                         input(type="text")#gateway-id
                         p Product ID
@@ -48,7 +51,7 @@ block content
         .modal-dialog
             .modal-content
                 .modal-header
-                    .modal-title RESGISTRATION
+                    .modal-body-content RESGISTRATION
                     //div
                     //    button modify
                 .modal-body
