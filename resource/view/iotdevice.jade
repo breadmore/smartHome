@@ -5,29 +5,10 @@ append head
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
     script(src='/javascript/iotdevice.js')
+    link(rel='stylesheet', type='text/css', href='/css/iotdevice.css')
 
     style(type='text/css').
-        .selected {
-            background-color: #B0BED9 !important;
-        }
-        .col-12 .btn {
-            float: right;
-            margin-left: 5px;
-            margin-right: 5px;
-            background-color: #3498db;
-            border-color: #3498db;
-        }
-        .page-link {
-            color: #3498db;
-        }
-        .page-item.active .page-link {
-            background-color: #3498db;
-            border-color: #3498db;
-        }
-        .col-sm-12, .col-md-6 {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-        }
+
 append title
     span.col-xl-2.content-title.no-padding IoT DEVICE
 
@@ -99,14 +80,11 @@ block content
                             span.value Device
                 .modal-footer
                     button.btn.btn-default(data-dismiss="modal") Close
-
-
-
     .col-12.no-padding
         input.btn.btn-primary(type='button', value='Delete')#deleteButton
         input.btn.btn-primary(type='button', value='Modify', onclick="deleteRow('dataTable')")
         input.btn.btn-primary(type='button', value='Add' data-target="#registModal" data-toggle="modal")#addButton
-    table#dataTable(style='width:100%;').no-padding
+    table#dataTable.table.table-striped.no-padding(style='width:100%;')
         thead
             tr
                 th(scope='cols') Gateway ID
@@ -119,7 +97,6 @@ block content
                 th(scope='cols') Connected
                 th(scope='cols') Authenticate
                 th(scope='cols') Policy
-
         tbody
             tr
                 td
@@ -4409,5 +4386,5 @@ block content
         // For demo to fit into DataTables site builder...
         $('#dataTable')
             .removeClass('display')
-            .addClass('table table-striped table-bordered');
+            .addClass('table table-striped');
 

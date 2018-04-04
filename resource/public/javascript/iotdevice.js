@@ -135,6 +135,7 @@ $(function () {
      * todo: delete database. & reload
      */
     $('#deleteButton').click(function () {
+        console.log(table.row('.selected'));
         table.row('.selected').remove().draw(false);
     });
 
