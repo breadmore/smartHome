@@ -86,7 +86,7 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
       db.run(init_database.initGateway());
       db.run(init_database.initPolicy());
       db.run(init_database.initUser());
-      db.run(init_database.initWebLog());
+      db.run(init_database.initSensorLog());
   });
 
   } else {
