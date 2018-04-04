@@ -70,6 +70,10 @@ body, li, p {
     font-weight: bold;
 }
 
+.login-bar {
+    padding-left: 35px;
+}
+
 .login-bar > div {
     margin-top: 10px;
 }
