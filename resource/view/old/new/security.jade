@@ -1,0 +1,54 @@
+extends layout
+
+append head
+    link(href='/css/new/security.css' rel='stylesheet')
+
+
+block content
+    .row.no-padding.content-title
+        .col-sm-12.no-padding
+            img(src="/image/keyWhite.png")
+            span Security Management
+    .row.content-header.no-padding
+        .col-sm-12.no-padding
+            h2 Security
+            h5 Security management
+    .row.no-padding.content-contents
+        .col-12.no-padding.table-frame
+            table(style='width:100%').table-responsive
+                thead
+                    tr
+                        td Index
+                        td Name
+                        td MQTT IP
+                        td MQTT Port
+                        td Vendor
+                        td Security version
+                        td Details
+                tbody
+                    tr
+                        td 0
+                        td ETRI-SG-001
+                        td 192.168.255.254
+                        td 20000
+                        td ETRI
+                        td ETRI Security  v1.0
+                        td
+                            button.details_button(data-target="#modify_gateway_Modal" data-toggle="modal") CLICK
+        .col-12.no-padding.pager-frame
+            nav
+                ul
+                    li
+                        a(href="#") <
+                    li
+                        a(href="#") 1
+                    li
+                        a(href="#") 2
+                    li
+                        a(href="#") 3
+                    li
+                        a(href="#") 4
+                    li
+                        a(href="#") >
+
+

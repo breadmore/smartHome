@@ -1,7 +1,7 @@
 extends layout
 
 append head
-    link(href='../css/account.css' rel='stylesheet')
+    link(href='/css/new/account.css' rel='stylesheet')
 
 
 block content
@@ -33,40 +33,45 @@ block content
                 .modal-footer
                     button.btn.btn-default(data-dismiss="modal")#close Close
                     button.btn.btn-default(data-dismiss="modal")#confirm Confirm
-    .content_title
-        img(src="/image/accountWhite.png")
-        div Account Management
-    .content_body
-        .content_body_title Account
-        .content_body_subtitle Admin/user management
-        button.add_account Add Account
-        table
-            thead
-                tr
-                    td
-                    td User level
-                    td User name
-                    td Email address
-                    td Details
-            tbody
-                tr
-                    td
-                        input(type="checkbox")
-                    td admin
-                    td Hong 길동
-                    td GdHong@naver.com
-                    td
-                tr
-                    td
-                        input(type="checkbox")
-                    td user
-                    td Kim 희동
-                    td HdKim@naver.com
-                    td
-        .button_list
-            button.delete Delete
-            button.modify(data-target="#modify_Modal" data-toggle="modal") Modify
-        .content_nav
+    .row.no-padding.content-title
+        .col-sm-12.no-padding
+            img(src="/image/accountWhite.png")
+            span Account Management
+    .row.content-header.no-padding
+        .col-sm-12.no-padding
+            h2 Account
+            h5 Admin/user management
+    .row.no-padding.content-contents
+        .col-12.no-padding.table-frame
+            button(data-target="#addgatewayModal" data-toggle="modal").btn.btn-common#add-account-btn Add Gateway
+            table.table-responsive
+                thead
+                    tr
+                        td(style='min-width:40px;')
+                        td User level
+                        td User name
+                        td Email address
+                        td Details
+                tbody
+                    tr
+                        td(style='min-width:40px;')
+                            input(type="checkbox")
+                        td admin
+                        td Hong 길동
+                        td GdHong@naver.com
+                        td
+                    tr
+                        td(style='min-width:40px;')
+                            input(type="checkbox")
+                        td user
+                        td Kim 희동
+                        td HdKim@naver.com
+                        td
+                            button.details_button(data-target="#modify_gateway_Modal" data-toggle="modal") CLICK
+            .button_list
+                button.modify(data-target="#modify_Modal" data-toggle="modal") Modify
+                button.delete Delete
+        .col-12.no-padding.pager-frame
             nav
                 ul
                     li
