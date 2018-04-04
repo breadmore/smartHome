@@ -86,12 +86,44 @@ block content
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    h5#exampleModalLongTitle.modal-title Policy Deploy
+                    .modal-title Policy Deploy
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    |....
+                    .modal-body-content
+                        p FromID → ToID
+                        input(type='text' readonly=true value='ThermoHygrometer_65934->MyIoTSVR')
+                        p Resource Name
+                        input(type='text' readonly=true value='ThermoHygrometer_65934')
+                        p Policy
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Create
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Read
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Update
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Delete
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Notification
+                        p Policy Target
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | Server
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | Device
                 .modal-footer
-                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Save changes
+                    button.modal-cancel(data-dismiss="modal") Cancel
+                    button.modal-confirm(data-dismiss="modal") Confirm
 

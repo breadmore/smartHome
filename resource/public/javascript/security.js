@@ -19,12 +19,12 @@ $(function () {
     $('#dataTable tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
-            enableButton(false)
+            enableButton(false);
         }
         else {
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-            enableButton(true)
+            enableButton(true);
         }
     });
 
@@ -34,6 +34,7 @@ $(function () {
      */
     $('#deleteButton').click(function () {
         table.row('.selected').remove().draw(false);
+        enableButton(false);
     });
 
     // $('#policyButton').on('shown.bs.modal', function(){
@@ -45,7 +46,6 @@ $(function () {
         var btn = $(e.relatedTarget);
         console.log(table.row('.selected').data());
     });
-
 });
 
 function enableButton(isEnabled) {
