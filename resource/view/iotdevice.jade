@@ -1,9 +1,4413 @@
 extends layout
 
 append head
-    link(rel="stylesheet" href="/css/dashboard.css")
+    link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
+    script(src='/javascript/iotdevice.js')
 
+    style(type='text/css').
+        .selected {
+            background-color: #B0BED9 !important;
+        }
+        .col-12 .btn {
+            float: right;
+            margin-left: 5px;
+            margin-right: 5px;
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+        .page-link {
+            color: #3498db;
+        }
+        .page-item.active .page-link {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+        .col-sm-12, .col-md-6 {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
 append title
-    span.col-xl-2.content-title IoT DEVICE
+    span.col-xl-2.content-title.no-padding IoT DEVICE
 
 block content
+    .modal.fade#registModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT Device
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Monitor / control panel
+                        #modal_regist
+                            span.name Power Control
+                            span.value
+                                span.toggle
+                                    p.off(style="display:none;") OFF
+                                    p ON
+                                label.switch
+                                    input(type="checkbox" checked=1)
+                                    span.slider.round
+                        div
+                            span.name Connection
+                            span.value Connected
+                        div
+                            span.name Sensor data
+                            span.value 50℃
+                        .monitor_title Device profile
+                        div
+                            span.name Gateway
+                            span.value ETRI-SG-001
+                            span.name Device type
+                            span.value Humidity sensor(2)
+                        div
+                            span.name Device name
+                            span.value SG001-Hum001
+                            span.name Device ID(EID)
+                            span.value 65935
+                        div
+                            span.name Vendor
+                            span.value ETRI
+                        .monitor_title Security features
+                        div
+                            span.name Product ID(DID)
+                            span.value 12965934
+                        div
+                            span.name Object ID(OID)
+                            span.value 0.2.481.1.10.100.3030.10011.65934
+                        div
+                            span.name Session ID(SID)
+                            span.value 54708
+                        div
+                            span.name Authorization
+                            span.value Not authorized(0)
+                        div
+                            span.name Policy deployment
+                            span.value Not OK(0)
+                        div
+                            span.name Registration
+                            span.value Not Registered(0)
+                        div
+                            span.name Access control
+                            span.value(style="width:auto;") Create(C) | Read(R) |  Update(U) | Delete(D) | Notify(N)
+                        div
+                            span.name Policy target
+                            span.value Device
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal") Close
+
+
+
+    .col-12.no-padding
+        input.btn.btn-primary(type='button', value='Delete')#deleteButton
+        input.btn.btn-primary(type='button', value='Modify', onclick="deleteRow('dataTable')")
+        input.btn.btn-primary(type='button', value='Add' data-target="#registModal" data-toggle="modal")#addButton
+    table#dataTable(style='width:100%;').no-padding
+        thead
+            tr
+                th(scope='cols') Gateway ID
+                th(scope='cols') Product ID
+                th(scope='cols') Device ID
+                th(scope='cols') Pre Shared Key
+                th(scope='cols') Object ID
+                th(scope='cols') Session ID
+                th(scope='cols') Type
+                th(scope='cols') Connected
+                th(scope='cols') Authenticate
+                th(scope='cols') Policy
+
+        tbody
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 2
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 1296593111
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+            tr
+                td
+                    | 1
+                td
+                    | 12965934
+                td
+                    | 65934
+                td
+                    | yyyyyyyyyyyyyyy
+                td
+                    | 02.481.1.10.100.3030.10011.65934
+                td
+                    | 54708
+                td
+                    | GasDetector
+                td
+                    | Conn
+                td
+                    | Not Auth
+                td
+                    | OK
+    script(type='text/javascript').
+        // For demo to fit into DataTables site builder...
+        $('#dataTable')
+            .removeClass('display')
+            .addClass('table table-striped table-bordered');
+

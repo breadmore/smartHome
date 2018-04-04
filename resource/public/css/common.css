@@ -67,9 +67,21 @@ body * {
 
 
 /******************Content Title*******************/
+.content {
+    margin-top: 20px;
+}
+
+.content-head {
+    color: #404040;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
 .content-title {
     margin: auto;
-    /*background-color: #f85457;*/
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .content-title img {
@@ -353,3 +365,25 @@ input:checked + .slider:before {
 
 
 /******************** Page Frame ***********************/
+
+
+/******************** DataTable Frame ***********************/
+#dataTable {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#dataTable th {
+    padding: 10px;
+    font-size:11px;
+}
+
+#dataTable td {
+    padding: 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+    font-size: 10px;
+}
+/******************** DataTable Frame ***********************/
