@@ -146,6 +146,18 @@ $(function () {
         var btn = $(e.relatedTarget);
         // console.log(btn);
         console.log(table.row('.selected').data());
+        var data = table.row('.selected').data();
+        $("#gateway-id").val(data[0]);
+        $("#product-id").val(data[1]);
+        $("#device-id").val(data[2]);
+        $("#pre-shared-key").val(data[3]);
+        $("#object-id").val(data[4]);
+        $("#session-id").val(data[5]);
+        $("#type").val(data[6]);
+        $("#connected").val(data[7]);
+        $("#authenticate").val(data[8]);
+        $("#policy").val(data[9]);
+
     });
 
 });
