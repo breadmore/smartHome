@@ -1,124 +1,89 @@
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-
-
 .container {
-    max-width: 1200px;
+    min-width: 1200px;
 }
 
-body {
-    font-family: 'Nanum Gothic', serif;
+.title-bar {
+    padding: 0px;
+    min-height: 50px;
+    margin: 0px;
 }
 
-.col-sm-9.col-md-6.col-lg-8.col-xl-8,.col-sm-3.col-md-6.col-lg-4.col-xl-4,.menu_list {
-    background-color: #2f3742;
-}
-
-.image {
-    float: left;
-
-}
-
-.layout_title {
-    padding-left: 10px;
-    padding-top: 10px;
-    float: left;
+.menu-bar {
+    padding-top: 15px;
+    min-height: 60px;
+    background-color: #1f2d3d;
     color: white;
-    font-size: 27pt;
-    font-weight: bolder;
+    margin: 0px;
 }
 
-.layout_title2 {
-    float: left;
-    color: white;
-    font-weight: bolder;
-    font-size: 10pt;
-    padding-top: 34px;
-    padding-left: 10px;
-}
-
-.col-sm-9.col-md-6.col-lg-8.col-xl-8 {
-    display: inline-block;
-    padding: 25px;
-}
-
-.col-sm-9.col-md-6.col-lg-8.col-xl-8 img{
-    width: 100px;
-    height: 65px;
-}
-
-.col-sm-3.col-md-6.col-lg-4.col-xl-4 > div{
-    float: left;
-    margin-top: 35px;
-    margin-right: 15px;
-}
-
-.profile_auth {
-    margin-top: 5px;
-    color: white;
-    font-size: 10pt;
-    font-weight: bolder;
-
-}
-
-.profile_auth_name {
-    width: 100px;
-}
-
-.profile_image{
-    margin-left: 50px;
-}
-
-.profile_name {
-    color: white;
-    font-size: 13pt;
-    font-weight: bolder;
-}
-
-.profile_logout > button {
-    outline: 0;
+.menu-bar > div > div > div{
+    padding-top: 5px;
     margin-left: 10px;
-    margin-top: 20px;
-    color: white;
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: #2f3742;
-}
-
-.col-sm-3.col-md-6.col-lg-4.col-xl-4 {
-    display: inline-block;
-}
-
-.profile_image > img {
-    width: 50px;
-    height: 50px;
-}
-
-.menu_list {
-    color: white;
-    font-size: 9pt;
-    text-align: center;
-    font-weight: bolder;
-    width: 12%;
-}
-
-.menu_list > div {
-    padding-bottom: 10px;
-}
-
-.menu_list p {
-    margin: 0;
-}
-
-.menu_list img {
-    margin-top: 15px;
-    margin-bottom: 7px;
-    width: 50px;
-    height: 50px;
 }
 
 .content {
-    width: 88%;
-    border-right: 1px solid #2f3742;
-    border-bottom: 1px solid #2f3742;
-    background-color: white;
+    padding-right: 0px;
+    /*padding-left: 0px;*/
+    margin-top: 10px;
 }
+
+.login-bar {
+    padding-left: 35px;
+    padding-right: 0px;
+}
+
+.title-logo img {
+    width: 100px;
+    height: 50px;
+}
+
+.menu-logo {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 20px;
+    padding-left: 0px;
+}
+
+.menu-logo img {
+    width: 45px;
+    height: 30px;
+}
+
+.menu-logo > div {
+    margin-left: 10px;
+}
+
+.login {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.auth {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login-bar > div {
+    padding-top: 5px;
+}
+
+.logout {
+    padding: 0px;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-left: 35px;
+    font-size: 12px;
+    width: 60px;
+    height: 30px;
+    color: white;
+    border: 1px solid #3498db;
+    background-color: #3498db;
+}
+

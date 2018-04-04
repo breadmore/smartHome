@@ -1,0 +1,113 @@
+extends layout
+
+append head
+    link(href='./css/gateway.css' rel='stylesheet')
+
+
+block content
+    .modal.fade#addgatewayModal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT gateway
+                .modal-body
+                    .gateway_name Gateway name
+                        div
+                            input(type="text")
+                    .mqtt_broker_ip MQTT broker IP
+                        div
+                            input(type="text")
+                    .mqtt_broker_port MQTT broker Port
+                        div
+                            input(type="text")
+                    .vendor Vendor
+                        div
+                            select
+                                option ETRI
+                    .security_version Security version
+                        div
+                            select
+                                option ETRI
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+                    button.btn.btn-default(data-dismiss="modal")#confirm Confirm
+    .modal.fade#modify_gateway_Modal(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title DETAILS
+                    div
+                        button modify
+                        div IoT gateway
+                .modal-body
+                    .gateway_name
+                        span.name Gateway name
+                        span.value ETRI-SG-001
+                    .mqtt_broker_ip
+                        span.name MQTT IP
+                        span.value 192.168.255.254
+                    .mqtt_broker_port
+                        span.name MQTT broker Port
+                        span.value 20000
+                    .vendor
+                        span.name Vendor
+                        span.value ETRI
+                    .security_version
+                        span.name Security version
+                        span.value ETRI Security v1.0
+                    .uptime
+                        span.name Uptime
+                        span.value 1231H 11M 30S
+                    .uplink_downlink
+                        span.name Uplink/Downlink
+                        span.value 15.03GB / 15GB
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")#close Close
+                    button.btn.btn-default(data-dismiss="modal")#confirm Confirm
+    .content_title
+        img(src="/image/gatewayWhite.png")
+        div Gateway Management
+    .content_body
+        .content_body_title Gateways
+        .content_body_subtitle Registered gateway
+        button.add_gateway(data-target="#addgatewayModal" data-toggle="modal") Add Gateway
+        table
+            thead
+                tr
+                    td Index
+                    td Name
+                    td MQTT IP
+                    td MQTT Port
+                    td Vendor
+                    td Security version
+                    td Details
+            tbody
+                tr
+                    td 0
+                    td ETRI-SG-001
+                    td 192.168.255.254
+                    td 20000
+                    td ETRI
+                    td ETRI Security  v1.0
+                    td
+                        button.details_button(data-target="#modify_gateway_Modal" data-toggle="modal") CLICK
+        .content_nav
+            nav
+                ul
+                    li
+                        a(href="#") <
+                    li
+                        a(href="#") 1
+                    li
+                        a(href="#") 2
+                    li
+                        a(href="#") 3
+                    li
+                        a(href="#") 4
+                    li
+                        a(href="#") >
+
+

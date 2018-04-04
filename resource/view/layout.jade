@@ -8,50 +8,45 @@ html
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
         script(src='http://code.jquery.com/jquery-1.10.1.min.js')
         script(src="/plugin/jquery/dist/jquery.js")
-        script(src="/javascript/layout.js")
+        //script(src="/javascript/layout.js")
         link(rel="stylesheet" href="/css/layout.css")
+        //link(rel="stylesheet" href="/css/common.css")
         title SecureHome
         block head
     body
         .container
-            .row
-                .col-sm-9.col-md-6.col-lg-8.col-xl-8
-                    .image
+            .row.col-12.title-bar
+                .col-2.title-logo
+                    img(src="/image/etriLogo.png")
+                .col-7
+                .row.col-3.text-left.login-bar
+                    img(src="/image/login.png").login
+                    div
+                        .col-.auth Admin
+                        .col-.name Hong Gildong
+                    button.logout Log out
+            .row.col-12.menu-bar
+                .col-7.menu-logo
+                    .row
                         img(src="/image/SIoTLogo.png")
-                    .layout_title SecureHome
-                    .layout_title2 ETRI SECURE GATEWAY SOLUTION
-                .col-sm-3.col-md-6.col-lg-4.col-xl-4
-                    .profile_image
-                        img(src="/image/login.png")
-                    .profile_auth_name
-                        .profile_auth Admin
-                        .profile_name Hong 길동
-                    .profile_logout
-                        button Log out
-            .row
-                .menu_list
-                    .dashboard
-                        img(src="/image/dashboardWhite.png")
-                        p Dashboard
-                    .gateway
-                        img(src="/image/gatewayWhite.png")
-                        p Gateway
-                        p Management
-                    .iot_device
-                        img(src="/image/shareWhite.png")
-                        p Iot Devices
-                        p Management
-                    .security
-                        img(src="/image/keyWhite.png")
-                        p Security
-                        p Management
-                    .account
-                        img(src="/image/accountWhite.png")
-                        p Account
-                        P Management
-                    .event_logger
-                        img(src="/image/alarmWhite.png")
-                        P Event Logger
-                        p Management
-                .content
-                    block content
+                        div Secure Smart Space
+                .col-5.text-right
+                    .row.text-right.menu-text
+                        div Dashboard
+                        div Gateway
+                        div Devices
+                        div Security
+                        div Account
+                        div Logger
+            .col-xl.content
+                .row.col-12.content-head
+                    .col-2
+                        block title
+                    .col-10.content-hr
+                        hr
+                block content
+
+
+
+
+

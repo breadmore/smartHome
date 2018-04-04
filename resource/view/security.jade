@@ -1,48 +1,9 @@
 extends layout
 
 append head
-    link(href='./css/security.css' rel='stylesheet')
+    link(rel="stylesheet" href="/css/dashboard.css")
 
+append title
+    span.col-xl-2.content-title Security
 
 block content
-    .content_title
-        img(src="/image/keyWhite.png")
-        div Security Management
-    .content_body
-        .content_body_title Security
-        .content_body_subtitle Security management
-        table
-            thead
-                tr
-                    td Device ID(eid)
-                    td Product ID(did)
-                    td Object ID(oid)
-                    td Device Type
-                    td Connected
-                    td Authorization
-                    td Registration
-            tbody
-                tr
-                    td 65934
-                    td 12965934
-                    td 0.2.481.1.10.100.30...
-                    td Temperature(0)
-                    td Not connected
-                    td Not authoized
-                    td Not registered
-        .content_nav
-            nav
-                ul
-                    li
-                        a(href="#") <
-                    li
-                        a(href="#") 1
-                    li
-                        a(href="#") 2
-                    li
-                        a(href="#") 3
-                    li
-                        a(href="#") 4
-                    li
-                        a(href="#") >
-
