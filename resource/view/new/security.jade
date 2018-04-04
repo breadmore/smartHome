@@ -1,36 +1,41 @@
 extends layout
 
 append head
-    link(href='../css/security.css' rel='stylesheet')
+    link(href='/css/new/security.css' rel='stylesheet')
 
 
 block content
-    .content_title
-        img(src="/image/keyWhite.png")
-        div Security Management
-    .content_body
-        .content_body_title Security
-        .content_body_subtitle Security management
-        table
-            thead
-                tr
-                    td Device ID(eid)
-                    td Product ID(did)
-                    td Object ID(oid)
-                    td Device Type
-                    td Connected
-                    td Authorization
-                    td Registration
-            tbody
-                tr
-                    td 65934
-                    td 12965934
-                    td 0.2.481.1.10.100.30...
-                    td Temperature(0)
-                    td Not connected
-                    td Not authoized
-                    td Not registered
-        .content_nav
+    .row.no-padding.content-title
+        .col-sm-12.no-padding
+            img(src="/image/keyWhite.png")
+            span Security Management
+    .row.content-header.no-padding
+        .col-sm-12.no-padding
+            h2 Security
+            h5 Security management
+    .row.no-padding.content-contents
+        .col-12.no-padding.table-frame
+            table(style='width:100%').table-responsive
+                thead
+                    tr
+                        td Index
+                        td Name
+                        td MQTT IP
+                        td MQTT Port
+                        td Vendor
+                        td Security version
+                        td Details
+                tbody
+                    tr
+                        td 0
+                        td ETRI-SG-001
+                        td 192.168.255.254
+                        td 20000
+                        td ETRI
+                        td ETRI Security  v1.0
+                        td
+                            button.details_button(data-target="#modify_gateway_Modal" data-toggle="modal") CLICK
+        .col-12.no-padding.pager-frame
             nav
                 ul
                     li
@@ -45,4 +50,5 @@ block content
                         a(href="#") 4
                     li
                         a(href="#") >
+
 
