@@ -1,5 +1,4 @@
 /*여기부터 dashboard*/
-
 .card {
     margin-right: 2px;
 }
@@ -7,6 +6,12 @@
 .card-box {
     margin: 0px;
     margin-bottom: 20px;
+}
+
+.card-body {
+    margin: 10px auto;
+    padding: 0;
+    width: 90%;
 }
 
 .card-text {
@@ -29,21 +34,11 @@
     color: rgb(46, 204, 113);
 }
 
-/*.content-head {*/
-    /*color: #404040;*/
-    /*font-size: 16px;*/
-    /*font-weight: 700;*/
-    /*margin-bottom: 10px;*/
-/*}*/
-
 .content-head-2 {
     color: #404040;
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 10px;
-}
-
-.card-title {
 }
 
 .temp-humi {
@@ -64,10 +59,7 @@
 }
 
 .temp-humi .card-text {
-    /*max-width: 243px;*/
     width: 243px;
-    /*max-height: 135px;*/
-    /*height: 135px;*/
 }
 
 .card .card-title {
@@ -93,9 +85,6 @@
 
 .luminance .card-text, .home-security-1 .card-text, .home-security-2 .card-text, .ip-camera .card-text, .gas-mgnmt .card-text  {
     width: 180px;
-    /*max-width: 180px;*/
-    /*height: 135px;*/
-    /*max-height: 135px;*/
 }
 
 .home-security-1 .card-text > div, .home-security-2 .card-text > div, .gas-mgnmt .card-text > div {
@@ -127,14 +116,11 @@
 }
 
 .home-security-service .card-text {
-    /*margin-top: 10px;*/
     width: 260px;
-    /*height: 130px;*/
 }
 
 .device-control {
     min-width: 260px;
-    /*min-height: 180px;*/
 }
 
 .home-security-service .card-body {
@@ -144,7 +130,6 @@
 .home-security-service .card-title {
     min-width: 260px;
     background-color: #3498db;
-    /*margin-bottom: 20px;*/
 }
 
 .device-control .card-title {
@@ -184,7 +169,6 @@ td {
     padding-top: 13px;
     padding-bottom: 10px;
     width: 100%;
-    /*height: 100%;*/
 }
 
 td:nth-child(1) {
@@ -240,13 +224,7 @@ td:nth-child(1) {
     width: 47px;
 }
 
-.luminance .card-title > span:nth-child(3) {
-    display: inline-block;
-    text-align: right;
-    width: 76px;
-}
-
-.ip-camera .card-title > span:nth-child(3) {
+.luminance .card-title > span:nth-child(3), .ip-camera .card-title > span:nth-child(3) {
     display: inline-block;
     text-align: right;
     width: 76px;
@@ -326,14 +304,8 @@ section {
 .graph:after {
     z-index: 3;
     border-color: rgba(0, 0, 0, 0.15);
-    /*-webkit-transform: rotate(150deg);*/
     transform: rotate(180deg);
 }
-/*.graph:hover:before {*/
-/*opacity: .8;*/
-/*cursor: pointer;*/
-/*}*/
-
 
 .model-1 {
     margin: 0px;
@@ -343,7 +315,6 @@ section {
     color: #fc6403;
 }
 .model-1 .graph:before {
-    /*-webkit-transform: rotate(180deg);*/
     transform: rotate(120deg);
     border-color: #fc6403;
 }
@@ -399,15 +370,7 @@ section {
     font-size: 26px;
     font-weight: 700;
     width: 100%;
-    /*margin-bottom: 10px;*/
-    /*height: 25px;*/
-    /*padding-bottom: 10px;*/
 }
-
-.lux > span {
-}
-
-
 
 /*여기가 스위치*/
 
@@ -472,14 +435,13 @@ input:checked + .slider:before {
     border-radius: 38%;
 }
 
+/*스위치 끝*/
+
 .security-service {
     width: 260px;
     height: 15px;
     margin-left: 15px;
     margin-top: 15px;
-    /*margin: 0px;*/
-    /*margin-bottom: 20px;*/
-    /*margin-left: 15px;*/
 }
 .security-service > p {
     margin-top: 4px;
@@ -507,9 +469,7 @@ input:checked + .slider:before {
     font-size: 14px;
     font-weight: bold;
     width: 120px;
-    /*height: 40px;*/
     margin-top: 15px;
-    /*margin-bottom: 15px;*/
     margin-left: 15px;
     background-color: rgb(127, 127, 127);
 }
@@ -539,5 +499,3 @@ input:checked + .slider:before {
     margin-top: 4px;
     font-size: 10px;
 }
-
-
