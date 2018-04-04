@@ -181,3 +181,21 @@
     float: right;
     font-size: 10pt;
 }
+
+.chart11 {
+    /*width: 200px;*/
+    /*height: 100px;*/
+}
+
+.start-value {
+    width: 20%;
+}
+
+.middle-value {
+    width: 60%;
+}
+
+.finish-value {
+    width: 20%;
+}
+

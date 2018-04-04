@@ -14,7 +14,7 @@ html
         title SecureHome
         block head
     body
-        .container
+        .container(style="max-width:1200px;")
             .row.layout-top-bar.no-padding
                 .col-sm-9.title-logo.no-padding
                     .title-logo-content#menu-logo
@@ -29,11 +29,11 @@ html
                         .col-sm-12.no-padding
                             span#user-role Admin
                         .col-sm-12.no-padding
-                            span#user-name Hong 길동
+                            span#user-name Hong Gildong
                     .col-sm-4.no-padding(style='margin: auto')
                         .btn#logout-btn Log out
             .row
-                .col-sm-1.no-padding.menu-bar(style='min-height:1080px')
+                .col-xl-2.no-padding.menu-bar(style='min-height:1080px;')
                     .col-sm-12.no-padding.menu-item#menu-dashboard
                         img.menu-img(src="/image/dashboardWhite.png").center-img
                         .menu-name Dashboard
@@ -67,7 +67,7 @@ html
                             |EventLogger
                             br
                             |Management
-                .col-sm-11.content.no-padding
+                .col-xl-10.content.no-padding(style="min-width:1080px")
                     block content
 
                     //.width_bar

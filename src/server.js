@@ -33,6 +33,7 @@ const express = require("express"); // THE std library for serving HTTP
 const RED = require("node-red");
 var nrSettings = require("../settings.js"); // Node-Red settings file
 const fs = require("fs");
+const sqlite3 = require('sqlite3').verbose(); // sqlite3 db
 
 const bodyParser = require('body-parser');
 // const httpLogger = require('morgan');
@@ -68,13 +69,59 @@ var app = express();
 var path = require('path');
 var socket = require('socket.io');
 
+// get the db file path
+const dbPath = path.join(__dirname, "db/test.db");
+
+// validate db existence
+let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+  if (err) { 
+    console.error('could not find test database. Making it...');
+    //make db
+    db = new sqlite3.Database(dbPath);
+
+    // sync process creating table.
+    db.serialize(() => {
+      let init_database = require('./db/init_database')
+      db.run(init_database.initDevice());
+      db.run(init_database.initGateway());
+      db.run(init_database.initPolicy());
+      db.run(init_database.initUser());
+      db.run(init_database.initWebLog());
+  });
+
+  } else {
+    console.log('Connected to the test database.');
+  }
+});
+
+
+
+
+
+
+
+// db.serialize(() => {
+//   db.all('SELECT * FROM device', (err, rows) => {
+//     console.log(rows);
+//   });
+
+// db.each('SELECT * FROM device', (err, row) => {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   console.log(row);
+// });
+// });
+
+module.exports.db = db;
+
 var resourcePath = path.join(__dirname, '../resource');
 
 // app http settings.
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(log4js.connectLogger(log4js.getLogger("http"), {level: 'auto'}));
+app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
 // app.use(httpLogger('dev'));
 
 app.set('view engine', 'jade');
@@ -89,6 +136,7 @@ app.use(express.static(resourcePath + '/public'));
 // });
 app.use("/", require('./web/ViewController'));
 app.use("/api", require('./web/ApiContoller'));
+app.use("/v1", require("./web/api/v1/V1Controller"));
 
 // Add static route for bower components from './bower_components'
 app.use("/bower_components", express.static("./bower_components"));
@@ -108,12 +156,12 @@ var httpServer = use_https
 
 var io = socket(httpServer);
 exports.clientSocket = function (url, data) {
-    io.sockets.emit(url, data);
+  io.sockets.emit(url, data);
 };
 module.exports.io = io;
-io.use(function(socket, next) {
-    console.info('SOCKETIO SESSION START');
-    next();
+io.use(function (socket, next) {
+  console.info('SOCKETIO SESSION START');
+  next();
 });
 io.on('connection', require('./web/SocketController'));
 
@@ -129,7 +177,7 @@ app.use(nrSettings.httpNodeRoot, RED.httpNode);
 
 
 // httpServer.listen(http_port, listening_address, function() {
-httpServer.listen(http_port, function() {
+httpServer.listen(http_port, function () {
   console.info(
     "Express 4 https server listening on http%s://%s:%d%s, serving node-red",
     use_https ? "s" : "",
@@ -140,7 +188,7 @@ httpServer.listen(http_port, function() {
 });
 
 // Start the runtime
-RED.start().then(function() {
+RED.start().then(function () {
   console.info("------ Engine started! ------");
 });
 

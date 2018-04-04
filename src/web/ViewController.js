@@ -69,6 +69,34 @@ router.get('/new/account', function (req, res) {
 });
 
 
+// router.get('/new2/dashboard', function (req, res) {
+//     res.render('new/dashboard_new');
+// });
+//
+// router.get('/new2/iotdevices', function (req, res) {
+//     res.render('new/iotdevice_new');
+// });
+//
+// router.get('/new2/gateway', function (req, res) {
+//     res.render('new/gateway_new');
+// });
+//
+// router.get('/new2/security', function (req, res) {
+//     res.render('new/security_new');
+// });
+
+router.get('/new2/layout', function (req, res) {
+    res.render('new2/layout');
+});
+
+router.get('/new2/dashboard', function (req, res) {
+    res.render('new2/dashboard');
+});
+
+router.get('/new2/', function (req, res) {
+    res.render('new2/layout');
+});
+
 
 module.exports = router;
 

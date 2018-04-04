@@ -1,0 +1,260 @@
+/*여기부터 dashboard*/
+
+.card {
+    margin-right: 2px;
+}
+
+.card-box {
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-size: 14px;
+    font-weight: 400;
+    width: 175px;
+    height: 120px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.card-text span {
+    padding-top: 10px;
+}
+
+.card-text > div > span:nth-child(2) {
+    padding-left: 3px;
+    display: inline-block;
+    height: 20px;
+    width: 75px;
+}
+
+.card-text > div > span:nth-child(3) {
+    color: #e74c3c;
+}
+
+.content-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.content-head {
+    padding: 0px;
+    color: #404040;
+    font-size: 16px;
+    font-weight: 700;
+    /*padding-top: 20px;*/
+    margin-bottom: 10px;
+}
+
+.content-head-2 {
+    padding: 0px;
+    color: #404040;
+    font-size: 16px;
+    font-weight: 700;
+    /*padding-top: 20px;*/
+    margin-bottom: 10px;
+}
+
+.device-monitor {
+    min-width: 180px;
+    min-height: 180px;
+}
+
+.menu-text {
+    padding-left: 60px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.temp-humi {
+    min-width: 240px;
+    min-height: 180px;
+}
+
+.card-body {
+    padding: 0px;
+}
+
+.temp-humi .card-title {
+    padding: 0px;
+    background-color: #3498db;
+}
+
+.card .card-title {
+    color: white;
+    /*min-height: 50px;*/
+    max-height: 50px;
+    max-width: 240px;
+    /*padding: 8px;*/
+    padding-left: 10px;
+}
+
+.big-title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.small-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.luminance .card-title {
+    background-color: #ff9900;
+}
+
+.home-security-1 .card-title, .home-security-2 .card-title, .gas-mgnmt .card-title {
+    background-color: #ff3366;
+}
+
+.ip-camera .card-title {
+    background-color: #009999;
+}
+
+.home-security-service {
+    min-width: 260px;
+    min-height: 180px;
+}
+
+.device-control-1 {
+    min-width: 300px;
+    min-height: 180px;
+}
+
+.home-security-service .card-title {
+    min-width: 260px;
+    background-color: #3498db;
+}
+
+.device-control-1 .card-title, .device-control-2 .card-title {
+    min-width: 300px;
+    background-color: #333366;
+}
+
+table {
+    margin-top: 10px;
+    text-align: center;
+    width: 1130px;
+    border: 2px solid lightgray;
+}
+
+thead {
+    font-weight: bold;
+    background-color: #eaeaea;
+}
+
+td {
+    height: 30px;
+    border: 1px solid lightgray;
+}
+
+.card-img {
+    width: 20px;
+    height: 20px;
+}
+
+.camera-img {
+    width: 100%;
+    height: 100%;
+}
+
+td:nth-child(1) {
+    width: 37px;
+}
+
+/*여기부터 도넛 차트*/
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+section {
+    display: inline-block;
+    width: 33.33%;
+    margin: 50px 0;
+    text-align: center;
+    min-width: 150px;
+    position: relative;
+}
+
+
+.graph {
+    width: 150px;
+    height: 75px;
+    position: relative;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    font-size: 16pt;
+    line-height: 130px;
+    font-weight: bolder;
+    border-radius: 150px 150px 0 0;
+    overflow: hidden;
+    color: #0ff;
+}
+.graph:before, .graph:after {
+    content: '';
+    width: 150px;
+    height: 75px;
+    border: 30px solid #0ff;
+    border-top: none;
+    position: absolute;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    border-radius: 0 0 300px 300px;
+    -webkit-animation: demo 2s;
+    animation: demo 2s;
+    left: 0;
+    top: 100%;
+    z-index: 5;
+}
+.graph:after {
+    z-index: 3;
+    border-color: rgba(0, 0, 0, 0.15);
+    /*-webkit-transform: rotate(150deg);*/
+    transform: rotate(180deg);
+}
+/*.graph:hover:before {*/
+/*opacity: .8;*/
+/*cursor: pointer;*/
+/*}*/
+
+
+.model-1 {
+    margin: 0px;
+}
+
+.model-1 .graph {
+    color: #fc6403;
+}
+.model-1 .graph:before {
+    /*-webkit-transform: rotate(180deg);*/
+    transform: rotate(170deg);
+    border-color: #fc6403;
+}
+
+@-webkit-keyframes demo {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+@keyframes demo {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
