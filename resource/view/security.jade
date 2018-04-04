@@ -15,7 +15,7 @@ append title
 block content
     .col-12.no-padding
         input.btn.btn-primary(type='button', value='Delete')#deleteButton
-        input.btn.btn-primary(type='button', value='Policy', onclick="deleteRow('dataTable')")
+        input.btn.btn-primary(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
     table#dataTable.table.table-striped.no-padding(style='width:100%')
         thead
             tr
@@ -82,3 +82,16 @@ block content
                 td SmartLighting
                 td Auth
                 td Non
+    #policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                    h5#exampleModalLongTitle.modal-title Policy Deploy
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    |....
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save changes
+

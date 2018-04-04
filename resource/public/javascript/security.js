@@ -1,5 +1,5 @@
 $(function () {
-
+    enableButton(false);
     /**
      * table to cast DataTable
      * https://datatables.net/
@@ -19,10 +19,12 @@ $(function () {
     $('#dataTable tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
+            enableButton(false)
         }
         else {
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
+            enableButton(true)
         }
     });
 
@@ -31,8 +33,29 @@ $(function () {
      * todo: delete database. & reload
      */
     $('#deleteButton').click(function () {
-        console.log(table.row('.selected'));
         table.row('.selected').remove().draw(false);
     });
 
+    // $('#policyButton').on('shown.bs.modal', function(){
+    //    $('policyModal').trigger('focus');
+    // });
+    // $('$policyButton').modal('show');
+
+    $('#policyModal').on('show.bs.modal', function (e) {
+        var btn = $(e.relatedTarget);
+        console.log(table.row('.selected').data());
+    });
+
 });
+
+function enableButton(isEnabled) {
+    if (isEnabled) {
+        $('#policyButton').removeAttr('disabled');
+        $('#deleteButton').removeAttr('disabled');
+    }
+    else {
+        $('#policyButton').attr('disabled', 'disabled');
+        $('#deleteButton').attr('disabled', 'disabled');
+    }
+
+}

@@ -1,9 +1,31 @@
 extends layout
 
 append head
-    link(rel="stylesheet" href="/css/dashboard.css")
+    link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
+    script(src='/javascript/gateway.js')
+    link(rel='stylesheet', type='text/css', href='/css/gateway.css')
 
 append title
     span.col-xl-2.content-title GATEWAY
 
 block content
+    table#dataTable.table.table-striped.no-padding(style='width:100%')
+        thead
+            tr
+                th Gateway ID
+                th Gateway Name
+                th Ip
+                th Port
+        tbody
+            tr
+                td 1
+                td gateway_room
+                td 192.168.0.11
+                td 3000
+            tr
+                td 2
+                td gateway_living
+                td 192.168.0.12
+                td 3001
