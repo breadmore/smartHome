@@ -194,3 +194,10 @@ input {
 .modal-body > div > div > div {
     text-align: center;
 }
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 630px;
+        margin: 30px auto;
+    }
+}

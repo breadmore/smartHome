@@ -1,5 +1,10 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+
+.container {
+    max-width: 1200px;
+}
+
 body {
     font-family: 'Nanum Gothic', serif;
 }

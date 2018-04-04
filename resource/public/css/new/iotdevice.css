@@ -141,6 +141,75 @@
     text-decoration: none;
 }
 
+.card-collapse {
+    font-size: 14pt;
+    margin-left: 25px;
+}
+
+#add-btn {
+    width: 170px;
+}
+
+table {
+    text-align: center;
+    margin-top: 15px;
+    width: 1050px;
+    border: 2px solid lightgray;
+}
+
+thead {
+    background-color: whitesmoke;
+}
+
+td {
+    width: 12.5%;
+    height: 40px;
+    border: 1px solid lightgray;
+}
+
+.monitor_control_panel > div > input  {
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid lightgray;
+    padding: 7px;
+    margin-top: 7px;
+
+    margin-bottom: 10px;
+}
+
+.monitor_title {
+    font-size: 13pt;
+    /*font-weight: bolder;*/
+}
+
+.modal-title {
+    font-size: 25pt;
+    font-weight: bolder;
+}
+
+.select , .select > select {
+    height: 30px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.select > select {
+    margin-top: 7px;
+}
+
+.btn-default.close , .confirm {
+    width: 160px;
+    height: 45px;
+    border: 1px solid black;
+    font-size: 18pt;
+    font-weight: bolder;
+}
+
+.confirm {
+    background-color: #1b1e21;
+    color: white;
+}
+
 /*.content_title {*/
     /*width: 100%;*/
     /*display: inline-block;*/

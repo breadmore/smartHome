@@ -1,0 +1,89 @@
+.container {
+    min-width: 1200px;
+}
+
+.title-bar {
+    padding: 0px;
+    min-height: 50px;
+    margin: 0px;
+}
+
+.menu-bar {
+    padding-top: 15px;
+    min-height: 60px;
+    background-color: #1f2d3d;
+    color: white;
+    margin: 0px;
+}
+
+.menu-bar > div > div > div{
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.content {
+    padding-right: 0px;
+    /*padding-left: 0px;*/
+    margin-top: 10px;
+}
+
+.login-bar {
+    padding-left: 35px;
+    padding-right: 0px;
+}
+
+.title-logo img {
+    width: 100px;
+    height: 50px;
+}
+
+.menu-logo {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 20px;
+    padding-left: 0px;
+}
+
+.menu-logo img {
+    width: 45px;
+    height: 30px;
+}
+
+.menu-logo > div {
+    margin-left: 10px;
+}
+
+.login {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.auth {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login-bar > div {
+    padding-top: 5px;
+}
+
+.logout {
+    padding: 0px;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-left: 35px;
+    font-size: 12px;
+    width: 60px;
+    height: 30px;
+    color: white;
+    border: 1px solid #3498db;
+    background-color: #3498db;
+}
+

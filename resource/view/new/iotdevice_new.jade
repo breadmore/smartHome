@@ -1,0 +1,76 @@
+extends layout
+
+append head
+    link(href='/css/new/iotdevice.css' rel='stylesheet')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
+
+
+block content
+    .modal.fade#add-device(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    .modal-title REGISTRATION
+                .modal-body
+                    .monitor_control_panel
+                        .monitor_title Device name
+                            input(type="text")
+                        .monitor_title Selete device vendor
+                            .select
+                                select
+                                    option ETRI
+                        .monitor_title Select device type
+                            .select
+                                select
+                                    option ETRI
+                        .monitor_title Select gateway
+                            .select
+                                select
+                                    option ETRI
+                        .monitor_title Device ID(EID)
+                            input(type="text")
+                .modal-footer
+                    button.btn.btn-default.close(data-dismiss="modal") Cancel
+                    button.btn.btn-default.confirm Confirm
+    .row.no-padding.content-title
+        .col-sm-12.no-padding
+            img(src="/image/shareWhite.png")
+            span IoT Devices Management
+    .row.content-header.no-padding
+        .col-sm-12.no-padding
+            h2 Devices
+            h5 Registered devices
+    .col-12.no-padding.card-collapse
+        .btn#add-btn(data-target="#add-device" data-toggle="modal") Add Device
+        table
+            thead
+                tr
+                    td Index
+                    td EID
+                    td DID
+                    td Vendor
+                    td Name
+                    td Type
+                    td Gateway Id
+                    td Connected
+            tbody
+                tr
+                    td 1
+                    td 65934
+                    td 12965934
+                    td Etri
+                    td 가스탐지기
+                    td GasDetector
+                    td 1
+                    td On
+                tr
+                    td 2
+                    td 65936
+                    td 12965936
+                    td Xiaomi
+                    td 조명
+                    td SmartLight
+                    td 2
+                    td Off

@@ -1,0 +1,193 @@
+extends layout
+
+append head
+    link(href='/css/new/dashboard.css' rel='stylesheet')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
+    script(src="/javascript/dashboard.js")
+
+
+block content
+    .row.no-padding.content-title
+        .col-sm-12.no-padding
+            img(src="/image/dashboardWhite.png")
+            span Dashboard
+    .row.content-header.no-padding
+        .col-sm-12.no-padding
+            h2 Overview
+    .col-12.no-padding.card-collapse
+        .panel-group
+            .panel.panel-default
+                .panel-collapse.collapse.show
+                    .row.no-padding.no-margin
+                        .col-sm-12.col-md-6.col-lg-12.no-padding.card-frame.summary-card.big
+                            .row.no-padding.card-title
+                                h5 ETRI Temperature / Humidity Device
+                            .row.no-padding.card-body
+                                .col-sm-1.no-padding.card-img
+                                    img(src="/image/temperatureWhite.png")
+                                .col-sm-5.no-padding.card-device-status.pie-chart.text-center
+                                    section.temp.model-1
+                                        .graph
+                                            span 23
+                                            span ℃
+                                .col-sm-1.no-padding.card-img
+                                    img(src="/image/humidityWhite.png")
+                                .col-sm-5.no-padding.card-device-status.pie-chart.text-center
+                                    section.humi.model-1
+                                        .graph
+                                            span 50
+                                            span %
+                        .col-sm-12.col-md-6.col-lg-12.no-padding.card-frame.summary-card.big
+                            .row.no-padding.card-title
+                                h5 ETRI Smart Light / Luminance Sensor
+                            .row.no-padding.card-body
+                                .col-sm-2.no-padding.card-img
+                                    img(src="/image/alarmWhite.png")
+                                .col-sm-4.no-padding.card-device-status.pie-chart.text-center
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                .col-sm-1.no-padding.card-img
+                                    img(src="/image/luxWhite.png")
+                                .col-sm-5.no-padding.card-device-status.pie-chart.text-center
+                                    section.lumi.model-1
+                                        .graph.change
+                                            span 100
+                                            span Lux
+    .col-12.no-padding.card-collapse
+        .panel-group
+            .panel.panel-default
+                .panel-collapse.collapse.show
+                    .row.no-padding.no-margin
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI Intrusion Detection
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/alarmWhite.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-intrusion-detection Siren
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI CCTV
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/alarmWhite.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-cctv Not Install
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI Window Sensor
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/humansensor.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-window-sensor Open
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI Human Sensor
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/humansensor.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-human-sensor ON
+    .col-12.no-padding.card-collapse
+        .panel-group
+            .panel.panel-default
+                .panel-collapse.collapse.show
+                    .row.no-padding.no-margin
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI Gas Detection
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/alarmWhite.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-gas-detection Siren
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI Gas Leakage Detector
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/alarmWhite.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-gas-leakage-detector Not Install
+                        .col-sm-12.col-md-6.col-lg-3.no-padding.card-frame.summary-card.small
+                            .row.no-padding.card-title
+                                h6 ETRI Smart Gas Valve
+                            .row.no-padding.card-body
+                                .col-sm-4.no-padding.card-img
+                                    img(src="/image/alarmWhite.png")
+                                .col-sm-8.no-padding.card-device-status.with-switch
+                                    label.switch
+                                        input(type='checkbox')
+                                        span.slider.round
+                                p#etri-smart-gas-value Not Install
+    .row.content-header.no-padding
+        .col-sm-12.no-padding
+            h2 Sensor event log
+    .col-12.no-padding.card-collapse
+        .panel-group
+            .panel.panel-default
+                table
+                    thead
+                        tr
+                            td Event date
+                            td Event level
+                            td Sensor type / name
+                            td Activity message
+                    tbody
+                        tr
+                            td 02-25-2018 18:00.31
+                            td Log
+                            td ETRI Humidity sensor / Hum001
+                            td Humidity sensor is connected
+                        tr
+                            td 02-25-2018 18:00.31
+                            td Log
+                            td ETRI Humidity sensor / Hum001
+                            td Humidity sensor is disconnected
+                        tr
+                            td 02-25-2018 18:00.31
+                            td Log
+                            td ETRI Intrusion detection alarm / IDA01
+                            td Intrusion detection alarm mode is on
+                        tr
+                            td 02-25-2018 18:00.31
+                            td Critical
+                            td ETRI Gas leakage alarm / GasLM001
+                            td Gas leakage is detected
+                        tr
+                            td 02-25-2018 18:00.31
+                            td Critical
+                            td XIAOMI power outlet / PO001
+                            td power outlet is off
+                        tr
+                            td 02-25-2018 18:00.31
+                            td Critical
+                            td ETRI Window sensor / IDW001
+                            td Window sensor is disconnected
+
+
+
+
