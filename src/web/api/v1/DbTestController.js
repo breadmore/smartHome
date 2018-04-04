@@ -3,7 +3,7 @@ var dbDevice = require('../../../dao/DeviceDao');
 var dbGateway = require('../../../dao/GatewayDao');
 var dbPolicy = require('../../../dao/PolicyDao');
 var dbUser = require('../../../dao/UserDao');
-var dbWebLog = require('../../../dao/WebLogDao');
+var dbSensorLog = require('../../../dao/SensorLogDao');
 
 
 
@@ -11,10 +11,14 @@ var dbWebLog = require('../../../dao/WebLogDao');
 //DeviceDao Test Controller
 ////////////////////////////////////////////////////////////////////////////////////////////
 /*
-*search all devices
+*list devices in page.
+*@param = (integer)offset, (integer)page
 */
-router.route('/device').get(function (req, res) {
-    dbDevice.searchAllDevices().then((value) => {
+router.route('/device/:offset/:page').get(function (req, res) {
+    const offset = Number(req.params.offset);
+    const page = Number(req.params.page)
+
+    dbDevice.listDevicesInPage(offset,page).then((value) => {
         res.status(200).send(value);
     }).catch((err) => {
         res.status(500).send(err);
@@ -23,11 +27,29 @@ router.route('/device').get(function (req, res) {
 
 
 /*
-*search one device
-*@param : sid
+*list devices by type.
+*@param = (integer)type
 */
-router.route('/device/:sid').get(function (req, res) {
-    dbDevice.searchOneDeviceBySid(req.params.sid).then((value) => {
+router.route('/deviceType/:type').get(function (req, res) {
+    const type = Number(req.params.type);
+
+    dbDevice.listDevicesByType(type).then((value) => {
+        res.status(200).send(value);
+    }).catch((err) => {
+        res.status(500).send(err + 'hahahahahahahahhaah');
+    })
+});
+
+
+/*
+*search one device
+*@param : (integer)id
+*/
+router.route('/device/:id').get(function (req, res) {
+    const id = Number(req.params.id)
+    console.log(req.params);
+
+    dbDevice.searchOneDeviceById(id).then((value) => {
         res.status(200).send(value);
     }).catch((err) => {
         res.status(500).send(err);
@@ -37,25 +59,29 @@ router.route('/device/:sid').get(function (req, res) {
 
 /*
 *update one device
-*@params : sid, deviceJsonObj
+*@params : (integer)id, (JSON object)deviceJsonObj
 */
-router.route('/device/:sid').put(function (req, res) {
-    res.status(200).send(dbDevice.updateOneDeviceBySid(req.params.sid, req.body));
+router.route('/device/:id').put(function (req, res) {
+    const id = Number(req.params.id)
+
+    res.status(200).send(dbDevice.updateOneDeviceById(id, req.body));
 });
 
 
 /*
 *delete one device
-*@param : sid
+*@param : (integer)id
 */
-router.route('/device/:sid').delete(function (req, res) {
-    res.status(200).send(dbDevice.deleteOneDeviceBySid(req.params.sid));
+router.route('/device/:id').delete(function (req, res) {
+    const id = Number(req.params.id)
+
+    res.status(200).send(dbDevice.deleteOneDeviceById(id));
 });
 
 
 /*
 *insert one device
-*@params : deviceJsonObj
+*@params : (JSON object)deviceJsonObj
 */
 router.route('/device').post(function (req, res) {
     res.status(200).send(dbDevice.insertDevice(req.body));
@@ -144,39 +170,39 @@ router.route('/gateway').post(function (req, res) {
 /*
 *search all policys
 */
-router.route('/policy').get(function (req, res) {
-    dbPolicy.searchAllPolicys().then((value) => {
-        res.status(200).send(value);
-    }).catch((err) => {
-        res.status(500).send(err);
-    })
-});
+// router.route('/policy').get(function (req, res) {
+//     dbPolicy.searchAllPolicys().then((value) => {
+//         res.status(200).send(value);
+//     }).catch((err) => {
+//         res.status(500).send(err);
+//     })
+// });
 
 
-/*
-*search one policy
-*@param : id
-*/
-router.route('/policy/:id').get(function (req, res) {
-    const id = Number(req.params.id);
+// /*
+// *search one policy
+// *@param : id
+// */
+// router.route('/policy/:id').get(function (req, res) {
+//     const id = Number(req.params.id);
 
-    dbPolicy.searchOnePolicyById(id).then((value) => {
-        res.status(200).send(value);
-    }).catch((err) => {
-        res.status(500).send(err);
-    })
-});
+//     dbPolicy.searchOnePolicyById(id).then((value) => {
+//         res.status(200).send(value);
+//     }).catch((err) => {
+//         res.status(500).send(err);
+//     })
+// });
 
 
-/*
-*update one policy
-*@params : id, policyJsonObj
-*/
-router.route('/policy/:id').put(function (req, res) {
-    const id = Number(req.params.id);
+// /*
+// *update one policy
+// *@params : id, policyJsonObj
+// */
+// router.route('/policy/:id').put(function (req, res) {
+//     const id = Number(req.params.id);
 
-    res.status(200).send(dbPolicy.updateOnePolicyById(id, req.body));
-});
+//     res.status(200).send(dbPolicy.updateOnePolicyById(id, req.body));
+// });
 
 
 
@@ -252,13 +278,13 @@ router.route('/user').post(function (req, res) {
 /*
 *search all web_logs
 */
-router.route('/webLog').get(function (req, res) {
-    dbWebLog.searchAllWebLogs().then((value) => {
-        res.status(200).send(value);
-    }).catch((err) => {
-        res.status(500).send(err);
-    })
-});
+// router.route('/webLog').get(function (req, res) {
+//     dbWebLog.searchAllWebLogs().then((value) => {
+//         res.status(200).send(value);
+//     }).catch((err) => {
+//         res.status(500).send(err);
+//     })
+// });
 
 
 

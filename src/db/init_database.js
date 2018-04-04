@@ -4,20 +4,21 @@ module.exports = {
     initGateway: initGateway,
     initPolicy: initPolicy,
     initUser: initUser,
-    initWebLog: initWebLog
+    initSensorLog: initSensorLog
 }
 
 
 /* Create device table */
 function initDevice() {
     return "CREATE TABLE device ( id integer PRIMARY KEY AUTOINCREMENT," +
+           "name text,"+
            "did text,"+
            "psk text,"+
            "oid text,"+
            "eid text,"+
            "sid text,"+
            "type integer,"+
-           "conn integer,"+
+           "connect integer,"+
            "auth integer,"+
            "reg integer,"+
            "gateway_id integer NOT NULL,"+
@@ -38,12 +39,13 @@ function initGateway() {
 /* Create policy table */
 function initPolicy() {
     return "CREATE TABLE policy ( id integer," +
+           "server integer NOT NULL," + // 0 = false, 1 = true
+           "device integer NOT NULL," + // 0 = false, 1 = true
            "\"create\" integer DEFAULT NULL," +
            "\"read\" integer DEFAULT NULL," +
            "\"update\" integer," +
            "\"delete\" integer," +
-           "notification integer," +
-           "device_id integer NOT NULL );"
+           "\"notificate\" integer );" 
 }
 
 
@@ -52,18 +54,19 @@ function initPolicy() {
 function initUser() {
     return "CREATE TABLE user ( id integer PRIMARY KEY AUTOINCREMENT," +
            "user_id text NOT NULL," +
+           "name text NOT NULL," +
            "password text NOT NULL," +
            "authority text NOT NULL );"
 }
 
 
 /* Create web_log table */
-function initWebLog() {
-    return "CREATE TABLE web_log ( id integer PRIMARY KEY AUTOINCREMENT," +
+function initSensorLog() {
+    return "CREATE TABLE sensor_log ( id integer PRIMARY KEY AUTOINCREMENT," +
     "device_id integer," +
-    "event text," +
-    "event_level integer," +
-    "\"datetime\" text );"
+    "state text," +
+    "\"timestamp\" integer," +
+    "room_state integer NOT NULL );" // 1 = 재실(in), 2 = 외출(out)
 }
 
 

@@ -3,7 +3,6 @@ let db = require('../server').db;
 
 
 module.exports = {
-    inItTable: inItTable,
     searchAll: searchAll,
     searchOne: searchOne,
     insertOne: insertOne,
@@ -11,11 +10,6 @@ module.exports = {
     updateOne: updateOne
 }
 
-
-// create tables if don't exist.
-function inItTable() {
-
-}
 
 // search all records in the table by sql.
 function searchAll(sql) {

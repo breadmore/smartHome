@@ -3,32 +3,42 @@ var db = require('../components/DataBaseComponent');
 
 
 module.exports = {
-    searchAllDevices: searchAllDevices,
-    searchOneDeviceBySid: searchOneDeviceBySid,
-    insertDevice: insertDevice,
-    deleteOneDeviceBySid: deleteOneDeviceBySid,
-    updateOneDeviceBySid: updateOneDeviceBySid
+    listDevicesInPage: listDevicesInPage,
+    listDevicesByType: listDevicesByType,
+    searchOneDeviceById: searchOneDeviceById,
+    updateOneDeviceById: updateOneDeviceById,
+    deleteOneDeviceById: deleteOneDeviceById,
+    insertDevice: insertDevice
 }
 
 
-// search all devices records.
-function searchAllDevices() {
-    let sql = 'SELECT * FROM device';
+// list devices in page by offset and page ordered by id asc.
+// todo: check what if offset is 0.
+function listDevicesInPage(offset, page) {
+    let sql = 'SELECT * FROM device ORDER BY id ASC LIMIT ' + offset + ' OFFSET ' + offset*(page-1);
+
+    return db.searchAll(sql);
+}
+
+
+//list devices by type ordered by id asc.
+function listDevicesByType(type) {
+    let sql = 'SELECT * FROM device WHERE type = "' + type + '" ORDER BY id ASC'
 
     return db.searchAll(sql);
 }
 
 
 // search one device record by sid.
-function searchOneDeviceBySid(sid) {
-    let sql = 'SELECT * FROM device WHERE sid = "' + sid + '"';
+function searchOneDeviceById(id) {
+    let sql = 'SELECT * FROM device WHERE id = "' + id + '"';
 
     return db.searchOne(sql);
 }
 
 
 // update one device record by sid
-function updateOneDeviceBySid(sid, deviceJsonObj) {
+function updateOneDeviceById(id, deviceJsonObj) {
     let str = "";
 
     for (let key in deviceJsonObj) {
@@ -42,15 +52,15 @@ function updateOneDeviceBySid(sid, deviceJsonObj) {
     }
 
     str = str.substr(0, str.length - 2);
-    let sql = 'UPDATE device SET ' + str + ' WHERE sid = "' + sid + '"';
+    let sql = 'UPDATE device SET ' + str + ' WHERE id = "' + id + '"';
 
     db.updateOne(sql);
 }
 
 
 // delete one device record by sid.
-function deleteOneDeviceBySid(sid) {
-    let sql = 'DELETE FROM device WHERE sid = "' + sid + '"';
+function deleteOneDeviceById(id) {
+    let sql = 'DELETE FROM device WHERE id = "' + id + '"';
 
     db.deleteOne(sql);
 }
