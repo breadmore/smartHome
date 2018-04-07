@@ -3,12 +3,21 @@ var db = require('../components/DataBaseComponent');
 
 
 module.exports = {
+    listDevices: listDevices,
     listDevicesInPage: listDevicesInPage,
     listDevicesByType: listDevicesByType,
     searchOneDeviceById: searchOneDeviceById,
     updateOneDeviceById: updateOneDeviceById,
     deleteOneDeviceById: deleteOneDeviceById,
     insertDevice: insertDevice
+}
+
+
+// list devices ordered by id asc.
+function listDevices() {
+    let sql = 'SELECT * FROM device ORDER BY id ASC';
+
+    return db.searchAll(sql);
 }
 
 

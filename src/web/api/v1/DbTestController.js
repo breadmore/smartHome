@@ -10,13 +10,27 @@ var dbSensorLog = require('../../../dao/SensorLogDao');
 ////////////////////////////////////////////////////////////////////////////////////////////
 //DeviceDao Test Controller
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*
+*list devices.
+*/
+router.route('/device').get(function (req, res) {
+    dbDevice.listDevices().then((value) => {
+        res.status(200).send(value);
+    }).catch((err) => {
+        res.status(500).send(err);
+    })
+});
+
+
 /*
 *list devices in page.
 *@param = (integer)offset, (integer)page
 */
 router.route('/device/:offset/:page').get(function (req, res) {
     const offset = Number(req.params.offset);
-    const page = Number(req.params.page)
+    const page = Number(req.params.page);
 
     dbDevice.listDevicesInPage(offset,page).then((value) => {
         res.status(200).send(value);
@@ -46,7 +60,7 @@ router.route('/deviceType/:type').get(function (req, res) {
 *@param : (integer)id
 */
 router.route('/device/:id').get(function (req, res) {
-    const id = Number(req.params.id)
+    const id = Number(req.params.id);
     console.log(req.params);
 
     dbDevice.searchOneDeviceById(id).then((value) => {
@@ -62,7 +76,7 @@ router.route('/device/:id').get(function (req, res) {
 *@params : (integer)id, (JSON object)deviceJsonObj
 */
 router.route('/device/:id').put(function (req, res) {
-    const id = Number(req.params.id)
+    const id = Number(req.params.id);
 
     res.status(200).send(dbDevice.updateOneDeviceById(id, req.body));
 });
@@ -73,7 +87,7 @@ router.route('/device/:id').put(function (req, res) {
 *@param : (integer)id
 */
 router.route('/device/:id').delete(function (req, res) {
-    const id = Number(req.params.id)
+    const id = Number(req.params.id);
 
     res.status(200).send(dbDevice.deleteOneDeviceById(id));
 });
@@ -84,6 +98,7 @@ router.route('/device/:id').delete(function (req, res) {
 *@params : (JSON object)deviceJsonObj
 */
 router.route('/device').post(function (req, res) {
+    console.log(req.body);
     res.status(200).send(dbDevice.insertDevice(req.body));
 });
 
