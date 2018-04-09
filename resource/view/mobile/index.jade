@@ -1,0 +1,26 @@
+extends layout
+
+append css
+    link(href='/css/mobile/index.css' rel='stylesheet')
+
+append left
+    .col-md-6.title.text-left.no-padding LOG IN
+
+append right
+    .col-md-6.title.text-right.no-padding E T R I
+
+block content
+    .login-body
+        img(src="/image/SIoTLogo.png").logo-img
+        .logo-body-title Secure Smart Space
+        .logo-body-subtitle ETRI SECURE GATEWAY SQLUTION
+    .login-foot
+        .input-group
+            span.input-img
+                img(src="/image/user.png")
+            input(placeholder="Username").form-control
+        .input-group
+            span.input-img
+                img(src="/image/pass.png")
+            input(type="password" placeholder="Password").form-control
+        button.confirm-btn CONFIRM
