@@ -99,7 +99,7 @@ body * {
 /******************** DataTable Frame ***********************/
 #dataTable {
     border-collapse: separate;
-    border-spacing: 1px;
+    border-spacing: 3px;
     text-align: center;
     line-height: 1.5;
 }
