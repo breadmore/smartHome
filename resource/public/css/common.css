@@ -204,3 +204,18 @@ body * {
     font-weight: bold;
 
 }
+
+#dataTable thead {
+    background-color: rgb(89,89,89);
+    color: rgb(255,255,255);
+}
+
+.col-12 .btn {
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #3498db;
+    border-color: #3498db;
+    height: 31px;
+    line-height: 1;
+}

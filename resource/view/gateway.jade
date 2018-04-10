@@ -11,21 +11,222 @@ append title
     span.col-xl-2.content-title GATEWAY
 
 block content
-    table#dataTable.table.table-striped.no-padding(style='width:100%')
-        thead
-            tr
-                th Gateway ID
-                th Gateway Name
-                th Ip
-                th Port
-        tbody
-            tr
-                td 1
-                td gateway_room
-                td 192.168.0.11
-                td 3000
-            tr
-                td 2
-                td gateway_living
-                td 192.168.0.12
-                td 3001
+    ul.nav.nav-tabs
+        li.active
+            a(data-toggle='tab', href='#gateway1') GatewayName1
+        li
+            a(data-toggle='tab', href='#gateway2') GatewayName2
+    .tab-content
+        #gateway1.tab-pane.fade.active.show
+            table.table.table-bordered
+                caption Gateway Information
+                tr
+                    th ID
+                    th 1
+                tr
+                    th Name
+                    th GatewayName1
+                tr
+                    th IP Address
+                    th 192.168.0.1
+                tr
+                    th Port
+                    th 3000
+            table#myTable1.table.table-striped(cellspacing='0', width='100%')
+                caption Device Information
+                thead
+                    tr
+                        th Device ID
+                        th Name
+                        th Type
+                        th Connected
+                tbody
+                    tr
+                        th 12965934
+                        th Gas!
+                        th GasDetector
+                        th Yes
+                    tr
+                        th 12965935
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965936
+                        th GasB!
+                        th GasBreaker
+                        th Yes
+        #gateway2.tab-pane.fade
+            table.table.table-striped.table-bordered
+                caption Gateway Information
+                tr
+                    th ID
+                    th 2
+                tr
+                    th Name
+                    th GatewayName1
+                tr
+                    th IP Address
+                    th 192.168.0.2
+                tr
+                    th Port
+                    th 3000
+            table#myTable2.table.table-striped(cellspacing='0', width='100%')
+                caption Device Information
+                thead
+                    tr
+                        th Device ID
+                        th Name
+                        th Type
+                        th Connected
+                tbody
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+        //#menu2.tab-pane.fade
+            h3 Menu 2
+            p
+                | Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+        //#menu3.tab-pane.fade
+            h3 Menu 3
+            p
+                | Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+
+
+
+    //table#dataTable.table.table-striped.no-padding(style='width:100%')
+    //    thead
+    //        tr
+    //            th Gateway ID
+    //            th Gateway Name
+    //            th Ip
+    //            th Port
+    //    tbody
+    //        tr
+    //            td 1
+    //            td gateway_room
+    //            td 192.168.0.11
+    //            td 3000
+    //        tr
+    //            td 2
+    //            td gateway_living
+    //            td 192.168.0.12
+    //            td 3001

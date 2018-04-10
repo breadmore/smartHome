@@ -4,46 +4,72 @@ $(function () {
      * table to cast DataTable
      * https://datatables.net/
      */
-    var table = $('#dataTable').DataTable({
-        // "ajax": "../ajax/data/objects.txt",
-        // "columnDefs": [{
-        //     "searchable": false,
-        //     "orderable": false,
-        //     "targets": 0
-        // }],
-        // "order": [[1, 'asc']]
+    // var table = $('#dataTable').DataTable({
+    //     // "ajax": "../ajax/data/objects.txt",
+    //     // "columnDefs": [{
+    //     //     "searchable": false,
+    //     //     "orderable": false,
+    //     //     "targets": 0
+    //     // }],
+    //     // "order": [[1, 'asc']]
+    // });
+
+    // $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+    //     $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+    // } );
+
+    $('#myTable1').DataTable( {
+        "dom": 't<"row no-gutters default-bottom-margin"<"col-sm-4"><"col-sm-4 text-center"p><"col-sm-4">>'
     });
+
+    // Apply a search to the second table for the demo
+    $('#myTable2').DataTable({
+        "dom": 't<"row no-gutters default-bottom-margin"<"col-sm-4"><"col-sm-4 text-center"p><"col-sm-4">>'
+    });
+
+
+
+
+
 
     /**
      * Select One Table Row Function
      */
-    $('#dataTable tbody').on('click', 'tr', function () {
-        var row = table.row($(this));
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            row.child.hide();
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            var data = [{
-                productId : "12965934",
-                deviceId : "65934",
-                objectId : "02.481.1.10.100.3030.10011.65934",
-                type : "GasDetector"
-
-            },
-                {
-                    productId : "12965935",
-                    deviceId : "65935",
-                    objectId : "02.481.1.10.100.3030.10011.65932",
-                    type : "GasController"
-
-                }];
-            row.child(format(data)).show();
-            // enableButton(true);
-        }
-    });
+    // $('#dataTable tbody').on('click', 'tr', function () {
+    //     var row = table.row($(this));
+    //     var attr = $(this).attr('role');
+    //     console.log(attr);
+    //     if (typeof attr === typeof undefined && attr !== 'row') {
+    //
+    //     }
+    //     else {
+    //         if ($(this).hasClass('selected')) {
+    //             $(this).removeClass('selected');
+    //             row.child.hide();
+    //         }
+    //         else {
+    //             table.$('tr.selected').removeClass('selected');
+    //             $(this).addClass('selected');
+    //             var data = [{
+    //                 productId : "12965934",
+    //                 deviceId : "65934",
+    //                 objectId : "02.481.1.10.100.3030.10011.65934",
+    //                 type : "GasDetector"
+    //
+    //             },
+    //                 {
+    //                     productId : "12965935",
+    //                     deviceId : "65935",
+    //                     objectId : "02.481.1.10.100.3030.10011.65932",
+    //                     type : "GasController"
+    //
+    //                 }];
+    //             row.child(format(data)).show();
+    //             // enableButton(true);
+    //         }
+    //     }
+    //
+    // });
 
     /**
      * Delete Selected Row.
@@ -78,45 +104,45 @@ function enableButton(isEnabled) {
 }
 
 /* Formatting function for row details - modify as you need */
-function format(data) {
-    // `d` is the original data object for the row
-    let tr = '';
-    if (data instanceof Array) {
-        // tr += '+';
-        data.forEach(function(item) {
-            tr += '<tr> ' +
-                '<td>' + item.productId + '</td>' +
-                '<td>' + item.deviceId +'</td>' +
-                '<td>' + item.objectId +'</td>' +
-                '<td>' + item.type +'</td>' +
-                '</tr>'
-        });
-    }
-
-    let table = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;width:100%;" class="inner-table table table-striped-" ">' +
-        '<tr style="">' +
-        '<td>Product ID</td>' +
-        '<td>Device ID</td>' +
-        '<td>Object ID</td>' +
-        '<td>Type</td>' +
-        '</tr>';
-
-    table += tr;
-    table += '</table>';
-    return table;
-
-    // return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-    //     '<tr>' +
-    //         '<td>Full name</td>' +
-    //         '<td>Extension number</td>' +
-    //     '</tr>' +
-    //     '<tr>' +
-    //     '   <td>' + data.name + '</td>' +
-    //         '<td>' + data.extn + '</td>' +
-    //     '</tr>' +
-    //     '<tr>' +
-    //     '   <td>Extra info:</td>' +
-    //         '<td>And any further details here (images etc)...</td>' +
-    //     '</tr>' +
-    //     '</table>';
-}
+// function format(data) {
+//     // `d` is the original data object for the row
+//     let tr = '';
+//     if (data instanceof Array) {
+//         // tr += '+';
+//         data.forEach(function(item) {
+//             tr += '<tr> ' +
+//                 '<td>' + item.productId + '</td>' +
+//                 '<td>' + item.deviceId +'</td>' +
+//                 '<td>' + item.objectId +'</td>' +
+//                 '<td>' + item.type +'</td>' +
+//                 '</tr>'
+//         });
+//     }
+//
+//     let table = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;width:100%;" class="inner-table table table-striped-" ">' +
+//         '<tr style="background-color: #ed5f00; color: white;">' +
+//         '<td>Product ID</td>' +
+//         '<td>Device ID</td>' +
+//         '<td>Object ID</td>' +
+//         '<td>Type</td>' +
+//         '</tr>';
+//
+//     table += tr;
+//     table += '</table>';
+//     return table;
+//
+//     // return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+//     //     '<tr>' +
+//     //         '<td>Full name</td>' +
+//     //         '<td>Extension number</td>' +
+//     //     '</tr>' +
+//     //     '<tr>' +
+//     //     '   <td>' + data.name + '</td>' +
+//     //         '<td>' + data.extn + '</td>' +
+//     //     '</tr>' +
+//     //     '<tr>' +
+//     //     '   <td>Extra info:</td>' +
+//     //         '<td>And any further details here (images etc)...</td>' +
+//     //     '</tr>' +
+//     //     '</table>';
+// }

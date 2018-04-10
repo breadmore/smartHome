@@ -1,9 +1,74 @@
 extends layout
 
 append head
-    link(rel="stylesheet" href="/css/dashboard.css")
+    link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
+    script(src='/javascript/account.js')
+    link(rel='stylesheet', type='text/css', href='/css/account.css')
+    link(rel='stylesheet', type='text/css', href='/css/common.css')
 
 append title
     span.col-xl-2.content-title ACCOUNT
 
 block content
+    .col-12.no-padding
+        input.btn.btn-primary(type='button', value='Delete')#deleteButton
+        input.btn.btn-primary(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
+    table#dataTable.no-padding(style='width:100%;')
+        thead
+            tr
+                th(scope='cols') Gateway ID
+                th(scope='cols') Product ID
+                th(scope='cols') Device ID
+                th(scope='cols') Pre Shared Key
+                th(scope='cols') Object ID
+                th(scope='cols') Session ID
+                th(scope='cols') Type
+                th(scope='cols') Connected
+                th(scope='cols') Authenticate
+                th(scope='cols') Policy
+    #policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title Policy Deploy
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        p FromID → ToID
+                        input(type='text' readonly=true value='ThermoHygrometer_65934->MyIoTSVR')
+                        p Resource Name
+                        input(type='text' readonly=true value='ThermoHygrometer_65934')
+                        p Policy
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Create
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Read
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Update
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Delete
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Notification
+                        p(style='margin-top:10px;') Policy Target
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | Server
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | Device
+                .modal-footer
+                    button.modal-cancel(data-dismiss="modal") Cancel
+                    button.modal-confirm(data-dismiss="modal") Confirm

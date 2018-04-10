@@ -24,3 +24,31 @@
     text-align: center;
     width: 100%;
 }
+
+.nav-tabs li{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+caption {
+    text-align: center;
+    caption-side: top;
+    font-size: 24px;
+}
+
+div .dataTables_paginate {
+    float: right;
+
+    position: relative;
+    left: -50%; /* or right 50% */
+    text-align: left;
+}
+div .dataTables_paginate > .pagination {
+    position: relative;
+    left: 50%;
+}
+
+.default-bottom-margin {
+    margin-bottom: 20px;
+}
+
