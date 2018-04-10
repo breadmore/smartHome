@@ -1,6 +1,6 @@
-.selected {
-    background-color: #B0BED9 !important;
-}
+/*.selected {*/
+    /*background-color: #B0BED9 !important;*/
+/*}*/
 
 
 
@@ -11,15 +11,15 @@
     /*background-color: #3498db;*/
     /*border-color: #3498db;*/
 /*}*/
-.page-link {
-    color: #3498db;
-}
-.page-item.active .page-link {
-    background-color: #3498db;
-    border-color: #3498db;
-}
-.col-sm-12, .col-md-6 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
+/*.page-link {*/
+    /*color: #3498db;*/
+/*}*/
+/*.page-item.active .page-link {*/
+    /*background-color: #3498db;*/
+    /*border-color: #3498db;*/
+/*}*/
+/*.col-sm-12, .col-md-6 {*/
+    /*padding-left: 0 !important;*/
+    /*padding-right: 0 !important;*/
+/*}*/
 

@@ -8,31 +8,31 @@ append head
     link(rel='stylesheet', type='text/css', href='/css/gateway.css')
 
 append title
-    span.col-xl-2.content-title GATEWAY
+    span.col-xl-2.content-title.no-padding GATEWAY
 
 block content
     ul.nav.nav-tabs
-        li.active
-            a(data-toggle='tab', href='#gateway1') GatewayName1
         li
-            a(data-toggle='tab', href='#gateway2') GatewayName2
+            a(data-toggle='tab', href='#gateway1').gateway-nav.active.show GatewayName1
+        li
+            a(data-toggle='tab', href='#gateway2').gateway-nav GatewayName2
     .tab-content
         #gateway1.tab-pane.fade.active.show
-            table.table.table-bordered
+            table(width='100%').gateway-table
                 caption Gateway Information
-                tr
-                    th ID
-                    th 1
-                tr
-                    th Name
-                    th GatewayName1
-                tr
-                    th IP Address
-                    th 192.168.0.1
-                tr
-                    th Port
-                    th 3000
-            table#myTable1.table.table-striped(cellspacing='0', width='100%')
+                thead
+                    tr
+                        th ID
+                        th Name
+                        th IP Address
+                        th Port
+                tbody
+                    tr
+                        th 1
+                        th GatewayName1
+                        th 192.168.0.11
+                        th 3000
+            table#myTable1(width='100%')
                 caption Device Information
                 thead
                     tr
@@ -57,21 +57,21 @@ block content
                         th GasBreaker
                         th Yes
         #gateway2.tab-pane.fade
-            table.table.table-striped.table-bordered
+            table(width='100%').gateway-table
                 caption Gateway Information
-                tr
-                    th ID
-                    th 2
-                tr
-                    th Name
-                    th GatewayName1
-                tr
-                    th IP Address
-                    th 192.168.0.2
-                tr
-                    th Port
-                    th 3000
-            table#myTable2.table.table-striped(cellspacing='0', width='100%')
+                thead
+                    tr
+                        th ID
+                        th Name
+                        th IP Address
+                        th Port
+                tbody
+                    tr
+                        th 2
+                        th GatewayName2
+                        th 192.168.0.21
+                        th 3000
+            table#myTable2(width='100%')
                 caption Device Information
                 thead
                     tr
@@ -80,6 +80,486 @@ block content
                         th Type
                         th Connected
                 tbody
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
+                    tr
+                        th 12965920
+                        th Power Plug!
+                        th SmartPlug
+                        th Yes
+                    tr
+                        th 12965921
+                        th Light!
+                        th SmartLight
+                        th Yes
+                    tr
+                        th 12965922
+                        th GasB!
+                        th GasBreaker
+                        th Not
                     tr
                         th 12965920
                         th Power Plug!

@@ -9,12 +9,13 @@ append head
     link(rel='stylesheet', type='text/css', href='/css/common.css')
 
 append title
-    span.col-xl-2.content-title ACCOUNT
+    span.col-xl-2.content-title.no-padding ACCOUNT
 
 block content
     .col-12.no-padding
-        input.btn.btn-primary(type='button', value='Delete')#deleteButton
-        input.btn.btn-primary(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
+        input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+        input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+        input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#policyModal" data-toggle="modal")#policyButton
     table#dataTable.no-padding(style='width:100%;')
         thead
             tr

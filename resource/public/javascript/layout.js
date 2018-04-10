@@ -22,15 +22,15 @@ $(function () {
     console.log(para[3])
 
     if (para[3] == "dashboard") {
-        $(".dashboard").css("background-color", "rgb(52, 63, 75)");
+        $(".dashboard").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "gateway") {
-        $(".gateway").css("background-color", "rgb(52, 63, 75)");
+        $(".gateway").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "iotdevices") {
-        $(".iotdevices").css("background-color", "rgb(52, 63, 75)");
+        $(".iotdevices").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "security") {
-        $(".security").css("background-color", "rgb(52, 63, 75)");
+        $(".security").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "account") {
-        $(".account").css("background-color", "rgb(52, 63, 75)");
+        $(".account").css("background-color", "rgb(90,153,157)");
     }
 
 

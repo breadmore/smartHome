@@ -2,7 +2,6 @@
 
 body, li, p {
     font-family: 'Noto Sans KR', sans-serif;
-/important;
 }
 
 .container {
@@ -80,18 +79,28 @@ body, li, p {
 
 .logout {
     border-radius: 4px;
-    margin-top: 10px;
-    margin-left: 35px;
+    margin: auto 0 auto auto;
     font-size: 12px;
-    width: 60px;
-    height: 30px;
     color: white;
-    border: 1px solid #3498db;
-    background-color: #3498db;
+    border: 1px solid #65c0c6;
+    background-color: #65c0c6;
+}
+
+.logout:disabled {
+    background-color: #65c0c6;
+    border-color: #65c0c6;
+}
+
+.logout:focus, .logout:active, .logout:hover:enabled {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #003333 !important;
+    border-color: #003333 !important;
 }
 
 .content-hr > hr {
-    background-color: rgb(51,51,51);
+    background-color: #f27171;
+    /*background-color: rgb(51,51,51);*/
 }
 
 .menu-text > div {
@@ -116,4 +125,3 @@ body, li, p {
 .content-head {
     padding-right: 0px;
 }
-

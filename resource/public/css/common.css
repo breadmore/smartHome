@@ -28,6 +28,7 @@ body * {
 /******************Content Title*******************/
 .content {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .content-head {
@@ -38,6 +39,7 @@ body * {
 }
 
 .content-title {
+    color: #f27171;
     margin: auto;
     font-size: 24px;
     font-weight: 700;
@@ -110,8 +112,17 @@ body * {
 #dataTable td {
     padding: 10px;
     vertical-align: middle;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #deceb2;
     font-size: 10px;
+}
+
+#dataTable thead {
+    background-color: #ebeff5;
+    color: rgb(0,0,0);
+}
+
+#dataTable tbody .selected {
+    background-color: #fcf9f9;
 }
 
 /******************** DataTable Frame ***********************/
@@ -205,17 +216,46 @@ body * {
 
 }
 
-#dataTable thead {
-    background-color: rgb(89,89,89);
-    color: rgb(255,255,255);
-}
-
-.col-12 .btn {
+.btn-action {
     float: right;
     margin-left: 5px;
     margin-right: 5px;
-    background-color: #3498db;
-    border-color: #3498db;
+    background-color: #65c0c6;
+    border-color: #65c0c6;
     height: 31px;
     line-height: 1;
+}
+
+.btn-action:disabled {
+    background-color: #65c0c6;
+    border-color: #65c0c6;
+}
+
+.btn-action:focus, .btn-action:active, .btn-action:hover:enabled {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #003333 !important;
+    border-color: #003333 !important;
+}
+
+.page-link {
+    color: #003333;
+}
+
+
+.page-item.active .page-link {
+    background-color: #65c0c6;
+    border-color: #65c0c6;
+    /*color: #003333;*/
+}
+
+
+.page-item.active:focus, .page-item.active:active, .page-item.active:hover:enabled {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.page-link:focus, .page-link:active, .page-link:hover:enabled {
+    outline: none !important;
+    box-shadow: none !important;
 }

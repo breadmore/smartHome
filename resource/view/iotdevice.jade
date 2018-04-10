@@ -14,6 +14,23 @@ append title
     span.col-xl-2.content-title.no-padding IoT DEVICE
 
 block content
+    .col-12.no-padding
+        input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+        input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+        input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#addModal" data-toggle="modal")#addButton
+    table#dataTable.no-padding(style='width:100%;')
+        thead
+            tr
+                th(scope='cols') Gateway ID
+                th(scope='cols') Product ID
+                th(scope='cols') Device ID
+                th(scope='cols') Pre Shared Key
+                th(scope='cols') Object ID
+                th(scope='cols') Session ID
+                th(scope='cols') Type
+                th(scope='cols') Connected
+                th(scope='cols') Authenticate
+                th(scope='cols') Policy
     .modal.fade#modifyModal(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content
@@ -47,7 +64,7 @@ block content
                         input(type="number")#policy
                 .modal-footer
                     button.btn.btn-default(data-dismiss="modal") Cancel
-                    button.btn.btn-primary(type='button')#saveButton Save Change 
+                    button.btn.btn-primary(type='button')#saveButton Save Change
     .modal.fade#addModal(role="dialog")
         .modal-dialog
             .modal-content
@@ -74,20 +91,3 @@ block content
                 .modal-footer
                     button.modal-cancel(data-dismiss="modal") Cancel
                     button.modal-confirm(type='button')#addButton Add Device
-    .col-12.no-padding
-        input.btn.btn-primary(type='button', value='Delete')#deleteButton
-        input.btn.btn-primary(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
-        input.btn.btn-primary(type='button', value='Add' data-target="#addModal" data-toggle="modal")#addButton
-    table#dataTable.no-padding(style='width:100%;')
-        thead
-            tr
-                th(scope='cols') Gateway ID
-                th(scope='cols') Product ID
-                th(scope='cols') Device ID
-                th(scope='cols') Pre Shared Key
-                th(scope='cols') Object ID
-                th(scope='cols') Session ID
-                th(scope='cols') Type
-                th(scope='cols') Connected
-                th(scope='cols') Authenticate
-                th(scope='cols') Policy

@@ -128,7 +128,7 @@ $(function () {
             {data: "connect"},
             {data: "auth"},
             {data: "policy_id"}
-        ]
+        ],
         // "columnDefs": [{
         //     "searchable": false,
         //     "orderable": false,
