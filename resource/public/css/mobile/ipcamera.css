@@ -1,0 +1,57 @@
+.go-back {
+    background: lightgray;
+    border-radius: 15px;
+    height: 5rem;
+    font-size: 2.2rem;
+    width: 15rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.label- {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.label-name {
+    padding-left: 2rem;
+}
+
+
+.label-two {
+    font-size: 1.8rem;
+    padding-left: 2rem;
+}
+
+hr {
+    margin: 0px;
+    margin-top: 2rem;
+    background: black;
+}
+
+
+.camera-video {
+    margin-top: 2rem;
+    width: 100%;
+    height: 50rem;
+    background-size: 100% 50rem;
+    background-image: url("/image/ipcamera.png");
+}
+
+.dashboard-content {
+    padding: 0px;
+}
+
+.on-air {
+    color: white;
+    font-weight: bolder;
+    font-size: 2rem;
+    width: 10rem;
+    text-align: center;
+    background: rgb(255, 51, 102);
+}
+

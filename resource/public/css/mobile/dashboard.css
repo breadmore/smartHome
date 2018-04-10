@@ -25,14 +25,16 @@
 .dashboard-card {
     height: 16.5rem;
     font-size: 2rem;
+    /*font-weight: bolder;*/
     color: white;
     padding: 1.3rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    margin-bottom: 3rem;
 }
 
-.dashboard-card-title, .dashboard-card-location {
-    font-weight: bolder;
+.dashboard-card-title {
+    font-weight: 990;
 }
 
 .temp {
@@ -45,4 +47,149 @@
 
 .dashboard-content {
     padding: 1.5rem;
+    padding-top: 2.5rem;
+}
+
+.dashboard-card-value {
+    margin-top: 2rem;
+    text-align: right;
+    font-size: 4rem;
+    font-weight: 990;
+}
+
+.dashboard-card.home-security {
+    height: 44rem;
+    background-color: rgb(255, 51, 102);
+}
+
+.dashboard-card.ip-camera {
+    padding: 0px;
+    background: black;
+    background-image: url("/image/ipcamera.png");
+    background-size: 28rem 20.5rem;
+}
+
+.dashboard-card.gas-management {
+    color: rgb(255, 51, 102);
+    border: 1px solid rgb(255, 51, 102);
+}
+
+.dashboard-card.gas-management, .dashboard-card.ip-camera {
+    height: 20.5rem;
+}
+
+.ip-camera > .dashboard-card-title, .ip-camera > .dashboard-card-location {
+    background: rgba(33, 33, 33, 0.8);
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+}
+
+.ip-camera > .dashboard-card-location {
+    padding-top: 0px;
+    padding-bottom: 1rem;
+}
+
+.dashboard-card-value > .row > div:nth-child(1) {
+    padding-left: 1rem;
+    font-size: 2rem;
+    width: 15rem;
+    text-align: left;
+}
+
+.dashboard-card-value > .row > div:nth-child(2) {
+    padding-left: 1rem;
+    font-size: 2rem;
+    width: 11rem;
+}
+
+.center-hr {
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+    background: white;
+    height: 1rem;
+}
+.dashboard-card-location {
+    font-weight: 400;
+}
+
+.home-security > .dashboard-card-value , .gas-management > .dashboard-card-value {
+    margin-top: 1rem;
+    font-weight: 400;
+}
+
+/*여기가 스위치*/
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 10.2rem;
+    height: 2rem;
+    margin-top: 3px;
+    margin-right: 18px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.6rem;
+    width: 4.05rem;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input:checked + .slider {
+    background-color: rgb(46,204,113);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px rgb(46,204,113);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(92px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 16px;
+}
+
+.slider.round:before {
+    border-radius: 16px;
+}
+
+/*스위치 끝*/
+
+p {
+    margin: 0px;
+    height: 10px;
+    color: black;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.dashboard {
+    background-color: rgba(33, 33, 33, 0.8);
 }

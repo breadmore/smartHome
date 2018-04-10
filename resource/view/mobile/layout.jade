@@ -1,5 +1,6 @@
 doctype html
 
+
 html(lang='en')
     head
         script(src="/plugin/jquery/dist/jquery.js")
@@ -19,15 +20,14 @@ html(lang='en')
                     block right
             .mobile-body
                 block content
-
         .col-md-12.bottom-bar
             .row.text-center
-                .dashboard
+                .dashboard(onclick="location.href='/m/dashboard'")
                     img(src="/image/dashboardWhite.png")
                     .name Dashboard
-                .gateway
+                .gateway(onclick="location.href='/m/gateway'")
                     img(src="/image/gatewayWhite.png")
                     .name Gateway
-                .device
+                .device(onclick="location.href='/m/devices'")
                     img(src="/image/shareWhite.png")
                     .name Device
