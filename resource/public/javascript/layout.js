@@ -32,9 +32,9 @@ $(function () {
     } else if (para[3] == "security") {
         $(".security").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "account") {
-        $(".account").css("background-color", "rgb(52, 63, 75)");
+        $(".account").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "logger") {
-        $(".logger").css("background-color", "rgb(52, 63, 75)");
+        $(".logger").css("background-color", "rgb(90,153,157)");
     }
 
 
