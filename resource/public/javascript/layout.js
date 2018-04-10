@@ -12,6 +12,8 @@ $(function () {
             location.href = "/security";
         } else if ( name == "account") {
             location.href = "/account";
+        } else if ( name == "logger") {
+            location.href = "/logger";
         }
 
     })
@@ -31,6 +33,8 @@ $(function () {
         $(".security").css("background-color", "rgb(52, 63, 75)");
     } else if (para[3] == "account") {
         $(".account").css("background-color", "rgb(52, 63, 75)");
+    } else if (para[3] == "logger") {
+        $(".logger").css("background-color", "rgb(52, 63, 75)");
     }
 
 

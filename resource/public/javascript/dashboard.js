@@ -36,6 +36,7 @@ $(function () {
     var ctx2 = $("#myChart2");
 
     Chart.defaults.global.legend.display = false;
+
     var myChart2 = new Chart(ctx2, {
         type: 'line',
         data: {

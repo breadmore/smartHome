@@ -36,6 +36,10 @@ router.get('/account', function (req, res) {
     res.render('account');
 });
 
+router.get('/logger', function (req, res) {
+    res.render('logger');
+});
+
 
 
 router.get('/m', function (req, res) {
@@ -66,11 +70,15 @@ router.get('/m/account', function (req, res) {
     res.render('mobile/account');
 });
 
-router.get('/m/bot', function (req, res) {
-    res.render('mobile/bottom');
+router.get('/m/ipcamera', function (req, res) {
+    res.render('mobile/ipcamera');
 });
 
+router.get('/m/control', function (req, res) {
+    res.render('mobile/control');
+});
 
+/////////////////////////////////////////////////
 
 router.get('/new', function (req, res) {
     res.render('new/index');
@@ -100,6 +108,9 @@ router.get('/new/account', function (req, res) {
     res.render('new/account');
 });
 
+router.get('/chart', function (req, res) {
+    res.render('chart');
+});
 
 module.exports = router;
 
