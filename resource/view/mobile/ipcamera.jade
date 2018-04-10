@@ -1,0 +1,35 @@
+extends layout
+
+append css
+    link(href='/css/mobile/dashboard.css' rel='stylesheet')
+    link(href='/css/mobile/ipcamera.css' rel='stylesheet')
+
+append left
+    .col-md-6.title.text-left.no-padding DASHBOARD
+
+append right
+    .col-md-6.title.text-right.no-padding(onclick="location.href='/m'")
+        img(src="/image/exit.png").exit-img
+
+block content
+    .row.col-12.text-center.dashboard-menu.no-gutters
+        .col-md-6.monitoring(onclick="location.href='/m/dashboard'") Monitoring
+        .col-md-6.service-control(onclick="location.href='/m/control'") Service Control
+    .row.col-12.lane.no-padding
+        .col-md-6.left-lane.no-padding
+        .col-md-6.right-lane.no-padding
+    .col-md-12.dashboard-content
+            button(onclick="location.href='/m/dashboard'").go-back < Go Back
+            .row.col-md-12.label-
+                .col-md-3.label-name IP Camera
+                .col-md-9
+                    hr
+            .row.col-md-12.label-two
+                .col-md-4 거실 001
+                .row.col-md-8
+                    label.switch
+                        input(type="checkbox" checked=1)
+                        div.slider.round
+                    p ON
+            .camera-video
+                .on-air On Air

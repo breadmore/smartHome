@@ -38,6 +38,38 @@ router.get('/account', function (req, res) {
 
 
 
+router.get('/m', function (req, res) {
+    res.render('mobile/index');
+});
+
+router.get('/m/dashboard', function (req, res) {
+    res.render('mobile/dashboard');
+});
+
+router.get('/m/regist', function (req, res) {
+    res.render('mobile/regist');
+});
+
+router.get('/m/gateway', function (req, res) {
+    res.render('mobile/gateway');
+});
+
+router.get('/m/devices', function (req, res) {
+    res.render('mobile/device');
+});
+
+router.get('/m/security', function (req, res) {
+    res.render('mobile/security');
+});
+
+router.get('/m/account', function (req, res) {
+    res.render('mobile/account');
+});
+
+router.get('/m/bot', function (req, res) {
+    res.render('mobile/bottom');
+});
+
 
 
 router.get('/new', function (req, res) {
@@ -66,35 +98,6 @@ router.get('/new/security', function (req, res) {
 
 router.get('/new/account', function (req, res) {
     res.render('new/account');
-});
-
-
-// router.get('/new2/dashboard', function (req, res) {
-//     res.render('new/dashboard_new');
-// });
-//
-// router.get('/new2/iotdevices', function (req, res) {
-//     res.render('new/iotdevice_new');
-// });
-//
-// router.get('/new2/gateway', function (req, res) {
-//     res.render('new/gateway_new');
-// });
-//
-// router.get('/new2/security', function (req, res) {
-//     res.render('new/security_new');
-// });
-
-router.get('/new2/layout', function (req, res) {
-    res.render('new2/layout');
-});
-
-router.get('/new2/dashboard', function (req, res) {
-    res.render('new2/dashboard');
-});
-
-router.get('/new2/', function (req, res) {
-    res.render('new2/layout');
 });
 
 

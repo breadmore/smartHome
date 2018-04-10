@@ -1,0 +1,35 @@
+.bottom-bar {
+    display: none;
+}
+
+.input-group {
+    width: 96%;
+    margin-bottom: 3rem;
+    height: 5.2rem;
+}
+
+.mobile-body {
+    padding: 0px;
+}
+
+/*.form-control {*/
+    /*width: 86%;*/
+/*}*/
+
+.login-body {
+    color: white;
+}
+
+.logo-body-title {
+    font-weight: 990;
+}
+
+.confirm-btn {
+    margin-left: 1rem;
+    width: 96%;
+    height: 6rem;
+    font-weight: 990;
+    margin-top: 1rem;
+    background: rgb(0, 135, 135);
+    border-radius: 15px;
+}

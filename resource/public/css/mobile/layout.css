@@ -1,0 +1,164 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+
+body, li, p {
+    font-family: 'Nanum Gothic', sans-serif;
+/important;
+    color: white;
+    height: 100%;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.top- {
+    height: 50%;
+    padding-bottom: 10rem;
+    /*margin-bottom: 10rem;*/
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 990;
+}
+
+.top-bar {
+    height: 6.8rem;
+    background-color: rgb(0, 51, 51);
+    padding: 20px;
+    padding-top: 12px;
+    border-bottom: 1px solid darkgray;
+    margin: 0px;
+}
+
+.top-bar > div {
+    margin: 0px;
+}
+
+.login-body {
+    background-color: rgb(0, 51, 51);
+    padding: 10rem;
+    padding-top: 11.5rem;
+    padding-bottom: 11.5rem;
+    text-align: center;
+}
+
+.logo-img {
+    width: 20rem;
+    height: 13rem;
+}
+
+.logo-body-title {
+    margin-top: 3rem;
+    font-size: 4rem;
+    font-weight: bolder;
+}
+
+.logo-body-subtitle {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    font-weight: bolder;
+}
+
+
+
+.login-foot {
+    text-align: center;
+    padding: 3rem;
+    padding-top: 6rem;
+    color: black;
+}
+
+.input-group {
+    border-radius: 8px;
+    border: 1px solid darkgray;
+    width: 86%;
+    margin-bottom: 1.5rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.input-img {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    background-color: rgb(237, 237, 237);
+    width: 6rem;
+    height: 6rem;
+    text-align: center;
+}
+
+.input-img > img {
+    margin-top: 6px;
+    width: 5rem;
+    height: 5rem;
+}
+
+.form-control {
+    font-size: 2.5rem;
+    width: 100%;
+    height: 6rem;
+    padding-left: 25px;
+}
+
+.confirm-btn {
+    margin-top: 3rem;
+    background-color: rgb(52, 152, 219);
+    width: 86%;
+    font-size: 2.5rem;
+    color: white;
+    height: 6rem;
+    border: 0px;
+    border-radius: 10px;
+}
+
+.exit-img {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.bottom-bar {
+    background-color: rgb(77, 77, 77);
+    height: 10rem;
+    text-align: center;
+    font-size: 1.7rem;
+    display: inline;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*margin-top: 20rem;*/
+    text-align: center;
+    margin-bottom: -1px;
+}
+
+.bottom-bar > div {
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+}
+
+.bottom-bar > div > div {
+    width: 16rem;
+
+}
+
+.bottom-bar img {
+    height: 100%;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.name {
+    margin-bottom: 1rem;
+}
+
+
+
+.mobile-body {
+    padding: 2rem;
+    padding-bottom: 1rem;
+    color: black;
+}
+

@@ -1,0 +1,11 @@
+.content-title {
+    width: 11rem;
+}
+
+.content-ip {
+    width: 16rem;
+}
+
+.gateway {
+    background-color: rgba(33, 33, 33, 0.8);
+}

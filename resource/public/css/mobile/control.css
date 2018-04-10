@@ -1,0 +1,49 @@
+.left-lane {
+    background-color: white;
+}
+
+.right-lane {
+    padding: 0px;
+    background-color: rgb(0, 135, 135);
+    height: 0.8rem;
+}
+
+.label- {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.label-name {
+    padding-left: 2rem;
+}
+
+
+hr {
+    margin: 0px;
+    margin-top: 2rem;
+    background: black;
+}
+
+.dashboard-content {
+    padding-top: 1rem;
+}
+
+.service-list {
+    font-size: 1.9rem;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 2rem;
+}
+
+.label-name {
+    margin: 0px;
+    padding: 0px;
+}
+
+.label-.device {
+    margin-top: 6rem;
+}

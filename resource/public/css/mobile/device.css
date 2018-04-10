@@ -1,0 +1,56 @@
+.device-card-body-title-right {
+    background-color: rgb(255, 51, 102);
+    height: 3rem;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}
+
+.device-card-body-content {
+    padding-left: 0.9rem;
+}
+
+.content-connect {
+    width: 12rem;
+}
+
+.content-connect-value {
+    width: 7rem;
+}
+
+.content-auth {
+    width: 15rem;
+}
+
+.content-auth-value {
+    width: 7rem;
+}
+
+.content-policy {
+    width: 8rem;
+}
+
+.load-more {
+    margin: 0.5rem;
+    margin-left: 1rem;
+    width: 96%;
+    height: 4rem;
+    background-color: rgb(0, 135, 135);
+    font-size: 2.5rem;
+    outline: 0px;
+    border: 1px solid rgb(0, 135, 135);
+    border-radius: 5px;
+}
+
+.smart-light {
+    background-color: rgb(243, 156, 18);
+}
+
+.temperature {
+    background-color: rgb(52, 152, 219);
+}
+
+.device {
+    background-color: rgba(33, 33, 33, 0.8);
+}

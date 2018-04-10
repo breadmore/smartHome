@@ -1,0 +1,61 @@
+extends layout
+
+append css
+    link(href='/css/mobile/dashboard.css' rel='stylesheet')
+    link(href='/css/mobile/control.css' rel='stylesheet')
+
+append left
+    .col-md-6.title.text-left.no-padding DASHBOARD
+
+append right
+    .col-md-6.title.text-right.no-padding(onclick="location.href='/m'")
+        img(src="/image/exit.png").exit-img
+
+block content
+    .row.col-12.text-center.dashboard-menu.no-gutters
+        .col-md-6.monitoring(onclick="location.href='/m/dashboard'") Monitoring
+        .col-md-6.service-control(onclick="location.href='/m/control'") Service Control
+    .row.col-12.lane.no-padding
+        .col-md-6.left-lane.no-padding
+        .col-md-6.right-lane.no-padding
+    .col-md-12.dashboard-content
+        .row.col-md-12.label-
+            .col-md-6.label-name Home Security Service
+            .col-md-6.no-padding
+                hr
+        .row.col-md-12.service-list
+            .col-md-5.no-padding Occupied Mode
+            .col-md-4.no-padding 거실
+            .row.col-md-3.no-padding
+                label.switch
+                    input(type="checkbox" checked=1)
+                    div.slider.round
+                p ON
+        .row.col-md-12.label-.device
+            .col-md-4.label-name Device Control
+            .col-md-8.no-padding
+                hr
+        .row.col-md-12.service-list
+            .col-md-5.no-padding Smart Light
+            .col-md-4.no-padding 거실 001
+            .row.col-md-3.no-padding
+                label.switch
+                    input(type="checkbox" checked=1)
+                    div.slider.round
+                p ON
+        .row.col-md-12.service-list
+            .col-md-5.no-padding Power Outlet
+            .col-md-4.no-padding 안방 001
+            .row.col-md-3.no-padding
+                label.switch
+                    input(type="checkbox" checked=1)
+                    div.slider.round
+                p ON
+        .row.col-md-12.service-list
+            .col-md-5.no-padding IP Camera
+            .col-md-4.no-padding 거실 001
+            .row.col-md-3.no-padding
+                label.switch
+                    input(type="checkbox" checked=1)
+                    div.slider.round
+                p ON

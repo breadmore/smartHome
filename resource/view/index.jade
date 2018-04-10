@@ -2,34 +2,62 @@ doctype html
 
 html(lang='en')
     head
-        script(src='/plugin/jquery/dist/jquery.js' type='text/javascript')
+        script(src="/plugin/jquery/dist/jquery.js")
+        script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
+        link(rel='stylesheet' href="/plugin/bootstrap/dist/css/bootstrap.css")
+        //script(src='/plugin/jquery/dist/jquery.js' type='text/javascript')
         link(href='./css/index.css' rel='stylesheet')
         title SecureHome
         script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
-        script(src='/javascript/index.js' type='text/javascript')
+        //script(src='/javascript/index.js' type='text/javascript')
 
 
     body
-        .title
-            span
-                img(src="/image/SIoTLogo.png")
-            span.title1 SecureHome
-            span.title2 ETRI SECURE GATEWAY SOLUTION
-        .sign_in
-            .sign_in_title
-                .text SIGN IN
-                .button Registration
-            .sign_in_content
-                img(src="/image/login.png")
-                form(action='/api/login', method='post')
-                    .id
-                        input(type="text" name="username" placeholder="Email or Username")
-                    .password
-                        input(type="password" name="password" placeholder="Password")
-                    .remember_me
-                        input(type="checkbox")
-                        span Remember me
-                        span.alert #{error}
-                    .submit
-                        input(type="submit" value="Confirm")
-        .company All rights reserved in Class Act Co., Ltd
+        //.title
+        //    span
+        //        img(src="/image/SIoTLogo.png")
+        //    span.title1 SecureHome
+        //    span.title2 ETRI SECURE GATEWAY SOLUTION
+        //.sign_in
+        //    .sign_in_title
+        //        .text SIGN IN
+        //        .button Registration
+        //    .sign_in_content
+        //        img(src="/image/login.png")
+        //        form(action='/api/login', method='post')
+        //            .id
+        //                input(type="text" name="username" placeholder="Email or Username")
+        //            .password
+        //                input(type="password" name="password" placeholder="Password")
+        //            .remember_me
+        //                input(type="checkbox")
+        //                span Remember me
+        //                span.alert #{error}
+        //            .submit
+        //                input(type="submit" value="Confirm")
+        //.company All rights reserved in Class Act Co., Ltd
+        .container
+            .row.col-12
+                .col-2
+                .col-8
+                    .row.top-bar.text-center
+                        img(src="/image/SIoTLogo.png").logo-img
+                        .title SecureHome
+                        .subtitle ETRI SECURE GATEWAY SOLUTION
+                    .login-form
+                        .login-form-header.col-12
+                            .header-sign-in SIGN IN
+                            .header-regist.text-center
+                                button Registration
+                        .login-form-body
+                            img(src="/image/login.png").login-img
+                            .email
+                                input(type="text" placeholder="Email or Username").form-control
+                            .password
+                                input(type="password" placeholder="Password").form-control
+                            .remember-me
+                                input(type="checkbox").form-check-input
+                                | Remember me
+                            button.confirm Confirm
+
+                .col-2

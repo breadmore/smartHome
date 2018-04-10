@@ -1,0 +1,87 @@
+extends layout
+
+append css
+    link(href='/css/mobile/device.css' rel='stylesheet')
+
+append left
+    .col-md-6.title.text-left.no-padding DEVICE
+
+append right
+    .col-md-6.title.text-right.no-padding(onclick="location.href='/m'")
+        img(src="/image/exit.png").exit-img
+
+block content
+    .row.select-list
+        select.device-section
+            option SORT BY Device ID
+            option SORT BY Device ID
+        .input-group
+            span.input-img
+                img(src="/image/glass.png")
+            input(type="password").form-control
+    .device-card
+        .col-12.device-card-top
+            .col-4.device-left
+        .row.col-12.device-card-body
+            .col-7.device-card-body-title Device 65934
+            .col-5.device-card-body-title-right Gas Detector
+            .row.device-card-body-content
+                .content-connect Connected
+                .content-connect-value NAN
+                .content-auth Authentication
+                .content-auth-value NAN
+                .content-policy Policy
+                .content-policy-value NAN
+    .device-card
+        .col-12.device-card-top
+            .col-4.device-left
+        .row.col-12.device-card-body
+            .col-7.device-card-body-title Device 65935
+            .col-5.device-card-body-title-right Gas Detector
+            .row.device-card-body-content
+                .content-connect Connected
+                .content-connect-value OK
+                .content-auth Authentication
+                .content-auth-value OK
+                .content-policy Policy
+                .content-policy-value CRUD
+    .device-card
+        .col-12.device-card-top
+            .col-4.device-left
+        .row.col-12.device-card-body
+            .col-7.device-card-body-title Device 65936
+            .col-5.device-card-body-title-right.smart-light Smart Light
+            .row.device-card-body-content
+                .content-connect Connected
+                .content-connect-value OK
+                .content-auth Authentication
+                .content-auth-value OK
+                .content-policy Policy
+                .content-policy-value CRUD
+    .device-card
+        .col-12.device-card-top
+            .col-4.device-left
+        .row.col-12.device-card-body
+            .col-7.device-card-body-title Device 65937
+            .col-5.device-card-body-title-right.smart-light Smart Light
+            .row.device-card-body-content
+                .content-connect Connected
+                .content-connect-value OK
+                .content-auth Authentication
+                .content-auth-value OK
+                .content-policy Policy
+                .content-policy-value CRUD
+    .device-card
+        .col-12.device-card-top
+            .col-4.device-left
+        .row.col-12.device-card-body
+            .col-7.device-card-body-title Device 65938
+            .col-5.device-card-body-title-right.temperature Temperature
+            .row.device-card-body-content
+                .content-connect Connected
+                .content-connect-value 001
+                .content-auth Authentication
+                .content-auth-value OK
+                .content-policy Policy
+                .content-policy-value CRUD
+    button.load-more LOAD MORE ITEMS

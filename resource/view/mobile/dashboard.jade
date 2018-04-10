@@ -1,0 +1,75 @@
+extends layout
+
+append css
+    link(href='/css/mobile/dashboard.css' rel='stylesheet')
+
+append left
+    .col-md-6.title.text-left.no-padding DASHBOARD
+
+append right
+    .col-md-6.title.text-right.no-padding(onclick="location.href='/m'")
+        img(src="/image/exit.png").exit-img
+
+block content
+    .row.col-12.text-center.dashboard-menu.no-gutters
+        .col-md-6.monitoring(onclick="location.href='/m/dashboard'") Monitoring
+        .col-md-6.service-control(onclick="location.href='/m/control'") Service Control
+    .row.col-12.lane.no-padding
+        .col-md-6.left-lane.no-padding
+        .col-md-6.right-lane.no-padding
+    .col-md-12.dashboard-content
+        .row.no-gutters
+            .col-md-6
+                .dashboard-card.temp
+                    .dashboard-card-title Temperature / Humidity
+                    .dashboard-card-location 안방 001
+                    .dashboard-card-value 23℃ / 30%
+            .col-md-6
+                .dashboard-card.lumi
+                    .dashboard-card-title Luminance
+                    .dashboard-card-location 안방 001
+                    .dashboard-card-value 100 Lux
+        .row.no-gutters
+            .col-md-6
+                .dashboard-card.home-security
+                    .dashboard-card-title Home Security
+                    .dashboard-card-location 거실 001
+                    .dashboard-card-value
+                        .row.siren
+                            .name Siren
+                            .value Triggered
+                        .row.window
+                            .name Window
+                            .value Opened
+                        .row.human
+                            .name Human
+                            .value Detected
+                    .col-md-12.center-hr
+                    .dashboard-card-location 거실 002
+                    .dashboard-card-value
+                        .row.siren
+                            .name Siren
+                            .value Triggered
+                        .row.window
+                            .name Window
+                            .value Opened
+                        .row.human
+                            .name Human
+                            .value Detected
+            .col-md-6
+                .dashboard-card.ip-camera(onclick="location.href='/m/ipcamera'")
+                    .dashboard-card-title IP Camera
+                    .dashboard-card-location 거실 001
+                .dashboard-card.gas-management
+                    .dashboard-card-title Gas Management
+                    .dashboard-card-location 주방 001
+                    .dashboard-card-value
+                        .row.siren
+                            .dash-name Siren
+                            .dash-value Triggered
+                        .row.window
+                            .dash-name Window
+                            .dash-value Opened
+                        .row.human
+                            .dash-name Human
+                            .dash-value Detected
