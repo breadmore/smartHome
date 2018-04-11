@@ -14,6 +14,14 @@ $(function () {
     });
 
     /**
+     * dom example :  https://datatables.net/reference/option/dom
+     *
+     */
+    var logTable = $('#logTable').DataTable({
+        dom : "rtp"
+    });
+
+    /**
      * Select One Table Row Function
      */
     $('#dataTable tbody').on('click', 'tr', function () {
@@ -27,6 +35,8 @@ $(function () {
             enableButton(true);
         }
     });
+
+
 
     /**
      * Delete Selected Row.

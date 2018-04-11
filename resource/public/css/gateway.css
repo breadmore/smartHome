@@ -71,10 +71,6 @@ table td {
     font-size: 10px;
 }
 
-table th {
-    border-bottom: 1px solid #deceb2;
-}
-
 table thead {
     background-color: #ebeff5;
     color: rgb(0,0,0);
