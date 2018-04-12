@@ -94,9 +94,28 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
   }
 });
 
+///////////////////////
 
 
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host  : 'localhost',
+    user  : 'rtst',
+    password  : 'rtst0653',
+    port  : 3306,
+    database : 'test'
+});
 
+connection.connect();
+
+connection.query('SELECT * FROM table_name', function(err, rows, fields) {
+    if (!err)
+        console.log('The solution is: ', rows);
+    else
+        console.log('Error while performing Query.', err);
+});
+
+connection.end();
 
 
 
