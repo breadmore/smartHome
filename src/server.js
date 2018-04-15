@@ -81,7 +81,7 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 
     // sync process creating table.
     db.serialize(() => {
-      let init_database = require('./db/init_database')
+      let init_database = require('./db/old/init_database')
       db.run(init_database.initDevice());
       db.run(init_database.initGateway());
       db.run(init_database.initPolicy());
@@ -97,27 +97,27 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 ///////////////////////
 
 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host  : 'localhost',
-    user  : 'rtst',
-    password  : 'rtst0653',
-    port  : 3306,
-    database : 'test'
-});
-
-connection.connect();
-
-connection.query('SELECT * FROM table_name', function(err, rows, fields) {
-    if (!err)
-        console.log('The solution is: ', rows);
-    else
-        console.log('Error while performing Query.', err);
-});
-
-connection.end();
-
-
+// var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//     host  : '10.0.0.24',
+//     user  : 'rtst',
+//     password  : 'rtst0653',
+//     port  : 3306,
+//     database : 'test'
+// });
+//
+// connection.connect();
+//
+// connection.query('SELECT * FROM actions', function(err, rows, fields) {
+//     if (!err) {
+//         console.log('The solution is: ', rows);
+//         console.log('The solution is: ', fields);
+//     }
+//     else
+//         console.log('Error while performing Query.', err);
+// });
+//
+// connection.end();
 
 // db.serialize(() => {
 //   db.all('SELECT * FROM device', (err, rows) => {
@@ -131,6 +131,23 @@ connection.end();
 //   console.log(row);
 // });
 // });
+
+/**
+ * Database Connection using sequelize
+ *
+ */
+//
+// const Sequelize = require('sequelize');
+// const sequelize = new Sequelize('mysql://classact:classact!@10.0.0.24:3306/test');
+// sequelize.authenticate()
+//     .then(() => {
+//     console.log('Connection Successful');
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     });
+
+
 
 module.exports.db = db;
 
@@ -176,6 +193,7 @@ var httpServer = use_https
 var io = socket(httpServer);
 exports.clientSocket = function (url, data) {
   io.sockets.emit(url, data);
+
 };
 module.exports.io = io;
 io.use(function (socket, next) {

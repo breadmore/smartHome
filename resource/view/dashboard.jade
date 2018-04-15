@@ -4,7 +4,11 @@ append head
     link(rel="stylesheet" href="/css/dashboard.css")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
+    script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
     script(src="/javascript/dashboard.js")
+    //link(href='/plugin/bootstrap-toggle/css/bootstrap-toggle.min.css', rel='stylesheet')
+    //script(src='/plugin/bootstrap-toggle/js/bootstrap-toggle.min.js')
+
 
     //script(type='text/javascript').
     //    var mobilecheck = function () {
@@ -41,13 +45,13 @@ block content
                     .row
                         span
                             img(src="/image/temperatureWhite.png").card-img
-                        span 23%
+                        span#temperatureValue
                         span
                             canvas#myChart
                     .row
                         span
                             img(src="/image/humidityWhite.png").card-img
-                        span 50%
+                        span#humidityValue
                         span
                             canvas#myChart2
 
@@ -66,7 +70,7 @@ block content
                             .start_value 0
                             .finish_value 100
                         .lux
-                            span.lux_value 100
+                            span.lux_value#luxValue 100
                             span Lux
         .card.device-monitor.home-security-1
             .card-body
@@ -84,12 +88,12 @@ block content
                         span
                             img(src="/image/window.png").card-img
                         span Window
-                        span Opened
+                        span#legacyWindow Opened
                     div
                         span
                             img(src="/image/human.png").card-img
                         span Human
-                        span Detected
+                        span#legacyHuman Detected
         .card.device-monitor.home-security-2
             .card-body
                 .card-title
@@ -106,12 +110,12 @@ block content
                         span
                             img(src="/image/window.png").card-img
                         span Window
-                        span No event
+                        span#xiaomiWindow No event
                     div
                         span
                             img(src="/image/human.png").card-img
                         span Human
-                        span No event
+                        span#xiaomiHuman No event
         .card.device-monitor.ip-camera
             .card-body
                 .card-title
@@ -136,12 +140,12 @@ block content
                         span
                             img(src="/image/leakage.png").card-img
                         span Leakage
-                        span Detected
+                        span#gasDetector Detected
                     div
                         span
                             img(src="/image/gasvalue.png").card-img
                         span Gas Valve
-                        span Blocked
+                        span#gasBlocker Blocked
 
     .content-head-2 Service / Device control
     .row.card-box
@@ -188,8 +192,8 @@ block content
                         .device-name Power Outlet
                         .device-number 001
                         label.switch
-                            input(type="checkbox")
-                            div.slider.round
+                            input#xiaomiPower(type="checkbox")
+                            div.slider.round#xiaomiPowerController
                         p ON
                     .row.device-control-content
                         img(src="/image/camera.png")

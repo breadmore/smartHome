@@ -50,7 +50,7 @@
         "type": "mqtt-broker",
         "z": "",
         "name": "",
-        "broker": "192.168.0.12",
+        "broker": "10.0.0.22",
         "port": "1883",
         "clientid": "",
         "usetls": false,
@@ -69,7 +69,7 @@
         "type": "xiaomi-configurator",
         "z": "",
         "name": "gateway",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "sid": "7811dce16bc4",
         "deviceList": [
             {
@@ -475,7 +475,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 80,
         "y": 220,
         "wires": [
@@ -511,14 +511,15 @@
         "type": "xiaomi-magnet",
         "z": "7441ed9a.98d394",
         "gateway": "ba1d673a.6332e8",
-        "name": "",
+        "name": "windows",
         "sid": "158d000209079a",
-        "x": 340,
+        "x": 320,
         "y": 160,
         "wires": [
             [
                 "e332ffe3.ceafd",
-                "4b6a5b9d.9aa974"
+                "4b6a5b9d.9aa974",
+                "bfd4fdae.04906"
             ]
         ]
     },
@@ -586,7 +587,8 @@
         "wires": [
             [
                 "e332ffe3.ceafd",
-                "4b6a5b9d.9aa974"
+                "4b6a5b9d.9aa974",
+                "bfd4fdae.04906"
             ]
         ]
     },
@@ -595,7 +597,7 @@
         "type": "debug",
         "z": "7441ed9a.98d394",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -664,8 +666,8 @@
         "wires": [
             [
                 "32f11830.20e2e8",
-                "73467d7c.f60714",
-                "b79db334.23f75"
+                "b79db334.23f75",
+                "73467d7c.f60714"
             ]
         ]
     },
@@ -702,18 +704,18 @@
         "y": 1680,
         "wires": [
             [
-                "e75064bb.86cbd8",
                 "b95a3f90.e9e85",
-                "d495de03.6105a",
-                "32b9d1e6.29a80e",
-                "9565688f.3ef7a8",
-                "d9681417.f7b258",
                 "c1d683cf.9eef4",
                 "29da16f3.55e5fa",
                 "d7909c35.6e196",
                 "b80129d7.2b0d18",
                 "96eb3f6f.a10e9",
-                "988f6c6f.46a13"
+                "988f6c6f.46a13",
+                "32b9d1e6.29a80e",
+                "d495de03.6105a",
+                "e75064bb.86cbd8",
+                "9565688f.3ef7a8",
+                "d9681417.f7b258"
             ]
         ]
     },
@@ -869,7 +871,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 1220,
         "y": 1760,
         "wires": []
@@ -1011,7 +1013,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 60,
         "y": 840,
         "wires": [
@@ -1094,18 +1096,6 @@
         ]
     },
     {
-        "id": "c920a52e.78ec18",
-        "type": "debug",
-        "z": "7441ed9a.98d394",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 970,
-        "y": 980,
-        "wires": []
-    },
-    {
         "id": "ab33a887.87ab18",
         "type": "xiaomi-actions on",
         "z": "7441ed9a.98d394",
@@ -1124,7 +1114,7 @@
         "z": "7441ed9a.98d394",
         "name": "todo: get device sid",
         "info": "",
-        "x": 670,
+        "x": 690,
         "y": 780,
         "wires": []
     },
@@ -1227,7 +1217,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 1000,
         "y": 840,
         "wires": []
@@ -1280,8 +1270,8 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
-        "x": 380,
+        "ip": "10.1.169.92",
+        "x": 360,
         "y": 540,
         "wires": []
     },
@@ -1316,20 +1306,6 @@
         "wires": []
     },
     {
-        "id": "d43665f2.c1b9c8",
-        "type": "debug",
-        "z": "7441ed9a.98d394",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 510,
-        "y": 480,
-        "wires": []
-    },
-    {
         "id": "7f570267.f3fc7c",
         "type": "xiaomi-motion",
         "z": "7441ed9a.98d394",
@@ -1351,7 +1327,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 80,
         "y": 1040,
         "wires": [
@@ -1377,20 +1353,6 @@
         ]
     },
     {
-        "id": "53ecd754.8a4598",
-        "type": "debug",
-        "z": "7441ed9a.98d394",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 430,
-        "y": 1100,
-        "wires": []
-    },
-    {
         "id": "bc313ebf.19e56",
         "type": "xiaomi-actions gateway_sound",
         "z": "7441ed9a.98d394",
@@ -1412,7 +1374,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 1340,
         "y": 1140,
         "wires": []
@@ -1486,7 +1448,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 760,
         "y": 1040,
         "wires": []
@@ -1510,7 +1472,7 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
+        "ip": "10.1.169.92",
         "x": 80,
         "y": 1320,
         "wires": [
@@ -1545,8 +1507,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 540,
-        "y": 600,
+        "x": 1100,
+        "y": 540,
         "wires": [
             [
                 "64a8437d.7986cc"
@@ -1559,9 +1521,9 @@
         "z": "7441ed9a.98d394",
         "name": "gateway",
         "gateway": "ba1d673a.6332e8",
-        "ip": "10.1.0.77",
-        "x": 960,
-        "y": 600,
+        "ip": "10.1.169.92",
+        "x": 1420,
+        "y": 540,
         "wires": []
     },
     {
@@ -1572,8 +1534,8 @@
         "func": "\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 730,
-        "y": 600,
+        "x": 1230,
+        "y": 540,
         "wires": [
             [
                 "793ec33b.966f3c"
@@ -1730,8 +1692,8 @@
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 1130,
-        "y": 480,
+        "x": 1250,
+        "y": 560,
         "wires": []
     },
     {
@@ -1746,7 +1708,6 @@
         "y": 480,
         "wires": [
             [
-                "d34aa2a5.a2acb",
                 "50ecb0d2.e15ec"
             ]
         ]
@@ -1989,8 +1950,7 @@
         "y": 560,
         "wires": [
             [
-                "d34aa2a5.a2acb",
-                "50ecb0d2.e15ec"
+                "947c0665.8c3118"
             ]
         ]
     },
@@ -2001,7 +1961,7 @@
         "name": "조도(기기->서버)",
         "info": "",
         "x": 620,
-        "y": 1320,
+        "y": 660,
         "wires": []
     },
     {
@@ -2029,7 +1989,7 @@
         "repair": false,
         "outputs": 2,
         "x": 770,
-        "y": 1380,
+        "y": 720,
         "wires": [
             [
                 "87e9b956.1cb308"
@@ -2049,8 +2009,8 @@
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 1170,
-        "y": 1380,
+        "x": 1270,
+        "y": 700,
         "wires": []
     },
     {
@@ -2061,8 +2021,8 @@
         "func": "var temp = msg.payload;\nmsg.payload = temp.substring(1);\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
-        "x": 960,
-        "y": 1360,
+        "x": 1000,
+        "y": 700,
         "wires": [
             [
                 "11c3cd8b.b2a172"
@@ -2078,7 +2038,7 @@
         "qos": "2",
         "broker": "965972a.373469",
         "x": 630,
-        "y": 1380,
+        "y": 720,
         "wires": [
             [
                 "24370886.7cda88",
@@ -2094,8 +2054,8 @@
         "func": "var temp = msg.payload;\nmsg.payload = temp.substring(1);\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
-        "x": 970,
-        "y": 1402,
+        "x": 1010,
+        "y": 740,
         "wires": [
             [
                 "11c3cd8b.b2a172"
@@ -2121,8 +2081,8 @@
         "qos": "",
         "retain": "",
         "broker": "965972a.373469",
-        "x": 830,
-        "y": 1580,
+        "x": 810,
+        "y": 1600,
         "wires": []
     },
     {
@@ -2131,8 +2091,8 @@
         "z": "943f007.ccb33",
         "name": "가스 탐지기",
         "info": "",
-        "x": 700,
-        "y": 680,
+        "x": 660,
+        "y": 1200,
         "wires": []
     },
     {
@@ -2143,8 +2103,8 @@
         "topic": "/gas",
         "qos": "2",
         "broker": "965972a.373469",
-        "x": 610,
-        "y": 760,
+        "x": 570,
+        "y": 1280,
         "wires": [
             [
                 "df3b378d.27cca8",
@@ -2185,8 +2145,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 4,
-        "x": 750,
-        "y": 760,
+        "x": 710,
+        "y": 1280,
         "wires": [
             [
                 "a7baec7c.73e69"
@@ -2210,8 +2170,8 @@
         "active": false,
         "console": "false",
         "complete": "false",
-        "x": 1230,
-        "y": 760,
+        "x": 1190,
+        "y": 1280,
         "wires": []
     },
     {
@@ -2233,8 +2193,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 960,
-        "y": 700,
+        "x": 920,
+        "y": 1220,
         "wires": [
             [
                 "ba1c78cd.a0b748"
@@ -2260,8 +2220,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 950,
-        "y": 740,
+        "x": 910,
+        "y": 1260,
         "wires": [
             [
                 "ba1c78cd.a0b748"
@@ -2287,8 +2247,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 960,
-        "y": 780,
+        "x": 920,
+        "y": 1300,
         "wires": [
             [
                 "ba1c78cd.a0b748"
@@ -2314,8 +2274,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 950,
-        "y": 820,
+        "x": 910,
+        "y": 1340,
         "wires": [
             [
                 "ba1c78cd.a0b748"
@@ -2556,8 +2516,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 700,
+        "x": 70,
+        "y": 1220,
         "wires": [
             [
                 "8ae3adb4.4bf04"
@@ -2576,8 +2536,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 740,
+        "x": 70,
+        "y": 1260,
         "wires": [
             [
                 "8ae3adb4.4bf04"
@@ -2596,8 +2556,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 780,
+        "x": 70,
+        "y": 1300,
         "wires": [
             [
                 "8ae3adb4.4bf04"
@@ -2616,8 +2576,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 820,
+        "x": 70,
+        "y": 1340,
         "wires": [
             [
                 "8ae3adb4.4bf04"
@@ -2633,8 +2593,8 @@
         "qos": "",
         "retain": "",
         "broker": "965972a.373469",
-        "x": 270,
-        "y": 760,
+        "x": 230,
+        "y": 1280,
         "wires": []
     },
     {
@@ -2663,8 +2623,8 @@
         "z": "943f007.ccb33",
         "name": "gas dummy",
         "info": "",
-        "x": 290,
-        "y": 720,
+        "x": 250,
+        "y": 1240,
         "wires": []
     },
     {
@@ -2726,7 +2686,7 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "localhost:1880/api/v1/demo/legacy/detect",
+        "url": "localhost:1880/api/v1/states/detect",
         "tls": "",
         "x": 770,
         "y": 340,
@@ -2741,7 +2701,7 @@
         "type": "debug",
         "z": "943f007.ccb33",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2757,10 +2717,10 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "localhost:1880/api/v1/demo/legacy/temhum",
+        "url": "localhost:1880/api/v1/environments/temperature",
         "tls": "",
-        "x": 1130,
-        "y": 560,
+        "x": 1070,
+        "y": 480,
         "wires": [
             [
                 "fec9537b.d3df9"
@@ -2777,8 +2737,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1310,
-        "y": 560,
+        "x": 1230,
+        "y": 480,
         "wires": []
     },
     {
@@ -2789,8 +2749,8 @@
         "func": "var payload = {}\npayload.status = msg.payload;\nmsg.payload = payload;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 750,
-        "y": 840,
+        "x": 710,
+        "y": 1360,
         "wires": [
             [
                 "dadf3190.425e6"
@@ -2804,10 +2764,10 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "localhost:1880/api/v1/demo/legacy/gas",
+        "url": "localhost:1880/api/v1/states/gas",
         "tls": "",
-        "x": 970,
-        "y": 880,
+        "x": 930,
+        "y": 1400,
         "wires": [
             [
                 "efa85665.46e4a8"
@@ -2819,13 +2779,13 @@
         "type": "debug",
         "z": "943f007.ccb33",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1170,
-        "y": 880,
+        "x": 1130,
+        "y": 1400,
         "wires": []
     },
     {
@@ -2835,7 +2795,7 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "localhost:1880/api/v1/demo/xiaomi",
+        "url": "localhost:1880/api/v1/xiaomi",
         "tls": "",
         "x": 790,
         "y": 60,
@@ -2850,7 +2810,7 @@
         "type": "debug",
         "z": "7441ed9a.98d394",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2883,8 +2843,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 760,
-        "y": 940,
+        "x": 720,
+        "y": 1460,
         "wires": []
     },
     {
@@ -2892,13 +2852,13 @@
         "type": "debug",
         "z": "943f007.ccb33",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 760,
-        "y": 1460,
+        "x": 790,
+        "y": 860,
         "wires": []
     },
     {
@@ -2927,8 +2887,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 623,
-        "y": 1565,
+        "x": 590,
+        "y": 1680,
         "wires": [
             [
                 "25a493e9.86b83c"
@@ -2947,11 +2907,189 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 623,
-        "y": 1525,
+        "x": 590,
+        "y": 1600,
         "wires": [
             [
                 "25a493e9.86b83c"
+            ]
+        ]
+    },
+    {
+        "id": "947c0665.8c3118",
+        "type": "http request",
+        "z": "943f007.ccb33",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "localhost:1880/api/v1/environments/humidity",
+        "tls": "",
+        "x": 1070,
+        "y": 560,
+        "wires": [
+            [
+                "d34aa2a5.a2acb"
+            ]
+        ]
+    },
+    {
+        "id": "a3d6f354.9cc87",
+        "type": "http in",
+        "z": "7441ed9a.98d394",
+        "name": "action",
+        "url": "/api/v1/xiaomi/action",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 310,
+        "y": 920,
+        "wires": [
+            [
+                "41dd2f8a.e9153",
+                "d4912e7d.a0d46"
+            ]
+        ]
+    },
+    {
+        "id": "41dd2f8a.e9153",
+        "type": "switch",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "property": "payload.plug",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 920,
+        "wires": [
+            [
+                "927a2ed0.e6772"
+            ],
+            [
+                "df53c1.b65dbc4"
+            ]
+        ]
+    },
+    {
+        "id": "d4912e7d.a0d46",
+        "type": "http response",
+        "z": "7441ed9a.98d394",
+        "name": "response",
+        "statusCode": "202",
+        "headers": {},
+        "x": 440,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "bfd4fdae.04906",
+        "type": "debug",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 540,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3dac7253.bba37e",
+        "type": "xiaomi-magnet",
+        "z": "7441ed9a.98d394",
+        "gateway": "ba1d673a.6332e8",
+        "name": "windows",
+        "sid": "158d000209079a",
+        "x": 500,
+        "y": 560,
+        "wires": [
+            [
+                "b02755e0.5ea398"
+            ]
+        ]
+    },
+    {
+        "id": "b02755e0.5ea398",
+        "type": "xiaomi-actions read",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "x": 650,
+        "y": 560,
+        "wires": [
+            [
+                "39e48579.87d92a"
+            ]
+        ]
+    },
+    {
+        "id": "39e48579.87d92a",
+        "type": "xiaomi-gateway out",
+        "z": "7441ed9a.98d394",
+        "name": "gateway",
+        "gateway": "ba1d673a.6332e8",
+        "ip": "10.1.169.92",
+        "x": 820,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "aa199054.d2f7d",
+        "type": "http in",
+        "z": "7441ed9a.98d394",
+        "name": "action",
+        "url": "/api/v1/xiaomi/status",
+        "method": "get",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 660,
+        "wires": [
+            [
+                "d6e9d27.6c2db3",
+                "99432dd.d892ed",
+                "3dac7253.bba37e"
+            ]
+        ]
+    },
+    {
+        "id": "99432dd.d892ed",
+        "type": "http response",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "statusCode": "202",
+        "headers": {},
+        "x": 500,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d6e9d27.6c2db3",
+        "type": "function",
+        "z": "7441ed9a.98d394",
+        "name": "",
+        "func": "var payload = {\"cmd\":\"read\",\"sid\":\"158d0001bc39a1\"}\nmsg.payload = payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 660,
+        "wires": [
+            [
+                "39e48579.87d92a"
             ]
         ]
     }
