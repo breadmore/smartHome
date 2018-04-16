@@ -3,110 +3,6 @@
 $(function () {
 
     /**
-     * open socket.
-     */
-    // let socket = io.connect('/');
-    // socket.emit('/socket/devices');
-    // socket.on('/socket/devices', function (data) {
-    //     console.log(data);
-    // });
-    //
-    //
-    // /**
-    //  * todo: socket connected by express.
-    //  * legacy device socket. be fill with data.
-    //  */
-    // socket.on('/legacy', function (data) {
-    //     console.log('lagacy data \n');
-    //     console.log(data);
-    //     if (data.type == "temperature") {
-    //         $("#etri-temperature-value").text(data.value + " ℃");
-    //     }
-    //     if (data.type == "humidity") {
-    //         $("#etri-humidity-value").text(data.value + " %");
-    //     }
-    //     if (data.status == "00") {
-    //         $("#etri-window-detect").text("Undetected").css("color", "#23a455");
-    //     } else if (data.status == "01") {
-    //         $("#etri-window-detect").text("Detected").css("color", "#d72a42");
-    //     } else if (data.status == "10") {
-    //         $("#etri-human-detect").text("Undetected").css("color", "#23a455");
-    //     } else if (data.status == "11") {
-    //         $("#etri-human-detect").text("Detected").css("color", "#d72a42");
-    //     } else if (data.status == "0") {
-    //         $("#etri-gas-alram").text("Undetected").css("color", "#23a455");
-    //     } else if (data.status == "1") {
-    //         $("#etri-gas-alram").text("Detected").css("color", "#d72a42");
-    //     } else if (data.status == "2") {
-    //         $("#etri-gas-leackage").text("Gas Blocked").css("color", "#23a455").css("padding-top", "15px");
-    //     } else if (data.status == "3") {
-    //         $("#etri-gas-leackage").text("Gas None Blocked").css("color", "#d72a42").css("padding-top", "0px");
-    //     } else if (data.status == "21" || data.status == "20" || data.status == "22") {
-    //         jaesil_data = true;
-    //         jaesil_true_false = false;
-    //         $("#etri-jaesil-alram").siblings().find("input").attr("checked", true);
-    //         $("#etri-jaesil-alram").text("Detected").css("color","#d72a42");
-    //     }
-    //
-    // });
-    //
-    // var motion_data;
-    // var jaesil_data;
-    //
-    // //todo : reporting data.  check model, status!
-    // socket.on('/xiaomi/report', function (data) {
-    //     console.log(data);
-    //     if (data.model == "magnet") {
-    //         $("#xiaomi-window-detect").text(data.data.status);
-    //     } else if (data.model == "switch") {
-    //         $("#xiaomi-switch-state").text(data.data.status);
-    //     } else if (data.model == "plug") {
-    //         if (data.data.status == "on") {
-    //             $("#xiaomi-plug-state").siblings().find("input").attr("checked", true);
-    //             $("#xiaomi-plug-state").text("ON");
-    //         } else if (data.data.status == "off") {
-    //             $("#xiaomi-plug-state").siblings().find("input").attr("checked", false);
-    //             $("#xiaomi-plug-state").text("OFF");
-    //         }
-    //     } else if (data.model == "motion") {
-    //         true_false = false;
-    //         motion_data = data.model;
-    //         $("#xiaomi-human-detect").text("Detected").css("color","#d72a42");
-    //     }
-    // });
-    //
-    // var count = 0;
-    // var jaesil_count = 0;
-    // var true_false = false;
-    // var jaesil_true_false = false;
-    //
-    // setInterval(function() {
-    //     if (motion_data == "motion" && true_false == false) {
-    //         count++;
-    //         if(count == 30) {
-    //             true_false = true;
-    //             $("#xiaomi-human-detect").text("Undetected").css("color","#23a455");
-    //             count = 0;
-    //         }
-    //     }
-    //     if (jaesil_data == true && jaesil_true_false == false) {
-    //         jaesil_count++;
-    //         if (jaesil_count == 30) {
-    //             jaesil_true_false = true;
-    //             $("#etri-jaesil-alram").text("Undetected").css("color","#23a455");
-    //             $("#etri-jaesil-alram").siblings().find("input").attr("checked", false);
-    //             jaesil_count = 0;
-    //         }
-    //     }
-    // }, 1000);
-    //
-    // //todo : read data.  check model, status!
-    // socket.on('xiaomi/read', function (data) {
-    //     console.log(data);
-    // });
-
-
-    /**
      * table to cast DataTable
      * https://datatables.net/
      */
@@ -116,18 +12,30 @@ $(function () {
         ordering: true,
         serverSide: false,
         searching: true,
-        ajax : { url: "v1/db/device", dataSrc: ""},
+        ajax : {
+            url: "/api/v1/devices",
+            dataSrc: function (jsonArray) {
+                var result = [];
+                $.each(jsonArray, function(index, item){
+                    item.psk.data = bin2String(item.psk.data);
+
+                    result.push(item);
+                });
+
+                return result;
+            }},
         columns : [
-            {data: "gateway_id"},
-            {data: "sid"},
             {data: "did"},
-            {data: "psk"},
+            {data: "psk.data"},
             {data: "oid"},
             {data: "eid"},
+            {data: "sid"},
+            {data: "gwid"},
+            {data: "dname"},
             {data: "type"},
-            {data: "connect"},
+            {data: "conn"},
             {data: "auth"},
-            {data: "policy_id"}
+            {data: "reg"}
         ],
         // "columnDefs": [{
         //     "searchable": false,
@@ -136,6 +44,41 @@ $(function () {
         // }],
         // "order": [[1, 'asc']],
     });
+
+//     $("#dataTable").dataTable({
+//         "bProcessing" : false,
+//         "sAjaxSource" : "responses/item-list.json",
+//         "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+//         "fnServerData" : function (sSource, aoData, fnCallback, oSettings) {
+//
+//             oSettings.jqXHR = $.ajax({
+//                 "dataType": "json",
+//                 "url": "/api/v1/devices",
+//                 "data": aoData,
+//                 "success": function(data) {
+//                     console.log(data);
+// //do your stuff here
+// //                     transform2DataTableFormat(data);
+// //finally call the original fn.
+//                     fnCallback(data);
+//                 }
+//             });
+//         },
+//         "columnsDef" : [
+//             {data: "did"},
+//             {data: "psk"},
+//             {data: "oid"},
+//             {data: "eid"},
+//             {data: "sid"},
+//             {data: "gwid"},
+//             {data: "dname"},
+//             {data: "type"},
+//             {data: "conn"},
+//             {data: "auth"},
+//             {data: "reg"}
+//             ]
+//
+//     });
 
     /**
      * Select One Table Row Function
@@ -308,3 +251,31 @@ $(function () {
         return true;
     }
 });
+
+
+/**
+ * Data Formatter
+ * 1. bin2String => psk converter
+ * 2. conn2Icon => connection converter
+ */
+
+function bin2String(array) {
+    var result = "";
+    for (var i = 0; i < array.length; i++) {
+        result += String.fromCharCode(parseInt(array[i]));
+    }
+    console.log(result);
+    return result;
+}
+
+function conn2Icon(conn) {
+    var icon = 'f042'
+
+    if (conn === 0 ) {
+        return '#f042'
+    }
+    else {
+    }
+
+    return icon;
+}
