@@ -1,11 +1,9 @@
-
+/**
+ * security policy log database.
+ * todo : architect and impl...
+ */
 var db = require('../../db/security');
 /**
- CREATE TABLE `test`.`ResourceIDTbl` (
- `ID` VARCHAR(32) NULL DEFAULT NULL,
- `Type` VARCHAR(32) NULL DEFAULT NULL,
- `Resource` VARCHAR(64) NULL DEFAULT NULL);
-
  mysql> desc ResourceIDTbl;
  +----------+-------------+------+-----+---------+-------+
  | Field    | Type        | Null | Key | Default | Extra |
@@ -40,23 +38,23 @@ var Resource = {
     insertDummyData: function(callback) {
         var sql = 'insert into ResourceIDTbl (ID, Type, Resource) values ?';
         var values = [
-            ['0', 'remoteCSE', '/'],
+            ['0', 'remoteCSE      ', '/'],
             ['1', 'contentInstance', '/CSE-ID'],
-            ['2', 'AE', '/ThermoHygrometer_1'],
+            ['2', 'AE             ', '/ThermoHygrometer_1'],
             ['3', 'contentInstance', '/ThermoHygrometer_1/AE-ID'],
             ['4', 'contentInstance', '/ThermoHygrometer_1/Values'],
-            ['5', 'AE', '/SmartLight_2'],
+            ['5', 'AE             ', '/SmartLight_2'],
             ['6', 'contentInstance', '/SmartLight_2/AE-ID'],
             ['7', 'contentInstance', '/SmartLight_2/Values']
         ];
         return db.query(sql, [values], callback);
     },
 
-    selectAll: function(callback) {
+    selectAllPolicy: function(callback) {
         return db.query('select * from ResourceIDTbl', callback);
     },
-    selectById: function(id, callback) {
-        return db.query('select * from ResourceIDTbl where ID = ?', id, callback);
+    selectEntityById: function(id, callback) {
+        return db.query('select * from ResourceIDTbl where ID = ?', id);
     }
 };
 

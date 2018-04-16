@@ -1,6 +1,12 @@
 var db = require('../../db/security');
 
 /**
+ CREATE TABLE `test`.`EntityIDTbl` (
+ `ID` VARCHAR(64) NULL DEFAULT NULL,
+ `Name` VARCHAR(64) NULL DEFAULT NULL,
+ `Status` VARCHAR(64) NULL DEFAULT NULL,
+ `TokenID` VARCHAR(64) NULL DEFAULT NULL);
+
  mysql> desc EntityIDTbl;
  +---------+-------------+------+-----+---------+-------+
  | Field   | Type        | Null | Key | Default | Extra |
@@ -23,22 +29,29 @@ var db = require('../../db/security');
  3 rows in set (0.00 sec)
  */
 
-var Action = {
-    getAllUser: function (callback) {
-        return db.query('', callback);
+var Entity = {
+    insertEntity: function (entity, callback) {
+        return db.query('insert into EntityIDTbl (ID, Name, Status, TokenID) values ?, ?, ?, ?'
+            , [entity.id, entity.name, entity.status, entity.tokenId]
+            , callback);
     },
-    getAllById: function(id, callback) {
-        return db.query('', callback)
+
+    insertDummyData: function(callback) {
+        var sql = 'insert into EntityIDTbl (ID, Name, Status, TokenId) values ?';
+        var values = [
+            ['0', 'MyIoTSVR', 'localhost', null],
+            ['1', 'ThermoHygrometer_1', null, '591732613'],
+            ['2', 'SmartLight_2', null, '1852533209']
+        ];
+        return db.query(sql, [values], callback);
     },
-    addUser: function(user, callback) {
-        return db.query('',[user.id, user.pwd, user.authority], callback );
+
+    selectAll: function(callback) {
+        return db.query('select * from EntityIDTbl', callback);
     },
-    deleteUser: function(user, callback) {
-        return db.query('',)
-    },
-    updateUserPwd: function(user, callback) {
-        return db.query('', callback);
+    selectById: function(id, callback) {
+        return db.query('select * from EntityIDTbl where ID = ?', id, callback);
     }
 };
 
-module.exports = Action;
+module.exports = Entity;

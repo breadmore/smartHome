@@ -1,4 +1,5 @@
 var environmentDao = require('../../../dao/EnvironmentDao');
+let logger = require('log4js').getLogger('EnvironmentService.js');
 var app = require('../../../server');
 
 function insertEnvironments(type, value, callback) {

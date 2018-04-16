@@ -1,5 +1,5 @@
 var router = require('express').Router();
-let logger = require('log4js').getLogger('DeviceGateway.js');
+let logger = require('log4js').getLogger('DeviceController.js');
 
 var authService = require('../../../service/api/v1/AuthsService');
 
@@ -8,15 +8,44 @@ router.route('/')
  * get all devices information.
  */
     .get(function (req, res) {
-        authService.getAllAuths(function(res, err){
-
+        authService.getAllAuths(function(err, result){
+             if (err) {
+                 res.status(500).send(err);
+             }
+             else {
+                 console.log(result);
+                 res.status(200).send(result);
+             }
         });
     })
     /**
      * add device.
      */
     .post(function (req, res) {
+        if (req.body.bulk) {
+            authService.insertDummyData(function(err, result) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+                else {
+                    res.status(201).send();
+                }
+            })
+        }
+        else if (req.body.auth) {
+            authService.insertAuth(req.body, function(err, result) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+                else {
+                    res.status(201).send(result);
+                }
+            });
 
+        }
+        else {
+            res.status(400).send()
+        }
     });
 
 
@@ -25,7 +54,16 @@ router.route('/:deviceId')
  * get device information.
  */
     .get(function (req, res) {
-        logger.debug('/api/v1/gateway/{gatewayId} ', req.params.gatewayId);
+        if (req.params.deviceId) {
+            authService.getAuthByDid(req.params.deviceId, function(err, result) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+                else {
+                    res.status(200).send(result);
+                }
+            });
+        }
     })
 /**
  *
