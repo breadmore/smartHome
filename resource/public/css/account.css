@@ -216,3 +216,111 @@
 /*.password {*/
     /*margin-bottom: 10px;*/
 /*}*/
+
+/*body {*/
+    /*font-family: Arial;*/
+/*}*/
+
+ul.tree li {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+
+ul.tree li a {
+    color: black;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+ul.tree li a:before {
+    height: 1em;
+    padding:0 .1em;
+    font-size: .8em;
+    display: block;
+    position: absolute;
+    left: -1.3em;
+    top: .2em;
+}
+
+ul.tree li > a:not(:last-child):before {
+    content: '+';
+    margin-left: 30px;
+}
+
+ul.tree li.open > a:not(:last-child):before {
+    content: '-';
+    margin-left: 30px;
+
+}
+
+li label {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    display: inline-block;
+}
+
+.device-type {
+    min-width: 200px;
+}
+
+.device-name {
+    min-width: 150px;
+}
+
+.gateway-name {
+    font-size: 30px;
+}
+
+
+#securityTable {
+    border-collapse: separate;
+    border-spacing: 3px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#securityTable th {
+    padding: 10px;
+    font-size: 11px;
+}
+
+#securityTable td {
+    padding: 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #deceb2;
+    font-size: 10px;
+}
+
+#securityTable thead {
+    background-color: #ebeff5;
+    color: rgb(0,0,0);
+}
+
+#securityTable tbody .selected {
+    background-color: #fcf9f9;
+}
+
+div .dataTables_paginate {
+    float: right;
+    position: relative;
+    left: -50%; /* or right 50% */
+    text-align: left;
+}
+div .dataTables_paginate > .pagination {
+    position: relative;
+    left: 50%;
+}
+
+#securityTable_wrapper {
+    padding: 0;
+    margin: auto;
+}

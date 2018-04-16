@@ -1,6 +1,10 @@
 var policyDao = require('../../../dao/security/PolicyDao');
 var entityDao = require('../../../dao/security/EntityDao');
 var resourceDao = require('../../../dao/security/ResourceDao');
+var tokenDao = require('../../../dao/security/TokenDao');
+var roleDao = require('../../../dao/security/RoleDao');
+var securityDao = require('../../../dao/security/SecurityLogDao');
+
 let logger = require('log4js').getLogger('SecurityService.js');
 var app = require('../../../server');
 
@@ -52,7 +56,7 @@ var ResourceService = {
 
 var PolicyService = {
     insert: function (entity, callback) {
-        policyDao.insertEntity(entity, callback);
+        policyDao.insert(entity, callback);
     },
     selectAll : function(callback) {
         policyDao.selectAll(callback);
@@ -65,11 +69,47 @@ var PolicyService = {
     }
 };
 
+var TokenService = {
+    insert: function (entity, callback) {
+        tokenDao.insert(entity, callback);
+    },
+    selectAll : function(callback) {
+        tokenDao.selectAll(callback);
+    },
+    selectById: function(id, callback) {
+        tokenDao.selectById(id, callback);
+    },
+    insertBulk: function (callback) {
+        tokenDao.insertDummyData(callback);
+    }
+};
+
+var RoleService = {
+    insert: function (entity, callback) {
+        roleDao.insert(entity, callback);
+    },
+    selectAll : function(callback) {
+        roleDao.selectAll(callback);
+    },
+    selectById: function(id, callback) {
+        roleDao.selectByResourceId(id, callback);
+    },
+    insertBulk: function (callback) {
+        roleDao.insertDummyData(callback);
+    }
+};
+
+function selectAllSecurityPolicy(callback) {
+    securityDao.selectAllSecurityPolicy(callback);
+}
 
 
 module.exports = {
     insertBulkData: insertBulkData,
     entityService: EntityService,
     resourceService: ResourceService,
-    policyService: PolicyService
+    policyService: PolicyService,
+    tokenService: TokenService,
+    roleService: RoleService,
+    selectAllPolicy: selectAllSecurityPolicy
 };
