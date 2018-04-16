@@ -18,7 +18,17 @@ $(function () {
                 var result = [];
                 $.each(jsonArray, function(index, item){
                     item.psk.data = bin2String(item.psk.data);
+                    if (index === 0 ){
+                        item.conn = conn2Icon(1);
+                    }
+                    else {
+                        item.conn = conn2Icon(item.conn);
+                    }
 
+                    item.auth = auth2Icon(item.auth);
+                    item.reg = regi2Icon(item.reg);
+
+                    item.type= type2Icon(item.type);
                     result.push(item);
                 });
 
@@ -257,6 +267,9 @@ $(function () {
  * Data Formatter
  * 1. bin2String => psk converter
  * 2. conn2Icon => connection converter
+ * 3. auth2Icon => authentication converter
+ * 3. regi2Icon => registered converter
+ * 4. type2Icon => devicetype converter
  */
 
 function bin2String(array) {
@@ -268,13 +281,70 @@ function bin2String(array) {
     return result;
 }
 
+
+function type2Icon(type) {
+    var icon;
+
+    if (type ===1) {
+        return icon = '<i class="fab fa-stumbleupon"></i>'
+    }
+    else if(type === 2){
+        return icon ='<i class="fas fa-ban"></i>'
+    }
+    else if(type === 3){
+        return icon ='<i class="fas fa-thermometer-half"></i>'
+    }
+    else if(type === 4){
+        return icon ='<i class="far fa-lightbulb"></i>'
+    }
+    else if(type === 5){
+        return icon ='<i class="fas fa-video"></i>'
+    }
+    else if(type === 6){
+        return icon ='<i class="fas fa-home"></i>'
+    }
+    else{
+        return icon ='<i class="fas fa-question"></i>'
+    }
+
+    return icon;
+}
+
+
 function conn2Icon(conn) {
-    var icon = 'f042'
+    var icon;
 
     if (conn === 0 ) {
-        return '#f042'
+        return icon = '<i class="fas fa-toggle-off"></i>'
     }
     else {
+        return icon ='<i class="fas fa-toggle-on" style="color:green;"></i>'
+    }
+
+    return icon;
+}
+
+function auth2Icon(auth) {
+    var icon;
+
+    if (auth === 0 ) {
+        return icon = '<i class="far fa-address-card"></i>'
+    }
+    else {
+        return icon ='<i class="fas fa-address-card" style="color:green;"></i>'
+    }
+
+    return icon;
+}
+
+function regi2Icon(regi) {
+    var icon;
+
+    if (regi === 0 ) {
+        return icon = '<i class="far fa-eye-slash"></i>'
+    }
+    else {
+        return icon ='<i class="fas fa-eye" style="color:green;"></i>'
     }
 
     return icon;
