@@ -1,0 +1,21 @@
+{
+  "name": "rtsp-ffmpeg",
+  "version": "0.0.12",
+  "author": "Andrew D.Laptev <a.d.laptev@gmail.com>",
+  "description": "ffmpeg wrapper for rtsp streaming",
+  "main": "lib/rtsp-ffmpeg.js",
+  "keywords": [
+    "rtsp",
+    "ffmpeg",
+    "mjpeg",
+    "motionjpeg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agsh/rtsp-ffmpeg.git"
+  },
+  "devDependencies": {
+    "socket.io": "^1.4",
+    "express": "4"
+  }
+}

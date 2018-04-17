@@ -5,14 +5,13 @@ append head
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
     script(src='/javascript/account.js')
-    link(rel='stylesheet', type='text/css', href='/css/common.css')
     link(rel='stylesheet', type='text/css', href='/css/account.css')
-
+    link(rel='stylesheet', type='text/css', href='/css/common.css')
 
     script(defer='', src='https://use.fontawesome.com/releases/v5.0.10/js/all.js', integrity='sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+', crossorigin='anonymous')
 
 append title
-    span.col-xl-2.content-title.no-padding ACCOUNT
+    span.col-xl-2.content-title.no-padding Device
 
 block content
     //.row.no-gutters
@@ -20,66 +19,73 @@ block content
             .col-12
                 i.fas.fa-sync-alt
             .col-12
-    .row.no-gutters(style='margin-bottom:20px;')
-        .col-6.no-gutters(style='height:300px; overflow-y: scroll;')
-            ul.tree
-        .col-6.no-gutters.datail-view(style='height:300px; overflow: scroll;')
-            table.datail-gateway-view(style='display:none;width:100%;table-layout: fixed;', width='100%')#gatewayTable
-                tbody
+    #loader
+    .row.no-gutters(style='margin-bottom:20px; display:none;')#deviceDiv
+        .col-6.no-gutters.view-box
+            .row.no-gutters.view-box-title
+                h3 Device List
+            .row.no-gutters.view-box-content
+                ul.tree
+        .col-6.no-gutters.detail-view.view-box(style='height:300px')
+            .row.no-gutters.view-box-title
+                h3 Device Detail
+            .row.no-gutters.view-box-content
+                table.detail-gateway-view(style='display:none;width:100%;table-layout: fixed;', width='100%')#gatewayTable
+                    tbody
+                        tr
+                            td(width='50%') Gateway ID
+                            td(width='50%')#gatewayId aaa
+                        tr
+                            td Gateway Name
+                            td#gatewayName bbb
+                        tr
+                            td IP
+                            td#gatewayIP 10.0.0.2
+                        tr
+                            td Port
+                            td#gatewayPort 3000
+                        tr
+                            td Connection
+                            td#gatewayConn conn
+                table.detail-device-view(style='display:none;width:100%;')#deviceTable
                     tr
-                        td(width='50%') Gateway ID
-                        td(width='50%')#gatewayId aaa
+                        td Gateway ID
+                        td#gwid
                     tr
-                        td Gateway Name
-                        td#gatewayName bbb
+                        td Device Name
+                        td#dname
                     tr
-                        td IP
-                        td#gatewayIP 10.0.0.2
+                        td Device Type
+                        td#type
                     tr
-                        td Port
-                        td#gatewayPort 3000
+                        td Device ID
+                        td#eid
+                    tr
+                        td Product ID
+                        td#did
+                    tr
+                        td Pre Shared Key
+                        td#psk
+                    tr
+                        td Object ID
+                        td#oid
+                    tr
+                        td Session ID
+                        td#sid
                     tr
                         td Connection
-                        td#gatewayConn conn
-            table.detail-device-view(style='display:none;width:100%;')#deviceTable
-                tr
-                    td Gateway ID
-                    td#gwid
-                tr
-                    td Device Name
-                    td#dname
-                tr
-                    td Device Type
-                    td#type
-                tr
-                    td Device ID
-                    td#eid
-                tr
-                    td Product ID
-                    td#did
-                tr
-                    td Pre Shared Key
-                    td#psk
-                tr
-                    td Object ID
-                    td#oid
-                tr
-                    td Session ID
-                    td#sid
-                tr
-                    td Connection
-                    td#conn
-                tr
-                    td Authentication
-                    td#auth
-                tr
-                    td Security Policy
-                    td#operation CRUDN
-    .row.col-12.text-right.no-gutters.no-padding
-        .col-12.no-gutters
-            input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
-            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
-    .row.no-gutters
+                        td#conn
+                    tr
+                        td Authentication
+                        td#auth
+                    tr
+                        td Security Policy
+                        td#operation CRUDN
+    .row.no-gutters(style='margin-bottom:20px')
+        span.col-xl-2.content-title.no-padding Security
+        .col-10.content-hr.no-padding
+            hr
+    .row.no-gutters(style='margin-bottom:20px; display: none;')#securityDiv
         .col-12.no-gutters
             table#securityTable(style='width:100%')
                 thead
@@ -93,6 +99,10 @@ block content
                         th Update
                         th Delete
                         th Notify
+    .row.no-gutters(style='margin-bottom:60px')
+        span.col-xl-2.content-title.no-padding Security Event
+        .col-10.content-hr.no-padding
+            hr
     #policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content

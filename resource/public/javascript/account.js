@@ -19,12 +19,14 @@ var gatewayList = [
 ];
 
 var deviceList;
-var securityList;
+var securityList = [];
 var entityList;
 
 $(document).ready(function () {
     //init device list & device detail
     createDeviceListView();
+
+    // Security DataTable.
     var table = $('#securityTable').DataTable({
         paging: false,
         processing: true,
@@ -38,31 +40,24 @@ $(document).ready(function () {
             dataSrc: function (jsonArray) {
                 // console.log(jsonArray);
                 // return jsonArray;
-                var result = [];
+
                 $.ajax({
                     url: 'api/v1/security/entities',
                     type:'get',
                     async: false,
                     success: function(entities){
-
                         entityList = entities;
-                        console.log(jsonArray);
-                        console.log(entities);
-
                         $.each(jsonArray, function(index, item){
                             item.fromName = findEntityById(item.FromID).Name;
                             item.toName = findEntityById(item.ToID).Name;
-                             // = fromName;
-                             // = toName;
-                            result.push(item);
+                            securityList.push(item);
                         });
-                        console.log(result);
                     },
                     error: function(err) {
                         console.log(err);
                     }
                 });
-                return result;
+                return securityList;
 
             }},
         columns : [
@@ -78,10 +73,34 @@ $(document).ready(function () {
         ],
     });
 
-
-
+    var isLoading = true;
+    var loading = setInterval(function() {
+        if (isLoading) {
+            if (deviceList !== undefined && securityList !== undefined && gatewayList !== undefined) {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('deviceDiv').style.display = 'flex';
+                document.getElementById('securityDiv').style.display = 'flex';
+            }
+            findOperationById();
+            isLoading = false;
+            clearInterval(loading);
+        }
+    },1000);
 
 });
+
+
+
+
+// function sleep(milliseconds) {
+//     var start = new Date().getTime();
+//     for (var i = 0; i < 1e7; i++) {
+//         if ((new Date().getTime() - start) > milliseconds){
+//             break;
+//         }
+//     }
+// }
+
 
 function findEntityById(id) {
     var idx = -1;
@@ -94,6 +113,20 @@ function findEntityById(id) {
         return entityList[idx];
     }
     return null;
+}
+
+function findOperationById() {
+    $.each(deviceList, function(dIdx, device){
+        $.each(securityList, function(sIdx, security) {
+            device.operation = {};
+            if (device.eid === security.EntityID) {
+                device.operation = operationJoiner(security);
+            }
+            else {
+                device.operation = "";
+            }
+        });
+    });
 }
 
 /** add click listener to gateway title in device list view
@@ -266,8 +299,9 @@ function deviceListForm(gateway, deviceList) {
  * 1. bin2String => psk converter
  * 2. conn2Icon => connection converter
  * 3. auth2Icon => authentication converter
- * 3. regi2Icon => registered converter
- * 4. type2Icon => devicetype converter
+ * 4. regi2Icon => registered converter
+ * 5. type2Icon => devicetype converter
+ * 6. operationJoiner
  */
 function bin2String(array) {
     var result = "";
@@ -334,4 +368,27 @@ function regi2Icon(regi) {
         return icon ='<i class="fas fa-eye" style="color:green;"></i>'
     }
     return icon;
+}
+
+function operationJoiner(security) {
+    var operation = "";
+    if (security) {
+        if (security.CreationYn === 'Y') {
+            operation += 'C';
+        }
+        if (security.ReadYn === 'Y') {
+            operation += 'R';
+        }
+        if (security.UpdateYn === 'Y') {
+            operation += "U";
+        }
+        if (security.DeleteYn === 'Y') {
+            operation += "D";
+        }
+        if (security.NotifyYn === 'Y') {
+            operation += "N";
+        }
+    }
+
+    return operation;
 }
