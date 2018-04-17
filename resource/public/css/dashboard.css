@@ -83,7 +83,7 @@
     width: 180px;
 }
 
-.luminance .card-text, .home-security-1 .card-text, .home-security-2 .card-text, .ip-camera .card-text, .gas-mgnmt .card-text  {
+.luminance .card-text, .home-security-1 .card-text, .home-security-2 .card-text, .ip-camera .card-text, .gas-mgnmt .card-text {
     width: 180px;
 }
 
@@ -181,7 +181,6 @@ td:nth-child(1) {
     width: 240px;
 }
 
-
 .temp-humi .row > span:nth-child(1) > img {
     margin-left: 10px;
     margin-top: 10px;
@@ -189,7 +188,7 @@ td:nth-child(1) {
 }
 
 .temp-humi .row > span:nth-child(2) {
-    color: rgb(52,152,219);
+    color: rgb(52, 152, 219);
     font-weight: bold;
     width: 60px;
     font-size: 24px;
@@ -218,7 +217,7 @@ td:nth-child(1) {
     width: 46px;
 }
 
-.home-security-1 .card-title > span:nth-child(3), .home-security-2 .card-title > span:nth-child(3){
+.home-security-1 .card-title > span:nth-child(3), .home-security-2 .card-title > span:nth-child(3) {
     display: inline-block;
     text-align: right;
     width: 47px;
@@ -268,7 +267,6 @@ section {
     position: relative;
 }
 
-
 .graph {
     width: 120px;
     height: 60px;
@@ -283,6 +281,7 @@ section {
     overflow: hidden;
     color: #0ff;
 }
+
 .graph:before, .graph:after {
     content: '';
     width: 120px;
@@ -301,6 +300,7 @@ section {
     top: 100%;
     z-index: 5;
 }
+
 .graph:after {
     z-index: 3;
     border-color: rgba(0, 0, 0, 0.15);
@@ -314,6 +314,7 @@ section {
 .model-1 .graph {
     color: #fc6403;
 }
+
 .model-1 .graph:before {
     transform: rotate(120deg);
     border-color: #fc6403;
@@ -329,6 +330,7 @@ section {
         transform: rotate(180deg);
     }
 }
+
 @keyframes demo {
     0% {
         -webkit-transform: rotate(0deg);
@@ -385,7 +387,9 @@ section {
 }
 
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+.switch input {
+    display: none;
+}
 
 /* The slider */
 .slider {
@@ -413,11 +417,11 @@ section {
 }
 
 input:checked + .slider {
-    background-color: rgb(46,204,113);
+    background-color: rgb(46, 204, 113);
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px rgb(46,204,113);
+    box-shadow: 0 0 1px rgb(46, 204, 113);
 }
 
 input:checked + .slider:before {
@@ -443,6 +447,7 @@ input:checked + .slider:before {
     margin-left: 15px;
     margin-top: 15px;
 }
+
 .security-service > p {
     margin-top: 4px;
     font-size: 10px;
@@ -500,4 +505,26 @@ input:checked + .slider:before {
 
 .device-name {
     margin-left: 7px;
+}
+
+@media (min-width: 640px) {
+    .modal-dialog {
+        max-width: 642px;
+        margin: 1.75rem auto;
+    }
+}
+
+#ipcamera > div {
+    width: 640px;
+    height: 360px;
+}
+
+#ipcamera > div > canvas {
+    max-width: 640px;
+    max-height: 360px;
+}
+
+.modal-body {
+    padding-left: 0px;
+    padding-right: 0px;
 }

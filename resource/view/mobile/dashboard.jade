@@ -2,6 +2,8 @@ extends layout
 
 append css
     link(href='/css/mobile/dashboard.css' rel='stylesheet')
+    script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
+    script(src="/javascript/mobile/dashboard.js")
 
 append left
     .col-md-6.title.text-left.no-padding DASHBOARD
@@ -23,12 +25,15 @@ block content
                 .dashboard-card.temp
                     .dashboard-card-title Temperature / Humidity
                     .dashboard-card-location 안방 001
-                    .dashboard-card-value 23℃ / 30%
+                    .dashboard-card-value
+                        span#temperatureValue
+                        span &nbsp;/&nbsp;
+                        span#humidityValue
             .col-md-6
                 .dashboard-card.lumi
                     .dashboard-card-title Luminance
                     .dashboard-card-location 안방 001
-                    .dashboard-card-value 100 Lux
+                    .dashboard-card-value#luxValue 100 Lux
         .row.no-gutters
             .col-md-6
                 .dashboard-card.home-security
@@ -40,22 +45,22 @@ block content
                             .value Triggered
                         .row.window
                             .name Window
-                            .value Opened
+                            .value#legacyWindow Opened
                         .row.human
                             .name Human
-                            .value Detected
+                            .value#legacyHuman Detected
                     .col-md-12.center-hr
                     .dashboard-card-location 거실 002
                     .dashboard-card-value
                         .row.siren
                             .name Siren
-                            .value Triggered
+                            .value No event
                         .row.window
                             .name Window
-                            .value Opened
+                            .value#xiaomiWindow Opened
                         .row.human
                             .name Human
-                            .value Detected
+                            .value#xiaomiHuman Detected
             .col-md-6
                 .dashboard-card.ip-camera(onclick="location.href='/m/ipcamera'")
                     .dashboard-card-title IP Camera
@@ -69,7 +74,7 @@ block content
                             .dash-value Triggered
                         .row.window
                             .dash-name Window
-                            .dash-value Opened
+                            .dash-value#gasDetector Detected
                         .row.human
                             .dash-name Human
-                            .dash-value Detected
+                            .dash-value#gasBlocker Blocked

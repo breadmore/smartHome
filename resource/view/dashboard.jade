@@ -9,7 +9,6 @@ append head
     //link(href='/plugin/bootstrap-toggle/css/bootstrap-toggle.min.css', rel='stylesheet')
     //script(src='/plugin/bootstrap-toggle/js/bootstrap-toggle.min.js')
 
-
     //script(type='text/javascript').
     //    var mobilecheck = function () {
     //        var check = false;
@@ -123,7 +122,7 @@ block content
                     span.small-title Camera
                     span 001
                 .card-text
-                    img(src="/image/maxresdefault.jpg").camera-img
+                    img(src="/image/thumbnail.png").camera-img(data-target="#ip-camera" data-toggle="modal")
         .card.device-monitor.gas-mgnmt
             .card-body
                 .card-title
@@ -249,4 +248,16 @@ block content
                     td Critical
                     td ETRI Window sensor / IDW001
                     td Window sensor is disconnected
-
+    .modal.fade#ip-camera(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title IP CAMERA
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                .modal-body
+                    .modal-body-content
+                        #ipcamera(style='width: 640px')
+                        button#record(disabled='') record
+                        button#stop(disabled='') stop
+                .modal-footer
+                    button.btn.btn-primary(data-dismiss="modal") Cancel

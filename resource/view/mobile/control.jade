@@ -3,6 +3,8 @@ extends layout
 append css
     link(href='/css/mobile/dashboard.css' rel='stylesheet')
     link(href='/css/mobile/control.css' rel='stylesheet')
+    script(src="/javascript/mobile/control.js")
+
 
 append left
     .col-md-6.title.text-left.no-padding DASHBOARD
@@ -48,8 +50,8 @@ block content
             .col-md-4.no-padding 안방 001
             .row.col-md-3.no-padding
                 label.switch
-                    input(type="checkbox" checked=1)
-                    div.slider.round
+                    input#xiaomiPower(type="checkbox" checked=1)
+                    div.slider.round#xiaomiPowerController
                 p ON
         .row.col-md-12.service-list
             .col-md-5.no-padding IP Camera

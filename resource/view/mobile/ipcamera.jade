@@ -1,8 +1,11 @@
 extends layout
 
 append css
+    script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
+    script(src="/javascript/mobile/ipcamera.js")
     link(href='/css/mobile/dashboard.css' rel='stylesheet')
     link(href='/css/mobile/ipcamera.css' rel='stylesheet')
+
 
 append left
     .col-md-6.title.text-left.no-padding DASHBOARD
@@ -32,4 +35,7 @@ block content
                         div.slider.round
                     p ON
             .camera-video
-                .on-air On Air
+                #ipcamera
+                    .on-air On Air
+
+

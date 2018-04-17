@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var app = require('../server');
 
 router.route('/')
     .get(function (req, res) {
@@ -17,7 +18,8 @@ router.route('/login')
         res.redirect('/dashboard');
     });
 router.post('/login/demo', function (req, res)  {
-   res.redirect('/new/dashboard');
+   app.cams.stream.recordStart();
+   res.send();
 });
 
 module.exports = router;

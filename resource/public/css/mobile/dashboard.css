@@ -65,7 +65,7 @@
 .dashboard-card.ip-camera {
     padding: 0px;
     background: black;
-    background-image: url("/image/ipcamera.png");
+    background-image: url("/image/thumbnail.png");
     background-size: 28rem 20.5rem;
 }
 
@@ -193,3 +193,7 @@ p {
 .dashboard {
     background-color: rgba(33, 33, 33, 0.8);
 }
+
+/*.tempandhumi {*/
+    /*text-align: right;*/
+/*}*/

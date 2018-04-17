@@ -64,6 +64,7 @@
     "node-red-contrib-mi-devices": "./src/library/node-red-contrib-mi-devices",
     "node-red-dashboard": "^2.8.2",
     "paint-console": "0.0.1",
+    "rtsp-ffmpeg": "./src/library/rtsp-ffmpeg",
     "sequelize": "^4.37.6",
     "socket.io": "^2.1.0",
     "sqlite3": "^4.0.0",

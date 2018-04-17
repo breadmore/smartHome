@@ -50,8 +50,13 @@ block content
                     .modal-body-content
                         p Gateway ID
                         input(type="number")#gateway-id
-                        p Product ID
-                        input(type="text")#product-id
+                        p Device Name
+                        input(type="text" value="")#device-name
+                        p Device type
+                        select#type
+                            option(value=1, selected="selected") Temperature sensor
+                            option(value=2) Temperature sensor2
+                            option(value=3) Temperature sensor3
                         p Device ID
                         input(type="text")#device-id
                         p Pre Shared Key
@@ -60,12 +65,22 @@ block content
                         input(type="text")#object-id
                         p Session ID
                         input(type="text")#session-id
-                        p Type
-                        input(type="number")#type
                         p Connected
-                        input(type="number")#connected
+                        .radio-group#connected
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;OK
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;NO
                         p Authenticate
-                        input(type="number")#authenticate
+                        .radio-group#authenticate
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;OK
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;NO
                         //p Policy
                         //input(type="number")#policy
                 .modal-footer
@@ -80,20 +95,42 @@ block content
                     //    button modify
                 .modal-body
                     .modal-body-content
-                        .product-id
-                        input(type="text")#add-product-id
-                        .select-device-type Select device type
-                        select#add-type
-                            option(value=1, selected="selected") Temperature sensor
-                            option(value=2) Temperature sensor2
-                            option(value=3) Temperature sensor3
-                        .select-gateway Select gateway
+                        .gateway_id Gateway ID
                         select#add-gateway-id
                             option(value=111, selected="selected") ETRI-SG-001
                             option(value=222) ETRI-SG-002
                             option(value=333) ETRI-SG-003
-                        .device-id Device ID(DID)
+                        .device-name Device Name
+                        input(type="text" value="")#add-device-name
+                        .select-device-type Device type
+                        select#add-type
+                            option(value=1, selected="selected") Temperature sensor
+                            option(value=2) Temperature sensor2
+                            option(value=3) Temperature sensor3
+                        .device-id Device ID
                         input(type="text")#add-device-id
+                        .pre_shared_key Pre Shared Key
+                        input(type="text" value="")#add-pre-shared-key
+                        .object-id Object ID
+                        input(type="text" value="")#add-object-id
+                        .session-id Session ID
+                        input(type="text" value="")#add-session-id
+                        .connection Connection
+                        .radio-group
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;OK
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;NO
+                        .authentication Authentication
+                        .radio-group
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;OK
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;NO
                 .modal-footer
-                    button.modal-cancel(data-dismiss="modal") Cancel
-                    button.modal-confirm(type='button')#addButton Add Device
+                    button.btn.btn-default(data-dismiss="modal") Cancel
+                    button.btn.btn-primary(type='button')#addButton Add Device

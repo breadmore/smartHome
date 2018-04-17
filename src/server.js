@@ -41,6 +41,7 @@ const bodyParser = require('body-parser');
 var log4js = require('log4js');
 log4js.configure('./config/logger/log4js.json');
 
+
 // you can set a default credential secret for storing node's credentials within node red
 // normally this is secret is generated randomly and stored in the user directory (config)
 // if you are sharing your flows over different systems  (e.g. windows, linux etc)
@@ -149,6 +150,8 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 
 
 
+
+
 module.exports.db = db;
 
 var resourcePath = path.join(__dirname, '../resource');
@@ -228,4 +231,73 @@ httpServer.listen(http_port, function () {
 RED.start().then(function () {
   console.info("------ Engine started! ------");
 });
+
+
+// RSTP-FFmpeg
+
+const rtsp = require('rtsp-ffmpeg');
+
+var cams = ['rtsp://10.0.254.1:554/unicast'].map(function(uri, i) {
+    var stream = new rtsp.FFMpeg({
+        rate: 10,
+        resolution: '640:440',
+        input: uri,
+        quality: 20,
+    });
+
+    // var record = new rtsp.FFMpeg({
+    //    start:0,
+    //    end:10,
+    //    saveDir:'c:/sample/recTest.mp4'
+    // })
+    // stream.on('record', function (data) {
+    //     console.log(data);
+    //     console.log('hello record');
+    // });
+
+    stream.on('start', function() {
+        console.log('stream ' + i + ' started');
+        console.log(uri);
+        // io.sockets.emit('record', "채팅방에 입장 하셨습니다.");
+    });
+    stream.on('stop', function() {
+        console.log('stream ' + i + ' stopped');
+    });
+
+    return stream;
+});
+
+module.exports.cams = cams;
+
+
+cams.forEach(function(camStream, i) {
+    var ns = io.of('/cam0');
+
+    ns.on('connection', function(wsocket) {
+        console.log('connected to /cam' + i);
+
+        camStream.emit('record', 0);
+
+
+        var pipeStream = function(data) {
+            wsocket.emit('data', data);
+        };
+        camStream.on('data', pipeStream);
+        wsocket.on('disconnect', function() {
+            console.log('disconnected from /cam' + i);
+            camStream.removeListener('data', pipeStream);
+        });
+    });
+});
+
+
+io.on('connection', function(socketio) {
+    socketio.emit('start', cams.length);
+    socketio.on('record', (res) => {
+        cams.forEach(function(camStream) {
+            camStream.emit('record', res);
+        });
+    })
+});
+
 
