@@ -324,3 +324,20 @@ div .dataTables_paginate > .pagination {
     padding: 0;
     margin: auto;
 }
+
+.btn-action {
+    float: right;
+    margin-right: 0px;
+    margin-left: 20px;
+    background-color: #65c0c6;
+    border-color: #65c0c6;
+    height: 31px;
+    line-height: 1;
+}
+
+@media (min-width: 620px){
+    .modal-dialog {
+        max-width: 620px;
+        margin: 1.75rem auto;
+    }
+}
