@@ -273,6 +273,19 @@ body *:focus, body *:active, body *:hover {
     height: 40px;
 }
 
+.radio-group > label:nth-child(1) {
+    width: 50%;
+}
+
 .btn-default {
     border: 1px solid lightgray;
+}
+
+.modal-btn {
+    width: 150px;
+    /*margin-right: 10px;*/
+}
+
+.modal-footer button:nth-child(1) {
+    margin-right: 10px;
 }
