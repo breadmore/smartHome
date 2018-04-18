@@ -228,11 +228,12 @@ body *:focus, body *:active, body *:hover {
 
 .btn-action {
     float: right;
-    margin-right: 20px;
+    margin-left: 20px;
     background-color: #65c0c6;
     border-color: #65c0c6;
-    height: 31px;
+    /*height: 31px;*/
     line-height: 1;
+    padding:10px;
 }
 
 .btn-action:disabled {
