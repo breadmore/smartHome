@@ -88,7 +88,8 @@ function observer(changes) {
 // };
 
 var on_off_record = false;
-
+var path = require('path');
+const campath = path.join(__dirname, '../../../resource/public');
 
 FFMpeg.prototype._args = function (option) {
     //영상 출력 // 썸네일
@@ -99,7 +100,7 @@ FFMpeg.prototype._args = function (option) {
         '-loglevel', 'quiet', '-y'
         , '-i', this.input,
         '-ss', '0',
-        '-vframes', '1', '/Users/JINU/Downloads/thumbnail.png'
+        '-vframes', '1', campath+'/image/thumbnail.png'
     ];
 
 
@@ -123,7 +124,7 @@ FFMpeg.prototype._args = function (option) {
         , '-i', this.input,
         '-vcodec', 'copy',
         '-ss', '0', '-t', '10',
-        '/Users/JINU/Downloads/'+ date +'.avi'
+        campath + '/video/' + date +'.avi'
     ];
 
     var stream = this.arguments.concat(thumbnail, video1, video2, video3);
