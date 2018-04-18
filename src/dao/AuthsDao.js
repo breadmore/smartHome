@@ -44,8 +44,8 @@ var moment = require('moment');
 var Auths = {
     insertAuth: function (auth, callback) {
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-
-        return db.query('insert into auths (did, psk, oid, eid, sid, type, conn, auth, reg, dname, gwid, created_at, updated_at) values ? ? ? ? ? ? ? ?'
+        console.log(auth);
+        return db.query('insert into auths (did, psk, oid, eid, sid, type, conn, auth, reg, dname, gwid, created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
             , [auth.did, auth.psk, auth.oid, auth.eid, auth.sid, auth.type, auth.conn, auth.auth, auth.reg, auth.dname, auth.gwid, now, now]
             , callback);
     },

@@ -33,7 +33,7 @@ router.route('/')
             })
         }
         else if (req.body.auth) {
-            authService.insertAuth(req.body, function(err, result) {
+            authService.insertAuth(req.body.auth, function(err, result) {
                 if (err) {
                     res.status(400).send(err);
                 }

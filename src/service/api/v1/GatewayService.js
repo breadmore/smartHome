@@ -1,9 +1,29 @@
-// var gaytewayDao = require('../../../dao/');
+var gatewayDao = require('../../../dao/GatewayDao');
 
-function getALlGateway() {
+function findAllGateway(callback) {
+    gatewayDao.findAll(callback);
+}
 
+function findGatewayById(id, callback) {
+    gatewayDao.findById(id, callback)
+}
+
+function insertGateway(gateway, callback) {
+    gatewayDao.insert(gateway, callback);
+}
+
+function updateGateway(id, gateway, callback) {
+    gatewayDao.update(id, gateway, callback);
+}
+
+function deleteById(id, callback) {
+    gatewayDao.deleteById(id, callback);
 }
 
 module.exports = {
-    getALlGateway : getALlGateway
+    findAllGateway : findAllGateway,
+    findGatewayById : findGatewayById,
+    insertGateway : insertGateway,
+    updateGateway : updateGateway,
+    deleteById: deleteById
 };

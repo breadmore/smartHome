@@ -1,6 +1,7 @@
 var router = require('express').Router();
 let logger = require('log4js').getLogger('GatewayController.js');
 
+var gatewayService = require('../../../service/api/v1/GatewayService');
 
 
 /**
@@ -8,19 +9,54 @@ let logger = require('log4js').getLogger('GatewayController.js');
  */
 router.route('/')
     .get(function (req, res) {
-
+        gatewayService.findAllGateway(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
     })
     .post(function (req, res) {
-
+        gatewayService.insertGateway(req.body.gateway, function(err, result){
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(201).send(result);
+            }
+        })
     });
 
 
 /**
  * get router information.
  */
-router.route('/:gatewayId')
+router.route('/:id')
     .get(function (req, res) {
-        logger.debug('/api/v1/gateway/{gatewayId} ', req.params.gatewayId);
-    });
+        gatewayService.findGatewayById(req.params.id, function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        });
+    })
+    .put(function (req, res) {
+        gatewayService.updateGateway(req.params.id ,req.body, function (err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(202).send(result);
+            }
+        })
+    })
+    .delete(function (req, res) {
+        gatewayService
+    })
+
 
 module.exports = router;
