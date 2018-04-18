@@ -31,9 +31,9 @@ var db = require('../../db/security');
 
 
 var Policy = {
-    insert: function (entity, callback) {
+    insert: function (data, callback) {
         return db.query('insert into PolicyIDTbl (ID, FromID, ToID, TokenID) values ?, ?, ?, ?'
-            , [entity.id, entity.name, entity.status, entity.tokenId]
+            , [data.id, data.name, data.status, data.tokenId]
             , callback);
     },
 

@@ -9,6 +9,8 @@ router.use('/xiaomi', require('./XiaomiController'));
 
 router.use('/security', require('./SecurityController'));
 
+router.use('/action', require('./ActionController'));
+
 
 /** Test Controller*/
 router.use('/demo', require('./DemoContoller'));

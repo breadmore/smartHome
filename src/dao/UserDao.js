@@ -1,4 +1,5 @@
 var db = require('../db/gui');
+var moment = require('moment');
 
 var User = {
     getAllUser: function (callback) {

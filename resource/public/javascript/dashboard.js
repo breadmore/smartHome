@@ -91,7 +91,7 @@ $(function () {
 
     let socket = io.connect('/');
 
-    initXiaomiDeviceData(socket);
+    initXiaomiDeviceData();
     // todo : fix socket!
     socket.on('/environments/', function (data) {
         console.log(data);
@@ -124,15 +124,29 @@ $(function () {
      * device -----> gateway -------> database <----- node server <------ dashboard
      *
      */
-    setTimeout(function () {
+    setInterval(function () {
         socket.emit('/legacy/states');
     }, 1000);
     socket.on('/legacy/states', function (data) {
+        console.log(currentState);
         if (currentState.window === undefined || currentState.human === undefined || currentState.gasB === undefined || currentState.gasD === undefined) {
             currentState.window = data.window_detector;
             currentState.human = data.human_detector;
             currentState.gasD = data.gas_detector;
             currentState.gasB = data.gas_blocker;
+            if (data.mode) {
+                currentState.mode = data.mode;
+            }
+            else {
+                currentState.mode = undefined;
+            }
+            if (data.led) {
+                currentState.led = data.led;
+            }
+            else {
+                currentState.led = undefined;
+            }
+            currentState.led = data.led;
         }
         updateLegacyStates(data);
     });
@@ -143,7 +157,7 @@ $(function () {
      *                                              ------> database
      */
     socket.on('/xiaomi/states', function (data) {
-        console.log(data);
+        // console.log(data);
         switch (data.type) {
             case 'magnet':
                 if (data.event === 'open') {
@@ -187,7 +201,6 @@ $(function () {
      * device ------> multiple server-> database <------ node server <---- dashboard EventLog
      */
 
-
     /** Xiaomi Power Plug Action Contoller*/
     $('#xiaomiPowerController').on('click', function (e) {
         if (!$('#xiaomiPower').prop('checked')) {
@@ -200,15 +213,34 @@ $(function () {
         }
     });
 
+    /** room mode controller*/
+    $('#roomModeController').on('click', function(e){
+        if (!$('#roomState').prop('checked')) {
+            console.log($('#roomState').prop('checked'));
+            legacyDeviceAction(2, true)
+            // xiaomiAction({plug: 'on'});
+        }
+        else {
+            console.log($('#roomState').prop('checked'));
+            legacyDeviceAction(2, false);
+            // xiaomiAction({plug: 'off'});
+        }
+    });
 
-    //////////////FFM
-    // var socket = io();
+    /** Light Controller*/
+    $('#lightController').on('click', function (e) {
+        if (!$('#lightState').prop('checked')) {
+            console.log($('#lightState').prop('checked'));
+            legacyDeviceAction(1, true);
+        }
+        else {
+            console.log($('#lightState').prop('checked'));
+            legacyDeviceAction(1, false);
+        }
+    });
 
 
-    //
-    // socket.on('recodr2',function (data) {
-    //     console.log(data);
-    // })
+
 
     camSocket = io(location.origin + '/cam0');
     camSocket.emit('stop');
@@ -249,138 +281,12 @@ $(function () {
             }
         });
 
-        // console.log('open modal');
-        // console.log(startCamSocket);
-        // if (!startCamSocket) {
-        //     console.log('startcam');
-        //     startCamSocket = socket.emit('/startcam');
-        // }
-        // socket.emit('/startcam');
-        // socket.on('start', function (cou) {
-        //     console.log('connect start');
-        //     // var divSocket, div = document.getElementById('ipcamera');
-        //     // var camImage = document.getElementById('camImage');
-        //
-        //     // var canvas = document.getElementById('ipcamera-canvas');
-        //
-        //     var ipcamera = document.getElementById('ipcamera');
-        //     var divSocket,
-        //         div = document.createElement('div');
-        //     var html = '';
-        //     // for (var i = 0; i < cou; i++) {
-        //     // 	html += '<option value="/cam' + i + '">Cam ' + i + '</option>';
-        //     // }
-        //     // html += '</select>';
-        //     html += "<canvas width='640' height='360'>";
-        //     div.innerHTML = html;
-        //     var canvas = div.getElementsByTagName('canvas')[0];
-        //     // select = div.getElementsByTagName('select')[0];
-        //     // select.onchange = function() {
-        //     //c
-        //     // };
-        //     /////////
-        //     // if (divSocket) {
-        //     //     console.log('divSocket disconn');
-        //     //     divSocket.disconnect();
-        //     //     document.getElementById('record').disabled = true;
-        //     // }
-        //     // console.log(this.value);
-        //     // console.log("asdasdasds");
-        //     if(camSocket) {
-        //         console.log('disconnect camSocket');
-        //         camSocket.disconnect();
-        //     }
-        //     camSocket = io(location.origin + '/cam0');
-        //     // camSocket = divSocket;
-        //     // console.log(camSocket);
-        //     camSocket.on('data', function (data) {
-        //         console.log('data');
-        //         document.getElementById('record').disabled = false;
-        //         var bytes = new Uint8Array(data);
-        //         var blob = new Blob([bytes], {type: 'application/octet-binary'});
-        //         var url = URL.createObjectURL(blob);
-        //         var img = new Image;
-        //         var ctx = canvas.getContext("2d");
-        //         img.onload = function () {
-        //             URL.revokeObjectURL(url);
-        //             ctx.drawImage(img, 0, 0);
-        //         };
-        //         img.src = url;
-        //         img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
-        //         // var bytes = new Uint8Array(data);
-        //         // camImage.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
-        //     });
-        //
-        //     ///////
-        //     // ipcamera.appendChild(div);
-        //
-        //     document.getElementById('record').onclick = function () {
-        //         this.disabled = true;
-        //         document.getElementById('stop').disabled = false;
-        //         socket.emit('record', 1);
-        //         console.log("record start");
-        //     };
-        //
-        //     document.getElementById('stop').onclick = function () {
-        //         this.disabled = true;
-        //         document.getElementById('record').disabled = false;
-        //         // console.log("record stop");
-        //     }
-        // });
-        // socket.emit('/startcam');
-        // socket.on('start', function (cou) {
-        //     console.log('start!!');
-        //     // var divSocket;
-        //         // div = document.createElement('div');
-        //     // var html = '';
-        //     // for (var i = 0; i < cou; i++) {
-        //     // 	html += '<option value="/cam' + i + '">Cam ' + i + '</option>';
-        //     // }
-        //     // html += '</select>';
-        //     // html += "<canvas width='640' height='360'>";
-        //     // div.innerHTML = html;
-        //
-        //     // select = div.getElementsByTagName('select')[0];
-        //     // select.onchange = function() {
-        //     //
-        //     // };
-        //     /////////
-        //     // if (camSocket) {
-        //     //     camSocket.disconnect();
-        //     //     document.getElementById('record').disabled = true;
-        //     //     camSocket.close();
-        //     // }
-        //     // console.log(this.value);
-        //     // console.log("asdasdasds");
-        //
-        //
-        //     ///////
-        //     // ipcamera.appendChild(div);
-        //
-        //     document.getElementById('record').onclick = function () {
-        //         this.disabled = true;
-        //         document.getElementById('stop').disabled = false;
-        //         socket.emit('record', 1);
-        //         console.log("record start");
-        //     }
-        //
-        //     document.getElementById('stop').onclick = function () {
-        //         this.disabled = true;
-        //         document.getElementById('record').disabled = false;
-        //         // console.log("record stop");
-        //     }
-        //
-        // });
 
     });
 
     $('#ip-camera').on('hidden.bs.modal', function (e) {
         console.log('close modal');
         camSocket.emit('stop');
-        // if (camSocket) {
-        //     console.log('camsocket disconnected');
-        //     camSocket.disconnect();
-        // }
     });
 
     function base64ArrayBuffer(arrayBuffer) {
@@ -423,8 +329,6 @@ $(function () {
     }
 
 });
-
-/////////////////
 
 function initEnvironmentData() {
     //get Recent Temperature Values.
@@ -487,13 +391,24 @@ function updateChart(chart, chartData) {
 }
 
 function updateLegacyStates(state) {
+    // console.log(state);
     // todo: jaesil or not jaesil check
     if (state.mode === undefined || state.mode === null) {
-        // jaesil == 0;
-        state.mode = 1;
+        state.mode = 0;
+    }
+    state.led = 1;
+
+    console.log(state.led);
+    if (state.led === 0) {
+        $('#lightState').prop("checked", false);
+    }
+    else {
+        $('#lightState').prop("checked", true);
     }
 
     if (state.mode !== 0) {
+        $('#roomState').prop("checked", false);
+
         if (state.window_detector === 0) {
             $('#legacyWindow').text(NOT_DETECTED);
         }
@@ -510,6 +425,8 @@ function updateLegacyStates(state) {
         }
     }
     else {
+        $('#roomState').prop("checked", true);
+
         $('#legacyWindow').text(NOT_DETECTED);
         $('#legacyHuman').text(NOT_DETECTED);
     }
@@ -531,20 +448,36 @@ function updateLegacyStates(state) {
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
-        console.log("window changed!");
+        // console.log("window changed!");
         currentState.window = state.window_detector;
+        sendSensorLog();
     }
     if (currentState.human !== state.human_detector) {
-        console.log("human changed!");
+        // console.log("human changed!");
         currentState.human = state.human_detector;
+        sendSensorLog();
     }
     if (currentState.gasB !== state.gas_blocker) {
-        console.log("gasB changed!");
+        // console.log("gasB changed!");
         currentState.gasB = state.gas_blocker;
+        sendSensorLog();
     }
     if (currentState.gasD !== state.gas_detector) {
-        console.log("gasD changed!");
+        // console.log("gasD changed!");
         currentState.gasD = state.gas_detector;
+        sendSensorLog();
+    }
+
+    if (currentState.mode !== state.mode) {
+        // console.log("gasD changed!");
+        currentState.gasD = state.gas_detector;
+        sendSensorLog();
+    }
+
+    if (currentState.led !== state.led) {
+        // console.log("gasD changed!");
+        currentState.led = state.led;
+        sendSensorLog();
     }
 }
 
@@ -561,6 +494,45 @@ function xiaomiAction(action) {
             console.log(err);
         }
     })
+}
+
+function legacyDeviceAction(type, action) {
+    // todo : ip address?
+    var action = {
+        'ip' : '',
+        'type' : type,
+        'turnOn' : action
+    };
+
+    $.ajax({
+        url: 'api/v1/action',
+        type: 'post',
+        data: action,
+        success: function(result) {
+            console.log(result);
+        },
+        error : function(err) {
+            console.log(err);
+        }
+    });
+}
+
+function sendSensorLog() {
+    var log = {
+
+    };
+
+    $.ajax({
+        url: 'api/v1/action/log',
+        type: 'post',
+        data: log,
+        success: function(result) {
+            console.log(result);
+        },
+        error : function(err) {
+            console.log(err);
+        }
+    });
 }
 
 

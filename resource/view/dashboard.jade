@@ -161,10 +161,10 @@ block content
                         .security-name Security Service
                         .security-number 001
                         label.switch
-                            input(type="checkbox")
-                            div.slider.round
+                            input(type="checkbox")#roomState
+                            div.slider.round#roomModeController
                         p ON
-                    .row.security-service
+                    //.row.security-service
                         .security-name Security Service
                         .security-number 002
                         label.switch
@@ -183,8 +183,8 @@ block content
                         .device-name Smart Light
                         .device-number 001
                         label.switch
-                            input(type="checkbox")
-                            div.slider.round
+                            input(type="checkbox")#lightState
+                            div.slider.round#lightController
                         p ON
                     .row.device-control-content
                         img(src="/image/PoweroutletWhite.png")
@@ -200,7 +200,7 @@ block content
                         .device-number 001
                         label.switch
                             input(type="checkbox")
-                            div.slider.round
+                            div.slider.round.disabled
                         p ON
     .content-head-2 Service / Device Event
         table
