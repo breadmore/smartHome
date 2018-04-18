@@ -7,6 +7,7 @@ const spawn = require('child_process').spawn
     , util = require('util')
 ;
 
+
 /**
  * Stream constructor
  * @param {object} options
@@ -62,31 +63,6 @@ function observer(changes) {
     }
 }
 
-// FFMpeg.prototype._args = function() {
-//     //영상 출력
-//     //ffmpeg -i rtsp:/211.238.240.86:554/unicast -r 10 -q:v 10 -f image2 -udatefirst 1 -
-//     console.log("none");
-//     return this.arguments.concat(
-//         [
-//             '-loglevel', 'quiet'
-//             , '-i', this.input
-//             , '-r', this.rate.toString()]
-//         , this.quality ? ['-q:v', this.quality.toString()] : [],
-//         [
-//             '-vf', 'scale=600:400',
-//             //  '-b:v', '512k',
-//             '-f', 'image2'
-//             , '-updatefirst', '1'
-//             , '-'
-//         ],
-//         [
-//         '-loglevel', 'quiet', '-y'
-//         , '-i', this.input,
-//         '-ss', '0',
-//         '-vframes', '1', 'C:/Users/classact/bbh/dev/webstorm/hhha/IoT_Security_Interface/resource/public/image/thumbnail.png'
-//     ]);
-// };
-
 var on_off_record = false;
 
 
@@ -99,7 +75,7 @@ FFMpeg.prototype._args = function (option) {
         '-loglevel', 'quiet', '-y'
         , '-i', this.input,
         '-ss', '0',
-        '-vframes', '1', '/Users/JINU/Downloads/thumbnail.png'
+        '-vframes', '1', '/Users/jongho/Downloads/thumbnail.png'
     ];
 
 
@@ -123,7 +99,7 @@ FFMpeg.prototype._args = function (option) {
         , '-i', this.input,
         '-vcodec', 'copy',
         '-ss', '0', '-t', '10',
-        '/Users/JINU/Downloads/'+ date +'.avi'
+        '/Users/jongho/Downloads/'+ date +'.avi'
     ];
 
     var stream = this.arguments.concat(thumbnail, video1, video2, video3);

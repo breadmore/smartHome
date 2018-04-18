@@ -20,13 +20,19 @@ block content
                 i.fas.fa-sync-alt
             .col-12
     #loader
-    .row.no-gutters(style='margin-bottom:20px; display:none;')#deviceDiv
+    .row.no-gutters(style='margin-bottom:20px; margin-top: -10px; display:none;')#deviceDiv
+        .col-12(style='margin-bottom: 10px;')
+            button refresh
+            input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+            input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+            input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addModal" data-toggle="modal")#addButton
+            input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addModal" data-toggle="modal")#addButton
         .col-6.no-gutters.view-box
             .row.no-gutters.view-box-title
                 h3 Device List
             .row.no-gutters.view-box-content
                 ul.tree
-        .col-6.no-gutters.detail-view.view-box(style='height:300px')
+        .col-6.no-gutters.detail-view.view-box
             .row.no-gutters.view-box-title
                 h3 Device Detail
             .row.no-gutters.view-box-content
@@ -37,16 +43,16 @@ block content
                             td(width='50%')#gatewayId aaa
                         tr
                             td Gateway Name
-                            td#gatewayName bbb
+                            td#gatewayName
                         tr
                             td IP
-                            td#gatewayIP 10.0.0.2
+                            td#gatewayIP
                         tr
                             td Port
-                            td#gatewayPort 3000
+                            td#gatewayPort
                         tr
                             td Connection
-                            td#gatewayConn conn
+                            td#gatewayConn
                 table.detail-device-view(style='display:none;width:100%;')#deviceTable
                     tr
                         td Gateway ID
@@ -81,11 +87,14 @@ block content
                     tr
                         td Security Policy
                         td#operation CRUDN
-    .row.no-gutters(style='margin-bottom:20px')
+    .row.no-gutters(style='margin-bottom:0px')
         span.col-xl-2.content-title.no-padding Security
         .col-10.content-hr.no-padding
             hr
     .row.no-gutters(style='margin-bottom:20px; display: none;')#securityDiv
+        .col-12(style='margin-bottom:10px;')
+            input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
+            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
         .col-12.no-gutters
             table#securityTable(style='width:100%')
                 thead

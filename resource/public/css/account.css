@@ -325,22 +325,13 @@ div .dataTables_paginate > .pagination {
     margin: auto;
 }
 
-.btn-action {
-    float: right;
-    margin-right: 0px;
-    margin-left: 20px;
-    background-color: #65c0c6;
-    border-color: #65c0c6;
-    height: 31px;
-    line-height: 1;
-}
 
-@media (min-width: 620px){
-    .modal-dialog {
-        max-width: 620px;
-        margin: 1.75rem auto;
-    }
-}
+/*@media (min-width: 620px){*/
+    /*.modal-dialog {*/
+        /*max-width: 620px;*/
+        /*margin: 1.75rem auto;*/
+    /*}*/
+/*}*/
 
 
 .detail-view table tbody, .detail-view table tbody tr {
@@ -359,6 +350,7 @@ div .dataTables_paginate > .pagination {
     /*overflow-y: scroll;*/
     border: solid 1px #3498db;
     position: relative;
+    width: 95%;
 }
 
 .view-box-title {
