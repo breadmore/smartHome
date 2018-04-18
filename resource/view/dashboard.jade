@@ -122,7 +122,7 @@ block content
                     span.small-title Camera
                     span 001
                 .card-text
-                    img(src="/image/thumbnail.png").camera-img(data-target="#ip-camera" data-toggle="modal")
+                    img(src="/image/thumbnail.png" alt='Camera is not initialized', data-target="#ip-camera" data-toggle="modal").camera-img#videoModal
         .card.device-monitor.gas-mgnmt
             .card-body
                 .card-title
@@ -257,6 +257,7 @@ block content
                 .modal-body
                     .modal-body-content
                         #ipcamera(style='width: 640px')
+                            canvas(width='640', height='360' style='width:640px; height:360px;')
                         button#record(disabled='') record
                         button#stop(disabled='') stop
                 .modal-footer

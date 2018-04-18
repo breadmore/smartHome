@@ -11,6 +11,16 @@ const CLOSED = 'Closed';
 
 var currentState = {};
 
+
+var camSocket;
+window.onbeforeunload = function () {
+    if (camSocket) {
+        console.log('disconnect cam');
+        camSocket.disconnect();
+        camSocket = undefined;
+    }
+};
+
 $(function () {
     initEnvironmentData();
 
@@ -114,7 +124,7 @@ $(function () {
      * device -----> gateway -------> database <----- node server <------ dashboard
      *
      */
-    setInterval(function () {
+    setTimeout(function () {
         socket.emit('/legacy/states');
     }, 1000);
     socket.on('/legacy/states', function (data) {
@@ -178,8 +188,6 @@ $(function () {
      */
 
 
-
-
     /** Xiaomi Power Plug Action Contoller*/
     $('#xiaomiPowerController').on('click', function (e) {
         if (!$('#xiaomiPower').prop('checked')) {
@@ -202,32 +210,16 @@ $(function () {
     //     console.log(data);
     // })
 
-
-    socket.on('start', function (cou) {
+    camSocket = io(location.origin + '/cam0');
+    camSocket.emit('stop');
+    camSocket.emit('init');
+    $('#ip-camera').on('show.bs.modal', function (e) {
+        camSocket.emit('stop');
         var ipcamera = document.getElementById('ipcamera');
-        var divSocket,
-            div = document.createElement('div');
-        var html = '';
-        // for (var i = 0; i < cou; i++) {
-        // 	html += '<option value="/cam' + i + '">Cam ' + i + '</option>';
-        // }
-        // html += '</select>';
-        html += "<canvas width='640' height='360'>";
-        div.innerHTML = html;
-        var canvas = div.getElementsByTagName('canvas')[0];
-        // select = div.getElementsByTagName('select')[0];
-        // select.onchange = function() {
-        //
-        // };
-        /////////
-        if (divSocket) {
-            divSocket.disconnect();
-            document.getElementById('record').disabled = true;
-        }
-        // console.log(this.value);
-        // console.log("asdasdasds");
-        divSocket = io(location.origin + '/cam0');
-        divSocket.on('data', function (data) {
+        var canvas = ipcamera.getElementsByTagName('canvas')[0];
+        camSocket.emit('start');
+        camSocket.on('data', function (data) {
+            console.log('data');
             // console.log(data);
             document.getElementById('record').disabled = false;
             var bytes = new Uint8Array(data);
@@ -241,24 +233,156 @@ $(function () {
             };
             img.src = url;
             img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
+
+            document.getElementById('record').onclick = function () {
+                this.disabled = true;
+                document.getElementById('stop').disabled = false;
+                camSocket.emit('stop');
+                camSocket.emit('record');
+                console.log("record start");
+            };
+
+            document.getElementById('stop').onclick = function () {
+                this.disabled = true;
+                document.getElementById('record').disabled = false;
+                // console.log("record stop");
+            }
         });
 
-        ///////
-        ipcamera.appendChild(div);
+        // console.log('open modal');
+        // console.log(startCamSocket);
+        // if (!startCamSocket) {
+        //     console.log('startcam');
+        //     startCamSocket = socket.emit('/startcam');
+        // }
+        // socket.emit('/startcam');
+        // socket.on('start', function (cou) {
+        //     console.log('connect start');
+        //     // var divSocket, div = document.getElementById('ipcamera');
+        //     // var camImage = document.getElementById('camImage');
+        //
+        //     // var canvas = document.getElementById('ipcamera-canvas');
+        //
+        //     var ipcamera = document.getElementById('ipcamera');
+        //     var divSocket,
+        //         div = document.createElement('div');
+        //     var html = '';
+        //     // for (var i = 0; i < cou; i++) {
+        //     // 	html += '<option value="/cam' + i + '">Cam ' + i + '</option>';
+        //     // }
+        //     // html += '</select>';
+        //     html += "<canvas width='640' height='360'>";
+        //     div.innerHTML = html;
+        //     var canvas = div.getElementsByTagName('canvas')[0];
+        //     // select = div.getElementsByTagName('select')[0];
+        //     // select.onchange = function() {
+        //     //c
+        //     // };
+        //     /////////
+        //     // if (divSocket) {
+        //     //     console.log('divSocket disconn');
+        //     //     divSocket.disconnect();
+        //     //     document.getElementById('record').disabled = true;
+        //     // }
+        //     // console.log(this.value);
+        //     // console.log("asdasdasds");
+        //     if(camSocket) {
+        //         console.log('disconnect camSocket');
+        //         camSocket.disconnect();
+        //     }
+        //     camSocket = io(location.origin + '/cam0');
+        //     // camSocket = divSocket;
+        //     // console.log(camSocket);
+        //     camSocket.on('data', function (data) {
+        //         console.log('data');
+        //         document.getElementById('record').disabled = false;
+        //         var bytes = new Uint8Array(data);
+        //         var blob = new Blob([bytes], {type: 'application/octet-binary'});
+        //         var url = URL.createObjectURL(blob);
+        //         var img = new Image;
+        //         var ctx = canvas.getContext("2d");
+        //         img.onload = function () {
+        //             URL.revokeObjectURL(url);
+        //             ctx.drawImage(img, 0, 0);
+        //         };
+        //         img.src = url;
+        //         img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
+        //         // var bytes = new Uint8Array(data);
+        //         // camImage.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
+        //     });
+        //
+        //     ///////
+        //     // ipcamera.appendChild(div);
+        //
+        //     document.getElementById('record').onclick = function () {
+        //         this.disabled = true;
+        //         document.getElementById('stop').disabled = false;
+        //         socket.emit('record', 1);
+        //         console.log("record start");
+        //     };
+        //
+        //     document.getElementById('stop').onclick = function () {
+        //         this.disabled = true;
+        //         document.getElementById('record').disabled = false;
+        //         // console.log("record stop");
+        //     }
+        // });
+        // socket.emit('/startcam');
+        // socket.on('start', function (cou) {
+        //     console.log('start!!');
+        //     // var divSocket;
+        //         // div = document.createElement('div');
+        //     // var html = '';
+        //     // for (var i = 0; i < cou; i++) {
+        //     // 	html += '<option value="/cam' + i + '">Cam ' + i + '</option>';
+        //     // }
+        //     // html += '</select>';
+        //     // html += "<canvas width='640' height='360'>";
+        //     // div.innerHTML = html;
+        //
+        //     // select = div.getElementsByTagName('select')[0];
+        //     // select.onchange = function() {
+        //     //
+        //     // };
+        //     /////////
+        //     // if (camSocket) {
+        //     //     camSocket.disconnect();
+        //     //     document.getElementById('record').disabled = true;
+        //     //     camSocket.close();
+        //     // }
+        //     // console.log(this.value);
+        //     // console.log("asdasdasds");
+        //
+        //
+        //     ///////
+        //     // ipcamera.appendChild(div);
+        //
+        //     document.getElementById('record').onclick = function () {
+        //         this.disabled = true;
+        //         document.getElementById('stop').disabled = false;
+        //         socket.emit('record', 1);
+        //         console.log("record start");
+        //     }
+        //
+        //     document.getElementById('stop').onclick = function () {
+        //         this.disabled = true;
+        //         document.getElementById('record').disabled = false;
+        //         // console.log("record stop");
+        //     }
+        //
+        // });
 
-        document.getElementById('record').onclick = function () {
-            this.disabled = true;
-            document.getElementById('stop').disabled = false;
-            socket.emit('record', 1);
-            console.log("record start");
-        }
-
-        document.getElementById('stop').onclick = function () {
-            this.disabled = true;
-            document.getElementById('record').disabled = false;
-            // console.log("record stop");
-        }
     });
+
+    $('#ip-camera').on('hidden.bs.modal', function (e) {
+        console.log('close modal');
+        camSocket.emit('stop');
+        // if (camSocket) {
+        //     console.log('camsocket disconnected');
+        //     camSocket.disconnect();
+        // }
+    });
+
     function base64ArrayBuffer(arrayBuffer) {
         var base64 = '';
         var encodings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -451,10 +575,10 @@ function initXiaomiDeviceData() {
         $.ajax({
             url: 'api/v1/xiaomi/status',
             type: 'get',
-            success: function(result) {
-                console.log(result);
+            success: function (result) {
+                // console.log(result);
             },
-            error : function(err) {
+            error: function (err) {
                 console.log(err)
             }
         });
