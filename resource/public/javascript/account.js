@@ -1,23 +1,24 @@
 //var dbController = require('../../../src/web/api/v1/DbTestController');
 
-var gatewayList = [
-    {
-        id: "12965901",
-        name: 'Gateway_Room',
-        ip : '10.0.0.2',
-        port: 3000,
-        conn: 0
+// var gatewayList = [
+//     {
+//         id: "12965901",
+//         name: 'Gateway_Room',
+//         ip : '10.0.0.2',
+//         port: 3000,
+//         conn: 0
+//
+//     },
+//     {
+//         id: "2",
+//         name: 'Gateway_Living',
+//         ip : '10.0.0.3',
+//         port: 3000,
+//         conn: 0
+//     }
+// ];
 
-    },
-    {
-        id: "2",
-        name: 'Gateway_Living',
-        ip : '10.0.0.3',
-        port: 3000,
-        conn: 0
-    }
-];
-
+var gatewayList;
 var deviceList;
 var securityList = [];
 var entityList;
@@ -251,27 +252,49 @@ function toggleTable(gateway, device) {
  * */
 
 function createDeviceListView() {
-    // todo : data crawling and save list.
+
+
+
     $.ajax({
-        url: '/api/v1/devices',
-        type: 'get',
-        success: function(result) {
-            // console.log(result);
-            $.each(result, function(index, item){
-                item.psk = bin2String(item.psk.data);
+        url : '/api/v1/gateways',
+        type : 'get',
+        success : function(gatewayResult) {
+
+            $.each(gatewayResult, function(index, item){
                 item.conn = conn2Icon(item.conn);
-                item.auth = auth2Icon(item.auth);
-                item.reg = regi2Icon(item.reg);
-                item.type= type2Icon(item.type);
             });
-            deviceList = result;
-            $.each(gatewayList, function(index, item){
-                $('.tree').append(deviceListForm(item, result));
-                addClickListenerToGatewayTitle();
-            });
-            addClickListenerToDeviceInfo();
+            gatewayList = gatewayResult;
+            $.ajax({
+                url: '/api/v1/devices',
+                type: 'get',
+                success: function(deviceResult) {
+                    $.each(deviceResult, function(index, item){
+                        // console.log(bin2String(item.psk.data));
+                        if (item.psk) {
+                            item.psk = bin2String(item.psk.data);
+                        }
+                        else {
+                            item.psk = "";
+                        }
+                        item.conn = conn2Icon(item.conn);
+                        item.auth = auth2Icon(item.auth);
+                        item.reg = regi2Icon(item.reg);
+                        item.type= type2Icon(item.type);
+                    });
+                    deviceList = deviceResult;
+                    console.log(deviceList);
+                    $.each(gatewayList, function(index, item){
+                        $('.tree').append(deviceListForm(item, deviceList));
+                        addClickListenerToGatewayTitle();
+                    });
+                    addClickListenerToDeviceInfo();
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
         },
-        error: function(err) {
+        error : function(err) {
             console.log(err);
         }
     });
