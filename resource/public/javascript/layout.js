@@ -4,12 +4,8 @@ $(function () {
         var name = $(this).attr('class');
         if (name == "dashboard") {
             location.href = "/dashboard";
-        } else if ( name == "gateway") {
-            location.href = "/gateway";
-        } else if ( name == "iotdevices") {
-            location.href = "/iotdevices";
-        } else if ( name == "security") {
-            location.href = "/security";
+        } else if ( name == "device_security") {
+            location.href = "/device_security";
         } else if ( name == "account") {
             location.href = "/account";
         } else if ( name == "logger") {
@@ -21,16 +17,12 @@ $(function () {
 
     var para = document.location.href.split("/");
 
-    console.log(para[3])
+    // console.log(para[3])
 
     if (para[3] == "dashboard") {
         $(".dashboard").css("background-color", "rgb(90,153,157)");
-    } else if (para[3] == "gateway") {
-        $(".gateway").css("background-color", "rgb(90,153,157)");
-    } else if (para[3] == "iotdevices") {
-        $(".iotdevices").css("background-color", "rgb(90,153,157)");
-    } else if (para[3] == "security") {
-        $(".security").css("background-color", "rgb(90,153,157)");
+    } else if (para[3] == "device_security") {
+        $(".device_security").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "account") {
         $(".account").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "logger") {

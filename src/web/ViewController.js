@@ -20,17 +20,21 @@ router.get('/regist', function (req, res) {
     res.render('regist');
 });
 
-router.get('/gateway', function (req, res) {
-    res.render('gateway');
+router.get('/device_security', function (req, res) {
+    res.render('device_security');
 });
 
-router.get('/iotdevices', function (req, res) {
-    res.render('iotdevice');
-});
-
-router.get('/security', function (req, res) {
-    res.render('security');
-});
+// router.get('/gateway', function (req, res) {
+//     res.render('gateway');
+// });
+//
+// // router.get('/iotdevices', function (req, res) {
+// //     res.render('iotdevice');
+// // });
+// //
+// // router.get('/security', function (req, res) {
+// //     res.render('security');
+// // });
 
 router.get('/account', function (req, res) {
     res.render('account');

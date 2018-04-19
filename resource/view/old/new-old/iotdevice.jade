@@ -1,4 +1,4 @@
-extends layout
+extends ../../layout
 
 append head
     link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
@@ -52,47 +52,50 @@ block content
                         input(type="number")#gateway-id
                         p Device Name
                         input(type="text" value="")#device-name
+                        p Device ID
+                        input(type="text")#device-id
+                        p Pre Shared Key
+                        input(type="text")#pre-shared-key
+                        p Entity ID
+                        input(type="text")#entity-id
+                        p Object ID
+                        input(type="text")#object-id
+                        p Session ID
+                        input(type="text")#session-id
                         p Device type
                         select#type
                             option(value=1, selected="selected") Temperature sensor
                             option(value=2) Temperature sensor2
                             option(value=3) Temperature sensor3
-                        p Device ID
-                        input(type="text")#device-id
-                        p Pre Shared Key
-                        input(type="text")#pre-shared-key
-                        p Object ID
-                        input(type="text")#object-id
-                        p Session ID
-                        input(type="text")#session-id
                         p Connected
                         .radio-group#connected
                             label.radio-inline
                                 input(type='radio', name='optradio')
-                                | &nbsp;OK
+                                | &nbsp;Connected
                             label.radio-inline(style="margin-left:12px")
                                 input(type='radio', name='optradio')
-                                | &nbsp;NO
+                                | &nbsp;Not Connected
                         p Authenticate
                         .radio-group#authenticate
                             label.radio-inline
                                 input(type='radio', name='optradio')
-                                | &nbsp;OK
+                                | &nbsp;Authenticated
                             label.radio-inline(style="margin-left:12px")
                                 input(type='radio', name='optradio')
-                                | &nbsp;NO
+                                | &nbsp;Not Authenticated
                         //p Policy
                         //input(type="number")#policy
                 .modal-footer
-                    button.btn.btn-default(data-dismiss="modal") Cancel
-                    button.btn.btn-primary(type='button')#saveButton Save Change
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.modal-btn.btn-action(type='button')#saveButton Save Change
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     .modal.fade#addModal(role="dialog")
         .modal-dialog
             .modal-content
                 .modal-header
                     .modal-title RESGISTRATION
-                    //div
-                    //    button modify
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
                         .gateway_id Gateway ID
@@ -102,35 +105,38 @@ block content
                             option(value=333) ETRI-SG-003
                         .device-name Device Name
                         input(type="text" value="")#add-device-name
+                        .device-id Device ID
+                        input(type="text")#add-device-id
+                        .pre_shared_key Pre Shared Key
+                        input(type="text" value="")#add-pre-shared-key
+                        .entity-id Entity ID
+                        input(type="text" value="")#add-entity-id
+                        .object-id Object ID
+                        input(type="text" value="")#add-object-id
+                        .session-id Session ID
+                        input(type="text" value="")#add-session-id
                         .select-device-type Device type
                         select#add-type
                             option(value=1, selected="selected") Temperature sensor
                             option(value=2) Temperature sensor2
                             option(value=3) Temperature sensor3
-                        .device-id Device ID
-                        input(type="text")#add-device-id
-                        .pre_shared_key Pre Shared Key
-                        input(type="text" value="")#add-pre-shared-key
-                        .object-id Object ID
-                        input(type="text" value="")#add-object-id
-                        .session-id Session ID
-                        input(type="text" value="")#add-session-id
                         .connection Connection
                         .radio-group
                             label.radio-inline
                                 input(type='radio', name='optradio')
-                                | &nbsp;OK
+                                | &nbsp;Connected
                             label.radio-inline(style="margin-left:12px")
                                 input(type='radio', name='optradio')
-                                | &nbsp;NO
+                                | &nbsp;Not Connected
                         .authentication Authentication
                         .radio-group
                             label.radio-inline
                                 input(type='radio', name='optradio')
-                                | &nbsp;OK
+                                | &nbsp;Authenticated
                             label.radio-inline(style="margin-left:12px")
                                 input(type='radio', name='optradio')
-                                | &nbsp;NO
+                                | &nbsp;Not Authenticated
                 .modal-footer
-                    button.btn.btn-default(data-dismiss="modal") Cancel
-                    button.btn.btn-primary(type='button')#addButton Add Device
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn(type='button')#addButton Add Device
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel

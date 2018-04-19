@@ -1,4 +1,4 @@
-extends layout
+extends ../../layout
 
 append head
     link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
@@ -86,17 +86,18 @@ block content
                         .form-check.form-check-inline.disabled
                             label.form-check-label
                                 input.form-check-input(type='checkbox', value='')
-                                | Notification
-                        p(style='margin-top:10px;') Policy Target
+                                | Notify
+                        p(style='margin-top:10px;') Policy Enforcement Point
                         label.radio-inline
                             input(type='radio', name='optradio')
-                            | Server
-                        label.radio-inline
+                            | &nbsp;Server
+                        label.radio-inline(style="margin-left:12px")
                             input(type='radio', name='optradio')
-                            | Device
+                            | &nbsp;Device
                 .modal-footer
-                    button.modal-cancel(data-dismiss="modal") Cancel
-                    button.modal-confirm(data-dismiss="modal") Confirm
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Confirm
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     #deployLogModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog.modal-lg(role='document')
             .modal-content
@@ -135,7 +136,8 @@ block content
                                     td ThermoHygrometer_65934
                                     td C
                 .modal-footer
-                    //button.modal-cancel(data-dismiss="modal") Cancel
-                    button.modal-confirm(data-dismiss="modal") Confirm
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Delete
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
 
 

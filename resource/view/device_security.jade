@@ -1,0 +1,415 @@
+extends layout
+
+append head
+    link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
+    script(src='/javascript/device_security.js')
+    link(rel='stylesheet', type='text/css', href='/css/common.css')
+    link(rel='stylesheet', type='text/css', href='/css/device_security.css')
+    script(defer='', src='https://use.fontawesome.com/releases/v5.0.10/js/all.js', integrity='sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+', crossorigin='anonymous')
+
+append title
+    span.col-xl-2.content-title.no-padding Device
+
+block content
+    //.row.no-gutters
+        .col-6.no-gutters
+            .col-12
+                i.fas.fa-sync-alt
+            .col-12
+    #loader
+    .row.no-gutters(style='margin-bottom:20px; margin-top: -10px; display:none;')#deviceDiv
+        .col-12(style='margin-bottom: 10px;')
+            button refresh
+            input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+            input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+            input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
+            input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addButton
+        .col-6.no-gutters.view-box
+            .row.no-gutters.view-box-title
+                h3 Device List
+            .row.no-gutters.view-box-content
+                ul.tree
+        .col-6.no-gutters.detail-view.view-box
+            .row.no-gutters.view-box-title
+                h3 Device Detail
+            .row.no-gutters.view-box-content
+                table.detail-gateway-view(style='display:none;width:100%;table-layout: fixed;', width='100%')#gatewayTable
+                    tbody
+                        tr
+                            td(width='50%') Gateway ID
+                            td(width='50%')#gatewayId aaa
+                        tr
+                            td Gateway Name
+                            td#gatewayName
+                        tr
+                            td IP
+                            td#gatewayIP
+                        tr
+                            td Port
+                            td#gatewayPort
+                        tr
+                            td Connection
+                            td#gatewayConn
+                table.detail-device-view(style='display:none;width:100%;')#deviceTable
+                    tr
+                        td Gateway ID
+                        td#gwid
+                    tr
+                        td Device Name
+                        td#dname
+                    tr
+                        td Device Type
+                        td#type
+                    tr
+                        td Device ID
+                        td#eid
+                    tr
+                        td Product ID
+                        td#did
+                    tr
+                        td Pre Shared Key
+                        td#psk
+                    tr
+                        td Object ID
+                        td#oid
+                    tr
+                        td Session ID
+                        td#sid
+                    tr
+                        td Connection
+                        td#conn
+                    tr
+                        td Authentication
+                        td#auth
+                    tr
+                        td Security Policy
+                        td#operation CRUDN
+    .row.no-gutters(style='margin-bottom:0px')
+        span.col-xl-2.content-title.no-padding Security
+        .col-10.content-hr.no-padding
+            hr
+    .row.no-gutters(style='margin-bottom:20px; display: none;')#securityDiv
+        .col-12(style='margin-bottom:10px;')
+            input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
+            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
+        .col-12.no-gutters
+            table#securityTable(style='width:100%')
+                thead
+                    tr
+                        th Enforce Date
+                        th From ID
+                        th To ID
+                        th Resource
+                        th Create
+                        th Read
+                        th Update
+                        th Delete
+                        th Notify
+    .row.no-gutters(style='margin-bottom:60px')
+        span.col-xl-2.content-title.no-padding Security Event
+        .col-10.content-hr.no-padding
+            hr
+    #addGatewayModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title ADD GATEWAY
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content#save-Gateway-form
+                        p Gateway ID
+                        input(type='text')#save-gateway-id
+                        p Gateway Name
+                        input(type='text')#save-gateway-name
+                        p IP Address
+                        input(type='text')#save-ipaddress
+                        p Port
+                        input(type='text')#save-port
+                        p Connected
+                        .radio-group#gateway-connected
+                            label.radio-inline
+                                input(type='radio', name='optradio' value=1)
+                                | &nbsp;Connected
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio' value=0)
+                                | &nbsp;Not Connected
+                .modal-footer
+                    //button.modal-cancel(data-dismiss="modal") Cancel
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn#save-Gateway(data-dismiss="modal") Save Gateway
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+    #addDeviceModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title ADD DEVICE
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        .gateway_id Gateway ID
+                        select#add-gateway-id
+                        .device-name Device Name
+                        input(type="text" value="")#add-device-name
+                        .device-id Device ID
+                        input(type="text")#add-device-id
+                        .pre_shared_key Pre Shared Key
+                        input(type="text" value="")#add-pre-shared-key
+                        .entity-id Entity ID
+                        input(type="text" value="")#add-entity-id
+                        .object-id Object ID
+                        input(type="text" value="")#add-object-id
+                        .session-id Session ID
+                        input(type="text" value="")#add-session-id
+                        .select-device-type Device type
+                        select#add-type
+                            option(value=1, selected="selected") GasDetector
+                            option(value=2) GasBreaker
+                            option(value=3) ThermoHygrometer
+                            option(value=4) SmartLighting
+                            option(value=5) IntrusionDetector
+                            option(value=6) DoorSensor
+                            option(value=7) SmartPlug
+                            option(value=8) SmartCamera
+                        .connection Connection
+                        .radio-group#add-connection
+                            label.radio-inline
+                                input(type='radio', name='optradio' value=1)
+                                | &nbsp;Connected
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio' value=0)
+                                | &nbsp;Not Connected
+                        .authentication Authentication
+                        .radio-group#add-authentication
+                            label.radio-inline
+                                input(type='radio', name='optradio2' value=1)
+                                | &nbsp;Authenticated
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio2' value=0)
+                                | &nbsp;Not Authenticated
+                        .registered Registered
+                        .radio-group#add-registered
+                            label.radio-inline
+                                input(type='radio', name='optradio3' value=1)
+                                | &nbsp;Registered
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio3' value=0)
+                                | &nbsp;Not Registered
+                .modal-footer
+                    //button.modal-cancel(data-dismiss="modal") Cancel
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn#save-Device(data-dismiss="modal") Save Device
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+    #modifyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title MODIFY DEVICE
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        p Gateway ID
+                        input(type="number")#gateway-id
+                        p Device Name
+                        input(type="text" value="")#device-name
+                        p Device ID
+                        input(type="text")#device-id
+                        p Pre Shared Key
+                        input(type="text")#pre-shared-key
+                        p Entity ID
+                        input(type="text")#entity-id
+                        p Object ID
+                        input(type="text")#object-id
+                        p Session ID
+                        input(type="text")#session-id
+                        p Device type
+                        select#type
+                            option(value=1, selected="selected") Temperature sensor
+                            option(value=2) Temperature sensor2
+                            option(value=3) Temperature sensor3
+                        p Connected
+                        .radio-group#connected
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;Connected
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;Not Connected
+                        p Authenticate
+                        .radio-group#authenticate
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;Authenticated
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;Not Authenticated
+                        p Registered
+                        .radio-group
+                            label.radio-inline
+                                input(type='radio', name='optradio')
+                                | &nbsp;Registered
+                            label.radio-inline(style="margin-left:12px")
+                                input(type='radio', name='optradio')
+                                | &nbsp;Not Registered
+                .modal-footer
+                    //button.modal-cancel(data-dismiss="modal") Cancel
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Delete
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+    #policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title Policy Deploy
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        p FromID
+                        select#form-Id
+                        p ToID
+                        select#to-Id
+                        p Resource Name
+                        select#resource-Name
+                        p Policy
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Create
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Read
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Update
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Delete
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Notify
+                        p(style='margin-top:10px;') Policy Enforcement Point
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | &nbsp;Server
+                        label.radio-inline(style="margin-left:12px")
+                            input(type='radio', name='optradio')
+                            | &nbsp;Device
+                .modal-footer
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Confirm
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+    #deployLogModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title Deploy Log
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        table#logTable.no-padding(style='width:100%')
+                            thead
+                                tr
+                                    th Datetime
+                                    th From ID
+                                    th To ID
+                                    th Resource Name
+                                    th Operation
+                            tbody
+                                tr
+                                    td 2018-04-09 13:12:10
+                                    td ThermoHygrometer_65934
+                                    td MyIoTSVR
+                                    td ThermoHygrometer_65934
+                                    td CRUD
+
+                                tr
+                                    td 2018-04-10 13:13:16
+                                    td ThermoHygrometer_65934
+                                    td MyIoTSVR
+                                    td ThermoHygrometer_65934
+                                    td CRUDN
+                                tr
+                                    td 2018-04-10 16:55:10
+                                    td ThermoHygrometer_65934
+                                    td MyIoTSVR
+                                    td ThermoHygrometer_65934
+                                    td C
+                .modal-footer
+                    //button.modal-cancel(data-dismiss="modal") Cancel
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Delete
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+
+
+
+    //.col-12.no-padding
+        input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+        input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+        input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#policyModal" data-toggle="modal")#policyButton
+    //table#dataTable.no-padding(style='width:100%;')
+        thead
+            tr
+                th(scope='cols') Gateway ID
+                th(scope='cols') Product ID
+                th(scope='cols') Device ID
+                th(scope='cols') Pre Shared Key
+                th(scope='cols') Object ID
+                th(scope='cols') Session ID
+                th(scope='cols') Type
+                th(scope='cols') Connected
+                th(scope='cols') Authenticate
+                th(scope='cols') Policy
+    //#policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title Policy Deploy
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        p FromID → ToID
+                        input(type='text' readonly=true value='ThermoHygrometer_65934->MyIoTSVR')
+                        p Resource Name
+                        input(type='text' readonly=true value='ThermoHygrometer_65934')
+                        p Policy
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Create
+                        .form-check.form-check-inline
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Read
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Update
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Delete
+                        .form-check.form-check-inline.disabled
+                            label.form-check-label
+                                input.form-check-input(type='checkbox', value='')
+                                | Notification
+                        p(style='margin-top:10px;') Policy Target
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | Server
+                        label.radio-inline
+                            input(type='radio', name='optradio')
+                            | Device
+                .modal-footer
+                    button.modal-cancel(data-dismiss="modal") Cancel
+                    button.modal-confirm(data-dismiss="modal") Confirm

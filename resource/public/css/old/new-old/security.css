@@ -66,3 +66,8 @@
     position: relative;
     left: 50%;
 }
+
+#logTable_previous, #logTable_next {
+    text-align: center;
+    width: 90px;
+}
