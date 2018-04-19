@@ -7,15 +7,21 @@ append head
     script(src='/javascript/logger.js')
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
-    link(rel='stylesheet', type='text/css', href='/css/iotdevice.css')
     link(rel='stylesheet', type='text/css', href='/css/common.css')
-
-    style(type='text/css').
+    script(src='/plugin/datepicker/combined/js/gijgo.js')
+    link(rel='stylesheet', type='text/css', href='/plugin/datepicker/combined/css/gijgo.css')
+    link(rel='stylesheet', type='text/css', href='/css/logger.css')
 
 append title
     span.col-xl-2.content-title.no-padding Logger
 
 block content
+    .row
+        .col
+        .col
+        .col
+            input#datepicker(placeholder="Select Date")
+        .col
+        .col
     .chart
         canvas#myChart
-    button.click click

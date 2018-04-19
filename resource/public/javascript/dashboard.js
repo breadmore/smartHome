@@ -2,6 +2,7 @@ var recentTemperature = [];
 var recentHumidity = [];
 var temperatureChart;
 var humidityChart;
+var myChart_modal;
 
 const NOT_DETECTED = 'Not Detected';
 const DETECTED = 'Detected';
@@ -88,6 +89,80 @@ $(function () {
                 }
         }
     });
+    //all Chart
+    var ctx_modal = $("#myChart-all");
+    myChart_modal = new Chart(ctx_modal, {
+        type: 'line',
+        data: {
+            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" ],
+            datasets: [
+                {
+                    label: 'Temperature',
+                    radius: 1.5,
+                    data: [13, 12, 12, 11, 11, 10, 10, 11, 12, 13, 14, 15, 16, 17, 16, 15, 15, 14, 13, 13, 12, 12, 11, 11],
+                    // backgroundColor: [
+                    //     'rgba(35, 189, 252,0.2)',
+                    // ],
+                    borderColor: [
+                        'rgba(35, 189, 252,1)',
+                    ],
+                    backgroundColor: "transparent",
+                    borderWidth: 1
+                }
+                ,
+                {
+                    label: 'Humidity',
+                    radius: 1.5,
+                    data: [85, 85, 85, 85, 85, 85,80, 75, 70, 65, 55, 45,45, 40, 40, 40, 40, 40,45, 45, 50, 55, 60, 60],
+                    // backgroundColor: [
+                    //     'rgba(41, 209, 51, 0.2)',
+                    // ],
+                    borderColor: [
+                        'rgba(41, 209, 51,1)',
+                    ],
+                    backgroundColor: "transparent",
+                    borderWidth: 1
+                }
+                ,
+                {
+                    label: 'Luminance',
+                    radius: 1.5,
+                    data: [110, 100, 100, 100, 130, 150,160, 190, 210, 230, 240, 250,270, 270, 260, 250, 240, 230,220, 210, 200, 180, 160, 120],
+                    // backgroundColor: [
+                    //     'rgba(252, 100, 3, 0.2)',
+                    // ],
+                    borderColor: [
+                        'rgba(252, 100, 3,1)',
+                    ],
+                    backgroundColor: "transparent",
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            title: {
+                display : false,
+                text : '2018-04-11',
+                fontSize : 17
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        // stepSize: 20,
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+                labels: {
+                    fontSize: 18
+                },
+                position : 'bottom'
+            }
+        }
+    });
+
 
     let socket = io.connect('/');
 
@@ -253,7 +328,7 @@ $(function () {
         camSocket.on('data', function (data) {
             console.log('data');
             // console.log(data);
-            document.getElementById('record').disabled = false;
+            // document.getElementById('record').disabled = false;
             var bytes = new Uint8Array(data);
             var blob = new Blob([bytes], {type: 'application/octet-binary'});
             var url = URL.createObjectURL(blob);
@@ -266,19 +341,19 @@ $(function () {
             img.src = url;
             img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
 
-            document.getElementById('record').onclick = function () {
-                this.disabled = true;
-                document.getElementById('stop').disabled = false;
-                camSocket.emit('stop');
-                camSocket.emit('record');
-                console.log("record start");
-            };
+            // document.getElementById('record').onclick = function () {
+            //     this.disabled = true;
+            //     // document.getElementById('stop').disabled = false;
+            //     camSocket.emit('stop');
+            //     camSocket.emit('record');
+            //     console.log("record start");
+            // };
 
-            document.getElementById('stop').onclick = function () {
-                this.disabled = true;
-                document.getElementById('record').disabled = false;
-                // console.log("record stop");
-            }
+            // document.getElementById('stop').onclick = function () {
+            //     this.disabled = true;
+            //     document.getElementById('record').disabled = false;
+            //     // console.log("record stop");
+            // }
         });
 
 

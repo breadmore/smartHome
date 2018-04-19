@@ -302,3 +302,8 @@ body *:focus, body *:active, body *:hover {
     text-align: center;
     width: 90px;
 }
+
+.modal-header > button > span{
+    display: inline-block;
+    margin-top: 5px;
+}

@@ -15,7 +15,7 @@
 }
 
 .card-text {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     width: 175px;
 }
@@ -23,7 +23,7 @@
 .card-text > div > span:nth-child(2) {
     display: inline-block;
     height: 20px;
-    width: 75px;
+    width: 60px;
 }
 
 .card-text > div > span:nth-child(3) {
@@ -161,7 +161,7 @@ td {
 .card-img {
     width: 20px;
     height: 20px;
-    margin-left: 10px;
+    margin-left: 7px;
     margin-right: 5px;
 }
 
@@ -176,10 +176,16 @@ td:nth-child(1) {
     width: 37px;
 }
 
+
+.temp-humi .row canvas{
+    max-height: 40px;
+}
+
 .temp-humi .row {
     margin: 0px;
     padding-top: 17px;
     width: 240px;
+    max-height: 50px;
 }
 
 .temp-humi .row > span:nth-child(1) > img {
@@ -193,6 +199,7 @@ td:nth-child(1) {
     font-weight: bold;
     width: 60px;
     font-size: 24px;
+    margin-top: 5px;
 }
 
 .temp-humi .row > span:nth-child(3) {
@@ -528,4 +535,13 @@ input:checked + .slider:before {
 .modal-body {
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.modal-body {
+    padding: 0px;
+}
+
+.modal-header > button > span{
+    display: inline-block;
+    margin-top: 5px;
 }

@@ -1,0 +1,11 @@
+#datepicker {
+    /*max-width: 250px;*/
+    /*margin-left: 420px;*/
+    /*margin: auto;*/
+    /*margin-right: 0px;*/
+    width: 80%;
+}
+
+.select_date {
+    text-align: center;
+}

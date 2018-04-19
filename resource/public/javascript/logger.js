@@ -1,18 +1,27 @@
 $(function () {
 
-    $(".click").on("click", function () {
-        console.log("Asd");
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4',
+        // select: function (e, type) {
+        //     console.log('Select from type of "' + type + '" is fired');
+        //     myChart.update();
+        // },
+        format: 'yyyy-mm-dd',
+        change: function (e) {
+                myChart.options.title.text = $("#datepicker").val();
+            console.log(e);
+            myChart.update();
+        }
+    });
 
+    $(".click").on("click", function () {
         var data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
         var data2 = [11,21,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191,201,211,221,231,241]
         var data3 = [100,120,130,140,150,160,170,180,190,300,310,320,330,340,350,360,370,380,390,400,410,420,430,440]
-
         myChart.data.datasets[0].data = data;
         myChart.data.datasets[1].data = data2;
         myChart.data.datasets[2].data = data3;
-
-        myChart.options.title.text = "2018-04-10";
-
+        myChart.options.title.text = "";
         myChart.update();
     });
     // console.log("!23123");
@@ -68,7 +77,7 @@ $(function () {
         },
         options: {
             title: {
-                display : true,
+                display : false,
                 text : '2018-04-11',
                 fontSize : 17
             },
@@ -79,6 +88,13 @@ $(function () {
                         // stepSize: 20,
                     }
                 }]
+            },
+            legend: {
+                display: true,
+                labels: {
+                    fontSize: 30
+                },
+                position : 'bottom'
             }
         }
     });
@@ -89,6 +105,8 @@ $(function () {
     Chart.data.datasets.forEach(function (e) {
         e.hidden = true;
     });
+
+
 
 
 

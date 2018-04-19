@@ -1,11 +1,11 @@
 extends layout
 
 append head
-    link(rel="stylesheet" href="/css/dashboard.css")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
     script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
     script(src="/javascript/dashboard.js")
+    link(rel="stylesheet" href="/css/dashboard.css")
     //link(href='/plugin/bootstrap-toggle/css/bootstrap-toggle.min.css', rel='stylesheet')
     //script(src='/plugin/bootstrap-toggle/js/bootstrap-toggle.min.js')
 
@@ -40,7 +40,7 @@ block content
                     span.big-title T
                     span.small-title emperature / Humidity
                     span 001
-                .card-text
+                .card-text(data-target="#temp-humi-lux-modal" data-toggle="modal")
                     .row
                         span
                             img(src="/image/temperatureWhite.png").card-img
@@ -60,7 +60,7 @@ block content
                     span.big-title L
                     span.small-title uminance
                     span 001
-                .card-text.text-center
+                .card-text.text-center(data-target="#temp-humi-lux-modal" data-toggle="modal")
                     section.lumi.model-1
                         .graph
                             span &nbsp;
@@ -254,11 +254,24 @@ block content
                 .modal-header
                     .modal-title IP CAMERA
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
                         #ipcamera(style='width: 640px')
                             canvas(width='640', height='360' style='width:640px; height:360px;')
-                        button#record(disabled='') record
-                        button#stop(disabled='') stop
+                        //button#record(disabled='') record
+                        //button#stop(disabled='') stop
                 .modal-footer
-                    button.btn.btn-primary(data-dismiss="modal") Cancel
+                //    button.btn.btn-primary(data-dismiss="modal") Cancel
+    .modal.fade#temp-humi-lux-modal(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title Environments
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        canvas#myChart-all
+                .modal-footer
+                //    button.btn.btn-primary(data-dismiss="modal") Cancel
