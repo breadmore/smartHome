@@ -257,10 +257,19 @@ block content
                         span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
+                        div.video(style='margin-left:600px')
+                            button#change stream
+                            ul
+                            each topic,cast in topics
+                                script.
+                                li
+                                    button.myBtn(data-name=topic)=topic
+                        video(id="myVideo",width='740',height='360', controls, style='display:none;')
+                            source(id="vid", type='video/mp4')
                         #ipcamera(style='width: 640px')
-                            canvas(width='640', height='360' style='width:640px; height:360px;')
-                        //button#record(disabled='') record
-                        //button#stop(disabled='') stop
+                            canvas#myCanvas(width='640', height='360' style='width:640px; height:360px;')
+                        button#record(disabled='') record
+                        button#stop(disabled='') stop
                 .modal-footer
                 //    button.btn.btn-primary(data-dismiss="modal") Cancel
     .modal.fade#temp-humi-lux-modal(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
