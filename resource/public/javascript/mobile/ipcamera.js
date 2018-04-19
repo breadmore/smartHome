@@ -1,3 +1,16 @@
+var camSocket;
+window.onbeforeunload = function () {
+    if (camSocket) {
+        console.log('disconnect cam');
+
+        camSocket.disconnect();
+        camSocket = undefined;
+
+        console.log('close modal');
+        camSocket.emit('stop');
+    }
+};
+
 $(function () {
 
     let socket = io.connect('/');
@@ -17,65 +30,34 @@ $(function () {
     //     console.log(data);
     // })
 
+    camSocket = io(location.origin + '/cam0');
+    camSocket.emit('stop');
+    camSocket.emit('init');
 
-    $("#record").click(() => {
-        console.log("record");
-        socket.emit('record', 'gogo');
+    ///페이지 열때
+
+    camSocket.emit('stop');
+    var ipcamera = document.getElementById('ipcamera');
+    var canvas = ipcamera.getElementsByTagName('canvas')[0];
+    camSocket.emit('start');
+    camSocket.on('data', function (data) {
+        // console.log('data');
+        // console.log(data);
+        // document.getElementById('record').disabled = false;
+        var bytes = new Uint8Array(data);
+        var blob = new Blob([bytes], {type: 'application/octet-binary'});
+        var url = URL.createObjectURL(blob);
+        var img = new Image;
+        var ctx = canvas.getContext("2d");
+        img.onload = function () {
+            URL.revokeObjectURL(url);
+            ctx.drawImage(img, 0, 0);
+        };
+        img.src = url;
+        img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
     });
 
 
-
-
-    socket.on('start', function (cou) {
-
-        var ipcamera = document.getElementById('ipcamera');
-        var divSocket,
-            div = document.createElement('div');
-        var html = '';
-        // for (var i = 0; i < cou; i++) {
-        // 	html += '<option value="/cam' + i + '">Cam ' + i + '</option>';
-        // }
-        // html += '</select>';
-        html += "<canvas width='640' height='360'>";
-        div.innerHTML = html;
-        var canvas = div.getElementsByTagName('canvas')[0];
-        // select = div.getElementsByTagName('select')[0];
-        // select.onchange = function() {
-        //
-        // };
-        /////////
-        if (divSocket) {
-            divSocket.disconnect();
-            document.getElementById('record').disabled = true;
-        }
-        // console.log(this.value);
-        // console.log("asdasdasds");
-        divSocket = io(location.origin + '/cam0');
-        divSocket.on('data', function (data) {
-            // console.log(data);
-            // document.getElementById('record').disabled = false;
-            var bytes = new Uint8Array(data);
-            var blob = new Blob([bytes], {type: 'application/octet-binary'});
-            var url = URL.createObjectURL(blob);
-            var img = new Image;
-            var ctx = canvas.getContext("2d");
-            img.onload = function () {
-                URL.revokeObjectURL(url);
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = url;
-            img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
-        });
-
-        ///////
-        ipcamera.appendChild(div);
-
-        // document.getElementById('stop').onclick = function () {
-        //     this.disabled = true;
-        //     document.getElementById('record').disabled = false;
-        //     console.log("record stop");
-        // }
-    });
 
     function base64ArrayBuffer(arrayBuffer) {
         var base64 = '';
@@ -115,5 +97,6 @@ $(function () {
         }
         return base64;
     }
+
 
 });

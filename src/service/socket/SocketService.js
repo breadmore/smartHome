@@ -1,5 +1,6 @@
 var socketComponent = require('../../components/SocketComponent');
 var stateService = require('../api/v1/StateService');
+var environmentService = require('../../service/api/v1/EnvironmentService');
 var app = require('../../server');
 
 const rtsp = require('rtsp-ffmpeg');
@@ -84,11 +85,46 @@ function camService(socket, url) {
     socketComponent.responseToTargetSocket(socket, url, cams.length);
 }
 
+function envirnoments(socket, number) {
+    var responseData = {
+        temperature : null,
+        humidity: null,
+        illuminaty: null
+    };
+    if (number === undefined) {
+    }
+    else {
+        environmentService.getLastTemperature(parseInt(number), function(err, result) {
+            if (err) {
+            }
+            else {
+                responseData.temperature = result;
+                environmentService.getLastHumidity(parseInt(number), function(err, result) {
+                    if (err) {
+                    }
+                    else {
+                        responseData.humidity = result;
+                        environmentService.getLastIlluminaty(parseInt(number), function(err, result) {
+                            if (err) {
+                            }
+                            else {
+                                responseData.illuminaty = result;
+                                socketComponent.responseEnvironments(socket, "/environment", responseData);
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+}
+
 
 module.exports = {
     // testService : testService,
     legacyStatesService: legacyStatesService,
-    camService: camService
+    camService: camService,
+    envirnoments: envirnoments
 };
 
 

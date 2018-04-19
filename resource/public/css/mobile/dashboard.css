@@ -92,14 +92,14 @@
 .dashboard-card-value > .row > div:nth-child(1) {
     padding-left: 1rem;
     font-size: 2rem;
-    width: 15rem;
+    width: 12rem;
     text-align: left;
 }
 
 .dashboard-card-value > .row > div:nth-child(2) {
     padding-left: 1rem;
     font-size: 2rem;
-    width: 11rem;
+    width: 14rem;
 }
 
 .center-hr {

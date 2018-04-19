@@ -226,6 +226,29 @@ $(function () {
         updateLegacyStates(data);
     });
 
+    setInterval(function () {
+        socket.emit('/environment');
+    }, 1500);
+    socket.on('/environment', function (data) {
+        console.log(data);
+
+                $('#temperatureValue').text(data.temperature[0].value + '℃');
+                recentTemperature.shift();
+                recentTemperature.push(data.temperature[0].value);
+                updateChart(temperatureChart, recentTemperature);
+
+                $('#humidityValue').text(data.humidity[0].value + '%');
+                recentHumidity.shift();
+                recentHumidity.push(data.humidity[0].value);
+                updateChart(humidityChart, recentHumidity);
+                // console.log(data.temperature[0].value);
+                // console.log(data.humidity[0].value);
+                // console.log(data.illuminaty.length);
+                //todo [0].value add
+                $('#luxValue').text(data.illuminaty);
+
+    });
+
     /** Xiaomi State Socket!
      *         udp              rest                  w/s
      * device ------> nodered  ------>  node server ------> dashboard
