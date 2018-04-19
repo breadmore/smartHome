@@ -23,6 +23,7 @@ var deviceList;
 var securityList = [];
 var entityList;
 var resourceList = [];
+var nowClick;
 
 $(document).ready(function () {
     //init device list & device detail
@@ -120,7 +121,16 @@ $(document).ready(function () {
         saveDevice(data);
     });
 
-
+    // $(document).on('click','.device-list', function (e) {
+    //     nowClick = this;
+    //     console.log(nowClick);
+    // });
+    $("#deleteButton").on("click", () => {
+        deleteResourceClicked();
+    });
+    $("#refresh").on("click", () => {
+        window.location.reload();
+    });
 });
 
 
@@ -200,6 +210,7 @@ function findOperationById() {
 function addClickListenerToGatewayTitle() {
     var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
     tree[tree.length - 1].addEventListener('click', function(e) {
+        nowClick = e.target;
         var parent = e.target.parentElement;
         var classList = parent.classList;
         if(classList.contains("open")) {
@@ -236,6 +247,7 @@ function addClickListenerToDeviceInfo() {
 
     $.each(deviceInfoList, function(index, item){
         item.addEventListener('click', function(e){
+            nowClick = e.target.parentElement.parentElement;
             detailViewUpdate(null, findDeviceByDid(item.dataset.did));
         });
     });
@@ -365,15 +377,15 @@ function createDeviceListView() {
 }
 /** create gateway title + device info list in device list view*/
 function deviceListForm(gateway, deviceList) {
-    var dom = '<li><a href="#" class="gateway-name" data-id=' + gateway.id +'>' + gateway.name +'</a><ul>';
+    var dom = '<li class="device-list"><a href="#" class="gateway-name " data-id=' + gateway.id +'>' + gateway.name +'</a><ul>';
     $.each(deviceList, function(index, item){
         if (gateway.id === item.gwid) {
-            dom += '<li class="device-info" data-did=' + item.did + '>' +
+            dom += '<li class="device-info device-list" data-did=' + item.did + '>' +
                 '<label class="device-type">'+ item.type +'</label>' +
                 '<label class="device-name">'+ item.dname +'</label>' +
-                '<label class="device-conn">'+ item.conn +'</label>' +
-                '<label class="device-auth">'+ item.auth +'</label>' +
-                '<label class="device-reg">'+ item.reg +'</label>' +
+                '<label class="device-conn" style="width:25px">'+ item.conn +'</label>' +
+                '<label class="device-auth" style="width:25px">'+ item.auth +'</label>' +
+                '<label class="device-reg" style="width:25px">'+ item.reg +'</label>' +
                 '</li>'
         }
     });
@@ -400,28 +412,28 @@ function bin2String(array) {
 function type2Icon(type) {
     var icon;
     if (type ===1) {
-        return icon = '<i class="fab fa-stumbleupon"></i><span>GasDetector</span>'
+        return icon = '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>'
     }
     else if(type === 2){
-        return icon ='<i class="fas fa-ban"></i><span>GasBreaker</span>'
+        return icon ='<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>'
     }
     else if(type === 3){
-        return icon ='<i class="fas fa-thermometer-half"></i><span>ThermoHytgrometer</span>'
+        return icon ='<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>'
     }
     else if(type === 4){
-        return icon ='<i class="far fa-lightbulb"></i><span>SmartLighting</span>'
+        return icon ='<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>'
     }
     else if(type === 5){
-        return icon ='<i class="fas fa-video"></i><span>IntrusionDetector</span>'
+        return icon ='<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>'
     }
     else if(type === 6){
-        return icon ='<i class="fas fa-home"></i><span>DoorSensor</span>'
+        return icon ='<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>'
     }
     else if(type === 7){
-        return icon ='<i class="fas fa-plug"></i><span>SmartPlug</span>'
+        return icon ='<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>'
     }
     else if(type === 8){
-        return icon ='<i class="fas fa-camera"></i><span>SmartCamera</span>'
+        return icon ='<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>'
     }
     else{
         return icon ='<i class="fas fa-question"></i><span>Unknown</span>'
@@ -436,7 +448,7 @@ function conn2Icon(conn) {
         return icon = '<i class="fas fa-toggle-off"></i>'
     }
     else {
-        return icon ='<i class="fas fa-toggle-on" style="color:green;"></i>'
+        return icon ='<i class="fas fa-toggle-on icon-on" ></i>'
     }
     return icon;
 }
@@ -447,7 +459,7 @@ function auth2Icon(auth) {
         return icon = '<i class="far fa-address-card"></i>'
     }
     else {
-        return icon ='<i class="fas fa-address-card" style="color:green;"></i>'
+        return icon ='<i class="fas fa-address-card icon-on" ></i>'
     }
     return icon;
 }
@@ -458,7 +470,7 @@ function regi2Icon(regi) {
         return icon = '<i class="far fa-eye-slash"></i>'
     }
     else {
-        return icon ='<i class="fas fa-eye" style="color:green;"></i>'
+        return icon ='<i class="fas fa-eye icon-on" ></i>'
     }
     return icon;
 }
@@ -566,6 +578,10 @@ function createResourceName() {
     });
 }
 
+function deleteResourceClicked() {
+    console.log(nowClick);
+    nowClick;
+}
 
 
 

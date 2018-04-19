@@ -21,71 +21,107 @@ block content
     #loader
     .row.no-gutters(style='margin-bottom:20px; margin-top: -10px; display:none;')#deviceDiv
         .col-12(style='margin-bottom: 10px;')
-            button refresh
+            span#refresh(style='float:left; background-color:#65c0c6; border-radius: 50%; border: 6px solid #65c0c6; font-size:26px')
+                i.fas.fa-redo-alt(style='color:white;')
+
             input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
             input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
             input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
             input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addButton
+
+
         .col-6.no-gutters.view-box
             .row.no-gutters.view-box-title
                 h3 Device List
-            .row.no-gutters.view-box-content
+            .row.no-gutters.view-box-content(style='border-left: solid 1px #deceb2;')
                 ul.tree
         .col-6.no-gutters.detail-view.view-box
             .row.no-gutters.view-box-title
                 h3 Device Detail
-            .row.no-gutters.view-box-content
+            .row.no-gutters.view-box-content(style='border-right: solid 1px #deceb2;')
                 table.detail-gateway-view(style='display:none;width:100%;table-layout: fixed;', width='100%')#gatewayTable
                     tbody
                         tr
-                            td(width='50%') Gateway ID
-                            td(width='50%')#gatewayId aaa
+                            td
+                                div Gateway ID
+                            td
+                                div.right#gatewayId aaa
                         tr
-                            td Gateway Name
-                            td#gatewayName
+                            td
+                                div Gateway Name
+                            td
+                                div.right#gatewayName
                         tr
-                            td IP
-                            td#gatewayIP
+                            td
+                                div IP
+                            td
+                                div.right#gatewayIP
                         tr
-                            td Port
-                            td#gatewayPort
+                            td
+                                div Port
+                            td
+                                div.right#gatewayPort
                         tr
-                            td Connection
-                            td#gatewayConn
+                            td
+                                div Connection
+                            td
+                                div.right#gatewayConn
                 table.detail-device-view(style='display:none;width:100%;')#deviceTable
                     tr
-                        td Gateway ID
-                        td#gwid
+                        td
+                            div Gateway ID
+                        td
+                            div.right#gwid
                     tr
-                        td Device Name
-                        td#dname
+                        td
+                            div Device Name
+                        td
+                            div.right#dname
                     tr
-                        td Device Type
-                        td#type
+                        td
+                            div Device Type
+                        td
+                            div.right#type
                     tr
-                        td Device ID
-                        td#eid
+                        td
+                            div Device ID
+                        td
+                            div.right#eid
                     tr
-                        td Product ID
-                        td#did
+                        td
+                            div Product ID
+                        td
+                            div.right#did
                     tr
-                        td Pre Shared Key
-                        td#psk
+                        td
+                            div Pre Shared Key
+                        td
+                            div.right#psk
                     tr
-                        td Object ID
-                        td#oid
+                        td
+                            div Object ID
+                        td
+                            div.right#oid
                     tr
-                        td Session ID
-                        td#sid
+                        td
+                            div Session ID
+                        td
+                            div.right#sid
                     tr
-                        td Connection
-                        td#conn
+                        td
+                            div Connection
+                        td
+                            div.right#conn
                     tr
-                        td Authentication
-                        td#auth
+                        td
+                            div Authentication
+                        td
+                            div.right#auth
                     tr
-                        td Security Policy
-                        td#operation CRUDN
+                        td
+                            div Security Policy
+                        td
+                            div.right#operation CRUDN
     .row.no-gutters(style='margin-bottom:0px')
         span.col-xl-2.content-title.no-padding Security
         .col-10.content-hr.no-padding
@@ -326,24 +362,39 @@ block content
                                     th Operation
                             tbody
                                 tr
-                                    td 2018-04-09 13:12:10
-                                    td ThermoHygrometer_65934
-                                    td MyIoTSVR
-                                    td ThermoHygrometer_65934
-                                    td CRUD
+                                    td
+                            div 2018-04-09 13:12:10
+                                    td
+                            div ThermoHygrometer_65934
+                                    td
+                            div MyIoTSVR
+                                    td
+                            div ThermoHygrometer_65934
+                                    td
+                            div CRUD
 
                                 tr
-                                    td 2018-04-10 13:13:16
-                                    td ThermoHygrometer_65934
-                                    td MyIoTSVR
-                                    td ThermoHygrometer_65934
-                                    td CRUDN
+                                    td
+                            div 2018-04-10 13:13:16
+                                    td
+                            div ThermoHygrometer_65934
+                                    td
+                            div MyIoTSVR
+                                    td
+                            div ThermoHygrometer_65934
+                                    td
+                            div CRUDN
                                 tr
-                                    td 2018-04-10 16:55:10
-                                    td ThermoHygrometer_65934
-                                    td MyIoTSVR
-                                    td ThermoHygrometer_65934
-                                    td C
+                                    td
+                            div 2018-04-10 16:55:10
+                                    td
+                            div ThermoHygrometer_65934
+                                    td
+                            div MyIoTSVR
+                                    td
+                            div ThermoHygrometer_65934
+                                    td
+                            div C
                 .modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters

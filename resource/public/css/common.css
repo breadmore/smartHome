@@ -307,3 +307,18 @@ body *:focus, body *:active, body *:hover {
     display: inline-block;
     margin-top: 5px;
 }
+.icon-on {
+    color:#65c0c6;
+}
+
+.modal-footer .col-12 .modal-btn {
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.btn-refresh{
+    float: left;
+    margin: 0;
+    border-radius: 50%
+}
