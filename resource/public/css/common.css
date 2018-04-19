@@ -282,11 +282,23 @@ body *:focus, body *:active, body *:hover {
     border: 1px solid lightgray;
 }
 
+.btn-primary {
+    background: #65c0c6;
+    border: 1px solid #65c0c6;
+}
+
 .modal-btn {
-    width: 150px;
+    width: 135px;
+    font-weight: 500;
+    float: none;
     /*margin-right: 10px;*/
 }
 
 .modal-footer button:nth-child(1) {
     margin-right: 10px;
+}
+
+#dataTable_previous, #dataTable_next {
+    text-align: center;
+    width: 90px;
 }
