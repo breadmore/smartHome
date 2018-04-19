@@ -71,31 +71,35 @@ var path = require('path');
 var socket = require('socket.io');
 
 // get the db file path
-const dbPath = path.join(__dirname, "db/test.db");
-
-// validate db existence
-let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-  if (err) { 
-    console.error('could not find test database. Making it...');
-    //make db
-    db = new sqlite3.Database(dbPath);
-
-    // sync process creating table.
-    db.serialize(() => {
-      let init_database = require('./db/old/init_database')
-      db.run(init_database.initDevice());
-      db.run(init_database.initGateway());
-      db.run(init_database.initPolicy());
-      db.run(init_database.initUser());
-      db.run(init_database.initSensorLog());
-  });
-
-  } else {
-    console.log('Connected to the test database.');
-  }
-});
+// const dbPath = path.join(__dirname, "db/test.db");
+//
+// // validate db existence
+// let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+//   if (err) {
+//     console.error('could not find test database. Making it...');
+//     //make db
+//     db = new sqlite3.Database(dbPath);
+//
+//     // sync process creating table.
+//     db.serialize(() => {
+//       let init_database = require('./db/old/init_database')
+//       db.run(init_database.initDevice());
+//       db.run(init_database.initGateway());
+//       db.run(init_database.initPolicy());
+//       db.run(init_database.initUser());
+//       db.run(init_database.initSensorLog());
+//   });
+//
+//   } else {
+//     console.log('Connected to the test database.');
+//   }
+// });
+// module.exports.db = db;
 
 ///////////////////////
+
+var guiDb = require('./db/gui');
+
 
 
 // var mysql = require('mysql');
@@ -147,12 +151,6 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 //     .catch(err => {
 //         console.log(err);
 //     });
-
-
-
-
-
-module.exports.db = db;
 
 var resourcePath = path.join(__dirname, '../resource');
 

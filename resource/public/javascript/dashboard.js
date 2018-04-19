@@ -204,7 +204,7 @@ $(function () {
         socket.emit('/legacy/states');
     }, 1000);
     socket.on('/legacy/states', function (data) {
-        console.log(currentState);
+        // console.log(currentState);
         if (currentState.window === undefined || currentState.human === undefined || currentState.gasB === undefined || currentState.gasD === undefined) {
             currentState.window = data.window_detector;
             currentState.human = data.human_detector;
@@ -231,7 +231,7 @@ $(function () {
         socket.emit('/environment');
     }, 1500);
     socket.on('/environment', function (data) {
-        console.log(data);
+        // console.log(data);
 
         $('#temperatureValue').text(data.temperature[0].value + '℃');
         recentTemperature.shift();
@@ -316,12 +316,12 @@ $(function () {
     $('#roomModeController').on('click', function (e) {
         if (!$('#roomState').prop('checked')) {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, true)
+            legacyDeviceAction(2, 0)
             // xiaomiAction({plug: 'on'});
         }
         else {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, false);
+            legacyDeviceAction(2, 1);
             // xiaomiAction({plug: 'off'});
         }
     });
@@ -330,11 +330,11 @@ $(function () {
     $('#lightController').on('click', function (e) {
         if (!$('#lightState').prop('checked')) {
             console.log($('#lightState').prop('checked'));
-            legacyDeviceAction(1, true);
+            legacyDeviceAction(1, 0);
         }
         else {
             console.log($('#lightState').prop('checked'));
-            legacyDeviceAction(1, false);
+            legacyDeviceAction(1, 1);
         }
     });
 
@@ -350,7 +350,7 @@ $(function () {
         camSocket.on('data', function (data) {
             console.log('data');
             // console.log(data);
-            // document.getElementById('record').disabled = false;
+            document.getElementById('record').disabled = false;
             var bytes = new Uint8Array(data);
             var blob = new Blob([bytes], {type: 'application/octet-binary'});
             var url = URL.createObjectURL(blob);
@@ -363,19 +363,19 @@ $(function () {
             img.src = url;
             img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
 
-            // document.getElementById('record').onclick = function () {
-            //     this.disabled = true;
-            //     // document.getElementById('stop').disabled = false;
-            //     camSocket.emit('stop');
-            //     camSocket.emit('record');
-            //     console.log("record start");
-            // };
+            document.getElementById('record').onclick = function () {
+                this.disabled = true;
+                // document.getElementById('stop').disabled = false;
+                camSocket.emit('stop');
+                camSocket.emit('record');
+                console.log("record start");
+            };
 
-            // document.getElementById('stop').onclick = function () {
-            //     this.disabled = true;
-            //     document.getElementById('record').disabled = false;
-            //     // console.log("record stop");
-            // }
+            document.getElementById('stop').onclick = function () {
+                this.disabled = true;
+                document.getElementById('record').disabled = false;
+                // console.log("record stop");
+            }
         });
 
 
@@ -493,9 +493,10 @@ function updateLegacyStates(state) {
     if (state.mode === undefined || state.mode === null) {
         state.mode = 0;
     }
+
     state.led = 1;
 
-    console.log(state.led);
+    // console.log(state.led);
     if (state.led === 0) {
         $('#lightState').prop("checked", false);
     }
@@ -545,37 +546,37 @@ function updateLegacyStates(state) {
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
-        // console.log("window changed!");
+        console.log("window changed!");
         currentState.window = state.window_detector;
         sendSensorLog();
     }
     if (currentState.human !== state.human_detector) {
-        // console.log("human changed!");
+        console.log("human changed!");
         currentState.human = state.human_detector;
         sendSensorLog();
     }
     if (currentState.gasB !== state.gas_blocker) {
-        // console.log("gasB changed!");
+        console.log("gasB changed!");
         currentState.gasB = state.gas_blocker;
         sendSensorLog();
     }
     if (currentState.gasD !== state.gas_detector) {
-        // console.log("gasD changed!");
+        console.log("gasD changed!");
         currentState.gasD = state.gas_detector;
         sendSensorLog();
     }
 
-    if (currentState.mode !== state.mode) {
-        // console.log("gasD changed!");
-        currentState.gasD = state.gas_detector;
-        sendSensorLog();
-    }
-
-    if (currentState.led !== state.led) {
-        // console.log("gasD changed!");
-        currentState.led = state.led;
-        sendSensorLog();
-    }
+    // if (currentState.mode !== state.mode) {
+    //     console.log("mode changed!");
+    //     currentState.mode = state.mode;
+    //     sendSensorLog();
+    // }
+    //
+    // if (currentState.led !== state.led) {
+    //     console.log("led changed!");
+    //     currentState.led = state.led;
+    //     sendSensorLog();
+    // }
 }
 
 
@@ -595,10 +596,22 @@ function xiaomiAction(action) {
 
 function legacyDeviceAction(type, action) {
     // todo : ip address?
+    var ip = undefined;
+    if (type === 1) {
+        ip = '192.168.0.20';
+    }
+    else if (type === 2) {
+        ip = '192.168.0.21'
+    }
+    else {
+        console.log('device action err');
+        return;
+    }
+
     var action = {
-        'ip': '',
+        'ip': ip,
         'type': type,
-        'turnOn': action
+        'turnOn': 0
     };
 
     $.ajax({

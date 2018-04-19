@@ -10,7 +10,7 @@ append head
     script(defer='', src='https://use.fontawesome.com/releases/v5.0.10/js/all.js', integrity='sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+', crossorigin='anonymous')
 
 append title
-    span.col-xl-2.content-title.no-padding Device
+    span.col-xl-2.content-title.no-padding DEVICE
 
 block content
     //.row.no-gutters
@@ -19,11 +19,11 @@ block content
                 i.fas.fa-sync-alt
             .col-12
     #loader
-    .row.no-gutters(style='margin-bottom:20px; margin-top: -10px; display:none;')#deviceDiv
+    .row.no-gutters(style='margin-bottom:30px; margin-top: -10px; display:none;')#deviceDiv
         .col-12(style='margin-bottom: 10px;')
-            span#refresh(style='float:left; background-color:#65c0c6; border-radius: 50%; border: 6px solid #65c0c6; font-size:26px')
-                i.fas.fa-redo-alt(style='color:white;')
-
+            span#refresh(style='float:left; background-color:#65c0c6;border: 6px solid #65c0c6; padding:5px;font-size:1rem; line-height:1; margin:auto 5px;color:white; border-radius: 0.25rem;') REFRESH
+                i.fas.fa-redo-alt(style='float:left; margin-left:5px; margin-right:5px;')
+            //span Refresh
             input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
             input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
             input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
@@ -32,96 +32,65 @@ block content
 
         .col-6.no-gutters.view-box
             .row.no-gutters.view-box-title
-                h3 Device List
-            .row.no-gutters.view-box-content(style='border-left: solid 1px #deceb2;')
+                h5 Device List
+            .row.no-gutters.view-box-content(style='border: solid 1px #deceb2; border-top:none')
                 ul.tree
         .col-6.no-gutters.detail-view.view-box
             .row.no-gutters.view-box-title
-                h3 Device Detail
-            .row.no-gutters.view-box-content(style='border-right: solid 1px #deceb2;')
+                h5 Device Detail
+            .row.no-gutters.view-box-content(style='border: solid 1px #deceb2;')
                 table.detail-gateway-view(style='display:none;width:100%;table-layout: fixed;', width='100%')#gatewayTable
                     tbody
                         tr
-                            td
-                                div Gateway ID
-                            td
-                                div.right#gatewayId aaa
+                            td Gateway ID
+                            td.right#gatewayId aaa
                         tr
-                            td
-                                div Gateway Name
-                            td
-                                div.right#gatewayName
+                            td Gateway Name
+                            td.right#gatewayName
                         tr
-                            td
-                                div IP
-                            td
-                                div.right#gatewayIP
+                            td IP
+                            td.right#gatewayIP
                         tr
-                            td
-                                div Port
-                            td
-                                div.right#gatewayPort
+                            td Port
+                            td.right#gatewayPort
                         tr
-                            td
-                                div Connection
-                            td
-                                div.right#gatewayConn
+                            td Connection
+                            td.right#gatewayConn
                 table.detail-device-view(style='display:none;width:100%;')#deviceTable
-                    tr
-                        td
-                            div Gateway ID
-                        td
-                            div.right#gwid
-                    tr
-                        td
-                            div Device Name
-                        td
-                            div.right#dname
-                    tr
-                        td
-                            div Device Type
-                        td
-                            div.right#type
-                    tr
-                        td
-                            div Device ID
-                        td
-                            div.right#eid
-                    tr
-                        td
-                            div Product ID
-                        td
-                            div.right#did
-                    tr
-                        td
-                            div Pre Shared Key
-                        td
-                            div.right#psk
-                    tr
-                        td
-                            div Object ID
-                        td
-                            div.right#oid
-                    tr
-                        td
-                            div Session ID
-                        td
-                            div.right#sid
-                    tr
-                        td
-                            div Connection
-                        td
-                            div.right#conn
-                    tr
-                        td
-                            div Authentication
-                        td
-                            div.right#auth
-                    tr
-                        td
-                            div Security Policy
-                        td
-                            div.right#operation CRUDN
+                    tbody
+                        tr
+                            td Gateway ID
+                            td.right#gwid
+                        tr
+                            td Device Name
+                            td.right#dname
+                        tr
+                            td Device Type
+                            td.right#type
+                        tr
+                            td Device ID
+                            td.right#eid
+                        tr
+                            td Product ID
+                            td.right#did
+                        tr
+                            td Pre Shared Key
+                            td.right#psk
+                        tr
+                            td Object ID
+                            td.right#oid
+                        tr
+                            td Session ID
+                            td.right#sid
+                        tr
+                            td Connection
+                            td.right#conn
+                        tr
+                            td Authentication
+                            td.right#auth
+                        tr
+                            td Security Policy
+                            td.right#operation CRUDN
     .row.no-gutters(style='margin-bottom:0px')
         span.col-xl-2.content-title.no-padding Security
         .col-10.content-hr.no-padding

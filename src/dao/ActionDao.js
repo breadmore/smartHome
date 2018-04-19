@@ -1,4 +1,5 @@
 var db = require('../db/gui');
+var moment = require('moment');
 
 /**
  CREATE TABLE `actions` (
@@ -15,8 +16,8 @@ var db = require('../db/gui');
 var Action = {
     insert: function (data, callback) {
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-        return db.query('insert into actions (ip, action_type, turn_on, created_at, updated_at) values (?, ?, ?, ?, ?, ?)'
-            , [data.ip, data.type, data.action, now, now]
+        return db.query('insert into actions (ip, action_type, turn_on, created_at, updated_at) values (?, ?, ?, ?, ?)'
+            , [data.ip, data.type, data.turnOn, now, now]
             , callback);
     },
 

@@ -247,6 +247,68 @@ function addClickListenerToDeviceInfo() {
 
     $.each(deviceInfoList, function(index, item){
         item.addEventListener('click', function(e){
+
+            // var classList = parent.classList;
+            // if(classList.contains("open")) {
+            //     classList.remove('open');
+            //     var opensubs = parent.querySelectorAll(':scope .open');
+            //     for(var i = 0; i < opensubs.length; i++){
+            //         opensubs[i].classList.remove('open');
+            //     }
+            // } else {
+            //     classList.add('open');
+            //     detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
+            // }
+
+            // $('#dataTable tbody').on('click', 'tr', function () {
+            //     if ($(this).hasClass('selected')) {
+            //         $(this).removeClass('selected');
+            //         enableButton(false);
+            //     }
+            //     else {
+            //         table.$('tr.selected').removeClass('selected');
+            //         $(this).addClass('selected');
+            //         enableButton(true);
+            //     }
+            // });
+            if($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+            }
+            else {
+                $(this).addClass('selected');
+                for (var i = 0; i < deviceInfoList.length; i++) {
+                    if (i != index) {
+                        $(deviceInfoList[i]).removeClass('selected');
+                        console.log('remove!');
+                    }
+                }
+            }
+
+            // var classList = e.target.parentElement.parentElement.classList;
+            // if (classList.contains('selected')) {
+            //     classList.remove('selected');
+            //     var opensubs = e.target.parentElement.parentElement.querySelectorAll(':scope .selected');
+            //     console.log(opensubs);
+            //         for(var i = 0; i < opensubs.length; i++){
+            //             opensubs[i].classList.remove('selected');
+            //         }
+            // }
+            // else {
+            //     classList.add('selected');
+            //
+            // }
+
+
+            var deviceType = document.getElementsByClassName('device-type');
+            // console.log(deviceType);
+            // $.each(deviceType, function(index, item){
+            //     if (e.target === item) {
+            //         e.target.addClass('selected');
+            //     }
+            //     else {
+            //         e.target.removeClass('selected');
+            //     }
+            // });
             nowClick = e.target.parentElement.parentElement;
             detailViewUpdate(null, findDeviceByDid(item.dataset.did));
         });
@@ -328,8 +390,6 @@ function toggleTable(gateway, device) {
 
 function createDeviceListView() {
 
-
-
     $.ajax({
         url : '/api/v1/gateways',
         type : 'get',
@@ -357,7 +417,7 @@ function createDeviceListView() {
                         item.type= type2Icon(item.type);
                     });
                     deviceList = deviceResult;
-                    console.log(deviceList);
+                    // console.log(deviceList);
                     $.each(gatewayList, function(index, item){
                         $('.tree').append(deviceListForm(item, deviceList));
                         addClickListenerToGatewayTitle();

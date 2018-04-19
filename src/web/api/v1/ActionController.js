@@ -11,18 +11,18 @@ router.route('/')
 
     })
     /**
-     * add device.
+     * action add
      */
     .post(function (req, res) {
-        res.status(200).send(req.body);
-        // actionService.insert(req.body, function(err, result){
-        //     if (err) {
-        //         res.status(400).send(err);
-        //     }
-        //     else {
-        //         res.status(202).send(result);
-        //     }
-        // });
+        // res.status(200).send(req.body);
+        actionService.insert(req.body, function(err, result){
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(202).send(result);
+            }
+        });
     });
 
 

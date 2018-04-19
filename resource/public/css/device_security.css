@@ -20,7 +20,6 @@
 /*margin-left: 45px;*/
 /*}*/
 
-
 /*td {*/
 /*border: 1px solid darkgray;*/
 /*padding: 10px;*/
@@ -222,8 +221,10 @@
 /*}*/
 
 ul.tree li {
+    color: #8a8a8a;
     list-style-type: none;
     position: relative;
+    margin-top: 5px;
 }
 
 ul.tree li ul {
@@ -232,17 +233,22 @@ ul.tree li ul {
 
 ul.tree li.open > ul {
     display: block;
+    color: black;
 }
 
 ul.tree li a {
-    color: black;
+    color: #8a8a8a;
     text-decoration: none;
-    margin-left: 20px;
+    margin-left: 35px;
+}
+
+ul.tree li.open a {
+    color: black;
 }
 
 ul.tree li a:before {
     height: 1em;
-    padding:0 .1em;
+    padding: 0 .1em;
     font-size: .8em;
     display: block;
     position: absolute;
@@ -250,26 +256,36 @@ ul.tree li a:before {
     top: .2em;
 }
 
+.open a {
+    color: black;
+}
+
 ul.tree li > a:not(:last-child):before {
-    content: '+';
+    content: '▲';
     margin-left: 30px;
 }
 
 ul.tree li.open > a:not(:last-child):before {
-    content: '-';
+    content: '▼';
     margin-left: 30px;
+    color: #f27171;
+}
 
+.selected {
+    color: black !important;
 }
 
 li label {
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 20px;
+    font-size: 15px;
     display: inline-block;
 }
 
 .device-type {
     min-width: 235px;
+    margin-left: 25px;
+    margin-top: 5px;
 }
 
 .device-name {
@@ -277,9 +293,8 @@ li label {
 }
 
 .gateway-name {
-    font-size: 30px;
+    font-size: 15px;
 }
-
 
 #securityTable {
     border-collapse: separate;
@@ -302,7 +317,7 @@ li label {
 
 #securityTable thead {
     background-color: #ebeff5;
-    color: rgb(0,0,0);
+    color: rgb(0, 0, 0);
 }
 
 #securityTable tbody .selected {
@@ -315,6 +330,7 @@ div .dataTables_paginate {
     left: -50%; /* or right 50% */
     text-align: left;
 }
+
 div .dataTables_paginate > .pagination {
     position: relative;
     left: 50%;
@@ -325,7 +341,6 @@ div .dataTables_paginate > .pagination {
     margin: auto;
 }
 
-
 /*@media (min-width: 620px){*/
 /*.modal-dialog {*/
 /*max-width: 620px;*/
@@ -333,20 +348,25 @@ div .dataTables_paginate > .pagination {
 /*}*/
 /*}*/
 
-
 .detail-view table tbody, .detail-view table tbody tr {
     display: block;
-    font-size: 23px;
+    font-size: 15px;
 }
 
 .detail-view td {
     display: inline-block;
-    width: 50%;
+    width: 35%;
     text-align: left;
-    text-indent: 1em;
+    text-indent: 3em;
+    margin-top: 10px;
 }
+
+td.right {
+    width: 60%;
+}
+
 .view-box {
-    height:300px;
+    height: 300px;
     /*overflow-y: scroll;*/
     border: solid 2px white;
     border-bottom: solid 1px #deceb2;
@@ -366,7 +386,7 @@ div .dataTables_paginate > .pagination {
 
 }
 
-.view-box-title h3 {
+.view-box-title h5 {
     margin: auto;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -374,9 +394,9 @@ div .dataTables_paginate > .pagination {
 
 .view-box-content {
     overflow-y: auto;
-    margin-top: 55px;
+    margin-top: 45px;
     width: 100%;
-    height: 243px;
+    height: 253px;
 }
 
 .view-box-content::-webkit-scrollbar {
@@ -401,15 +421,22 @@ div .dataTables_paginate > .pagination {
 }
 
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
-
 
 #logTable {
     border-collapse: separate;
@@ -432,13 +459,12 @@ div .dataTables_paginate > .pagination {
 
 #logTable thead {
     background-color: #ebeff5;
-    color: rgb(0,0,0);
+    color: rgb(0, 0, 0);
 }
 
 #logTable tbody .selected {
     background-color: #fcf9f9;
 }
-
 
 #deployLogModal div .dataTables_paginate {
     float: right;
@@ -446,6 +472,7 @@ div .dataTables_paginate > .pagination {
     left: -50%; /* or right 50% */
     text-align: left;
 }
+
 #deployLogModal div .dataTables_paginate > .pagination {
     position: relative;
     left: 50%;
@@ -457,6 +484,7 @@ div .dataTables_paginate > .pagination {
 
 #type .device-type-icon {
     margin-left: 0;
+    min-width: 0;
 }
 
 .device-type-icon {
@@ -465,26 +493,44 @@ div .dataTables_paginate > .pagination {
     min-width: 25px;
 }
 
-tbody tr td {
-    width : 50%;
-}
-tbody tr td div{
-    margin-left: 6%;
-    margin-right: 3%;
-    width : 91%;
-    border-bottom: 1px solid #deceb2;
-    height :35px;
-    margin-top: 5px;;
+#refresh {
+    /*float: left;*/
+    /*background-color: #65c0c6;*/
+    /*border: 6px solid #65c0c6;*/
+    /*padding: 5px;*/
+    /*font-size: 1rem;*/
+    /*line-height: 1;*/
+    /*margin: auto 5px;*/
+    /*color: white;*/
+    /*border-radius: 0.25rem;*/
+    float: left;
+    margin-left: 20px;
+    background-color: #65c0c6;
+    border-color: #65c0c6;
+    /* height: 31px; */
+    line-height: 1;
+    padding: 10px;
 }
 
-tbody tr td .right{
-    margin-left: 3%;
-    margin-right: 6%;
-    width : 91%;
-    border-bottom: 1px solid #deceb2;
-    height :35px;
-    margin-top: 5px;;
-}
+/*tbody tr td {*/
+/*width : 50%;*/
+/*}*/
+/*tbody tr td div{*/
+/*margin-left: 6%;*/
+/*margin-right: 3%;*/
+/*width : 75%;*/
+/*!*border-bottom: 1px solid #deceb2;*!*/
+/*!*height :35px;*!*/
+/*margin-top: 10px;*/
+/*}*/
+
+/*tbody tr td {*/
+/*margin-left: 30px;*/
+/*width : 110%;*/
+/*!*border-bottom: 1px solid #deceb2;*!*/
+/*height :35px;*/
+/*margin-top: 5px;;*/
+/*}*/
 
 tbody tr td .svg-inline--fa {
     font-size: 1.4em;
