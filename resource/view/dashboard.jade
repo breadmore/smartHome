@@ -267,7 +267,7 @@ block content
                                 div.video
                                     button#change(style='border:none; background-color: white') stream
                                     ul
-                                    each topic in topics
+                                    each topic, cast in topics
                                         script.
                                         li(style='margin-top:10px;')
                                             button.myBtn(data-name=topic, style='border:none; background-color: white')=topic
