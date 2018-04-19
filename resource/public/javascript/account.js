@@ -22,11 +22,12 @@ var gatewayList;
 var deviceList;
 var securityList = [];
 var entityList;
+var resourceList = [];
 
 $(document).ready(function () {
     //init device list & device detail
     createDeviceListView();
-
+    createResourceName();
     // Security DataTable.
     var table = $('#securityTable').DataTable({
         paging: false,
@@ -88,6 +89,38 @@ $(document).ready(function () {
         }
     },1000);
 
+    $("#save-Gateway").on("click", () => {
+
+
+        var data = {
+            id : $("#save-gateway-id").val(),
+            name : $("#save-gateway-name").val(),
+            ip : $("#save-ipaddress").val(),
+            port : $("#save-port").val(),
+            conn : $("#gateway-connected input:radio[name=optradio]:checked").val()
+        }
+        // console.log(data);
+        saveGateway(data);
+    });
+
+    $("#save-Device").on("click", () => {
+        var data = {
+            did : $("#add-device-id").val(),
+            psk : $("#add-pre-shared-key").val(),
+            oid : $("#add-object-id").val(),
+            eid : $("#add-entity-id").val(),
+            sid : $("#add-session-id").val(),
+            type : $("#add-type option:selected").val(),
+            conn : $("#add-connection input:radio[name=optradio]:checked").val(),
+            auth : $("#add-authentication input:radio[name=optradio2]:checked").val(),
+            reg : $("#add-registered input:radio[name=optradio3]:checked").val(),
+            dname : $("#add-device-name").val(),
+            gwid : $("#add-gateway-id option:selected").val()
+        };
+        saveDevice(data);
+    });
+
+
 });
 
 
@@ -118,7 +151,37 @@ function findEntityById(id) {
 
 function findOperationById() {
     $.each(deviceList, function(dIdx, device){
+        var count = 0;
+        var entityName = [];
+        var toName = [];
+        var entityName_unique = [];
+        var toName_unique = [];
         $.each(securityList, function(sIdx, security) {
+            if (dIdx == 0) {
+                count++;
+                entityName.push(security.EntityName);
+                toName.push(security.toName);
+                if (count = sIdx) {
+                    // $.each(entityName, function(i, el){
+                    //     if($.inArray(el, entityName_unique) === -1) entityName_unique.push(el);
+                    // });
+                    // $.each(toName, function(i, el){
+                    //     if($.inArray(el, toName_unique) === -1) toName_unique.push(el);
+                    // });
+                    // for (var i=0; i<entityName_unique.length; i++) {
+                    //     $("#form-Id").append("<option>" + entityName_unique[i] +"</option>");
+                    // }
+                    // for (var i=0; i<toName_unique.length; i++) {
+                    //     $("#to-Id").append("<option>" + toName_unique[i] +"</option>");
+                    // }
+                    $.each(entityName, function(i, el){
+                            $("#form-Id").append("<option>" + entityName[i] +"</option>");
+                    });
+                    $.each(toName, function(i, el){
+                            $("#to-Id").append("<option>" + toName[i] +"</option>");
+                    });
+                }
+            };
             device.operation = {};
             if (device.eid === security.EntityID) {
                 device.operation = operationJoiner(security);
@@ -286,6 +349,7 @@ function createDeviceListView() {
                     $.each(gatewayList, function(index, item){
                         $('.tree').append(deviceListForm(item, deviceList));
                         addClickListenerToGatewayTitle();
+                        $("#add-gateway-id").append("<option value=" + item.id + ">" + item.name + "</option>");
                     });
                     addClickListenerToDeviceInfo();
                 },
@@ -353,6 +417,12 @@ function type2Icon(type) {
     else if(type === 6){
         return icon ='<i class="fas fa-home"></i><span>DoorSensor</span>'
     }
+    else if(type === 7){
+        return icon ='<i class="fas fa-plug"></i><span>SmartPlug</span>'
+    }
+    else if(type === 8){
+        return icon ='<i class="fas fa-camera"></i><span>SmartCamera</span>'
+    }
     else{
         return icon ='<i class="fas fa-question"></i><span>Unknown</span>'
     }
@@ -415,3 +485,109 @@ function operationJoiner(security) {
 
     return operation;
 }
+
+
+function saveGateway(data) {
+    var gateway_data = {
+        "gateway" : {
+            "id" : data.id,
+            "name" : data.name,
+            "ip" : data.ip,
+            "port" : data.port,
+            "conn" : data.conn
+        }
+    };
+    $.ajax({
+        url: '/api/v1/gateways',
+        type: 'post',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(gateway_data),
+        // datatype : "json",
+        success: function(result) {
+            // console.log(data);
+            // console.log(result);
+            // console.log("success");
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+function saveDevice(data) {
+    var device_data = {
+        "auth" : {
+            "did" : data.did,
+            "psk" : data.psk,
+            "oid" : data.oid,
+            "eid" : data.eid,
+            "sid" : data.sid,
+            "type" : data.type,
+            "conn" : data.conn,
+            "auth" : data.auth,
+            "reg" : data.reg,
+            "dname" : data.dname,
+            "gwid" : data.gwid
+        }
+    };
+
+    // console.log(device_data);
+    $.ajax({
+        url: '/api/v1/devices',
+        type: 'post',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(device_data),
+        success: function(result) {
+            // console.log(data);
+            console.log(result);
+            console.log("success");
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+function createResourceName() {
+    $.ajax({
+        url: '/api/v1/security/resources',
+        type: 'get',
+        // contentType: "application/json; charset=utf-8",
+        // data: JSON.stringify(device_data),
+        success: function(result) {
+            resourceList = result;
+            $.each(resourceList, function(index, item){
+                $("#resource-Name").append("<option>"+ item.Resource +"</option>")
+            });
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
