@@ -29,10 +29,11 @@ var cams = [
 	});
 
 cams.forEach(function(camStream, i) {
-	var ns = io.of('/cam' + i);
+	var ns = app.io.of('/cam' + i);
 	ns.on('connection', function(wsocket) {
 		console.log('connected to /cam' + i);
 		var pipeStream = function(data) {
+			console.log('wsocket emit!!');
 			wsocket.emit('data', data);
 		};
 		camStream.on('data', pipeStream);

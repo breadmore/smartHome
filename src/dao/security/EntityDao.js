@@ -30,9 +30,9 @@ var db = require('../../db/security');
  */
 
 var Entity = {
-    insertEntity: function (entity, callback) {
+    insertEntity: function (data, callback) {
         return db.query('insert into EntityIDTbl (ID, Name, Status, TokenID) values ?, ?, ?, ?'
-            , [entity.id, entity.name, entity.status, entity.tokenId]
+            , [data.id, data.name, data.status, data.tokenId]
             , callback);
     },
 

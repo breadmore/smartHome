@@ -16,14 +16,7 @@ var state = {
  */
 router.route('/')
     .get(function (req, res) {
-        // stateService.insertState(state, function(err, result) {
-        //     if (err) {
-        //         res.status(400).send(err);
-        //     }
-        //     else {
-        //         res.status(200).send(result);
-        //     }
-        // })
+
     })
     .post(function (req, res) {
 

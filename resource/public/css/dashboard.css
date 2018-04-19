@@ -169,6 +169,7 @@ td {
     padding-top: 13px;
     padding-bottom: 10px;
     width: 100%;
+    max-height: 120px;
 }
 
 td:nth-child(1) {
@@ -246,10 +247,10 @@ td:nth-child(1) {
     text-align: right;
 }
 
-canvas {
-    max-width: 150px;
-    max-height: 35px;
-}
+/*canvas {*/
+    /*max-width: 150px;*/
+    /*max-height: 35px;*/
+/*}*/
 
 /*여기부터 도넛 차트*/
 
