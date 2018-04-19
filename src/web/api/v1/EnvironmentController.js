@@ -155,4 +155,45 @@ router.route('/illuminati')
         }
     });
 
+router.route('/envirnomentsall')
+    .get(function (req, res) {
+        var responseData = {
+            temperature : null,
+            humidity: null,
+            illuminaty: null
+        };
+        if (req.query.number === undefined) {
+            res.status(400).send();
+        }
+        else {
+            environmentService.getLastTemperature(parseInt(req.query.number), function(err, result) {
+                if (err) {
+                    logger.error(err);
+                    res.status(400).send(err);
+                }
+                else {
+                    responseData.temperature = result;
+                    environmentService.getLastHumidity(parseInt(req.query.number), function(err, result) {
+                        if (err) {
+                            logger.error(err);
+                            res.status(400).send(err);
+                        }
+                        else {
+                            responseData.humidity = result;
+                            environmentService.getLastIlluminaty(parseInt(req.query.number), function(err, result) {
+                                if (err) {
+                                    res.status(400).send(err);
+                                }
+                                else {
+                                    responseData.illuminaty = result;
+                                    res.status(200).send(responseData);
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    });
+
 module.exports = router;

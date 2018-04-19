@@ -517,7 +517,7 @@ input:checked + .slider:before {
 
 @media (min-width: 640px) {
     .modal-dialog {
-        max-width: 642px;
+        max-width: 942px;
         margin: 1.75rem auto;
     }
 }

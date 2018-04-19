@@ -25,6 +25,7 @@ window.onbeforeunload = function () {
 $(function () {
     initEnvironmentData();
 
+    videoPlayer();
     // temperature Chart init.
     var ctx = $("#myChart");
     Chart.defaults.global.legend.display = false;
@@ -94,7 +95,7 @@ $(function () {
     myChart_modal = new Chart(ctx_modal, {
         type: 'line',
         data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" ],
+            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
             datasets: [
                 {
                     label: 'Temperature',
@@ -113,7 +114,7 @@ $(function () {
                 {
                     label: 'Humidity',
                     radius: 1.5,
-                    data: [85, 85, 85, 85, 85, 85,80, 75, 70, 65, 55, 45,45, 40, 40, 40, 40, 40,45, 45, 50, 55, 60, 60],
+                    data: [85, 85, 85, 85, 85, 85, 80, 75, 70, 65, 55, 45, 45, 40, 40, 40, 40, 40, 45, 45, 50, 55, 60, 60],
                     // backgroundColor: [
                     //     'rgba(41, 209, 51, 0.2)',
                     // ],
@@ -127,7 +128,7 @@ $(function () {
                 {
                     label: 'Luminance',
                     radius: 1.5,
-                    data: [110, 100, 100, 100, 130, 150,160, 190, 210, 230, 240, 250,270, 270, 260, 250, 240, 230,220, 210, 200, 180, 160, 120],
+                    data: [110, 100, 100, 100, 130, 150, 160, 190, 210, 230, 240, 250, 270, 270, 260, 250, 240, 230, 220, 210, 200, 180, 160, 120],
                     // backgroundColor: [
                     //     'rgba(252, 100, 3, 0.2)',
                     // ],
@@ -141,9 +142,9 @@ $(function () {
         },
         options: {
             title: {
-                display : false,
-                text : '2018-04-11',
-                fontSize : 17
+                display: false,
+                text: '2018-04-11',
+                fontSize: 17
             },
             scales: {
                 yAxes: [{
@@ -158,7 +159,7 @@ $(function () {
                 labels: {
                     fontSize: 18
                 },
-                position : 'bottom'
+                position: 'bottom'
             }
         }
     });
@@ -226,6 +227,29 @@ $(function () {
         updateLegacyStates(data);
     });
 
+    setInterval(function () {
+        socket.emit('/environment');
+    }, 1500);
+    socket.on('/environment', function (data) {
+        console.log(data);
+
+        $('#temperatureValue').text(data.temperature[0].value + '℃');
+        recentTemperature.shift();
+        recentTemperature.push(data.temperature[0].value);
+        updateChart(temperatureChart, recentTemperature);
+
+        $('#humidityValue').text(data.humidity[0].value + '%');
+        recentHumidity.shift();
+        recentHumidity.push(data.humidity[0].value);
+        updateChart(humidityChart, recentHumidity);
+        // console.log(data.temperature[0].value);
+        // console.log(data.humidity[0].value);
+        // console.log(data.illuminaty.length);
+        //todo [0].value add
+        $('#luxValue').text(data.illuminaty);
+
+    });
+
     /** Xiaomi State Socket!
      *         udp              rest                  w/s
      * device ------> nodered  ------>  node server ------> dashboard
@@ -289,7 +313,7 @@ $(function () {
     });
 
     /** room mode controller*/
-    $('#roomModeController').on('click', function(e){
+    $('#roomModeController').on('click', function (e) {
         if (!$('#roomState').prop('checked')) {
             console.log($('#roomState').prop('checked'));
             legacyDeviceAction(2, true)
@@ -313,8 +337,6 @@ $(function () {
             legacyDeviceAction(1, false);
         }
     });
-
-
 
 
     camSocket = io(location.origin + '/cam0');
@@ -574,37 +596,35 @@ function xiaomiAction(action) {
 function legacyDeviceAction(type, action) {
     // todo : ip address?
     var action = {
-        'ip' : '',
-        'type' : type,
-        'turnOn' : action
+        'ip': '',
+        'type': type,
+        'turnOn': action
     };
 
     $.ajax({
         url: 'api/v1/action',
         type: 'post',
         data: action,
-        success: function(result) {
+        success: function (result) {
             console.log(result);
         },
-        error : function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
 }
 
 function sendSensorLog() {
-    var log = {
-
-    };
+    var log = {};
 
     $.ajax({
         url: 'api/v1/action/log',
         type: 'post',
         data: log,
-        success: function(result) {
+        success: function (result) {
             console.log(result);
         },
-        error : function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
@@ -631,4 +651,35 @@ function initXiaomiDeviceData() {
         });
     }, 1500);
 
+}
+
+function videoPlayer() {
+    var video = document.getElementById('myVideo');
+    var src = document.getElementById('vid');
+    var btns = document.getElementsByClassName("myBtn");
+    var change = document.getElementById('change');
+
+    $.each(btns, function (index, item) {
+        item.addEventListener('click', function (e) {
+            console.log($(this).attr('data-id'));
+            src.src = "/video/" + $(this).attr('data-name');
+
+            if ($("canvas").css("display") == "none") console.log("none");
+            else $("canvas").toggle();
+
+            if ($("video").css("display") == "none") $("video").toggle()
+            video.load();
+        })
+    })
+
+    $(document).ready(function () {
+        change.onclick = function () {
+            console.log("ch");
+            if ($("#myCanvas").css("display") == "none") $("canvas").toggle();
+
+            if ($("video").css("display") == "none") console.log("none");
+            else $("video").toggle();
+            video.pause();
+        };
+    });
 }

@@ -1,5 +1,7 @@
 var router = require('express').Router();
 var logger = require('log4js').getLogger("page.js");
+var fs = require('fs');
+var path = require('path');
 
 // router.get('/*', function (req, res, next) {
 //     // logger.debug(new Date().toString());
@@ -13,7 +15,17 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    res.render('dashboard');
+    const videoPath = path.join(__dirname, "../../resource/public/video");
+
+
+    fs.readdir(videoPath, function (err, files) {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        }
+        res.render('dashboard', {topics: files});
+    });
+    // res.render('dashboard');
 });
 
 router.get('/regist', function (req, res) {

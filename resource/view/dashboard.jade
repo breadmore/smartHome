@@ -69,7 +69,7 @@ block content
                             .start_value 0
                             .finish_value 100
                         .lux
-                            span.lux_value#luxValue 100
+                            span.lux_value#luxValue
                             span Lux
         .card.device-monitor.home-security-1
             .card-body
@@ -257,12 +257,25 @@ block content
                         span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
-                        #ipcamera(style='width: 640px')
-                            canvas(width='640', height='360' style='width:640px; height:360px;')
-                        //button#record(disabled='') record
-                        //button#stop(disabled='') stop
+                        .row
+                            .col-8(style='float:left')
+                                video(id="myVideo",width='640',height='360', controls, style='display:none;')
+                                    source(id="vid", type='video/mp4')
+                                #ipcamera(style='width: 640px')
+                                    canvas#myCanvas(width='640', height='360' style='width:640px; height:360px;')
+                            .col-4(style='float: right; margin-left:auto, margin-right:auto margin-top: 10px')
+                                div.video
+                                    button#change(style='border:none; background-color: white') stream
+                                    ul
+                                    each topic, cast in topics
+                                        script.
+                                        li(style='margin-top:10px;')
+                                            button.myBtn(data-name=topic, style='border:none; background-color: white')=topic
+                        .col-12(style='clear=both; margin:auto;')
+                            button#record(disabled='') record
+                            button#stop(disabled='') stop
                 .modal-footer
-                //    button.btn.btn-primary(data-dismiss="modal") Cancel
+                    button.btn.btn-primary(data-dismiss="modal") Cancel
     .modal.fade#temp-humi-lux-modal(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content

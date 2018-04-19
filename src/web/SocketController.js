@@ -12,4 +12,8 @@ module.exports = function (socket) {
         socketService.camService(socket, 'start');
     });
 
+    socket.on('/environment', function () {
+        socketService.envirnoments(socket, 1);
+    });
+
 };
