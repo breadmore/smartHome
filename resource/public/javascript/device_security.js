@@ -437,20 +437,26 @@ function createDeviceListView() {
 }
 /** create gateway title + device info list in device list view*/
 function deviceListForm(gateway, deviceList) {
-    var dom = '<li class="device-list"><a href="#" class="gateway-name " data-id=' + gateway.id +'>' + gateway.name +'</a><ul>';
-    $.each(deviceList, function(index, item){
-        if (gateway.id === item.gwid) {
-            dom += '<li class="device-info device-list" data-did=' + item.did + '>' +
-                '<label class="device-type">'+ item.type +'</label>' +
-                '<label class="device-name">'+ item.dname +'</label>' +
-                '<label class="device-conn" style="width:25px">'+ item.conn +'</label>' +
-                '<label class="device-auth" style="width:25px">'+ item.auth +'</label>' +
-                '<label class="device-reg" style="width:25px">'+ item.reg +'</label>' +
-                '</li>'
-        }
-    });
-    dom += '</ul></li>';
-    return dom;
+    if (deviceList.length > 0) {
+        var dom = '<li class="device-list"><a href="#" class="gateway-name " data-id=' + gateway.id +'>' + gateway.name +'</a><ul>';
+        $.each(deviceList, function(index, item){
+            if (gateway.id === item.gwid) {
+                dom += '<li class="device-info device-list" data-did=' + item.did + '>' +
+                    '<label class="device-type">'+ item.type +'</label>' +
+                    '<label class="device-name">'+ item.dname +'</label>' +
+                    '<label class="device-conn" style="width:25px">'+ item.conn +'</label>' +
+                    '<label class="device-auth" style="width:25px">'+ item.auth +'</label>' +
+                    '<label class="device-reg" style="width:25px">'+ item.reg +'</label>' +
+                    '</li>'
+            }
+        });
+        dom += '</ul></li>';
+        return dom;
+    }
+    else {
+        return null;
+    }
+
 }
 
 /**

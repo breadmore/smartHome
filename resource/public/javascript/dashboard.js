@@ -168,31 +168,30 @@ $(function () {
     let socket = io.connect('/');
 
     initXiaomiDeviceData();
-    // todo : fix socket!
-    socket.on('/environments/', function (data) {
-        console.log(data);
-        switch (data.type) {
-            case 'temperature':
-                $('#temperatureValue').text(data.value + '℃');
-                recentTemperature.shift();
-                recentTemperature.push(data.value);
-                updateChart(temperatureChart, recentTemperature);
-                break;
-            case 'humidity':
-                $('#humidityValue').text(data.value + '%');
-                recentHumidity.shift();
-                recentHumidity.push(data.value);
-                updateChart(humidityChart, recentHumidity);
-                break;
-            case 'illuminati':
-                console.log(data.value);
-                $('#luxValue').text(data.value + 'Lux');
-                break;
-            default:
-                console.error(data);
-                break;
-        }
-    });
+    // socket.on('/environments/', function (data) {
+    //     console.log(data);
+    //     switch (data.type) {
+    //         case 'temperature':
+    //             $('#temperatureValue').text(data.value + '℃');
+    //             recentTemperature.shift();
+    //             recentTemperature.push(data.value);
+    //             updateChart(temperatureChart, recentTemperature);
+    //             break;
+    //         case 'humidity':
+    //             $('#humidityValue').text(data.value + '%');
+    //             recentHumidity.shift();
+    //             recentHumidity.push(data.value);
+    //             updateChart(humidityChart, recentHumidity);
+    //             break;
+    //         case 'illuminati':
+    //             console.log(data.value);
+    //             $('#luxValue').text(data.value + 'Lux');
+    //             break;
+    //         default:
+    //             console.error(data);
+    //             break;
+    //     }
+    // });
 
     /**
      * legacy device state update socket!
@@ -231,7 +230,7 @@ $(function () {
         socket.emit('/environment');
     }, 1500);
     socket.on('/environment', function (data) {
-        // console.log(data);
+        // console.log(data.illuminaty);
 
         $('#temperatureValue').text(data.temperature[0].value + '℃');
         recentTemperature.shift();
@@ -246,7 +245,7 @@ $(function () {
         // console.log(data.humidity[0].value);
         // console.log(data.illuminaty.length);
         //todo [0].value add
-        $('#luxValue').text(data.illuminaty);
+        $('#luxValue').text(data.illuminaty[0].value);
 
     });
 
@@ -256,7 +255,7 @@ $(function () {
      *                                              ------> database
      */
     socket.on('/xiaomi/states', function (data) {
-        // console.log(data);
+        console.log(data);
         switch (data.type) {
             case 'magnet':
                 if (data.event === 'open') {

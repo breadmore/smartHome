@@ -243,7 +243,8 @@ ul.tree li a {
 }
 
 ul.tree li.open a {
-    color: black;
+    color: #f27171;
+
 }
 
 ul.tree li a:before {
@@ -280,13 +281,17 @@ li label {
     margin-right: 10px;
     font-size: 15px;
     display: inline-block;
+    margin-bottom: 0 !important;
 }
 
 .device-type {
     min-width: 235px;
     margin-left: 25px;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
 }
+
+
+
 
 .device-name {
     min-width: 135px;
@@ -359,10 +364,12 @@ div .dataTables_paginate > .pagination {
     text-align: left;
     text-indent: 3em;
     margin-top: 10px;
+    color: #f27171;
 }
 
 td.right {
     width: 60%;
+    color: black;
 }
 
 .view-box {

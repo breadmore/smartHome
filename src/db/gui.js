@@ -8,4 +8,12 @@ var connection = mysql.createPool({
     database: 'test'
 });
 
+// var connection = mysql.createPool({
+//
+//     host: '192.168.0.3',
+//     user: 'rtst',
+//     password: 'etri1234',
+//     database: 'iot-prototype_production'
+// });
+
 module.exports = connection;

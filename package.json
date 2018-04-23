@@ -68,7 +68,6 @@
     "rtsp-ffmpeg": "./src/library/rtsp-ffmpeg",
     "sequelize": "^4.37.6",
     "socket.io": "^2.1.0",
-    "sqlite3": "^4.0.0",
     "syslog-client": "^1.1.0"
   },
   "engines": {
