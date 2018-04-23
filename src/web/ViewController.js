@@ -15,17 +15,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    const videoPath = path.join(__dirname, "../../resource/public/video");
-
-
-    fs.readdir(videoPath, function (err, files) {
-        if (err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
-        res.render('dashboard', {topics: files});
-    });
-    // res.render('dashboard');
+    res.render('dashboard');
 });
 
 router.get('/regist', function (req, res) {
