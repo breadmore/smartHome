@@ -6,7 +6,8 @@ function insert(action, callback){
 }
 
 function insertLog(log, callback) {
-    logDao.insertLog(log, callback);
+    // logDao.insertLog(log, callback);
+    callback(null,'insert Log');
 }
 
 

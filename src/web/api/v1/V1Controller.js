@@ -10,6 +10,7 @@ router.use('/xiaomi', require('./XiaomiController'));
 router.use('/security', require('./SecurityController'));
 router.use('/action', require('./ActionController'));
 router.use('/users', require('./UserController'));
+router.use('/logs', require('./LogController'));
 
 
 

@@ -12,16 +12,58 @@ let logger = require('log4js').getLogger('LogDao.js');
  PRIMARY KEY (`id`));
  */
 
+
+/**
+ * CREATE TABLE `test`.`Policy_History` (
+ `id` INT NOT NULL AUTO_INCREMENT,
+ `enforce_date` DATETIME NOT NULL,
+ `from_id` INT NOT NULL,
+ `to_id` INT NOT NULL,
+ `resource_name` VARCHAR(45) NOT NULL,
+ `pre_operation` VARCHAR(45) NULL,
+ `current_operation` VARCHAR(45) NULL,
+ PRIMARY KEY (`id`));
+ */
+
+/**
+ * CREATE TABLE `test`.`Security_Log` (
+ `id` INT NOT NULL AUTO_INCREMENT,
+ `event_date` DATETIME NOT NULL,
+ `event_type` VARCHAR(45) NOT NULL,
+ `device_type` INT(11) NULL,
+ `device_id` VARCHAR(45) NULL,
+ `msg` VARCHAR(256) NULL,
+ PRIMARY KEY (`id`));
+
+ */
+
 var Log = {
+
+    //todo : it will be not used.. remove.
     insertLog: function (log, callback) {
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-        logger.debug("insert log :");
-        logger.debug(log);
-
         return db.query('insert into event_log (device_group, device_type, event, level, created_at) values (?, ?, ?, ?, ?)'
             , [log.group, log.type, log.event, log.level, now]
             , callback);
     },
+
+    insert: function(log, callback) {
+        var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        return db.query('insert into Security_Log (event_date, event_type, device_type, device_id, msg) values (?, ?, ?, ?, ? )',
+            [now, log.eventType, log.deviceType, log.deviceId, log.msg],
+            callback);
+
+    },
+
+    selectAllSecurityEvent(callback) {
+        return db.query('select * from Security_Log where event_type = security or critical',
+            callback);
+    },
+
+    selectAllEvent(callback) {
+        return db.query('select * from Security_Log', callback);
+    },
+
 
     selecetAllLog: function(callback) {
         return db.query('select * from event_log', callback);
@@ -29,7 +71,7 @@ var Log = {
 
     selectXiaomiLog: function (callback) {
         return db.query('select * from event_log where device_group = xiaomi', callback)
-    },
+    }
 
 };
 
