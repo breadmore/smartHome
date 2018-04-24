@@ -95,7 +95,6 @@ $(document).ready(function () {
 
     $("#save-Gateway").on("click", () => {
 
-
         var data = {
             id: $("#save-gateway-id").val(),
             name: $("#save-gateway-name").val(),
@@ -186,7 +185,34 @@ $(document).ready(function () {
 
         $("#policy-confirm").attr('disabled', true);
     });
+    $('#deployLogModal').on('show.bs.modal',function (e) {
 
+    })
+    $('#modifyModal').on('show.bs.modal', function (e) {
+
+        var device = findDeviceByDid(nowClick.getAttribute('data-did'))
+        $("#gateway-id").val(device.gwid);
+        $("#device-name").val(nowClick.getAttribute('data-did'));
+        $("#device-id").val(device.id);
+        $("#pre-shared-key").val(device.psk);
+        $("#entity-id").val(device.eid);
+        $("#object-id").val(device.oid);
+        $("#type").val(device.type);
+        $("#session-id").val(device.sid)
+
+        if('<i class="fas fa-toggle-off"></i>'===device.conn){
+            $('#connected').html(device.conn + ' Not Connected');
+        }
+        else $('#connected').html(device.conn + ' Connected');
+        if('<i class="far fa-address-card"></i>'===device.auth){
+            $('#authenticate').html(device.auth + ' Not Connected');
+        }
+        else  $('#authenticate').html(device.auth + ' Connected');
+        if('<i class="far fa-eye-slash"></i>'===device.reg){
+            $('#regster').html(device.reg + ' Not Registered');
+        }else
+            $('#regster').html(device.reg + ' Registered');
+    });
     $("#policy-confirm").on("click", () => {
 
         var tmp =  table.row('.selected').data();
@@ -243,6 +269,19 @@ function findEntityById(id) {
     return null;
 }
 
+function findDeviceByDid(did) {
+    var idx = -1;
+    $.each(deviceList,function (index, item){
+        if (item.did === did) {
+            idx = index;
+        }
+    });
+
+    if (idx !== -1) {
+        return deviceList[idx];
+    }
+    return null;
+}
 function findOperationById() {
     $.each(deviceList, function (dIdx, device) {
         var count = 0;
@@ -352,6 +391,8 @@ function enableButton(isEnabled) {
 // //var btn = $(e.relatedTarget);
 // //console.log(btn);
 // //console.log(table.row('.selected').data());
+
+
 
 /** add click listener to gateway title in device list view
  * 1. folding gateway title
