@@ -26,4 +26,16 @@ router.route('/')
         })
     });
 
+router.route('/policy')
+    .get(function (req, res) {
+        logService.selectAllUsers(function (err,result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(201).send(result);
+            }
+        })
+    })
+
 module.exports = router;
