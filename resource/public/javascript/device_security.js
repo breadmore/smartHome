@@ -37,8 +37,8 @@ $(document).ready(function () {
         serverSide: false,
         searching: true,
         // dom: 't<"row no-gutters default-bottom-margin"<"col"><"col"p><"col">>',
-        dom : '<"row no-gutters"t>',
-        ajax : {
+        dom: '<"row no-gutters"t>',
+        ajax: {
             url: "/api/v1/security",
             dataSrc: function (jsonArray) {
                 // console.log(jsonArray);
@@ -46,24 +46,25 @@ $(document).ready(function () {
 
                 $.ajax({
                     url: 'api/v1/security/entities',
-                    type:'get',
+                    type: 'get',
                     async: false,
-                    success: function(entities){
+                    success: function (entities) {
                         entityList = entities;
-                        $.each(jsonArray, function(index, item){
+                        $.each(jsonArray, function (index, item) {
                             item.fromName = findEntityById(item.FromID).Name;
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
                         });
                     },
-                    error: function(err) {
+                    error: function (err) {
                         console.log(err);
                     }
                 });
                 return securityList;
 
-            }},
-        columns : [
+            }
+        },
+        columns: [
             {data: "FromID"},
             {data: "fromName"},
             {data: "toName"},
@@ -77,7 +78,7 @@ $(document).ready(function () {
     });
 
     var isLoading = true;
-    var loading = setInterval(function() {
+    var loading = setInterval(function () {
         if (isLoading) {
             if (deviceList !== undefined && securityList !== undefined && gatewayList !== undefined) {
                 document.getElementById('loader').style.display = 'none';
@@ -88,17 +89,17 @@ $(document).ready(function () {
             isLoading = false;
             clearInterval(loading);
         }
-    },1000);
+    }, 1000);
 
     $("#save-Gateway").on("click", () => {
 
 
         var data = {
-            id : $("#save-gateway-id").val(),
-            name : $("#save-gateway-name").val(),
-            ip : $("#save-ipaddress").val(),
-            port : $("#save-port").val(),
-            conn : $("#gateway-connected input:radio[name=optradio]:checked").val()
+            id: $("#save-gateway-id").val(),
+            name: $("#save-gateway-name").val(),
+            ip: $("#save-ipaddress").val(),
+            port: $("#save-port").val(),
+            conn: $("#gateway-connected input:radio[name=optradio]:checked").val()
         }
         // console.log(data);
         saveGateway(data);
@@ -106,17 +107,17 @@ $(document).ready(function () {
 
     $("#save-Device").on("click", () => {
         var data = {
-            did : $("#add-device-id").val(),
-            psk : $("#add-pre-shared-key").val(),
-            oid : $("#add-object-id").val(),
-            eid : $("#add-entity-id").val(),
-            sid : $("#add-session-id").val(),
-            type : $("#add-type option:selected").val(),
-            conn : $("#add-connection input:radio[name=optradio]:checked").val(),
-            auth : $("#add-authentication input:radio[name=optradio2]:checked").val(),
-            reg : $("#add-registered input:radio[name=optradio3]:checked").val(),
-            dname : $("#add-device-name").val(),
-            gwid : $("#add-gateway-id option:selected").val()
+            did: $("#add-device-id").val(),
+            psk: $("#add-pre-shared-key").val(),
+            oid: $("#add-object-id").val(),
+            eid: $("#add-entity-id").val(),
+            sid: $("#add-session-id").val(),
+            type: $("#add-type option:selected").val(),
+            conn: $("#add-connection input:radio[name=optradio]:checked").val(),
+            auth: $("#add-authentication input:radio[name=optradio2]:checked").val(),
+            reg: $("#add-registered input:radio[name=optradio3]:checked").val(),
+            dname: $("#add-device-name").val(),
+            gwid: $("#add-gateway-id option:selected").val()
         };
         saveDevice(data);
     });
@@ -134,8 +135,6 @@ $(document).ready(function () {
 });
 
 
-
-
 // function sleep(milliseconds) {
 //     var start = new Date().getTime();
 //     for (var i = 0; i < 1e7; i++) {
@@ -148,7 +147,7 @@ $(document).ready(function () {
 
 function findEntityById(id) {
     var idx = -1;
-    $.each(entityList, function(index, item){
+    $.each(entityList, function (index, item) {
         if (item.ID === id) {
             idx = index;
         }
@@ -160,13 +159,13 @@ function findEntityById(id) {
 }
 
 function findOperationById() {
-    $.each(deviceList, function(dIdx, device){
+    $.each(deviceList, function (dIdx, device) {
         var count = 0;
         var entityName = [];
         var toName = [];
         var entityName_unique = [];
         var toName_unique = [];
-        $.each(securityList, function(sIdx, security) {
+        $.each(securityList, function (sIdx, security) {
             if (dIdx == 0) {
                 count++;
                 entityName.push(security.EntityName);
@@ -184,14 +183,15 @@ function findOperationById() {
                     // for (var i=0; i<toName_unique.length; i++) {
                     //     $("#to-Id").append("<option>" + toName_unique[i] +"</option>");
                     // }
-                    $.each(entityName, function(i, el){
-                        $("#form-Id").append("<option>" + entityName[i] +"</option>");
+                    $.each(entityName, function (i, el) {
+                        $("#form-Id").append("<option>" + entityName[i] + "</option>");
                     });
-                    $.each(toName, function(i, el){
-                        $("#to-Id").append("<option>" + toName[i] +"</option>");
+                    $.each(toName, function (i, el) {
+                        $("#to-Id").append("<option>" + toName[i] + "</option>");
                     });
                 }
-            };
+            }
+            ;
             device.operation = {};
             if (device.eid === security.EntityID) {
                 device.operation = operationJoiner(security);
@@ -209,17 +209,18 @@ function findOperationById() {
  * */
 function addClickListenerToGatewayTitle() {
     var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
-    tree[tree.length - 1].addEventListener('click', function(e) {
+    tree[tree.length - 1].addEventListener('click', function (e) {
         nowClick = e.target;
         var parent = e.target.parentElement;
         var classList = parent.classList;
-        if(classList.contains("open")) {
+        if (classList.contains("open")) {
             classList.remove('open');
             var opensubs = parent.querySelectorAll(':scope .open');
-            for(var i = 0; i < opensubs.length; i++){
+            for (var i = 0; i < opensubs.length; i++) {
                 opensubs[i].classList.remove('open');
             }
         } else {
+            $('.open').removeClass('open');
             classList.add('open');
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
         }
@@ -227,7 +228,7 @@ function addClickListenerToGatewayTitle() {
 
     function findGatewayByDid(id) {
         var idx = -1;
-        $.each(gatewayList, function(index, item){
+        $.each(gatewayList, function (index, item) {
             if (item.id === id) {
                 idx = index;
             }
@@ -245,8 +246,8 @@ function addClickListenerToGatewayTitle() {
 function addClickListenerToDeviceInfo() {
     var deviceInfoList = $('.device-info');
 
-    $.each(deviceInfoList, function(index, item){
-        item.addEventListener('click', function(e){
+    $.each(deviceInfoList, function (index, item) {
+        item.addEventListener('click', function (e) {
 
             // var classList = parent.classList;
             // if(classList.contains("open")) {
@@ -271,7 +272,7 @@ function addClickListenerToDeviceInfo() {
             //         enableButton(true);
             //     }
             // });
-            if($(this).hasClass('selected')){
+            if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
             }
             else {
@@ -316,7 +317,7 @@ function addClickListenerToDeviceInfo() {
 
     function findDeviceByDid(did) {
         var idx = -1;
-        $.each(deviceList, function(index, item){
+        $.each(deviceList, function (index, item) {
             if (item.did === did) {
                 idx = index;
             }
@@ -339,7 +340,10 @@ function detailViewUpdate(gateway, device) {
         $('#gatewayName').html(gateway.name);
         $('#gatewayIP').html(gateway.ip);
         $('#gatewayPort').html(gateway.port);
-        $('#gatewayConn').html(gateway.conn);
+        if ('<i class="fas fa-toggle-off"></i>' === gateway.conn)
+            $('#gatewayConn').html(gateway.conn + ' Disconnected');
+        else
+            $('#gatewayConn').html(gateway.conn + ' Connected');
 
     }
     else if (device) {
@@ -353,8 +357,16 @@ function detailViewUpdate(gateway, device) {
         $('#psk').html(device.psk);
         $('#oid').html(device.oid);
         $('#sid').html(device.sid);
-        $('#conn').html(device.conn);
-        $('#auth').html(device.auth);
+        if ('<i class="fas fa-toggle-off"></i>' === device.conn)
+            $('#conn').html(device.conn + ' Disconnected');
+        else
+            $('#conn').html(device.conn + ' Connected');
+
+        if ('<i class="far fa-address-card"></i>' === device.auth)
+            $('#auth').html(device.auth + ' Unauthorized');
+        else
+            $('#auth').html(device.auth + ' Authorized');
+
         $('#operation').html(device.operation);
     }
     else {
@@ -374,7 +386,7 @@ function toggleTable(gateway, device) {
         gatewayTable.style.display = 'block';
         deviceTable.style.display = 'none';
     }
-    else if (device){
+    else if (device) {
         deviceTable.style.display = 'block'
         gatewayTable.style.display = 'none';
     }
@@ -391,19 +403,19 @@ function toggleTable(gateway, device) {
 function createDeviceListView() {
 
     $.ajax({
-        url : '/api/v1/gateways',
-        type : 'get',
-        success : function(gatewayResult) {
+        url: '/api/v1/gateways',
+        type: 'get',
+        success: function (gatewayResult) {
 
-            $.each(gatewayResult, function(index, item){
+            $.each(gatewayResult, function (index, item) {
                 item.conn = conn2Icon(item.conn);
             });
             gatewayList = gatewayResult;
             $.ajax({
                 url: '/api/v1/devices',
                 type: 'get',
-                success: function(deviceResult) {
-                    $.each(deviceResult, function(index, item){
+                success: function (deviceResult) {
+                    $.each(deviceResult, function (index, item) {
                         // console.log(bin2String(item.psk.data));
                         if (item.psk) {
                             item.psk = bin2String(item.psk.data);
@@ -414,39 +426,40 @@ function createDeviceListView() {
                         item.conn = conn2Icon(item.conn);
                         item.auth = auth2Icon(item.auth);
                         item.reg = regi2Icon(item.reg);
-                        item.type= type2Icon(item.type);
+                        item.type = type2Icon(item.type);
                     });
                     deviceList = deviceResult;
                     // console.log(deviceList);
-                    $.each(gatewayList, function(index, item){
+                    $.each(gatewayList, function (index, item) {
                         $('.tree').append(deviceListForm(item, deviceList));
                         addClickListenerToGatewayTitle();
                         $("#add-gateway-id").append("<option value=" + item.id + ">" + item.name + "</option>");
                     });
                     addClickListenerToDeviceInfo();
                 },
-                error: function(err) {
+                error: function (err) {
                     console.log(err);
                 }
             })
         },
-        error : function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
 }
+
 /** create gateway title + device info list in device list view*/
 function deviceListForm(gateway, deviceList) {
     if (deviceList.length > 0) {
-        var dom = '<li class="device-list"><a href="#" class="gateway-name " data-id=' + gateway.id +'>' + gateway.name +'</a><ul>';
-        $.each(deviceList, function(index, item){
+        var dom = '<li class="device-list"><a href="#" class="gateway-name " data-id=' + gateway.id + '>' + gateway.name + '</a><ul>';
+        $.each(deviceList, function (index, item) {
             if (gateway.id === item.gwid) {
                 dom += '<li class="device-info device-list" data-did=' + item.did + '>' +
-                    '<label class="device-type">'+ item.type +'</label>' +
-                    '<label class="device-name">'+ item.dname +'</label>' +
-                    '<label class="device-conn" style="width:25px">'+ item.conn +'</label>' +
-                    '<label class="device-auth" style="width:25px">'+ item.auth +'</label>' +
-                    '<label class="device-reg" style="width:25px">'+ item.reg +'</label>' +
+                    '<label class="device-type">' + item.type + '</label>' +
+                    '<label class="device-name">' + item.dname + '</label>' +
+                    '<label class="device-conn" style="width:25px">' + item.conn + '</label>' +
+                    '<label class="device-auth" style="width:25px">' + item.auth + '</label>' +
+                    '<label class="device-reg" style="width:25px">' + item.reg + '</label>' +
                     '</li>'
             }
         });
@@ -475,34 +488,35 @@ function bin2String(array) {
     }
     return result;
 }
+
 function type2Icon(type) {
     var icon;
-    if (type ===1) {
+    if (type === 1) {
         return icon = '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>'
     }
-    else if(type === 2){
-        return icon ='<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>'
+    else if (type === 2) {
+        return icon = '<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>'
     }
-    else if(type === 3){
-        return icon ='<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>'
+    else if (type === 3) {
+        return icon = '<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>'
     }
-    else if(type === 4){
-        return icon ='<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>'
+    else if (type === 4) {
+        return icon = '<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>'
     }
-    else if(type === 5){
-        return icon ='<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>'
+    else if (type === 5) {
+        return icon = '<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>'
     }
-    else if(type === 6){
-        return icon ='<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>'
+    else if (type === 6) {
+        return icon = '<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>'
     }
-    else if(type === 7){
-        return icon ='<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>'
+    else if (type === 7) {
+        return icon = '<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>'
     }
-    else if(type === 8){
-        return icon ='<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>'
+    else if (type === 8) {
+        return icon = '<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>'
     }
-    else{
-        return icon ='<i class="fas fa-question"></i><span>Unknown</span>'
+    else {
+        return icon = '<i class="fas fa-question"></i><span>Unknown</span>'
     }
     return icon;
 }
@@ -510,33 +524,33 @@ function type2Icon(type) {
 
 function conn2Icon(conn) {
     var icon;
-    if (conn === 0 ) {
+    if (conn === 0) {
         return icon = '<i class="fas fa-toggle-off"></i>'
     }
     else {
-        return icon ='<i class="fas fa-toggle-on icon-on" ></i>'
+        return icon = '<i class="fas fa-toggle-on icon-on" ></i>'
     }
     return icon;
 }
 
 function auth2Icon(auth) {
     var icon;
-    if (auth === 0 ) {
+    if (auth === 0) {
         return icon = '<i class="far fa-address-card"></i>'
     }
     else {
-        return icon ='<i class="fas fa-address-card icon-on" ></i>'
+        return icon = '<i class="fas fa-address-card icon-on" ></i>'
     }
     return icon;
 }
 
 function regi2Icon(regi) {
     var icon;
-    if (regi === 0 ) {
+    if (regi === 0) {
         return icon = '<i class="far fa-eye-slash"></i>'
     }
     else {
-        return icon ='<i class="fas fa-eye icon-on" ></i>'
+        return icon = '<i class="fas fa-eye icon-on" ></i>'
     }
     return icon;
 }
@@ -567,12 +581,12 @@ function operationJoiner(security) {
 
 function saveGateway(data) {
     var gateway_data = {
-        "gateway" : {
-            "id" : data.id,
-            "name" : data.name,
-            "ip" : data.ip,
-            "port" : data.port,
-            "conn" : data.conn
+        "gateway": {
+            "id": data.id,
+            "name": data.name,
+            "ip": data.ip,
+            "port": data.port,
+            "conn": data.conn
         }
     };
     $.ajax({
@@ -581,12 +595,12 @@ function saveGateway(data) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(gateway_data),
         // datatype : "json",
-        success: function(result) {
+        success: function (result) {
             // console.log(data);
             // console.log(result);
             // console.log("success");
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
@@ -594,18 +608,18 @@ function saveGateway(data) {
 
 function saveDevice(data) {
     var device_data = {
-        "auth" : {
-            "did" : data.did,
-            "psk" : data.psk,
-            "oid" : data.oid,
-            "eid" : data.eid,
-            "sid" : data.sid,
-            "type" : data.type,
-            "conn" : data.conn,
-            "auth" : data.auth,
-            "reg" : data.reg,
-            "dname" : data.dname,
-            "gwid" : data.gwid
+        "auth": {
+            "did": data.did,
+            "psk": data.psk,
+            "oid": data.oid,
+            "eid": data.eid,
+            "sid": data.sid,
+            "type": data.type,
+            "conn": data.conn,
+            "auth": data.auth,
+            "reg": data.reg,
+            "dname": data.dname,
+            "gwid": data.gwid
         }
     };
 
@@ -615,12 +629,12 @@ function saveDevice(data) {
         type: 'post',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(device_data),
-        success: function(result) {
+        success: function (result) {
             // console.log(data);
             console.log(result);
             console.log("success");
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
@@ -632,13 +646,13 @@ function createResourceName() {
         type: 'get',
         // contentType: "application/json; charset=utf-8",
         // data: JSON.stringify(device_data),
-        success: function(result) {
+        success: function (result) {
             resourceList = result;
-            $.each(resourceList, function(index, item){
-                $("#resource-Name").append("<option>"+ item.Resource +"</option>")
+            $.each(resourceList, function (index, item) {
+                $("#resource-Name").append("<option>" + item.Resource + "</option>")
             });
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
