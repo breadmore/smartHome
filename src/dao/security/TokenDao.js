@@ -27,6 +27,9 @@ var Token = {
     },
     selectById: function(id, callback) {
         return db.query('select * from TokenIDTbl where ID = ?', id, callback);
+    },
+    selectByTokenId: function (body, callback) {
+        return db.query('select * from TokenIDTbl where ID = ?', body.tokenId, callback);
     }
 };
 

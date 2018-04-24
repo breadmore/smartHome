@@ -57,6 +57,50 @@ router.route('/')
         else {
             res.status(400).send();
         }
+    })
+    .put(function(req, res) {
+       console.log(req.body);
+
+       if (req.body && req.body.operation) {
+           policyService.update(req.body, function(err, result) {
+               if (err) {
+                   res.status(500).send(err);
+               }
+               else {
+                   tokenService.selectByTokenId(req.body, function (err, result) {
+                       if (err) {
+                           res.status(500).send(err);
+                       }
+                       else{
+                           // todo : updateOperartionByRoleId
+                           var data = {RoleID: result[0].RoleID, op: req.body.operation};
+                           // console.log(data);
+                           // todo : 1.select role operation.   : clear?
+                           roleService.selectById(result[0].RoleID, function (err, result) {
+                               if (err) {
+                                   res.status(500).send(err);
+                               }
+                               else{
+                                   console.log(result[0].Operation);
+                               }
+                           });
+                           // todo : 2. previous operation save & new operation. -> insert policy log.
+                           // todo : 3. update new operation. : clear
+                           roleService.updateOperation(data, function (err, result) {
+                               if (err) {
+                                   res.status(500).send(err);
+                               }
+                               else{
+                                   res.status(200).send(result);
+                               }
+                            })
+                       }
+                   })
+               }
+           })
+       }
+
+       // res.status(200).send(result);
     });
 
 

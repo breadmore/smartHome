@@ -66,6 +66,9 @@ var PolicyService = {
     },
     insertBulk: function (callback) {
         policyDao.insertDummyData(callback);
+    },
+    update: function (policy, callback) {
+        policyDao.update(policy, callback);
     }
 };
 
@@ -81,6 +84,9 @@ var TokenService = {
     },
     insertBulk: function (callback) {
         tokenDao.insertDummyData(callback);
+    },
+    selectByTokenId: function (body, callback) {
+        tokenDao.selectByTokenId(body, callback);
     }
 };
 
@@ -96,6 +102,12 @@ var RoleService = {
     },
     insertBulk: function (callback) {
         roleDao.insertDummyData(callback);
+    },
+    updateOperation: function (data, callback) {
+        roleDao.updateOperation(data, callback);
+    },
+    selectById: function (id, callback) {
+        roleDao.selectById(id, callback);
     }
 };
 

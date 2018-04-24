@@ -27,6 +27,12 @@ var Role = {
     },
     selectByResourceId: function(resourceId, callback) {
         return db.query('select * from RoleIDTbl where ID = ?', resourceId, callback);
+    },
+    selectById: function(id, callback) {
+        return db.query('select * from RoleIDTbl where ID = ?', id, callback);
+    },
+    updateOperation: function (data, callback) {
+        return db.query('update RoleIDTbl SET Operation = ? where ID = ?', [data.op, data.RoleID], callback);
     }
 };
 

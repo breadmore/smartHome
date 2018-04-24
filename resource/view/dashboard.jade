@@ -128,7 +128,7 @@ block content
             .card-body
                 .card-title
                     span.big-title G
-                    span.small-title as mgmt
+                    span.small-title as management
                     span 001
                 .card-text
                     div
@@ -146,6 +146,30 @@ block content
                             img(src="/image/gasvalue.png").card-img
                         span Gas Valve
                         span#gasBlocker Blocked
+
+        .card.device-monitor.device-status
+            .card-body
+                .card-title
+                    span.big-title D
+                    span.small-title evice Status
+                    span 001
+                .card-text
+                    div
+                        span
+                            img(src="/image/alarmWhite.png").card-img
+                        span Siren
+                        span No event
+                    div
+                        span
+                            img(src="/image/window.png").card-img
+                        span Smart Light
+                        span#statusblah1 Not Detected
+                    div
+                        span
+                            img(src="/image/human.png").card-img
+                        span power Outlet
+                        span#statusblah2 Not Detected
+
 
     .content-head-2 Service / Device control
     .row.card-box
@@ -254,14 +278,14 @@ block content
                             .col-8(style='float:left;').video-player
                                 p#nowPlay(style="color:white;font-size:6px;margin-bottom:3px;margin-top:7px;text-align:center; display:block") ON AIR...
                                 //input#videoName(type='text', placeholder='Rewrite this file name', style="margin-bottom:1px;display:block")
-                                video(id="myVideo",width='640',height='360', controls, style='display:none;')
+                                video(id="myVideo",width='640',height='440', controls, style='display:none;')
                                     source(id="vid", type='video/mp4')
                                 #ipcamera(style='width: 640px')
-                                canvas#myCanvas(width='640', height='360' style='width:640px; height:360px;')
+                                    canvas#myCanvas(width='640', height='440' style='width:640px; height:440px;')
                             .video-list-box(style='float:right;width:30%')
                                 div(style="border-bottom:white solid 3px;padding-left:10px;font-size:30px;height:50px;")
                                     button#change.video-btn Stream
-                                div.video(style="overflow:auto;height:340px;scroll-y:hidden")
+                                div.video(style="overflow:auto;height:415px;")
                                     ul.my-video-list
                         .col-12(style='clear=both; margin:auto;')
 
@@ -271,9 +295,17 @@ block content
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    .modal-title Environments
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') ×
+                    .col-4.text-left
+                        .modal-title Environments
+                    .col-4.text-center
+                        select.environment_date
+                            option(value=1) 1시간
+                            option(value=2) 6시간
+                            option(value=3) 12시간
+                            option(value=4) 1개월
+                    .col-4.text-right
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
                         canvas#myChart-all
