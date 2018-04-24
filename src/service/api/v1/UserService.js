@@ -9,7 +9,18 @@ function addUser(user, callback) {
 }
 
 
+
+function deleteUserByUserId(user,callback){
+    userDao.deleteUserByUserId(user,callback);
+}
+
+function updateUserByUserId(user,callback){
+    userDao.updateUserByUserId(user,callback);
+}
+
 module.exports = {
     selectAllUsers: selectAllUsers,
-    addUser: addUser
+    addUser: addUser,
+    deleteUserByUserId:deleteUserByUserId,
+    updateUserByUserId:updateUserByUserId
 };
