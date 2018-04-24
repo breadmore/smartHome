@@ -507,7 +507,7 @@ function detailViewUpdate(gateway, device) {
         toggleTable(gateway, device);
         $('#gwid').html(device.gwid);
         $('#dname').html(device.dname);
-        $('#type').html(device.type);
+        $('#dtype').html(device.type);
         $('#eid').html(device.eid);
         $('#oid').html(device.oid);
         $('#did').html(device.did);
