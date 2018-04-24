@@ -545,3 +545,55 @@ input:checked + .slider:before {
     display: inline-block;
     margin-top: 5px;
 }
+
+
+.video-content {
+    border:navy solid 3px;
+    background: #2B2B2B;
+}
+.video-list-box {
+    border-left: white solid 3px;
+    color:white;
+
+}
+.video-btn {
+    background: #2B2B2B;
+    color:white;
+    border: none;
+}
+
+.video-btn:disabled {
+    background-color: #2B2B2B;
+    /*border-color: #65c0c6;*/
+}
+
+.video-btn:focus, .video-btnn:active, .video-btn:hover:enabled {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #2B2B2B !important;
+    color:yellow !important;
+    border-color: yellow !important;
+}
+
+.video-player {
+    padding:1px;
+    padding-left: 6px;
+
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.video-list{
+    list-style: none;
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-top: 5px;
+    color:white;
+
+}
+
+li .video-btn {
+    border-bottom: white solid 1px;
+}
+.video::-webkit-scrollbar {
+    width: 0px;
+}

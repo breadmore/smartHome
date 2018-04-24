@@ -342,19 +342,19 @@ $(function () {
     camSocket.emit('stop');
     camSocket.emit('init');
     $('#ip-camera').on('show.bs.modal', function (e) {
+        display(true);
+        modal_list();
         camSocket.emit('stop');
         var ipcamera = document.getElementById('ipcamera');
         var canvas = ipcamera.getElementsByTagName('canvas')[0];
         camSocket.emit('start');
         camSocket.on('data', function (data) {
-            console.log('data');
-            // console.log(data);
-            document.getElementById('record').disabled = false;
             var bytes = new Uint8Array(data);
             var blob = new Blob([bytes], {type: 'application/octet-binary'});
             var url = URL.createObjectURL(blob);
             var img = new Image;
             var ctx = canvas.getContext("2d");
+
             img.onload = function () {
                 URL.revokeObjectURL(url);
                 ctx.drawImage(img, 0, 0);
@@ -362,26 +362,12 @@ $(function () {
             img.src = url;
             img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
 
-            document.getElementById('record').onclick = function () {
-                this.disabled = true;
-                // document.getElementById('stop').disabled = false;
-                camSocket.emit('stop');
-                camSocket.emit('record');
-                console.log("record start");
-            };
-
-            document.getElementById('stop').onclick = function () {
-                this.disabled = true;
-                document.getElementById('record').disabled = false;
-                // console.log("record stop");
-            }
         });
 
 
     });
 
     $('#ip-camera').on('hidden.bs.modal', function (e) {
-        console.log('close modal');
         camSocket.emit('stop');
     });
 
@@ -432,7 +418,6 @@ function initEnvironmentData() {
         url: '/api/v1/environments/temperature?number=24',
         type: 'get',
         success: function (result) {
-            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentTemperature.push(item.value);
             });
@@ -449,7 +434,6 @@ function initEnvironmentData() {
         url: '/api/v1/environments/humidity?number=24',
         type: 'get',
         success: function (result) {
-            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentHumidity.push(item.value);
             });
@@ -467,7 +451,6 @@ function initEnvironmentData() {
         url: '/api/v1/environments/humidity?number=24',
         type: 'get',
         success: function (result) {
-            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentHumidity.push(item.value);
             });
@@ -548,6 +531,11 @@ function updateLegacyStates(state) {
         console.log("window changed!");
         currentState.window = state.window_detector;
         sendSensorLog();
+
+        if (currentState.window === 'closed' && state.window_detector === 'opened') {
+            console.log("asdasd");
+        }
+
     }
     if (currentState.human !== state.human_detector) {
         console.log("human changed!");
@@ -664,34 +652,110 @@ function initXiaomiDeviceData() {
     }, 1500);
 
 }
+// function canvasDisplay(){
+//     if ($("#myCanvas").css("display") == "none") {
+//         $("canvas").toggle();
+//         $("#videoName").toggle();
+//     }
+//     if ($("video").css("display") != "none"){
+//         $("video").toggle();
+//         $("#nowPlay").toggle();
+//     }
+// }
+// function videoDisplay(){
+//     if ($("canvas").css("display") != "none")
+//     {
+//         $("canvas").toggle();
+//         $("#videoName").toggle();
+//     }
+//
+//     if ($("video").css("display") == "none") {
+//         $("video").toggle()
+//         $("#nowPlay").toggle();
+//     }
+// }
 
+function display(isCan) {
+    if(isCan === true && $("canvas").css("display") === "none") {           //streaming
+        $("canvas").toggle();
+        // $("#videoName").toggle();
+        $("video").toggle();
+        $("#nowPlay").text("ON AIR...");
+    }
+    else if(isCan === false && $("canvas").css("display") !== "none") {     //videoplay
+        $("canvas").toggle();
+        // $("#videoName").toggle();
+        $("video").toggle();
+        // $("#nowPlay").toggle();
+    }
+
+}
 function videoPlayer() {
     var video = document.getElementById('myVideo');
     var src = document.getElementById('vid');
     var btns = document.getElementsByClassName("myBtn");
     var change = document.getElementById('change');
 
-    $.each(btns, function (index, item) {
-        item.addEventListener('click', function (e) {
-            console.log($(this).attr('data-id'));
-            src.src = "/video/" + $(this).attr('data-name');
 
-            if ($("canvas").css("display") == "none") console.log("none");
-            else $("canvas").toggle();
+    $(document).on('click', '.myBtn', function () {
+        src.src = "/video/" + $(this).attr('data-name');
+        // videoDisplay();
+        display(false);
+        $('#nowPlay').text($(this).attr('data-name'));
 
-            if ($("video").css("display") == "none") $("video").toggle()
-            video.load();
-        })
+        video.load();
+
     })
 
     $(document).ready(function () {
         change.onclick = function () {
-            console.log("ch");
-            if ($("#myCanvas").css("display") == "none") $("canvas").toggle();
-
-            if ($("video").css("display") == "none") console.log("none");
-            else $("video").toggle();
+            display(true);
+           // canvasDisplay();
             video.pause();
         };
     });
+}
+
+function modal_list() {
+    $(".video-list").remove();
+
+    $.ajax({
+        type:"get",
+        url:"http://localhost:1880/api/videos",
+        success: function (data) {
+            for(i=0; i<data.length; i++) {
+                $(".my-video-list").append("<li class='video-list'>"+" <button class='myBtn video-btn' data-name="+data[i]+">"+data[i]+" </button> " +"</li>");
+            }
+        }
+    })
+
+}
+/**
+ *
+ *
+ * @param index==1 >>>>>>> window change
+ *        index==2 >>>>>>> human change
+ *        index==3 >>>>>>> myVideo Name
+ */
+
+function recordStart(index) {
+
+    var videoName;
+    var dd = new Date()
+    var ss = '' + dd.getUTCFullYear() + 0+(dd.getMonth()+1) + dd.getDate() + dd.getHours()+ dd.getMinutes()+ dd.getSeconds()
+
+    if(index==1){
+        videoName='window'+ss;
+    }
+    else if(index==2){
+        videoName='human'+ss;
+    }
+    else if(index==3){
+        videoName=$("#videoName").val();
+    }
+
+        camSocket.emit('stop');
+        camSocket.emit('record',videoName);
+        console.log("record start");
+
 }
