@@ -21,8 +21,6 @@ var moment = require('moment');
 var User = {
     insert: function(user, callback) {
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-        // console.log(user);
-        // console.log(now);
         return db.query('insert into gui_user (user_id, password, authority, user_name, email, phone_number, created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?, ?)',
             [user.userId, user.password, user.authority, user.name, user.email, user.phone, now, now],
             callback)
@@ -40,11 +38,15 @@ var User = {
     },
 
     updateUserByUserId: function (user, callback) {
-        return db.query('update ');
+        return db.query('update gui_user set password = ?, authority = ?, user_name =? , email = ?, phone_number = ? where user_id = ?',
+            [user.password,user.authority, user.user_name,user.email, user.phone_number, user.user_id],
+            callback);
     },
 
-    deleteUserByUserId: function (user, callback) {
-        return db.query('delete  ');
+    deleteUserByUserId: function (user,callback) {
+        return db.query('delete from gui_user where user_id = ?',
+            user.id,
+            callback);
     }
 
 };

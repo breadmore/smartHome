@@ -41,15 +41,16 @@ $(document).ready(function () {
      * Delete Selected Row.
      * todo: delete database. & reload
      */
+
     // controller를 쓰지 않은 이유 : rest api attack(?) 보안 상, 내부에서 처리 해주는게 낫지 않을까
     // then => how to handle error during interaction between dao and web action?
     $('#deleteButton').click(function () {
-        //console.log(table.row('.selected').data);
-        let delete_row_id = table.row('.selected').data().id;
-
+        console.log('asdasd');
+        let delete_row_id = table.row('.selected').data().user_id;
+        console.log(delete_row_id);
         $.ajax({
             type: 'DELETE',
-            url: 'v1/db/device/' + delete_row_id,
+            url: '/api/v1/users/' + delete_row_id,
             dataType: 'json',
             success: function(result) {
                 console.log(result);
@@ -62,22 +63,23 @@ $(document).ready(function () {
         enableButton(false);
     });
 
-    $('#addButton').click(function () {
+    $('#save-User').click(function () {
         var insertObj = {};
 
-        if($("#add-gateway-id").val() != null) insertObj.gateway_id = $("#add-gateway-id").val();
-        if($("#add-type").val() != null) insertObj.type = $("#add-type").val();
-        if($("#add-product-id").val() != null) insertObj.sid = $("#add-product-id").val();
-        if($("#add-device-id").val() != null) insertObj.did = $("#add-device-id").val();
-        //policy-id 꼭 채워야함
-        insertObj.policy_id = 12321;
-
+        if($("#add-user-id").val() != null) insertObj.userId= $("#add-user-id").val();
+        if($("#add-user-password").val() != null) insertObj.password = $("#add-user-password").val();
+        if($("#add-authority").val() != null) insertObj.authority = $("#add-authority").val();
+        if($("#add-name").val() != null) insertObj.name = $("#add-name").val();
+        if($("#add-e-mail").val() != null) insertObj.email = $("#add-e-mail").val();
+        if($("#add-phone-number").val() != null) insertObj.phone = $("#add-phone-number").val();
+        // //policy-id 꼭 채워야함
+        insertObj.userId = 'none';
         if(isObjectEmpty(insertObj))
             alert("Nothing Input!!");
         else {
             $.ajax({
                 type: 'POST',
-                url: 'v1/db/device',
+                url: '/api/v1/users',
                 data: insertObj,
                 dataType: 'json',
                 success: function(result) {
@@ -97,54 +99,37 @@ $(document).ready(function () {
     });
 
     $('#addModal').on('show.bs.modal', function (e) {
-        $("#add-product-id").val(null);
-        $("#add-type").val(1);
-        $("#add-gateway-id").val(111);
-        $("#add-device-id").val(null);
+        $("#add-user-id").val(null);
+        $("#add-authority").val(null);
+        $("#add-name").val(null);
+        $("#add-e-mail").val(null);
+        $("#add-phone-number").val(null);
     });
 
-    $('#modifyModal').on('show.bs.modal', function (e) {
+    $('#ModifyModal').on('show.bs.modal', function (e) {
         //var btn = $(e.relatedTarget);
         //console.log(btn);
         //console.log(table.row('.selected').data());
         var data = table.row('.selected').data();
-        $("#gateway-id").val(data.gateway_id);
-        $("#product-id").val(data.sid);
-        $("#device-id").val(data.did);
-        $("#pre-shared-key").val(data.psk);
-        $("#object-id").val(data.oid);
-        $("#session-id").val(data.eid);
-        $("#type").val(data.type);
-        $("#connected").val(data.connect);
-        $("#authenticate").val(data.auth);
-        $("#policy").val(data.policy_id);
+        $("#user-id").val(data.user_id);
+        $("#user-password").val(data.password);
+        $("#authority").val(data.authority);
+        $("#name").val(data.user_name);
+        $("#e-mail").val(data.email);
+        $("#phone-number").val(data.phone_number);
+        console.log(data);
     });
 
-    $('#saveButton').click(function () {
+    $('#modify-User').click(function () {
         var data = table.row('.selected').data();
         var updateObj = {};
 
-        //console.log($("#product-id").val());
-        if( $("#gateway-id").val() != data.gateway_id)
-            updateObj.gateway_id = $("#gateway-id").val();
-        if( $("#product-id").val() != data.sid)
-            updateObj.sid = $("#product-id").val();
-        if( $("#device-id").val() != data.did)
-            updateObj.did = $("#device-id").val();
-        if( $("#pre-shared-key").val() != data.psk)
-            updateObj.psk = $("#pre-shared-key").val();
-        if( $("#object-id").val() != data.oid)
-            updateObj.oid = $("#object-id").val();
-        if( $("#session-id").val() != data.eid)
-            updateObj.eid = $("#session-id").val();
-        if( $("#type").val() != data.type)
-            updateObj.type = $("#type").val();
-        if( $("#connected").val() != data.connect)
-            updateObj.connect = $("#connected").val();
-        if( $("#authenticate").val() != data.auth)
-            updateObj.auth = $("#authenticate").val();
-        if( $("#policy").val() != data.policy_id)
-            updateObj.policy_id = $("#policy").val();
+            updateObj.user_id = $("#user-id").val();
+            updateObj.password = $("#user-password").val();
+            updateObj.authority = $("#authority").val();
+            updateObj.user_name = $("#name").val();
+            updateObj.email = $("#e-mail").val();
+            updateObj.phone_number = $("#phone-number").val();
 
         //console.log(updateObj);
         if(isObjectEmpty(updateObj))
@@ -152,7 +137,7 @@ $(document).ready(function () {
         else {
             $.ajax({
                 type: 'PUT',
-                url: 'v1/db/device/' + data.id,
+                url: '/api/v1/users/' + data.id,
                 data: updateObj,
                 dataType: 'json',
                 success: function(result) {
