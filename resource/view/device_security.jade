@@ -96,10 +96,10 @@ block content
         .col-10.content-hr.no-padding
             hr
     .row.no-gutters(style='margin-bottom:20px; display: none;')#securityDiv
-        if authority == "admin"
-            .col-12(style='margin-bottom:10px;')
-                input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
-                input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal" disabled=true)#policyButton
+        //if authority == "admin"
+        .col-12(style='margin-bottom:10px;')
+            input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
+            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal" disabled=true)#policyButton
         .col-12.no-gutters
             table#securityTable(style='width:100%')
                 thead

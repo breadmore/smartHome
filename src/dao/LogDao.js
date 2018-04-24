@@ -65,6 +65,14 @@ var Log = {
     },
 
 
+    // Mark : PolicyHistory Dao.
+    insertPolicyLog: function(data, callback) {
+        console.log(data);
+        return db.query('insert into Policy_History (enforce_date, from_id, to_id, resource_name, pre_operation, current_operation) values (?, ?, ?, ?, ?, ?)',
+            [data.enforce_date, data.fromId, data.toId, data.resourceName, data.previous, data.operation],
+            callback);
+    },
+
     selecetAllLog: function(callback) {
         return db.query('select * from event_log', callback);
     },

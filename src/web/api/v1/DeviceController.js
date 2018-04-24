@@ -13,7 +13,7 @@ router.route('/')
                  res.status(500).send(err);
              }
              else {
-                 console.log(result);
+                 // console.log(result);
                  res.status(200).send(result);
              }
         });

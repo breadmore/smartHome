@@ -53,6 +53,7 @@ $(document).ready(function () {
                     success: function (entities) {
                         entityList = entities;
                         $.each(jsonArray, function (index, item) {
+                            item.enforceDate = dateFormatter(item.policyID);
                             item.fromName = findEntityById(item.FromID).Name;
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
@@ -67,7 +68,7 @@ $(document).ready(function () {
             }
         },
         columns: [
-            {data: "FromID"},
+            {data: "enforceDate"},
             {data: "fromName"},
             {data: "toName"},
             {data: "Resouce"},
@@ -190,17 +191,32 @@ $(document).ready(function () {
     $("#policy-confirm").on("click", () => {
 
         var tmp =  table.row('.selected').data();
-        console.log('asdfasdf' + tmp.TokenID);
+        console.log(tmp);
 
-        var updateData = {tokenId: tmp.TokenID, operation: change};
-        // console.log(updateData);
+        var policy = {
+        };
+
+        var updateData = {
+            fromId: tmp.FromID,
+            toId: tmp.ToID,
+            resourceName: tmp.Resouce,
+            tokenId: tmp.TokenID,
+            operation: change
+        };
+        console.log(updateData);
 
         $.ajax({
             url: "api/v1/security",
             type: "PUT",
             data: updateData,
             dataType: 'json',
-            success: window.location.reload()
+            success: function(result) {
+                window.location.reload();
+                console.log(result);
+            },
+            error: function (err) {
+                console.log(err);
+            }
         });
 
 
@@ -398,30 +414,6 @@ function addClickListenerToDeviceInfo() {
 
     $.each(deviceInfoList, function (index, item) {
         item.addEventListener('click', function (e) {
-
-            // var classList = parent.classList;
-            // if(classList.contains("open")) {
-            //     classList.remove('open');
-            //     var opensubs = parent.querySelectorAll(':scope .open');
-            //     for(var i = 0; i < opensubs.length; i++){
-            //         opensubs[i].classList.remove('open');
-            //     }
-            // } else {
-            //     classList.add('open');
-            //     detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
-            // }
-
-            // $('#dataTable tbody').on('click', 'tr', function () {
-            //     if ($(this).hasClass('selected')) {
-            //         $(this).removeClass('selected');
-            //         enableButton(false);
-            //     }
-            //     else {
-            //         table.$('tr.selected').removeClass('selected');
-            //         $(this).addClass('selected');
-            //         enableButton(true);
-            //     }
-            // });
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
             }
@@ -434,32 +426,6 @@ function addClickListenerToDeviceInfo() {
                     }
                 }
             }
-
-            // var classList = e.target.parentElement.parentElement.classList;
-            // if (classList.contains('selected')) {
-            //     classList.remove('selected');
-            //     var opensubs = e.target.parentElement.parentElement.querySelectorAll(':scope .selected');
-            //     console.log(opensubs);
-            //         for(var i = 0; i < opensubs.length; i++){
-            //             opensubs[i].classList.remove('selected');
-            //         }
-            // }
-            // else {
-            //     classList.add('selected');
-            //
-            // }
-
-
-            var deviceType = document.getElementsByClassName('device-type');
-            // console.log(deviceType);
-            // $.each(deviceType, function(index, item){
-            //     if (e.target === item) {
-            //         e.target.addClass('selected');
-            //     }
-            //     else {
-            //         e.target.removeClass('selected');
-            //     }
-            // });
             nowClick = e.target.parentElement.parentElement;
             detailViewUpdate(null, findDeviceByDid(item.dataset.did));
         });
@@ -728,6 +694,16 @@ function operationJoiner(security) {
     return operation;
 }
 
+function dateFormatter(date) {
+    var str = '';
+    str += date.substring(0,4) + '년 ';
+    str += date.substring(4,6) + '월 ';
+    str += date.substring(6,8) + '일 ';
+    str += date.substring(8,10) + '시 ';
+    str += date.substring(10,12) + '분 ';
+    return str;
+}
+
 
 function saveGateway(data) {
     var gateway_data = {
@@ -850,11 +826,6 @@ function crudnListner() {
     }
 }
 
-
-function updatePolicy() {
-
-
-}
 
 
 

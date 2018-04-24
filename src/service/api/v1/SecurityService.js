@@ -67,8 +67,8 @@ var PolicyService = {
     insertBulk: function (callback) {
         policyDao.insertDummyData(callback);
     },
-    update: function (policy, callback) {
-        policyDao.update(policy, callback);
+    update: function (now, policy, callback) {
+        policyDao.update(now, policy, callback);
     }
 };
 
@@ -123,5 +123,5 @@ module.exports = {
     policyService: PolicyService,
     tokenService: TokenService,
     roleService: RoleService,
-    selectAllPolicy: selectAllSecurityPolicy
+    selectAllPolicy: selectAllSecurityPolicy,
 };

@@ -10,6 +10,11 @@ var tokenService = securityService.tokenService;
 var resourceService = securityService.resourceService;
 
 
+var logDao = require('../../../dao/LogDao');
+
+var moment = require('moment');
+
+
 /**
  * policy 1)-> fromID, ToID  => entityTbl -> selectNameById
  *        2)-> TokenId => tokenTbl -> selectRoleIdByTokenId => roleTbl ->
@@ -59,48 +64,65 @@ router.route('/')
         }
     })
     .put(function(req, res) {
-       console.log(req.body);
+       if (req.body) {
+           var now = moment(Date.now()).format('YYYYMMDDHHmmss');
+           // data.enforce_date, data.fromId, data.toId, data.resourceName, data.previous, data.operation]
 
-       if (req.body && req.body.operation) {
-           policyService.update(req.body, function(err, result) {
+           var log = {
+               enforce_date: now,
+               fromId: req.body.fromId,
+               toId: req.body.toId,
+               resourceName: req.body.resourceName,
+               previous: undefined,
+               operation: req.body.operation
+           };
+           policyService.update(now, req.body, function(err, result) {
                if (err) {
+                   console.log(err);
                    res.status(500).send(err);
                }
                else {
+                   console.log(result);
                    tokenService.selectByTokenId(req.body, function (err, result) {
                        if (err) {
                            res.status(500).send(err);
                        }
                        else{
-                           // todo : updateOperartionByRoleId
                            var data = {RoleID: result[0].RoleID, op: req.body.operation};
-                           // console.log(data);
-                           // todo : 1.select role operation.   : clear?
+                           console.log(data);
                            roleService.selectById(result[0].RoleID, function (err, result) {
                                if (err) {
                                    res.status(500).send(err);
                                }
                                else{
                                    console.log(result[0].Operation);
+                                   log.previous = result[0].Operation;
+                                   console.log(log);
+                                   roleService.updateOperation(data, function (err, result) {
+                                       if (err) {
+                                           res.status(500).send(err);
+                                       }
+                                       else{
+                                           console.log(log);
+                                            logDao.insertPolicyLog(log, function(err, result){
+                                                if (err) {
+                                                    res.status(401).send(err);
+                                                }
+                                                else {
+                                                    res.status(200).send(result);
+                                                }
+                                            });
+                                       }
+                                   })
                                }
                            });
-                           // todo : 2. previous operation save & new operation. -> insert policy log.
-                           // todo : 3. update new operation. : clear
-                           roleService.updateOperation(data, function (err, result) {
-                               if (err) {
-                                   res.status(500).send(err);
-                               }
-                               else{
-                                   res.status(200).send(result);
-                               }
-                            })
+
                        }
                    })
                }
            })
        }
 
-       // res.status(200).send(result);
     });
 
 

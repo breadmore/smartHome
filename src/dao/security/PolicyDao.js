@@ -47,9 +47,7 @@ var Policy = {
         return db.query(sql, [values], callback);
     },
 
-    update: function (policy, callback) {
-        // var now = moment(Date.now()).format('YYYYMMDDHHmmss');
-        var now = '20180424182930801807';
+    update: function (now, policy, callback) {
         return db.query( 'update PolicyIDTbl SET ID = ? where TokenID = ?'
             , [now, policy.tokenId]
             , callback);
