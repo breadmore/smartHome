@@ -6,6 +6,9 @@ append head
     script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
     script(src="/javascript/dashboard.js")
     link(rel="stylesheet" href="/css/dashboard.css")
+    link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
+    script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
     //link(href='/plugin/bootstrap-toggle/css/bootstrap-toggle.min.css', rel='stylesheet')
     //script(src='/plugin/bootstrap-toggle/js/bootstrap-toggle.min.js')
 
@@ -220,51 +223,61 @@ block content
                             div.slider.round#xiaomiPowerController
                         p ON
     .content-head-2 Service / Device Event
-        table
-            thead
-                tr
-                    td
-                    td Event date
-                    td Level
-                    td Sensor type / number
-                    td Activity message
-            tbody
-                tr
-                    td 1
-                    td 02-25-2018 18:00.31
-                    td Log
-                    td ETRI Humidity sensor / Hum001
-                    td Humidity sensor is connected
-                tr
-                    td 2
-                    td 02-25-2018 18:00.31
-                    td Log
-                    td ETRI Humidity sensor / Hum001
-                    td Humidity sensor is disconnected
-                tr
-                    td 3
-                    td 02-25-2018 18:00.31
-                    td Log
-                    td ETRI Intrusion detection alarm / IDA01
-                    td Intrusion detection alarm mode is on
-                tr
-                    td 4
-                    td 02-25-2018 18:00.31
-                    td Critical
-                    td ETRI Gas leakage alarm / GasLM001
-                    td Gas leakage is detected
-                tr
-                    td 5
-                    td 02-25-2018 18:00.31
-                    td Critical
-                    td XIAOMI power outlet / PO001
-                    td power outlet is off
-                tr
-                    td 6
-                    td 02-25-2018 18:00.31
-                    td Critical
-                    td ETRI Window sensor / IDW001
-                    td Window sensor is disconnected
+        .row.no-gutters(style='margin-bottom:20px')#EventDiv
+            .col-12.no-gutters
+                table#eventTable(style='width:100%')
+                    thead
+                        tr
+                            td
+                            td Event date
+                            td Level
+                            td Sensor type / number
+                            td Activity message
+    //table
+        //    thead
+        //        tr
+        //            td
+        //            td Event date
+        //            td Level
+        //            td Sensor type / number
+        //            td Activity message
+        //    tbody
+        //        tr
+        //            td 1
+        //            td 02-25-2018 18:00.31
+        //            td Log
+        //            td ETRI Humidity sensor / Hum001
+        //            td Humidity sensor is connected
+        //        tr
+        //            td 2
+        //            td 02-25-2018 18:00.31
+        //            td Log
+        //            td ETRI Humidity sensor / Hum001
+        //            td Humidity sensor is disconnected
+        //        tr
+        //            td 3
+        //            td 02-25-2018 18:00.31
+        //            td Log
+        //            td ETRI Intrusion detection alarm / IDA01
+        //            td Intrusion detection alarm mode is on
+        //        tr
+        //            td 4
+        //            td 02-25-2018 18:00.31
+        //            td Critical
+        //            td ETRI Gas leakage alarm / GasLM001
+        //            td Gas leakage is detected
+        //        tr
+        //            td 5
+        //            td 02-25-2018 18:00.31
+        //            td Critical
+        //            td XIAOMI power outlet / PO001
+        //            td power outlet is off
+        //        tr
+        //            td 6
+        //            td 02-25-2018 18:00.31
+        //            td Critical
+        //            td ETRI Window sensor / IDW001
+        //            td Window sensor is disconnected
     .modal.fade#ip-camera(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true', data-backdrop="static", data-keyboard="false")
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content

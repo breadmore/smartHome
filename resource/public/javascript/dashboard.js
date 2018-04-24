@@ -709,7 +709,7 @@ function initXiaomiDeviceData() {
             url: 'api/v1/xiaomi/status',
             type: 'get',
             success: function (result) {
-                // console.log(result);
+                console.log(result);
             },
             error: function (err) {
                 console.log(err)
@@ -961,3 +961,26 @@ function getHourTemp(value) {
         });
     }
 }
+
+$(document).ready(function () {
+    var table = $('#eventTable').DataTable({
+        paging: true,
+        processing: true,
+        ordering: true,
+        serverSide: false,
+        searching: true,
+        ajax : {
+            url: "/api/v1/Logs",
+            dataSrc: function (result) {
+                console.log(result);
+                return result;
+            }},
+        columns : [
+            {data: "id"},
+            {data: "event_date"},
+            {data: "event_type"},
+            {data: "device_type"},
+            {data: "msg"}
+        ]
+    });
+});
