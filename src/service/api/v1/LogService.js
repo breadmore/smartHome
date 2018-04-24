@@ -10,11 +10,18 @@ function selectRecentAllLog(callback) {
 }
 
 
+
 function updateState(state, callback) {
     // return stateDao.updateState(state, callback);
 }
 
+function selectAllUsers(callback) {
+    logDao.selectAllUsers(callback);
+}
+
+
 module.exports = {
     insertLog: insert,
-    selectRecentAllLog: selectRecentAllLog
+    selectRecentAllLog: selectRecentAllLog,
+    selectAllUsers:selectAllUsers
 };

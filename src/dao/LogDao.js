@@ -72,6 +72,13 @@ var Log = {
             [data.enforce_date, data.fromId, data.toId, data.resourceName, data.previous, data.operation],
             callback);
     },
+    selectAllUsers: function(callback) {
+        return db.query('select * from Policy_History',callback);
+    },
+
+    selectById: function(data, callback){
+
+    },
 
     selecetAllLog: function(callback) {
         return db.query('select * from event_log', callback);
