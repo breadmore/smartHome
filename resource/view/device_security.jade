@@ -98,7 +98,7 @@ block content
     .row.no-gutters(style='margin-bottom:20px; display: none;')#securityDiv
         .col-12(style='margin-bottom:10px;')
             input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
-            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
+            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal" disabled=true)#policyButton
         .col-12.no-gutters
             table#securityTable(style='width:100%')
                 thead
@@ -275,31 +275,31 @@ block content
                 .modal-body
                     .modal-body-content
                         p FromID
-                        select#form-Id
+                        select#form-Id(disabled=true)
                         p ToID
-                        select#to-Id
+                        select#to-Id(disabled=true)
                         p Resource Name
-                        select#resource-Name
+                        select#resource-Name(disabled=true)
                         p Policy
                         .form-check.form-check-inline
                             label.form-check-label
-                                input.form-check-input(type='checkbox', value='')
+                                input.form-check-input#chkC(type='checkbox', value='C')
                                 | Create
                         .form-check.form-check-inline
                             label.form-check-label
-                                input.form-check-input(type='checkbox', value='')
+                                input.form-check-input#chkR(type='checkbox', value='R')
                                 | Read
                         .form-check.form-check-inline.disabled
                             label.form-check-label
-                                input.form-check-input(type='checkbox', value='')
+                                input.form-check-input#chkU(type='checkbox', value='U')
                                 | Update
                         .form-check.form-check-inline.disabled
                             label.form-check-label
-                                input.form-check-input(type='checkbox', value='')
+                                input.form-check-input#chkD(type='checkbox', value='D')
                                 | Delete
                         .form-check.form-check-inline.disabled
                             label.form-check-label
-                                input.form-check-input(type='checkbox', value='')
+                                input.form-check-input#chkN(type='checkbox', value='N')
                                 | Notify
                         p(style='margin-top:10px;') Policy Enforcement Point
                         label.radio-inline
@@ -310,7 +310,7 @@ block content
                             | &nbsp;Device
                 .modal-footer
                     .col-12.text-center.no-gutters
-                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Confirm
+                        button.btn.btn-primary.btn-action.modal-btn#policy-confirm(data-dismiss="modal" disabled=true) Confirm
                         button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     #deployLogModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog.modal-lg(role='document')
@@ -332,38 +332,38 @@ block content
                             tbody
                                 tr
                                     td
-                            div 2018-04-09 13:12:10
+                                        div 2018-04-09 13:12:10
                                     td
-                            div ThermoHygrometer_65934
+                                        div ThermoHygrometer_65934
                                     td
-                            div MyIoTSVR
+                                        div MyIoTSVR
                                     td
-                            div ThermoHygrometer_65934
+                                        div ThermoHygrometer_65934
                                     td
-                            div CRUD
+                                        div CRUD
 
                                 tr
                                     td
-                            div 2018-04-10 13:13:16
+                                        div 2018-04-10 13:13:16
                                     td
-                            div ThermoHygrometer_65934
+                                        div ThermoHygrometer_65934
                                     td
-                            div MyIoTSVR
+                                        div MyIoTSVR
                                     td
-                            div ThermoHygrometer_65934
+                                        div ThermoHygrometer_65934
                                     td
-                            div CRUDN
+                                        div CRUDN
                                 tr
                                     td
-                            div 2018-04-10 16:55:10
+                                        div 2018-04-10 16:55:10
                                     td
-                            div ThermoHygrometer_65934
+                                        div ThermoHygrometer_65934
                                     td
-                            div MyIoTSVR
+                                        div MyIoTSVR
                                     td
-                            div ThermoHygrometer_65934
+                                        div ThermoHygrometer_65934
                                     td
-                            div C
+                                        div C
                 .modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters

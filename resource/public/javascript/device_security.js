@@ -24,6 +24,8 @@ var securityList = [];
 var entityList;
 var resourceList = [];
 var nowClick;
+var chkCheckBox; // ktw add
+var change; //ktw add
 
 $(document).ready(function () {
     //init device list & device detail
@@ -132,6 +134,89 @@ $(document).ready(function () {
     $("#refresh").on("click", () => {
         window.location.reload();
     });
+
+    //ktw add
+    $(".form-check-input").on("click", () => {
+        crudnListner();
+    });
+
+    $("#policyButton").on("click", () => {
+        chkCheckBox = '';
+
+        if(table.row('.selected').data().CreationYn === 'Y'){
+            $("#chkC").attr('checked', true);
+            chkCheckBox += 'C';
+        }
+        // else{
+        //     $("#chkC").removeAttr('checked');
+        //     $("#chkC").attr('checked', false);
+        // }
+        if(table.row('.selected').data().ReadYn === 'Y'){
+            $("#chkR").attr('checked', true);
+            chkCheckBox += 'R';
+        }
+        // else{
+        //     $("#chkR").removeAttr('checked');
+        //     $("#chkC").attr('checked', false);
+        // }
+        if(table.row('.selected').data().UpdateYn === 'Y'){
+            $("#chkU").attr('checked', true);
+            chkCheckBox += 'U';
+        }
+        // else{
+        //     $("#chkU").removeAttr('checked');
+        //     $("#chkC").attr('checked', false);
+        // }
+        if(table.row('.selected').data().DeleteYn === 'Y'){
+            $("#chkD").attr('checked', true);
+            chkCheckBox += 'D';
+        }
+        // else{
+        //     $("#chkD").removeAttr('checked');
+        //     $("#chkC").attr('checked', false);
+        // }
+        if(table.row('.selected').data().NotifyYn === 'Y'){
+            $("#chkN").attr('checked', true);
+            chkCheckBox += 'N';
+        }
+        // else{
+        //     $("#chkN").removeAttr('checked');
+        //     $("#chkC").attr('checked', false);
+        // }
+
+        $("#policy-confirm").attr('disabled', true);
+    });
+
+    $("#policy-confirm").on("click", () => {
+
+        var tmp =  table.row('.selected').data();
+        console.log('asdfasdf' + tmp.TokenID);
+
+        var updateData = {tokenId: tmp.TokenID, operation: change};
+        // console.log(updateData);
+
+        $.ajax({
+            url: "api/v1/security",
+            type: "PUT",
+            data: updateData,
+            dataType: 'json',
+            success: window.location.reload()
+        });
+
+
+    });
+    $('#securityTable tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+            enableButton(false);
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            enableButton(true);
+            // console.log(table.row('.selected').data());
+        }
+    });
 });
 
 
@@ -202,6 +287,71 @@ function findOperationById() {
         });
     });
 }
+
+/**
+ * Select Only One Table Row Function
+ */
+
+
+// todo: policy button enable setting example.
+// enableButton(false);
+function enableButton(isEnabled) {
+    if (isEnabled) {
+        $('#policyButton').removeAttr('disabled');
+        // $('#deleteButton').removeAttr('disabled');
+    }
+    else {
+        $('#policyButton').attr('disabled', 'disabled');
+        // $('#deleteButton').attr('disabled', 'disabled');
+    }
+}
+
+// todo : modal data preset data example.
+// $('#addButton').click(function () {
+// var insertObj = {};
+//
+// if($("#add-gateway-id").val() != null) insertObj.gateway_id = $("#add-gateway-id").val();
+// if($("#add-type").val() != null) insertObj.type = $("#add-type").val();
+// if($("#add-product-id").val() != null) insertObj.sid = $("#add-product-id").val();
+// if($("#add-device-id").val() != null) insertObj.did = $("#add-device-id").val();
+// //policy-id 꼭 채워야함
+// insertObj.policy_id = 12321;
+//
+// if(isObjectEmpty(insertObj))
+// alert("Nothing Input!!");
+// else {
+// $.ajax({
+// type: 'POST',
+// url: 'v1/db/device',
+// data: insertObj,
+// dataType: 'json',
+// success: function(result) {
+// console.log(result);
+// }, error: function(err) {
+// console.log(err);
+// }
+// });
+//
+// $('#addModal').modal('hide');
+//
+// setTimeout(function() {
+// table.ajax.reload( null, false );
+// },100);
+// }
+//
+// });
+//
+// $('#addModal').on('show.bs.modal', function (e) {
+// $("#add-product-id").val(null);
+// $("#add-type").val(1);
+// $("#add-gateway-id").val(111);
+// $("#add-device-id").val(null);
+// });
+//
+// $('#modifyModal').on('show.bs.modal', function (e) {
+// //var btn = $(e.relatedTarget);
+// //console.log(btn);
+// //console.log(table.row('.selected').data());
 
 /** add click listener to gateway title in device list view
  * 1. folding gateway title
@@ -663,8 +813,48 @@ function deleteResourceClicked() {
     nowClick;
 }
 
+//ktw add
+
+function test1() {
+    var tmp = document.getElementsByClassName('form-check-input');
+    var str;
 
 
+
+    // console.log(tmp.item(1).checked);
+    for ( let i = 0; i < tmp.length; i++){
+        if (tmp.item(i).checked == true){
+            console.log(tmp.item(i).value);
+        }
+    }
+
+    // tmp = document.getElementById('form-Id');
+    // console.log(tmp.selectedIndex);
+    // console.log(tmp.selectedIndex);
+}
+
+function crudnListner() {
+    var tmp = document.getElementsByClassName('form-check-input');
+    change = '';
+
+    for ( let i = 0; i < tmp.length; i++){
+        if (tmp.item(i).checked == true){
+            change += tmp.item(i).value;
+        }
+    }
+    // console.log(change[0]);
+    if(chkCheckBox === change){
+        $('#policy-confirm').attr('disabled', true);
+    }else{
+        $('#policy-confirm').attr('disabled', false);
+    }
+}
+
+
+function updatePolicy() {
+
+
+}
 
 
 

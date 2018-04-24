@@ -1,4 +1,5 @@
 var db = require('../../db/security');
+var moment = require('moment');
 /**
 
  CREATE TABLE `test`.`PolicyIDTbl` (
@@ -44,6 +45,14 @@ var Policy = {
             ['20180412143820801807', '2', '0', '1852533209']
         ];
         return db.query(sql, [values], callback);
+    },
+
+    update: function (policy, callback) {
+        // var now = moment(Date.now()).format('YYYYMMDDHHmmss');
+        var now = '20180424182930801807';
+        return db.query( 'update PolicyIDTbl SET ID = ? where TokenID = ?'
+            , [now, policy.tokenId]
+            , callback);
     },
 
     selectAll: function(callback) {
