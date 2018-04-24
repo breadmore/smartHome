@@ -22,8 +22,7 @@ window.onbeforeunload = function () {
     }
 };
 
-$(function () {
-
+$(document).ready(function() {
     $(".environment_date").change(function () {
         getHourTemp($(".environment_date option:selected").val());
     });
@@ -171,7 +170,6 @@ $(function () {
         }
     });
 
-
     let socket = io.connect('/');
 
     initXiaomiDeviceData();
@@ -267,6 +265,7 @@ $(function () {
             case 'magnet':
                 if (data.event === 'open') {
                     $('#xiaomiWindow').text(OPENED);
+                    // recordStart(1);
                 }
                 else if (data.event === 'close') {
                     $('#xiaomiWindow').text(CLOSED);
@@ -278,6 +277,7 @@ $(function () {
             case 'motion':
                 if (data.event === 'motion') {
                     $('#xiaomiHuman').text(DETECTED);
+                    recordStart(2);
                 }
                 else if (data.event === 'no_motion') {
                     $('#xiaomiHuman').text(NOT_DETECTED);
@@ -709,7 +709,7 @@ function initXiaomiDeviceData() {
             url: 'api/v1/xiaomi/status',
             type: 'get',
             success: function (result) {
-                console.log(result);
+                // console.log(result);
             },
             error: function (err) {
                 console.log(err)
@@ -776,7 +776,7 @@ function videoPlayer() {
     $(document).ready(function () {
         change.onclick = function () {
             display(true);
-           // canvasDisplay();
+            // canvasDisplay();
             video.pause();
         };
     });
@@ -805,24 +805,23 @@ function modal_list() {
  */
 
 function recordStart(index) {
-
     var videoName;
     var dd = new Date()
     var ss = '' + dd.getUTCFullYear() + 0+(dd.getMonth()+1) + dd.getDate() + dd.getHours()+ dd.getMinutes()+ dd.getSeconds()
 
     if(index==1){
-        videoName='window'+ss;
+        videoName='window_'+ss;
     }
     else if(index==2){
-        videoName='human'+ss;
+        videoName='human_'+ss;
     }
     else if(index==3){
         videoName=$("#videoName").val();
     }
 
-        camSocket.emit('stop');
-        camSocket.emit('record',videoName);
-        console.log("record start");
+    camSocket.emit('stop');
+    camSocket.emit('record',videoName);
+    console.log("record start");
 
 }
 
@@ -960,27 +959,36 @@ function getHourTemp(value) {
             }
         });
     }
-}
 
-$(document).ready(function () {
     var table = $('#eventTable').DataTable({
         paging: true,
         processing: true,
-        ordering: true,
+        // ordering: true,
+        order: [[1, 'desc']],
         serverSide: false,
         searching: true,
+        dom : '<"row no-gutters"t>',
         ajax : {
-            url: "/api/v1/Logs",
+            url: "/api/v1/logs",
             dataSrc: function (result) {
-                console.log(result);
                 return result;
             }},
         columns : [
-            {data: "id"},
+            {data: null},
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_type"},
             {data: "msg"}
         ]
     });
-});
+    // add index.
+    table.on('order.dt search.dt', function () {
+        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    setInterval(function () {
+        table.ajax.reload();
+    }, 1000 * 2)
+}

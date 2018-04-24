@@ -61,7 +61,7 @@ var Log = {
     },
 
     selectAllEvent(callback) {
-        return db.query('select * from Security_Log', callback);
+        return db.query('select * from Security_Log order by id desc limit 6', callback);
     },
 
 
