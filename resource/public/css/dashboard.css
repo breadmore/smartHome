@@ -624,3 +624,10 @@ li .video-btn {
 .device-monitor {
     margin-right: 20px;
 }
+
+
+.environment_date {
+    background: white;
+    height: 40px;
+    width: 65%;
+}

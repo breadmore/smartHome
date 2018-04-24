@@ -3,6 +3,7 @@ var fs = require('fs');
 var app = require('../server');
 var path = require('path');
 var userDao = require('../dao/UserDao');
+var environment = require('../service/api/v1/EnvironmentService')
 
 router.route('/')
     .get(function (req, res) {
@@ -81,6 +82,90 @@ router.route('/logout')
                 console.log(err);
             }else{
                 res.redirect('/');
+            }
+        });
+    });
+
+router.route('/hourtemp')
+    .post(function (req, res) {
+        console.log(req.body);
+        var value = req.body;
+        environment.getHourTemperature(value, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+router.route('/hourhumi')
+    .post(function (req, res) {
+        console.log(req.body);
+        var value = req.body;
+        environment.getHourHumidity(value, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+router.route('/hourillumi')
+    .post(function (req, res) {
+        console.log(req.body);
+        var value = req.body;
+        environment.getHourIllumination(value, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+router.route('/daytemp')
+    .post(function (req, res) {
+        console.log(req.body);
+        var value = req.body;
+        environment.getDayTemperature(value, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+router.route('/dayhumi')
+    .post(function (req, res) {
+        console.log(req.body);
+        var value = req.body;
+        environment.getDayHumidity(value, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+router.route('/dayillumi')
+    .post(function (req, res) {
+        console.log(req.body);
+        var value = req.body;
+        environment.getDayIllumination(value, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.status(200).send(result);
             }
         });
     });

@@ -271,9 +271,17 @@ block content
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    .modal-title Environments
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') ×
+                    .col-4.text-left
+                        .modal-title Environments
+                    .col-4.text-center
+                        select.environment_date
+                            option(value=1) 1시간
+                            option(value=2) 6시간
+                            option(value=3) 12시간
+                            option(value=4) 한달
+                    .col-4.text-right
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
                         canvas#myChart-all
