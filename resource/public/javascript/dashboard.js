@@ -244,8 +244,8 @@ $(function () {
         // console.log(data.temperature[0].value);
         // console.log(data.humidity[0].value);
         // console.log(data.illuminaty.length);
-        //todo [0].value add
-        $('#luxValue').text(data.illuminaty[0].value);
+        //todo [0].value addç
+        // $('#luxValue').text(data.illuminaty[0].value);
 
     });
 
@@ -361,7 +361,6 @@ $(function () {
             };
             img.src = url;
             img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
-
         });
 
 
@@ -529,28 +528,48 @@ function updateLegacyStates(state) {
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
         console.log("window changed!");
-        currentState.window = state.window_detector;
-        sendSensorLog();
-
-        if (currentState.window === 'closed' && state.window_detector === 'opened') {
-            console.log("asdasd");
+        if (currentState.window === 0) {
+            sendLog('log', 'window opened.');
         }
-
+        else {
+            sendLog('log', 'windows closed.');
+        }
+        currentState.window = state.window_detector;
+        // sendSensorLog();
     }
+
     if (currentState.human !== state.human_detector) {
         console.log("human changed!");
+        if (currentState.human === 0) {
+            sendLog('log', 'human detected.');
+        }
+        else {
+            sendLog('log', 'human undetected.');
+        }
         currentState.human = state.human_detector;
-        sendSensorLog();
+        // sendSensorLog();
     }
     if (currentState.gasB !== state.gas_blocker) {
         console.log("gasB changed!");
         currentState.gasB = state.gas_blocker;
-        sendSensorLog();
+        if (currentState.gasB === 0) {
+            sendLog('log', 'gas blocked.');
+        }
+        else {
+            sendLog('log', 'gas unblocked.');
+        }
+        // sendSensorLog();
     }
     if (currentState.gasD !== state.gas_detector) {
         console.log("gasD changed!");
+        if (currentState.gasD === 0) {
+            sendLog('log', 'gas detected.');
+        }
+        else {
+            sendLog('log', 'gas undetected.');
+        }
         currentState.gasD = state.gas_detector;
-        sendSensorLog();
+        // sendSensorLog();
     }
 
     // if (currentState.mode !== state.mode) {
@@ -581,24 +600,38 @@ function xiaomiAction(action) {
     })
 }
 
-function legacyDeviceAction(type, action) {
+function legacyDeviceAction(type, command) {
     // todo : ip address?
     var ip = undefined;
+    var msg;
     if (type === 1) {
         ip = '192.168.0.20';
+        if (command === 0) {
+            msg = 'request jaesil mode off.';
+            msg = 'request led light off.';
+        }
+        else {
+            msg = 'request led light on.';
+        }
     }
     else if (type === 2) {
         ip = '192.168.0.21'
+        if (command === 0) {
+            msg = 'request jaesil mode off.';
+        }
+        else {
+            msg = 'request jaesil mode on.';
+
+        }
     }
     else {
         console.log('device action err');
         return;
     }
-
     var action = {
         'ip': ip,
         'type': type,
-        'turnOn': 0
+        'turnOn': command
     };
 
     $.ajax({
@@ -607,12 +640,37 @@ function legacyDeviceAction(type, action) {
         data: action,
         success: function (result) {
             console.log(result);
+            sendLog('service', msg);
         },
         error: function (err) {
             console.log(err);
         }
     });
+
 }
+
+function sendLog(eventType, msg) {
+    var data = {
+        eventType : eventType,
+        msg: msg
+    };
+
+    $.ajax({
+        url: '/api/v1/logs',
+        type: 'post',
+        data : data,
+        success: function(result) {
+            console.log('success send Log!');
+            console.log(result);
+        },
+        error : function(err) {
+            console.log('Error send Log!');
+            console.log(err);
+        }
+    });
+}
+
+
 
 function sendSensorLog() {
     var log = {};
@@ -650,8 +708,8 @@ function initXiaomiDeviceData() {
             }
         });
     }, 1500);
-
 }
+
 // function canvasDisplay(){
 //     if ($("#myCanvas").css("display") == "none") {
 //         $("canvas").toggle();
