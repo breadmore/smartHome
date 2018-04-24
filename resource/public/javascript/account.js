@@ -65,17 +65,17 @@ $(document).ready(function () {
 
     $('#save-User').click(function () {
         var insertObj = {};
-
         if($("#add-user-id").val() != null) insertObj.userId= $("#add-user-id").val();
+        else alert("You must input your ID!!");
+
         if($("#add-user-password").val() != null) insertObj.password = $("#add-user-password").val();
         if($("#add-authority").val() != null) insertObj.authority = $("#add-authority").val();
         if($("#add-name").val() != null) insertObj.name = $("#add-name").val();
         if($("#add-e-mail").val() != null) insertObj.email = $("#add-e-mail").val();
         if($("#add-phone-number").val() != null) insertObj.phone = $("#add-phone-number").val();
-        // //policy-id 꼭 채워야함
-        insertObj.userId = 'none';
-        if(isObjectEmpty(insertObj))
-            alert("Nothing Input!!");
+
+        if($("#add-user-id").val() == '')
+            alert("You must input USER ID!!");
         else {
             $.ajax({
                 type: 'POST',
@@ -132,8 +132,8 @@ $(document).ready(function () {
             updateObj.phone_number = $("#phone-number").val();
 
         //console.log(updateObj);
-        if(isObjectEmpty(updateObj))
-            alert("Nothing Modified!!");
+        if($("#user-id").val() == '')
+            alert("You must input USER ID!!");
         else {
             $.ajax({
                 type: 'PUT',
@@ -176,8 +176,6 @@ $(document).ready(function () {
         }
         return true;
     }
-
-
 
 });
 

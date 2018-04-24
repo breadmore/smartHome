@@ -44,7 +44,9 @@ block content
                             .user_password User Password
                             input(type="text" )#add-user-password
                             .authority Authority
-                            input(type="text" value="")#add-authority
+                            select#add-authority
+                                option(value='admin') admin
+                                option(value='user') user
                             .name Name
                             input(type="text" value="")#add-name
                             .e-mail E-mail
@@ -70,10 +72,10 @@ block content
                             p User Password
                             input(type="password" )#user-password
                             p Authority
-                            //select#authority
-                            //    option(value=1, selected="selected") admin
-                            //    option(value=2) user
-                            input(type="text")#authority
+                            select#authority
+                                option(value='admin') admin
+                                option(value='user') user
+                            //input(type="text")#authority
                             p Name
                             input(type="text" value="")#name
                             p E-mail
