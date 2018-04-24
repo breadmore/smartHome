@@ -13,12 +13,13 @@ router.route('/')
         })
     })
     .post(function(req, res){
+        console.log(req.body);
        userService.addUser(req.body, function(err, result){
            if (err) {
-               console.log(err);
+               res.status(401).send(err);
            }
            else {
-               console.log(req.body);
+               res.status(200).send(result);
            }
        })
     });
