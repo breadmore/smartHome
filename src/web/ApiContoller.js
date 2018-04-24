@@ -34,7 +34,10 @@ router.route('/videos')
 //todo : change login logic
 router.route('/login')
     .post(function (req, res) {
-        res.redirect('/dashboard');
+
+        res.render('/dashboard', {user: user})
+
+        // res.redirect('/dashboard');
     });
 
 module.exports = router;
