@@ -123,11 +123,12 @@ block content
                     span 001
                 .card-text
                     img(src="/image/thumbnail.png" alt='Camera is not initialized', data-target="#ip-camera" data-toggle="modal").camera-img#videoModal
+    .row.card-box
         .card.device-monitor.gas-mgnmt
             .card-body
                 .card-title
                     span.big-title G
-                    span.small-title as mgmt
+                    span.small-title as management
                     span 001
                 .card-text
                     div
@@ -145,6 +146,30 @@ block content
                             img(src="/image/gasvalue.png").card-img
                         span Gas Valve
                         span#gasBlocker Blocked
+
+        .card.device-monitor.device-status
+            .card-body
+                .card-title
+                    span.big-title D
+                    span.small-title evice Status
+                    span 001
+                .card-text
+                    div
+                        span
+                            img(src="/image/alarmWhite.png").card-img
+                        span Siren
+                        span No event
+                    div
+                        span
+                            img(src="/image/window.png").card-img
+                        span Smart Light
+                        span#statusblah1 Not Detected
+                    div
+                        span
+                            img(src="/image/human.png").card-img
+                        span power Outlet
+                        span#statusblah2 Not Detected
+
 
     .content-head-2 Service / Device control
     .row.card-box
@@ -194,14 +219,6 @@ block content
                             input#xiaomiPower(type="checkbox")
                             div.slider.round#xiaomiPowerController
                         p ON
-                    .row.device-control-content
-                        img(src="/image/camera.png")
-                        .device-name IP Camera
-                        .device-number 001
-                        label.switch
-                            input(type="checkbox")
-                            div.slider.round.disabled
-                        p ON
     .content-head-2 Service / Device Event
         table
             thead
@@ -248,7 +265,7 @@ block content
                     td Critical
                     td ETRI Window sensor / IDW001
                     td Window sensor is disconnected
-    .modal.fade#ip-camera(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+    .modal.fade#ip-camera(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true', data-backdrop="static", data-keyboard="false")
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
@@ -256,35 +273,39 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    .modal-body-content
+                    .modal-body-content.video-content
                         .row
-                            .col-8(style='float:left')
-                                video(id="myVideo",width='640',height='360', controls, style='display:none;')
+                            .col-8(style='float:left;').video-player
+                                p#nowPlay(style="color:white;font-size:6px;margin-bottom:3px;margin-top:7px;text-align:center; display:block") ON AIR...
+                                //input#videoName(type='text', placeholder='Rewrite this file name', style="margin-bottom:1px;display:block")
+                                video(id="myVideo",width='640',height='440', controls, style='display:none;')
                                     source(id="vid", type='video/mp4')
                                 #ipcamera(style='width: 640px')
-                                    canvas#myCanvas(width='640', height='360' style='width:640px; height:360px;')
-                            .col-4(style='float: right; margin-left:auto, margin-right:auto margin-top: 10px')
-                                div.video
-                                    button#change(style='border:none; background-color: white') stream
-                                    ul
-                                    for topic in topics
-                                        script.
-                                        li(style='margin-top:10px;')
-                                            button.myBtn(data-name=topic, style='border:none; background-color: white')=topic
-                                    else
-                                        script.
+                                    canvas#myCanvas(width='640', height='440' style='width:640px; height:440px;')
+                            .video-list-box(style='float:right;width:30%')
+                                div(style="border-bottom:white solid 3px;padding-left:10px;font-size:30px;height:50px;")
+                                    button#change.video-btn Stream
+                                div.video(style="overflow:auto;height:415px;")
+                                    ul.my-video-list
                         .col-12(style='clear=both; margin:auto;')
-                            button#record(disabled='') record
-                            button#stop(disabled='') stop
-                .modal-footer
-                    button.btn.btn-primary(data-dismiss="modal") Cancel
+
+                //.modal-footer
+                //    button.btn.btn-primary(data-dismiss="modal") Cancel
     .modal.fade#temp-humi-lux-modal(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    .modal-title Environments
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') ×
+                    .col-4.text-left
+                        .modal-title Environments
+                    .col-4.text-center
+                        select.environment_date
+                            option(value=1) 1시간
+                            option(value=2) 6시간
+                            option(value=3) 12시간
+                            option(value=4) 1개월
+                    .col-4.text-right
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content
                         canvas#myChart-all

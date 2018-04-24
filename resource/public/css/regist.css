@@ -99,8 +99,14 @@ a:link {
 form > div > p{
     color: black;
     font-weight: bolder;
+    margin: 0px;
+
     margin-left: 50px;
     text-align: left;
+}
+
+.password > input:nth-child(2) {
+    /*margin-bottom: 5px;*/
 }
 
 form > div > input {
@@ -116,7 +122,9 @@ form > div > input {
 }
 
 form > div > input{
-    padding: 13px;
+    min-height: 40px;
+    padding-left: 13px;
+    padding-right: 13px;
     font-size: 13pt;
     margin-bottom: 15px;
     width: 80%;

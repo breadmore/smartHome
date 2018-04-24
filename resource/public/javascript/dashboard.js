@@ -23,6 +23,13 @@ window.onbeforeunload = function () {
 };
 
 $(function () {
+
+    $(".environment_date").change(function () {
+        getHourTemp($(".environment_date option:selected").val());
+    });
+
+    getHourTemp(1);
+
     initEnvironmentData();
 
     videoPlayer();
@@ -38,7 +45,7 @@ $(function () {
                 radius: 0,
                 label: 'apples',
                 borderColor: "rgba(35, 189, 252)",
-                data: [2, 2, 2.1, 2, 2.1, 2, 2.2, 2, 2.3, 1.9, 2.1, 2.3, 2.7, 2.8, 2.6, 2.8, 3.1, 2.3, 2.4, 2.3, 2, 2.1, 1.9],
+                data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
                 backgroundColor: "transparent"
             }]
         },
@@ -95,12 +102,12 @@ $(function () {
     myChart_modal = new Chart(ctx_modal, {
         type: 'line',
         data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+            labels: [5,10,15,20,25,30,35,40,45,50,55,60],
             datasets: [
                 {
                     label: 'Temperature',
                     radius: 1.5,
-                    data: [13, 12, 12, 11, 11, 10, 10, 11, 12, 13, 14, 15, 16, 17, 16, 15, 15, 14, 13, 13, 12, 12, 11, 11],
+                    data: [13, 12, 12, 11, 11, 10, 10, 11, 12, 13, 14, 15],
                     // backgroundColor: [
                     //     'rgba(35, 189, 252,0.2)',
                     // ],
@@ -114,7 +121,7 @@ $(function () {
                 {
                     label: 'Humidity',
                     radius: 1.5,
-                    data: [85, 85, 85, 85, 85, 85, 80, 75, 70, 65, 55, 45, 45, 40, 40, 40, 40, 40, 45, 45, 50, 55, 60, 60],
+                    data: [85, 85, 85, 85, 85, 85, 80, 75, 70, 65, 55, 45],
                     // backgroundColor: [
                     //     'rgba(41, 209, 51, 0.2)',
                     // ],
@@ -128,7 +135,7 @@ $(function () {
                 {
                     label: 'Luminance',
                     radius: 1.5,
-                    data: [110, 100, 100, 100, 130, 150, 160, 190, 210, 230, 240, 250, 270, 270, 260, 250, 240, 230, 220, 210, 200, 180, 160, 120],
+                    data: [110, 100, 100, 100, 130, 150, 160, 190, 210, 230, 240, 250],
                     // backgroundColor: [
                     //     'rgba(252, 100, 3, 0.2)',
                     // ],
@@ -245,7 +252,7 @@ $(function () {
         // console.log(data.humidity[0].value);
         // console.log(data.illuminaty.length);
         //todo [0].value add
-        $('#luxValue').text(data.illuminaty[0].value);
+        // $('#luxValue').text(data.illuminaty[0].value);
 
     });
 
@@ -342,19 +349,19 @@ $(function () {
     camSocket.emit('stop');
     camSocket.emit('init');
     $('#ip-camera').on('show.bs.modal', function (e) {
+        display(true);
+        modal_list();
         camSocket.emit('stop');
         var ipcamera = document.getElementById('ipcamera');
         var canvas = ipcamera.getElementsByTagName('canvas')[0];
         camSocket.emit('start');
         camSocket.on('data', function (data) {
-            console.log('data');
-            // console.log(data);
-            document.getElementById('record').disabled = false;
             var bytes = new Uint8Array(data);
             var blob = new Blob([bytes], {type: 'application/octet-binary'});
             var url = URL.createObjectURL(blob);
             var img = new Image;
             var ctx = canvas.getContext("2d");
+
             img.onload = function () {
                 URL.revokeObjectURL(url);
                 ctx.drawImage(img, 0, 0);
@@ -362,26 +369,12 @@ $(function () {
             img.src = url;
             img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
 
-            document.getElementById('record').onclick = function () {
-                this.disabled = true;
-                // document.getElementById('stop').disabled = false;
-                camSocket.emit('stop');
-                camSocket.emit('record');
-                console.log("record start");
-            };
-
-            document.getElementById('stop').onclick = function () {
-                this.disabled = true;
-                document.getElementById('record').disabled = false;
-                // console.log("record stop");
-            }
         });
 
 
     });
 
     $('#ip-camera').on('hidden.bs.modal', function (e) {
-        console.log('close modal');
         camSocket.emit('stop');
     });
 
@@ -432,7 +425,6 @@ function initEnvironmentData() {
         url: '/api/v1/environments/temperature?number=24',
         type: 'get',
         success: function (result) {
-            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentTemperature.push(item.value);
             });
@@ -449,7 +441,6 @@ function initEnvironmentData() {
         url: '/api/v1/environments/humidity?number=24',
         type: 'get',
         success: function (result) {
-            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentHumidity.push(item.value);
             });
@@ -467,7 +458,6 @@ function initEnvironmentData() {
         url: '/api/v1/environments/humidity?number=24',
         type: 'get',
         success: function (result) {
-            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentHumidity.push(item.value);
             });
@@ -548,6 +538,11 @@ function updateLegacyStates(state) {
         console.log("window changed!");
         currentState.window = state.window_detector;
         sendSensorLog();
+
+        if (currentState.window === 'closed' && state.window_detector === 'opened') {
+            console.log("asdasd");
+        }
+
     }
     if (currentState.human !== state.human_detector) {
         console.log("human changed!");
@@ -664,34 +659,246 @@ function initXiaomiDeviceData() {
     }, 1500);
 
 }
+// function canvasDisplay(){
+//     if ($("#myCanvas").css("display") == "none") {
+//         $("canvas").toggle();
+//         $("#videoName").toggle();
+//     }
+//     if ($("video").css("display") != "none"){
+//         $("video").toggle();
+//         $("#nowPlay").toggle();
+//     }
+// }
+// function videoDisplay(){
+//     if ($("canvas").css("display") != "none")
+//     {
+//         $("canvas").toggle();
+//         $("#videoName").toggle();
+//     }
+//
+//     if ($("video").css("display") == "none") {
+//         $("video").toggle()
+//         $("#nowPlay").toggle();
+//     }
+// }
 
+function display(isCan) {
+    if(isCan === true && $("canvas").css("display") === "none") {           //streaming
+        $("canvas").toggle();
+        // $("#videoName").toggle();
+        $("video").toggle();
+        $("#nowPlay").text("ON AIR...");
+    }
+    else if(isCan === false && $("canvas").css("display") !== "none") {     //videoplay
+        $("canvas").toggle();
+        // $("#videoName").toggle();
+        $("video").toggle();
+        // $("#nowPlay").toggle();
+    }
+
+}
 function videoPlayer() {
     var video = document.getElementById('myVideo');
     var src = document.getElementById('vid');
     var btns = document.getElementsByClassName("myBtn");
     var change = document.getElementById('change');
 
-    $.each(btns, function (index, item) {
-        item.addEventListener('click', function (e) {
-            console.log($(this).attr('data-id'));
-            src.src = "/video/" + $(this).attr('data-name');
 
-            if ($("canvas").css("display") == "none") console.log("none");
-            else $("canvas").toggle();
+    $(document).on('click', '.myBtn', function () {
+        src.src = "/video/" + $(this).attr('data-name');
+        // videoDisplay();
+        display(false);
+        $('#nowPlay').text($(this).attr('data-name'));
 
-            if ($("video").css("display") == "none") $("video").toggle()
-            video.load();
-        })
+        video.load();
+
     })
 
     $(document).ready(function () {
         change.onclick = function () {
-            console.log("ch");
-            if ($("#myCanvas").css("display") == "none") $("canvas").toggle();
-
-            if ($("video").css("display") == "none") console.log("none");
-            else $("video").toggle();
+            display(true);
+           // canvasDisplay();
             video.pause();
         };
     });
+}
+
+function modal_list() {
+    $(".video-list").remove();
+
+    $.ajax({
+        type:"get",
+        url:"http://localhost:1880/api/videos",
+        success: function (data) {
+            for(i=0; i<data.length; i++) {
+                $(".my-video-list").append("<li class='video-list'>"+" <button class='myBtn video-btn' data-name="+data[i]+">"+data[i]+" </button> " +"</li>");
+            }
+        }
+    })
+
+}
+/**
+ *
+ *
+ * @param index==1 >>>>>>> window change
+ *        index==2 >>>>>>> human change
+ *        index==3 >>>>>>> myVideo Name
+ */
+
+function recordStart(index) {
+
+    var videoName;
+    var dd = new Date()
+    var ss = '' + dd.getUTCFullYear() + 0+(dd.getMonth()+1) + dd.getDate() + dd.getHours()+ dd.getMinutes()+ dd.getSeconds()
+
+    if(index==1){
+        videoName='window'+ss;
+    }
+    else if(index==2){
+        videoName='human'+ss;
+    }
+    else if(index==3){
+        videoName=$("#videoName").val();
+    }
+
+        camSocket.emit('stop');
+        camSocket.emit('record',videoName);
+        console.log("record start");
+
+}
+
+
+
+function getHourTemp(value) {
+    var hour_min = {
+        "min" : null,
+        "hour" : null
+    };
+    var label = [];
+    // console.log("value " + value);
+    if (value == 1) {
+        hour_min.min = 5;
+        hour_min.hour = 1;
+        getDataHour();
+    } else if ( value == 2) {
+        hour_min.min = 30;
+        hour_min.hour = 6;
+        getDataHour();
+    } else if (value == 3) {
+        hour_min.min = 60;
+        hour_min.hour = 12;
+        getDataHour();
+    } else if (value == 4) {
+        getDateDay();
+    }
+
+    function getDataHour() {
+        $.ajax({
+            url : "api/hourtemp",
+            type : 'post',
+            data : hour_min,
+            success: function (result) {
+                var new_data = [];
+                var min;
+                $.each(result, function (index, item) {
+                    new_data.push(item.valueAvg);
+                    if (item["min * " + hour_min.min] == 0) {
+                        min = "00";
+                    } else {
+                        min = "30";
+                    }
+                    var time = '' + item.hour + ':' + min + '';
+                    // console.log(time);
+                    label.push(time);
+                });
+                myChart_modal.data.datasets[0].data = new_data;
+                myChart_modal.data.labels = label;
+                $.ajax({
+                    url: "api/hourhumi",
+                    type: 'post',
+                    data: hour_min,
+                    success: function (result) {
+                        var new_data = [];
+                        $.each(result, function (index, item) {
+                            new_data.push(item.valueAvg);
+                        });
+                        myChart_modal.data.datasets[1].data = new_data;
+                        $.ajax({
+                            url: "api/hourillumi",
+                            type: 'post',
+                            data: hour_min,
+                            success: function (result) {
+                                var new_data = [];
+                                $.each(result, function (index, item) {
+                                    new_data.push(item.valueAvg);
+                                });
+                                myChart_modal.data.datasets[2].data = new_data;
+                                myChart_modal.update();
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function getDateDay() {
+        $.ajax({
+            url : "api/daytemp",
+            type : 'post',
+            success: function (result) {
+                var new_data = [];
+                var min;
+                $.each(result, function (index, item) {
+                    new_data.push(item.valueAvg);
+                    var time = '' + item.month + '/' + item.day + '';
+                    label.push(time);
+                });
+                myChart_modal.data.datasets[0].data = new_data;
+                myChart_modal.data.labels = label;
+                $.ajax({
+                    url: "api/dayhumi",
+                    type: 'post',
+                    success: function (result) {
+                        var new_data = [];
+                        $.each(result, function (index, item) {
+                            new_data.push(item.valueAvg);
+                        });
+                        myChart_modal.data.datasets[1].data = new_data;
+                        $.ajax({
+                            url: "api/dayillumi",
+                            type: 'post',
+                            success: function (result) {
+                                var new_data = [];
+                                $.each(result, function (index, item) {
+                                    new_data.push(item.valueAvg);
+                                });
+                                myChart_modal.data.datasets[2].data = new_data;
+                                // myChart_modal.data.labels = label;
+                                myChart_modal.update();
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
 }

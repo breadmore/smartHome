@@ -63,9 +63,9 @@ cams.forEach(function (camStream, i) {
             camStream.restart();
         });
 
-        wsocket.on('record', function(){
+        wsocket.on('record', function(data){
             console.log('record  cam')
-            camStream.record();
+            camStream.record(data);
         });
 
         wsocket.on('init', function(data){

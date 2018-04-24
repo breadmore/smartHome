@@ -8,7 +8,6 @@ const spawn = require('child_process').spawn
 ;
 
 var moment = require('moment');
-
 /**
  * Stream constructor
  * @param {object} options
@@ -95,10 +94,10 @@ function observer(changes) {
 //     ]);
 // };
 
-FFMpeg.prototype._args = function (option) {
+FFMpeg.prototype._args = function (option,data) {
     //영상 출력 // 썸네일
-    var now = moment(Date.now()).format('YYYYMMDDHHmmss');
-    var recordFilePath = './resource/public/video/' + now + '.mp4';
+    // var now = moment(Date.now()).format('YYYYMMDDHHmmss');
+    var recordFilePath = './resource/public/video/' + data + '.mp4';
     var thumbnailPath = './resource/public/image/thumbnail.png';
 
     if (option === 0) {
@@ -130,6 +129,8 @@ FFMpeg.prototype._args = function (option) {
             ]);
     }
     else if (option === 2) {
+        console.log(option);
+        console.log(data);
         return this.arguments.concat(
             ['-loglevel', 'quiet', '-y', '-i',
                 this.input, '-vcodec', 'copy', '-ss', '0',
@@ -227,8 +228,9 @@ FFMpeg.prototype.restart = function () {
     }
 };
 
-FFMpeg.prototype.record = function () {
-    this.child = spawn(FFMpeg.cmd, this._args(parseInt(2)));
+FFMpeg.prototype.record = function (data) {
+    this.child = spawn(FFMpeg.cmd, this._args(parseInt(2),data));
+    // console.log(data);
     // this.child.stdout.on('data', (data) => {
     //     console.log(`stdout: ${data}`);
     // });

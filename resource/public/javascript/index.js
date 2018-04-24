@@ -15,3 +15,41 @@ if (mobilecheck()) {
     //location.href = '/pc/';
     //PC로 접속시 이동 경로
 }
+
+$(function () {
+
+
+
+
+
+    $(".confirm").on("click", () => {
+
+
+        var userId = $(".id > input").val();
+        var password = $(".password > input").val();
+
+        var user = {
+            "userId" : userId,
+            "password" : password
+        }
+        console.log(user);
+        $.ajax({
+            url : "api/login",
+            type : "post",
+            data : JSON.stringify(user),
+            contentType:"application/json; charset=utf-8",
+            success: function (data) {
+                console.log("good");
+                location.href = "/dashboard";
+            },
+            error: function (data) {
+                console.log(data);
+                if (data.status === 404) {
+                    alert('id not found');
+                }
+            }
+        })
+    });
+
+
+});
