@@ -29,6 +29,19 @@ $(function () {
         $(".logger").css("background-color", "rgb(90,153,157)");
     }
 
+    $(".logout").on("click", () => {
+        $.ajax({
+            url: 'api/logout',
+            type: 'post',
+            success: function (data) {
+                console.log(data);
+                location.href = "/";
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
 
 
 

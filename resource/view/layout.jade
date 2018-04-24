@@ -11,6 +11,7 @@ html
         title SecureHome
         block head
     body
+
         .container.no-padding
             .row.col-12.title-bar.no-padding
                 .col-2.title-logo.no-padding
@@ -19,8 +20,8 @@ html
                 .row.col-3.text-left.login-bar
                     img(src="/image/login.png").login
                     div
-                        .col-.auth Admin
-                        .col-.name Hong Gildong
+                        .col-.auth #{authority}
+                        .col-.name #{userName}
                     button.btn.logout Log out
         .row.col-12.menu-bar
             .container.no-padding

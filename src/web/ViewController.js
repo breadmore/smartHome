@@ -15,15 +15,45 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    res.render('dashboard');
+    res.render('dashboard', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
 });
 
 router.get('/regist', function (req, res) {
     res.render('regist');
 });
 
+// router.post('/regist', (req, res) => {
+//     console.log(req.body);
+//     userDao.insert(req.body, (err, result) => {
+//         if (err) {
+//             res.status(401).send(err);
+//         }
+//         else {
+//             res.status(201).send(result);
+//
+//         }
+//
+//
+//     })
+// });
+//
+// router.post('/login', (req, res) => {
+//    console.log(req.body);
+//    // var test = userDao.selectUserByUserId(req.body);
+//     userDao.selectUserByUserId(req.body, function (result) {
+//         console.log(result);
+//     });
+//    // res.redirect('/', test);
+// });
+
 router.get('/device_security', function (req, res) {
-    res.render('device_security');
+    res.render('device_security', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
 });
 
 // router.get('/gateway', function (req, res) {
@@ -39,11 +69,17 @@ router.get('/device_security', function (req, res) {
 // // });
 
 router.get('/account', function (req, res) {
-    res.render('account');
+    res.render('account', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
 });
 
 router.get('/logger', function (req, res) {
-    res.render('logger');
+    res.render('logger', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
 });
 
 

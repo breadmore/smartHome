@@ -69,6 +69,13 @@ if (process.env.npm_package_config_nr_title) {
 var app = express();
 var path = require('path');
 var socket = require('socket.io');
+var session = require('express-session');
+app.use(session({
+    secret: 'etri!!!!@@@@',
+    resave: false,
+    saveUninitialized: true,
+}));
+
 
 // get the db file path
 // const dbPath = path.join(__dirname, "db/test.db");

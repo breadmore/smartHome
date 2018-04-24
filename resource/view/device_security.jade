@@ -20,15 +20,15 @@ block content
             .col-12
     #loader
     .row.no-gutters(style='margin-bottom:30px; margin-top: -10px; display:none;')#deviceDiv
-        .col-12(style='margin-bottom: 10px;')
-            span#refresh(style='float:left; background-color:#65c0c6;border: 6px solid #65c0c6; padding:5px;font-size:1rem; line-height:1; margin:auto 5px;color:white; border-radius: 0.25rem;') REFRESH
-                i.fas.fa-redo-alt(style='float:left; margin-left:5px; margin-right:5px;')
-            //span Refresh
-            input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
-            input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
-            input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
-            input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addButton
-
+        if authority == "admin"
+            .col-12(style='margin-bottom: 10px;')
+                span#refresh(style='float:left; background-color:#65c0c6;border: 6px solid #65c0c6; padding:5px;font-size:1rem; line-height:1; margin:auto 5px;color:white; border-radius: 0.25rem;') REFRESH
+                    i.fas.fa-redo-alt(style='float:left; margin-left:5px; margin-right:5px;')
+                //span Refresh
+                input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+                input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+                input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
+                input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addButton
 
         .col-6.no-gutters.view-box
             .row.no-gutters.view-box-title
@@ -96,9 +96,10 @@ block content
         .col-10.content-hr.no-padding
             hr
     .row.no-gutters(style='margin-bottom:20px; display: none;')#securityDiv
-        .col-12(style='margin-bottom:10px;')
-            input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
-            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
+        if authority == "admin"
+            .col-12(style='margin-bottom:10px;')
+                input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
+                input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
         .col-12.no-gutters
             table#securityTable(style='width:100%')
                 thead

@@ -112,15 +112,15 @@
 
 .home-security-service {
     min-width: 260px;
-    min-height: 180px;
 }
 
 .home-security-service .card-text {
     width: 260px;
 }
 
-.device-control {
+.device-control, .home-security-service {
     min-width: 260px;
+    height: 135px;
 }
 
 .home-security-service .card-body {
@@ -252,6 +252,29 @@ td:nth-child(1) {
 .gas-mgnmt span > span {
     width: 80px;
     text-align: right;
+}
+
+.gas-mgnmt {
+    width: 200px;
+    height: 130px;
+}
+
+.gas-mgnmt > div > .card-text {
+    width: 200px;
+}
+
+.gas-mgnmt > div >.card-title , .gas-mgnmt > .card-body{
+    width: 199px;
+}
+
+.gas-mgnmt > div > .card-text > div{
+    width: 100%;
+    padding: 0px;
+    margin-top: 5px;
+}
+
+.gas-mgnmt > div > .card-text > div > span:nth-child(3) {
+    margin-left: 10px;
 }
 
 /*canvas {*/
@@ -596,4 +619,8 @@ li .video-btn {
 }
 .video::-webkit-scrollbar {
     width: 0px;
+}
+
+.device-monitor {
+    margin-right: 20px;
 }

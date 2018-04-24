@@ -11,7 +11,6 @@ html(lang='en')
         script(src='/plugin/socket.io/socketio.min.js' type='text/javascript')
         script(src='/javascript/index.js' type='text/javascript')
 
-
     body
         //.title
         //    span
@@ -47,17 +46,17 @@ html(lang='en')
                     .login-form
                         .login-form-header.col-12
                             .header-sign-in SIGN IN
-                            .header-regist.text-center
+                            .header-regist.text-center(onclick="location.href='/regist'")
                                 button Registration
                         .login-form-body
                             img(src="/image/login.png").login-img
-                            .email
-                                input(type="text" placeholder="Email or Username").form-control
+                            .id
+                                input(type="text" placeholder="ID").form-control#id
                             .password
-                                input(type="password" placeholder="Password").form-control
+                                input(type="password" placeholder="Password").form-control#pw
                             .remember-me
                                 input(type="checkbox").form-check-input
                                 | Remember me
-                            button.confirm(onclick="location.href='/dashboard'") Confirm
+                            button(type="submit").confirm Confirm
 
                 .col-2

@@ -123,6 +123,7 @@ block content
                     span 001
                 .card-text
                     img(src="/image/thumbnail.png" alt='Camera is not initialized', data-target="#ip-camera" data-toggle="modal").camera-img#videoModal
+    .row.card-box
         .card.device-monitor.gas-mgnmt
             .card-body
                 .card-title
@@ -193,14 +194,6 @@ block content
                         label.switch
                             input#xiaomiPower(type="checkbox")
                             div.slider.round#xiaomiPowerController
-                        p ON
-                    .row.device-control-content
-                        img(src="/image/camera.png")
-                        .device-name IP Camera
-                        .device-number 001
-                        label.switch
-                            input(type="checkbox")
-                            div.slider.round.disabled
                         p ON
     .content-head-2 Service / Device Event
         table
