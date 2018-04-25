@@ -66,7 +66,7 @@ block content
                             td.right#dname
                         tr
                             td Device Type
-                            td.right#type
+                            td.right#dtype
                         tr
                             td Device ID
                             td.right#eid
@@ -325,47 +325,13 @@ block content
                         table#logTable.no-padding(style='width:100%')
                             thead
                                 tr
-                                    th Datetime
-                                    th From ID
-                                    th To ID
-                                    th Resource Name
-                                    th Operation
-                            tbody
-                                tr
-                                    td
-                                        div 2018-04-09 13:12:10
-                                    td
-                                        div ThermoHygrometer_65934
-                                    td
-                                        div MyIoTSVR
-                                    td
-                                        div ThermoHygrometer_65934
-                                    td
-                                        div CRUD
-
-                                tr
-                                    td
-                                        div 2018-04-10 13:13:16
-                                    td
-                                        div ThermoHygrometer_65934
-                                    td
-                                        div MyIoTSVR
-                                    td
-                                        div ThermoHygrometer_65934
-                                    td
-                                        div CRUDN
-                                tr
-                                    td
-                                        div 2018-04-10 16:55:10
-                                    td
-                                        div ThermoHygrometer_65934
-                                    td
-                                        div MyIoTSVR
-                                    td
-                                        div ThermoHygrometer_65934
-                                    td
-                                        div C
-                .modal-footer
+                                    th enforce_date
+                                    th from_id
+                                    th to_id
+                                    th resource_name
+                                    th pre_operation
+                                    th current_operation
+                //.modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters
                         button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Delete

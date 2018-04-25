@@ -187,8 +187,9 @@ $(document).ready(function () {
         $("#policy-confirm").attr('disabled', true);
     });
     $('#deployLogModal').on('show.bs.modal',function (e) {
+        deployLogTable.ajax.reload();
 
-    })
+    });
     $('#modifyModal').on('show.bs.modal', function (e) {
 
         var device = findDeviceByDid(nowClick.getAttribute('data-did'))
@@ -259,7 +260,40 @@ $(document).ready(function () {
             // console.log(table.row('.selected').data());
         }
     });
+
+    var deployLogTable = $('#logTable').DataTable({
+        paging: true,
+        processing: true,
+        ordering: true,
+        serverSide: false,
+        searching: true,
+        dom : '<"row no-gutters"t>',
+        ajax : {
+            url: "/api/v1/Logs/policy",
+            dataSrc: function (result) {
+                var logs = [];
+                $.each(result, function(index, item){
+                    item.enforceDate = dateFormatter(item.enforce_date);
+                    item.fromName = findEntityById(item.from_id.toString()).Name;
+                    item.toName = findEntityById(item.to_id.toString()).Name;
+                    logs.push(item);
+                });
+                return logs;
+            }},
+        columns : [
+            {data: "enforceDate"},
+            {data: "fromName"},
+            {data: "toName"},
+            {data: "resource_name"},
+            {data: "pre_operation"},
+            {data: "current_operation"}
+        ]
+    });
+
+
 });
+
+
 
 
 // function sleep(milliseconds) {

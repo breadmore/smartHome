@@ -64,7 +64,6 @@ var Log = {
         return db.query('select * from Security_Log order by id desc limit 6', callback);
     },
 
-
     // Mark : PolicyHistory Dao.
     insertPolicyLog: function(data, callback) {
         console.log(data);
@@ -72,9 +71,16 @@ var Log = {
             [data.enforce_date, data.fromId, data.toId, data.resourceName, data.previous, data.operation],
             callback);
     },
-    selectAllUsers: function(callback) {
+
+    selectAllDeployLog: function(callback) {
         return db.query('select * from Policy_History',callback);
     },
+
+    selectRecentDeployLog: function(callback) {
+        return db.query('select * from Policy_History order by id desc limit 5',callback);
+    },
+
+
 
     selectById: function(data, callback){
 
