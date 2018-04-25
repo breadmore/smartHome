@@ -334,3 +334,10 @@ body *:focus, body *:active, body *:hover {
     margin: 0;
     border-radius: 50%
 }
+
+#securityTable > tbody > tr > td, #securityEventTable > tbody > tr > td, #eventTable > tbody > tr > td, #userTable > tbody > tr > td{
+    font-size: 14px;
+}
+#securityTable > thead > tr > th, #securityEventTable > thead > tr > th, #eventTable > thead > tr > th, #userTable > thead > tr > th, #eventTable > thead > tr > td{
+    font-size: 14px;
+}

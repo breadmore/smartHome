@@ -689,3 +689,8 @@ div .dataTables_paginate > .pagination {
     height: 20px;
     width: 110px;
 }
+
+
+#eventTable > tbody > tr > td:nth-child(4){
+    text-align: left!important;
+}

@@ -52,3 +52,7 @@ div .dataTables_paginate > .pagination {
         display: grid;
     }
 }
+
+#eventTable > tbody > tr > td:nth-child(4){
+    text-align: left!important;
+}
