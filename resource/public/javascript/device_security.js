@@ -80,6 +80,27 @@ $(document).ready(function () {
         ],
     });
 
+    var securityEventTable = $('#securityEventTable').DataTable({
+        paging: true,
+        processing: true,
+        order: [[1, 'desc']],
+        serverSide: false,
+        searching: true,
+        dom : '<"row no-gutters"t>',
+        ajax : {
+            url: "/api/v1/logs/event",
+            dataSrc: function (result) {
+                return result;
+            }},
+        columns : [
+            {data: "event_date"},
+            {data: "event_type"},
+            {data: "device_type"},
+            {data: "device_id"},
+            {data: "msg"}
+        ]
+    });
+
     var isLoading = true;
     var loading = setInterval(function () {
         if (isLoading) {
@@ -87,6 +108,7 @@ $(document).ready(function () {
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('deviceDiv').style.display = 'flex';
                 document.getElementById('securityDiv').style.display = 'flex';
+                document.getElementById('securityEvent').style.display = 'flex';
             }
             findOperationById();
             isLoading = false;
@@ -136,6 +158,13 @@ $(document).ready(function () {
     });
 
     //ktw add
+    $('#from-Id').attr('disabled', true);
+    $('#to-Id').attr('disabled', true);
+    $('#resource-Name').attr('disabled', true);
+    $('#policy-confirm').attr('disabled', true);
+    $('#policyButton').attr('disabled', true);
+    $('.radio-server').attr('checked', true);
+
     $(".form-check-input").on("click", () => {
         crudnListner();
     });
@@ -192,33 +221,51 @@ $(document).ready(function () {
     });
     $('#modifyModal').on('show.bs.modal', function (e) {
 
-        var device = findDeviceByDid(nowClick.getAttribute('data-did'))
-        $("#gateway-id").val(device.gwid);
-        $("#device-name").val(nowClick.getAttribute('data-did'));
-        $("#device-id").val(device.id);
-        $("#pre-shared-key").val(device.psk);
-        $("#entity-id").val(device.eid);
-        $("#object-id").val(device.oid);
-        $("#type").val(device.type);
-        $("#session-id").val(device.sid)
+        if(nowClick.getAttribute('data-did') !== null) {
+            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            $("#gateway-id").val(device.gwid);
+            $("#device-name").val(nowClick.getAttribute('data-did'));
+            $("#device-id").val(device.id);
+            $("#pre-shared-key").val(device.psk);
+            $("#entity-id").val(device.eid);
+            $("#object-id").val(device.oid);
+            $("#type").val(device.type);
+            $("#session-id").val(device.sid);
 
-        if('<i class="fas fa-toggle-off"></i>'===device.conn){
-            $('#connected').html(device.conn + ' Not Connected');
+            if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
+                $('#connected').html(device.conn + ' Not Connected');
+            }
+            else $('#connected').html(device.conn + ' Connected');
+            if ('<i class="far fa-address-card"></i>' === device.auth) {
+                $('#authenticate').html(device.auth + ' Not Authorized');
+            }
+            else $('#authenticate').html(device.auth + ' Authorized');
+            if ('<i class="far fa-eye-slash"></i>' === device.reg) {
+                $('#register').html(device.reg + ' Not Registered');
+            } else
+                $('#register').html(device.auth + ' Authorized');
         }
-        else $('#connected').html(device.conn + ' Connected');
-        if('<i class="far fa-address-card"></i>'===device.auth){
-            $('#authenticate').html(device.auth + ' Not Connected');
+        else{
+            $("#gateway-id").val('error');
+            $("#device-name").val('error');
+            $("#device-id").val('error');
+            $("#pre-shared-key").val('error');
+            $("#entity-id").val('error');
+            $("#object-id").val('error');
+            $("#type").val('error');
+            $("#session-id").val('error');
+
+            $('#connected').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
+            $('#authenticate').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
+            $('#register').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
         }
-        else  $('#authenticate').html(device.auth + ' Connected');
-        if('<i class="far fa-eye-slash"></i>'===device.reg){
-            $('#regster').html(device.reg + ' Not Registered');
-        }else
-            $('#regster').html(device.reg + ' Registered');
+
     });
     $("#policy-confirm").on("click", () => {
 
         var tmp =  table.row('.selected').data();
         console.log(tmp);
+        var policyEnforcementPoint = $('.policy-radio:checked');
 
         var policy = {
         };
@@ -228,7 +275,8 @@ $(document).ready(function () {
             toId: tmp.ToID,
             resourceName: tmp.Resouce,
             tokenId: tmp.TokenID,
-            operation: change
+            operation: change,
+            enforcePoint: policyEnforcementPoint.val()
         };
         console.log(updateData);
 
@@ -352,13 +400,13 @@ function findOperationById() {
                     //     if($.inArray(el, toName_unique) === -1) toName_unique.push(el);
                     // });
                     // for (var i=0; i<entityName_unique.length; i++) {
-                    //     $("#form-Id").append("<option>" + entityName_unique[i] +"</option>");
+                    //     $("#from-Id").append("<option>" + entityName_unique[i] +"</option>");
                     // }
                     // for (var i=0; i<toName_unique.length; i++) {
                     //     $("#to-Id").append("<option>" + toName_unique[i] +"</option>");
                     // }
                     $.each(entityName, function (i, el) {
-                        $("#form-Id").append("<option>" + entityName[i] + "</option>");
+                        $("#from-Id").append("<option>" + entityName[i] + "</option>");
                     });
                     $.each(toName, function (i, el) {
                         $("#to-Id").append("<option>" + toName[i] + "</option>");
@@ -867,21 +915,11 @@ function deleteResourceClicked() {
 //ktw add
 
 function test1() {
-    var tmp = document.getElementsByClassName('form-check-input');
-    var str;
+    // $('input.form-check-input:checked').each(function() {
+    //     console.log($(this).val());
+    // });
 
-
-
-    // console.log(tmp.item(1).checked);
-    for ( let i = 0; i < tmp.length; i++){
-        if (tmp.item(i).checked == true){
-            console.log(tmp.item(i).value);
-        }
-    }
-
-    // tmp = document.getElementById('form-Id');
-    // console.log(tmp.selectedIndex);
-    // console.log(tmp.selectedIndex);
+    var policyEnforcementPoint = $('.policy-radio').attr(checked, true);
 }
 
 function crudnListner() {

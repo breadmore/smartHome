@@ -298,7 +298,7 @@ $(document).ready(function() {
             case 'magnet':
                 if (data.event === 'open') {
                     $('#xiaomiWindow').text(OPENED);
-                    // recordStart(1);
+                    recordStart(1);
                 }
                 else if (data.event === 'close') {
                     $('#xiaomiWindow').text(CLOSED);

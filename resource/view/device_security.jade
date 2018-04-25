@@ -99,7 +99,7 @@ block content
         //if authority == "admin"
         .col-12(style='margin-bottom:10px;')
             input.btn.btn-primary.btn-action(type='button', value='Deploy Log' data-target="#deployLogModal" data-toggle="modal")#logButton
-            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal" disabled=true)#policyButton
+            input.btn.btn-primary.btn-action(type='button', value='Policy' data-target="#policyModal" data-toggle="modal")#policyButton
         .col-12.no-gutters
             table#securityTable(style='width:100%')
                 thead
@@ -113,10 +113,20 @@ block content
                         th Update
                         th Delete
                         th Notify
-    .row.no-gutters(style='margin-bottom:60px')
+    .row.no-gutters(style='margin-bottom:20px')
         span.col-xl-2.content-title.no-padding Security Event
         .col-10.content-hr.no-padding
             hr
+    .row.no-gutters(style='margin-bottom:20px; display: none;')#securityEvent
+        .col-12.no-gutters
+            table#securityEventTable(style='width:100%')
+                thead
+                    tr
+                        th Event Date
+                        th Event Type
+                        th Device Type
+                        th Device ID
+                        th Message
     #addGatewayModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content
@@ -254,7 +264,7 @@ block content
                                 input(type='radio', name='optradio')
                                 | &nbsp;Not Authenticated
                         p Registered
-                        .radio-group
+                        .radio-group#register
                             label.radio-inline
                                 input(type='radio', name='optradio')
                                 | &nbsp;Registered
@@ -276,11 +286,11 @@ block content
                 .modal-body
                     .modal-body-content
                         p FromID
-                        select#form-Id(disabled=true)
+                        select#from-Id
                         p ToID
-                        select#to-Id(disabled=true)
+                        select#to-Id
                         p Resource Name
-                        select#resource-Name(disabled=true)
+                        select#resource-Name()
                         p Policy
                         .form-check.form-check-inline
                             label.form-check-label
@@ -304,14 +314,14 @@ block content
                                 | Notify
                         p(style='margin-top:10px;') Policy Enforcement Point
                         label.radio-inline
-                            input(type='radio', name='optradio')
+                            input.policy-radio.radio-server(type='radio', name='optradio', value='Server')
                             | &nbsp;Server
                         label.radio-inline(style="margin-left:12px")
-                            input(type='radio', name='optradio')
+                            input.policy-radio(type='radio', name='optradio', value='Device')
                             | &nbsp;Device
                 .modal-footer
                     .col-12.text-center.no-gutters
-                        button.btn.btn-primary.btn-action.modal-btn#policy-confirm(data-dismiss="modal" disabled=true) Confirm
+                        button.btn.btn-primary.btn-action.modal-btn#policy-confirm(data-dismiss="modal") Confirm
                         button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     #deployLogModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog.modal-lg(role='document')

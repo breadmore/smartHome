@@ -33,13 +33,13 @@ const express = require("express"); // THE std library for serving HTTP
 const RED = require("node-red");
 var nrSettings = require("../settings.js"); // Node-Red settings file
 const fs = require("fs");
-const sqlite3 = require('sqlite3').verbose(); // sqlite3 db
+// const sqlite3 = require('sqlite3').verbose(); // sqlite3 db
 
 const bodyParser = require('body-parser');
 // const httpLogger = require('morgan');
 
 var log4js = require('log4js');
-log4js.configure('./config/logger/log4js.json');
+log4js.configure('../config/logger/log4js.json');
 
 
 // you can set a default credential secret for storing node's credentials within node red
@@ -76,91 +76,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-
-// get the db file path
-// const dbPath = path.join(__dirname, "db/test.db");
-//
-// // validate db existence
-// let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-//   if (err) {
-//     console.error('could not find test database. Making it...');
-//     //make db
-//     db = new sqlite3.Database(dbPath);
-//
-//     // sync process creating table.
-//     db.serialize(() => {
-//       let init_database = require('./db/old/init_database')
-//       db.run(init_database.initDevice());
-//       db.run(init_database.initGateway());
-//       db.run(init_database.initPolicy());
-//       db.run(init_database.initUser());
-//       db.run(init_database.initSensorLog());
-//   });
-//
-//   } else {
-//     console.log('Connected to the test database.');
-//   }
-// });
-// module.exports.db = db;
-
-///////////////////////
-
-var guiDb = require('./db/gui');
-
-
-
-// var mysql = require('mysql');
-// var connection = mysql.createConnection({
-//     host  : '10.0.0.24',
-//     user  : 'rtst',
-//     password  : 'rtst0653',
-//     port  : 3306,
-//     database : 'test'
-// });
-//
-// connection.connect();
-//
-// connection.query('SELECT * FROM actions', function(err, rows, fields) {
-//     if (!err) {
-//         console.log('The solution is: ', rows);
-//         console.log('The solution is: ', fields);
-//     }
-//     else
-//         console.log('Error while performing Query.', err);
-// });
-//
-// connection.end();
-
-// db.serialize(() => {
-//   db.all('SELECT * FROM device', (err, rows) => {
-//     console.log(rows);
-//   });
-
-// db.each('SELECT * FROM device', (err, row) => {
-//   if (err) {
-//     console.error(err.message);
-//   }
-//   console.log(row);
-// });
-// });
-
-/**
- * Database Connection using sequelize
- *
- */
-//
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('mysql://classact:classact!@10.0.0.24:3306/test');
-// sequelize.authenticate()
-//     .then(() => {
-//     console.log('Connection Successful');
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-
 var resourcePath = path.join(__dirname, '../resource');
-
 // app http settings.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -538,11 +538,14 @@ input:checked + .slider:before {
 }
 
 .video-player {
-    padding: 1px;
-    padding-left: 6px;
-
-    margin-left: 10px;
-    margin-right: 5px;
+    width: 638px;
+    padding:1px 0px 3px 0px;
+    /*padding-top: 1px;*/
+    /*padding-left: 0px;*/
+    /*padding-right: 0px;*/
+    /*padding-bottom: 3px;*/
+    margin-left: 4px;
+    margin-right: 6px;
 }
 
 .video-list {

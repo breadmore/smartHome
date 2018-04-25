@@ -72,6 +72,6 @@ router.route('/deployall')
                 res.status(200).send(result);
             }
         })
-    });
+    })
 
 module.exports = router;

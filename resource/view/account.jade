@@ -58,6 +58,24 @@ block content
                         .col-12.text-center.no-gutters
                             button.btn.btn-primary.btn-action.modal-btn#save-User(data-dismiss="modal") Save User
                             button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+    #DeleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+            .modal-dialog(role='document')
+                .modal-content
+                    .modal-header
+                        .modal-title Delete?
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
+                    .modal-body
+                        .modal-body-content
+                            span Do you want to Delete
+                            span#delete-id
+                            span  ?
+                    .modal-footer
+                        //button.modal-cancel(data-dismiss="modal") Cancel
+                        .col-12.text-center.no-gutters
+                            button.btn.btn-primary.btn-action.modal-btn#delete-User(data-dismiss="modal") Delete User
+                            button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+
     #ModifyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
             .modal-dialog(role='document')
                 .modal-content

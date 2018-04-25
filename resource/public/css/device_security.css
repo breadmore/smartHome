@@ -329,6 +329,34 @@ li label {
     background-color: #fcf9f9;
 }
 
+#securityEventTable {
+    border-collapse: separate;
+    border-spacing: 3px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#securityEventTable th {
+    padding: 10px;
+    font-size: 11px;
+}
+
+#securityEventTable td {
+    padding: 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #deceb2;
+    font-size: 10px;
+}
+
+#securityEventTable thead {
+    background-color: #ebeff5;
+    color: rgb(0, 0, 0);
+}
+
+#securityEventTable tbody .selected {
+    background-color: #fcf9f9;
+}
+
 div .dataTables_paginate {
     float: right;
     position: relative;
