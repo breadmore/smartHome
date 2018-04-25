@@ -15,13 +15,13 @@ function updateState(state, callback) {
     // return stateDao.updateState(state, callback);
 }
 
-function selectAllUsers(callback) {
-    logDao.selectAllUsers(callback);
+function selectRecentDeployLog(callback) {
+    logDao.selectRecentDeployLog(callback);
 }
 
 
 module.exports = {
     insertLog: insert,
     selectRecentAllLog: selectRecentAllLog,
-    selectAllUsers:selectAllUsers
+    selectRecentDeployLog:selectRecentDeployLog
 };
