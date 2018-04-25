@@ -43,6 +43,13 @@ $(document).ready(function() {
             {data: "event_type"},
             // {data: "device_type"},
             {data: "msg"}
+        ],
+        columnDefs: [
+            { width: '17%', targets: 0 },
+            { width: '35%', targets: 1 },
+            { width: '18%', targets: 2 },
+            // { width: '35%', targets: 3 },
+
         ]
     });
     // add index.

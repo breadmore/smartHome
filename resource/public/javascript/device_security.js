@@ -259,8 +259,10 @@ $(document).ready(function () {
     $('#modifyModal').on('show.bs.modal', function (e) {
 
         if (nowClick.getAttribute('data-did') !== null) {
+            $('.gateway-modify').hide();
+            $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            $("#gateway-id").val(device.gwid);
+            $("#device-gateway-id").val(device.gwid);
             $("#device-name").val(nowClick.getAttribute('data-did'));
             $("#device-id").val(device.id);
             $("#pre-shared-key").val(device.psk);
@@ -283,18 +285,18 @@ $(document).ready(function () {
                 $('#register').html(device.reg + ' Registered');
         }
         else {
-            $("#gateway-id").val('error');
-            $("#device-name").val('error');
-            $("#device-id").val('error');
-            $("#pre-shared-key").val('error');
-            $("#entity-id").val('error');
-            $("#object-id").val('error');
-            $("#type").val('error');
-            $("#session-id").val('error');
+            $('.gateway-modify').show();
+            $('.device-modify').hide();
+            var device = findGatewayById(nowClick.getAttribute('data-id'));
 
-            $('#connected').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
-            $('#authenticate').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
-            $('#register').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
+            $("#gateway-id").val(device.id);
+            $("#gateway-name").val(device.name);
+            $("#gateway-ip").val(device.ip);
+            $("#gateway-port").val(device.port);
+            if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
+                $('#gateway-conn').html(device.conn + ' Not Connected');
+            }
+            else $('#gateway-conn').html(device.conn + ' Connected');
         }
 
     });
@@ -392,7 +394,18 @@ $(document).ready(function () {
 //         }
 //     }
 // }
-
+function findGatewayById(id) {
+    var idx = -1;
+    $.each(gatewayList, function (index, item) {
+        if (item.id === id) {
+            idx = index;
+        }
+    });
+    if (idx !== -1) {
+        return gatewayList[idx];
+    }
+    return null;
+}
 
 function findEntityById(id) {
     var idx = -1;
