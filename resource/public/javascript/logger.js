@@ -14,6 +14,10 @@ $(function () {
         ajax : {
             url: "/api/v1/logs/recentservice",
             dataSrc: function (result) {
+                $.each(result, function (index, item) {
+                    item.event_date = dateFormatter(item.event_date);
+                })
+                // console.log(result);
                 return result;
             }},
         columns : [
@@ -70,7 +74,6 @@ $(function () {
         ajax : {
             url: "/api/v1/Logs/deployall",
             dataSrc: function (result) {
-                // console.log(result);
                 var logs = [];
                 $.each(result, function(index, item){
                     item.enforceDate = dateFormatter(item.enforce_date);
@@ -95,10 +98,10 @@ $(function () {
 function dateFormatter(date) {
     var str = '';
     str += date.substring(0,4) + '년 ';
-    str += date.substring(4,6) + '월 ';
-    str += date.substring(6,8) + '일 ';
-    str += date.substring(8,10) + '시 ';
-    str += date.substring(10,12) + '분 ';
+    str += date.substring(5,7) + '월 ';
+    str += date.substring(8,10) + '일 ';
+    str += date.substring(11,13) + '시 ';
+    str += date.substring(14,16) + '분 ';
     return str;
 }
 

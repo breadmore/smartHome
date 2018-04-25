@@ -4,6 +4,7 @@ var resourceDao = require('../../../dao/security/ResourceDao');
 var tokenDao = require('../../../dao/security/TokenDao');
 var roleDao = require('../../../dao/security/RoleDao');
 var securityDao = require('../../../dao/security/SecurityLogDao');
+var authDao = require('../../../dao/AuthsDao');
 
 let logger = require('log4js').getLogger('SecurityService.js');
 var app = require('../../../server');
@@ -115,6 +116,10 @@ function selectAllSecurityPolicy(callback) {
     securityDao.selectAllSecurityPolicy(callback);
 }
 
+function selectAllDidByEid(data, callback) {
+    authDao.selectAllDidByEid(data, callback);
+}
+
 
 module.exports = {
     insertBulkData: insertBulkData,
@@ -124,4 +129,5 @@ module.exports = {
     tokenService: TokenService,
     roleService: RoleService,
     selectAllPolicy: selectAllSecurityPolicy,
+    selectAllDidByEid: selectAllDidByEid
 };

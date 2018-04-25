@@ -391,7 +391,7 @@ div .dataTables_paginate > .pagination {
     width: 35%;
     text-align: left;
     text-indent: 3em;
-    margin-top: 10px;
+    margin-top: 3px;
     color: #f27171;
 }
 
@@ -401,7 +401,7 @@ td.right {
 }
 
 .view-box {
-    height: 210px;
+    height: 332px;
     /*overflow-y: scroll;*/
     border: solid 2px white;
     border-bottom: solid 1px #deceb2;
@@ -431,7 +431,7 @@ td.right {
     overflow-y: auto;
     margin-top: 45px;
     width: 100%;
-    height: 163px;
+    height: 285px;
 }
 
 .view-box-content::-webkit-scrollbar {
@@ -577,4 +577,16 @@ tbody tr td .device-type-icon {
 
 td.right .fa-address-card {
     margin-right: 4px;
+}
+
+#securityTable > tbody > tr > td:nth-child(4) {
+    text-align:left!important
+}
+
+#securityEventTable > tbody > tr > td:nth-child(5){
+    text-align:left
+}
+
+#securityEventTable_wrapper{
+    padding:0px;
 }
