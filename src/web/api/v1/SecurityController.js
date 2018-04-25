@@ -68,13 +68,15 @@ router.route('/')
            var now = moment(Date.now()).format('YYYYMMDDHHmmss');
            // data.enforce_date, data.fromId, data.toId, data.resourceName, data.previous, data.operation]
 
+           // enforcePoint: Policy Enforcement Point radio button value => Server, Device
            var log = {
                enforce_date: now,
                fromId: req.body.fromId,
                toId: req.body.toId,
                resourceName: req.body.resourceName,
                previous: undefined,
-               operation: req.body.operation
+               operation: req.body.operation,
+               enforcePoint: req.body.enforcePoint
            };
            policyService.update(now, req.body, function(err, result) {
                if (err) {
