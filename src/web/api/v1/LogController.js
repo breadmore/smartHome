@@ -6,7 +6,7 @@ var logService = require('../../../service/api/v1/LogService');
  */
 router.route('/')
     .get(function (req, res) {
-        logService.selectRecentAllLog(function(err, result) {
+        logService.selectRecentSecurityLog(function(err, result) {
             if (err) {
                 res.status(400).send(err);
             }
@@ -40,7 +40,7 @@ router.route('/policy')
 
 router.route('/deviceall')
     .get(function (req, res) {
-        logService.selectDeployAllLog(function(err, result) {
+        logService.selectAllSecurityEvent(function(err, result) {
             if (err) {
                 res.status(400).send(err);
             }
@@ -48,6 +48,30 @@ router.route('/deviceall')
                 res.status(200).send(result);
             }
         })
-    })
+    });
+
+router.route('/recentservice')
+    .get(function (req, res) {
+        logService.selectRecentServiceLog(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    });
+
+router.route('/deployall')
+    .get(function (req, res) {
+        logService.selectAllDeployLog(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    });
 
 module.exports = router;

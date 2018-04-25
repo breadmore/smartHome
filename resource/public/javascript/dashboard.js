@@ -33,7 +33,7 @@ $(document).ready(function() {
         searching: true,
         dom : '<"row no-gutters"t>',
         ajax : {
-            url: "/api/v1/logs",
+            url: "/api/v1/logs/recentservice",
             dataSrc: function (result) {
                 return result;
             }},

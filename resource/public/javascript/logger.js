@@ -1,6 +1,10 @@
+var entityList;
+var securityList = [];
+
+
 $(function () {
 
-    var table = $('#eventTable').DataTable({
+    var table = $('.devicelog').DataTable({
         paging: true,
         processing: true,
         // ordering: true,
@@ -26,16 +30,87 @@ $(function () {
             cell.innerHTML = i+1;
         } );
     } ).draw();
-    // // add index.
-    // table.on('order.dt search.dt', function () {
-    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-    //         cell.innerHTML = i+1;
-    //     } );
-    // } ).draw();
-    //
-    // setInterval(function () {
-    //     table.ajax.reload();
-    // }, 1000 * 2)
 
+    getEntityList();
+
+    function getEntityList() {
+                $.ajax({
+                    url: "/api/v1/security",
+                    success: function (jsonArray) {
+                        // return jsonArray;
+                        $.ajax({
+                            url: 'api/v1/security/entities',
+                            async: false,
+                            success: function (entities) {
+                                entityList = entities;
+                                $.each(jsonArray, function (index, item) {
+                                    item.enforceDate = dateFormatter(item.policyID);
+                                    item.fromName = findEntityById(item.FromID).Name;
+                                    item.toName = findEntityById(item.ToID).Name;
+                                    securityList.push(item);
+                                });
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                        return securityList;
+
+                    }
+                });
+    }
+
+
+    var deployLogTable = $('.deploylog').DataTable({
+        paging: true,
+        processing: true,
+        ordering: true,
+        serverSide: false,
+        searching: true,
+        ajax : {
+            url: "/api/v1/Logs/deployall",
+            dataSrc: function (result) {
+                // console.log(result);
+                var logs = [];
+                $.each(result, function(index, item){
+                    item.enforceDate = dateFormatter(item.enforce_date);
+                    item.fromName = findEntityById(item.from_id.toString()).Name;
+                    item.toName = findEntityById(item.to_id.toString()).Name;
+                    logs.push(item);
+                });
+                return logs;
+            }},
+        columns : [
+            {data: "enforceDate"},
+            {data: "fromName"},
+            {data: "toName"},
+            {data: "resource_name"},
+            {data: "pre_operation"},
+            {data: "current_operation"}
+        ]
+    });
 
 });
+
+function dateFormatter(date) {
+    var str = '';
+    str += date.substring(0,4) + '년 ';
+    str += date.substring(4,6) + '월 ';
+    str += date.substring(6,8) + '일 ';
+    str += date.substring(8,10) + '시 ';
+    str += date.substring(10,12) + '분 ';
+    return str;
+}
+
+function findEntityById(id) {
+    var idx = -1;
+    $.each(entityList, function (index, item) {
+        if (item.ID === id) {
+            idx = index;
+        }
+    });
+    if (idx !== -1) {
+        return entityList[idx];
+    }
+    return null;
+}

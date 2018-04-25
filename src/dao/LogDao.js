@@ -60,8 +60,12 @@ var Log = {
             callback);
     },
 
-    selectAllEvent(callback) {
-        return db.query('select * from Security_Log order by id desc limit 6', callback);
+    selectRecentSecurityEvent(callback) {
+        return db.query('select * from Security_Log where event_type = "security" or event_type = "critical" order by id desc limit 10', callback);
+    },
+
+    selectAllServiceLog(callback) {
+        return db.query('select * from Security_Log where event_type = "service" or event_type = "log"', callback);
     },
 
     // Mark : PolicyHistory Dao.
@@ -77,7 +81,7 @@ var Log = {
     },
 
     selectRecentDeployLog: function(callback) {
-        return db.query('select * from Policy_History order by id desc limit 5',callback);
+        return db.query('select * from Policy_History order by id desc limit 10',callback);
     },
 
 
