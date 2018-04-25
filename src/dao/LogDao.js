@@ -76,6 +76,13 @@ var Log = {
             callback);
     },
 
+    insertSecurityLog: function(data, callback) {
+        console.log(data);
+        return db.query('insert into Security_Log (event_date, event_type, device_type, device_id, msg) values (?, ?, ?, ?, ?)',
+            [data.edate, data.etype, data.dtype, data.did, data.msg],
+            callback);
+    },
+
     selectAllDeployLog: function(callback) {
         return db.query('select * from Policy_History',callback);
     },

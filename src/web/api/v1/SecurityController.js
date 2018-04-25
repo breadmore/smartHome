@@ -14,14 +14,12 @@ var logDao = require('../../../dao/LogDao');
 
 var moment = require('moment');
 
-
 /**
  * policy 1)-> fromID, ToID  => entityTbl -> selectNameById
  *        2)-> TokenId => tokenTbl -> selectRoleIdByTokenId => roleTbl ->
  *         selectResorueID&OperationById => ResourceTbl -> selectResourceByID
  *
  */
-
 router.route('/')
     .get(function (req, res) {
         var security = [];
@@ -78,6 +76,24 @@ router.route('/')
                operation: req.body.operation,
                enforcePoint: req.body.enforcePoint
            };
+
+           // insert into security_log set update_log
+           // {
+           //     edate: now,
+           //     etype: "security",
+           //     dtype: ,
+           //     did: auth table -> ,
+           //     msg: 'update operation ' + log.previous + ' to ' + log.operation + '.'
+           // }
+           var security_log = {
+               edate: now,
+               etype: 'security',
+               dtype: req.body.fromId,
+               did: undefined,
+               msg: undefined
+           };
+
+           // service 1
            policyService.update(now, req.body, function(err, result) {
                if (err) {
                    console.log(err);
@@ -99,19 +115,40 @@ router.route('/')
                                else{
                                    console.log(result[0].Operation);
                                    log.previous = result[0].Operation;
+                                   security_log.msg = 'update operation ' + log.previous + ' to ' + log.operation + '.'
                                    console.log(log);
+
                                    roleService.updateOperation(data, function (err, result) {
                                        if (err) {
                                            res.status(500).send(err);
                                        }
                                        else{
                                            console.log(log);
-                                            logDao.insertPolicyLog(log, function(err, result){
+                                           // service 2
+                                           logDao.insertPolicyLog(log, function(err, result){
                                                 if (err) {
                                                     res.status(401).send(err);
                                                 }
                                                 else {
-                                                    res.status(200).send(result);
+
+                                                    // service 3
+                                                    // set did from auth table. use type(log.fromId)
+                                                    securityService.selectAllDidByEid(log, function (err, result) {
+                                                        if (err) {
+                                                            res.status(500).send(err);
+                                                        }
+                                                        else {
+                                                             security_log.did = result[0].did;
+                                                             logDao.insertSecurityLog(security_log, function (err, result) {
+                                                                 if (err) {
+                                                                     res.status(401).send(err);
+                                                                 }
+                                                                 else {
+                                                                     res.status(200).send(result);
+                                                                 }
+                                                             });
+                                                        }
+                                                    });
                                                 }
                                             });
                                        }

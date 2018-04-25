@@ -69,6 +69,10 @@ var Auths = {
 
     selectAuthByDid: function(did, callback) {
         return db.query('select * from auths where did = ?', did, callback);
+    },
+
+    selectAllDidByEid: function (data, callback) {
+        return db.query('select * from auths where eid = ?', Number(data.fromId), callback);
     }
 };
 
