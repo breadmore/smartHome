@@ -39,7 +39,7 @@ router.route('/')
             case 'heartbeat':
             case 'write_ack':
             default:
-                console.log(req.body);
+                // console.log(req.body);
                 res.status(200).send();
                 break;
         }

@@ -17,7 +17,6 @@ router.route('/')
     })
     .post(function (req, res) {
         logService.insertLog(req.body, function(err, result) {
-            console.log(req.body);
             if (err) {
                 res.status(400).send(err);
             }

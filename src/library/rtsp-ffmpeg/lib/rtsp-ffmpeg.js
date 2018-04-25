@@ -132,6 +132,18 @@ FFMpeg.prototype._args = function (option,data) {
         console.log(option);
         console.log(data);
         return this.arguments.concat(
+            [
+                '-loglevel', 'quiet'
+                , '-i', this.input
+                , '-r', this.rate.toString()],
+            this.quality ? ['-q:v', this.quality.toString()] : [],
+            [
+                '-vf', 'scale=' + this.resolution,
+                //  '-b:v', '512k',
+                '-f', 'image2'
+                , '-updatefirst', '1'
+                , '-'
+            ],
             ['-loglevel', 'quiet', '-y', '-i',
                 this.input, '-vcodec', 'copy', '-ss', '0',
                 '-t', '10', recordFilePath]);
@@ -236,7 +248,6 @@ FFMpeg.prototype.record = function (data) {
     // });
 
     this.child.stdout.on('data', function (data) {
-        console.log('success');
         // console.log(data.toString());
         this.emit.bind(data, 'data');
     });

@@ -10,7 +10,21 @@ const DETECTED = 'Detected';
 const OPENED = 'Opened';
 const CLOSED = 'Closed';
 
-var currentState = {};
+const ON_STAUTS = 'ON';
+const OFF_STATUS = 'OFF';
+
+var currentState = {
+    window : undefined,
+    human : undefined,
+    gasB: undefined,
+    gasD: undefined
+};
+
+var currentXiaomi = {
+    magnet : undefined,
+    motion : undefined,
+    plug : undefined
+};
 
 
 var camSocket;
@@ -54,7 +68,7 @@ $(document).ready(function() {
 
     setInterval(function () {
         table.ajax.reload();
-    }, 1000 * 2)
+    }, 500);
 
     $(".environment_date").change(function () {
         getHourTemp($(".environment_date option:selected").val());
@@ -205,32 +219,8 @@ $(document).ready(function() {
 
     let socket = io.connect('/');
 
-    initXiaomiDeviceData();
-    // socket.on('/environments/', function (data) {
-    //     console.log(data);
-    //     switch (data.type) {
-    //         case 'temperature':
-    //             $('#temperatureValue').text(data.value + '℃');
-    //             recentTemperature.shift();
-    //             recentTemperature.push(data.value);
-    //             updateChart(temperatureChart, recentTemperature);
-    //             break;
-    //         case 'humidity':
-    //             $('#humidityValue').text(data.value + '%');
-    //             recentHumidity.shift();
-    //             recentHumidity.push(data.value);
-    //             updateChart(humidityChart, recentHumidity);
-    //             break;
-    //         case 'illuminati':
-    //             console.log(data.value);
-    //             $('#luxValue').text(data.value + 'Lux');
-    //             break;
-    //         default:
-    //             console.error(data);
-    //             break;
-    //     }
-    // });
 
+    initXiaomiDeviceData();
     /**
      * legacy device state update socket!
      *         mqtt             sql               sql               w/s
@@ -241,25 +231,25 @@ $(document).ready(function() {
         socket.emit('/legacy/states');
     }, 1000);
     socket.on('/legacy/states', function (data) {
-        // console.log(currentState);
         if (currentState.window === undefined || currentState.human === undefined || currentState.gasB === undefined || currentState.gasD === undefined) {
             currentState.window = data.window_detector;
             currentState.human = data.human_detector;
             currentState.gasD = data.gas_detector;
             currentState.gasB = data.gas_blocker;
+
             if (data.mode) {
                 currentState.mode = data.mode;
             }
             else {
                 currentState.mode = undefined;
             }
+
             if (data.led) {
                 currentState.led = data.led;
             }
             else {
                 currentState.led = undefined;
             }
-            currentState.led = data.led;
         }
         updateLegacyStates(data);
     });
@@ -268,8 +258,6 @@ $(document).ready(function() {
         socket.emit('/environment');
     }, 1500);
     socket.on('/environment', function (data) {
-        // console.log(data.illuminaty);
-
         $('#temperatureValue').text(data.temperature[0].value + '℃');
         recentTemperature.shift();
         recentTemperature.push(data.temperature[0].value);
@@ -296,41 +284,102 @@ $(document).ready(function() {
         console.log(data);
         switch (data.type) {
             case 'magnet':
-                if (data.event === 'open') {
-                    $('#xiaomiWindow').text(OPENED);
-                    recordStart(1);
+                if (currentXiaomi.magnet === undefined) {
+                    currentXiaomi.magnet = data.event;
                 }
-                else if (data.event === 'close') {
-                    $('#xiaomiWindow').text(CLOSED);
-                }
-                else {
-                    console.error('event is undefined');
-                }
-                break;
-            case 'motion':
-                if (data.event === 'motion') {
-                    $('#xiaomiHuman').text(DETECTED);
-                    recordStart(2);
-                }
-                else if (data.event === 'no_motion') {
-                    $('#xiaomiHuman').text(NOT_DETECTED);
+                if (currentState.mode !== 0) {
+                    if (data.event === 'open') {
+                        $('#xiaomiWindow').text(OPENED);
+                        // recordStart(1);
+                    }
+                    else if (data.event === 'close') {
+                        $('#xiaomiWindow').text(CLOSED);
+                    }
+                    else {
+                        console.error('event is undefined');
+                    }
                 }
                 else {
-                    console.error('event is undefined');
                     $('#xiaomiWindow').text(NOT_DETECTED);
                 }
+
+                console.log(currentXiaomi.magnet);
+                if (currentXiaomi.magnet !== data.event) {
+                    console.log('magnet changed!');
+                    if (currentXiaomi.magnet === 'open') {
+                        sendLog('log', 'magnet closed.');
+                        currentXiaomi.magnet = 'close';
+                    }
+                    else {
+                        sendLog('log', 'magnet opened.');
+                        currentXiaomi.magnet = 'open';
+                    }
+                }
+
+                break;
+            case 'motion':
+                if (currentXiaomi.motion === undefined) {
+                    currentXiaomi.motion = data.event;
+                }
+                if (currentState.mode !== 0) {
+                    if (data.event === 'motion') {
+                        $('#xiaomiHuman').text(DETECTED);
+                        // recordStart(2);
+                    }
+                    else if (data.event === 'no_motion') {
+                        $('#xiaomiHuman').text(NOT_DETECTED);
+                    }
+                    else {
+                        console.error('event is undefined');
+                        $('#xiaomiWindow').text(NOT_DETECTED);
+                    }
+                }
+                else {
+                    $('#xiaomiWindow').text(NOT_DETECTED);
+                }
+
+                if (currentXiaomi.motion !== data.event) {
+                    console.log('motion changed!');
+                    if (currentXiaomi.motion === 'no_motion') {
+                        sendLog('log', 'motion is detected.');
+                    }
+                    else {
+                        sendLog('log', 'motion is disappeared.');
+                    }
+                    currentXiaomi.motion = undefined;
+                }
+
                 break;
             case 'plug':
+                if (currentXiaomi.plug === undefined) {
+                    currentXiaomi.plug = data.event;
+                }
+
                 if (data.event === 'on') {
                     $('#xiaomiPower').prop("checked", true);
+                    $('#plugStatus').text(ON_STAUTS);
                 }
                 else if (data.event === 'off') {
                     $('#xiaomiPower').prop("checked", false);
+                    $('#plugStatus').text(OFF_STATUS);
+                }
+
+                if (currentXiaomi.plug !== data.event) {
+                    console.log('plug changed!');
+                    if (currentXiaomi.plug === 'on') {
+                        sendLog('log', 'plug outlet is turned off.');
+                    }
+                    else {
+                        sendLog('log', 'plug outlet is turned on.');
+                    }
+                    currentXiaomi.plug = undefined;
                 }
                 break;
             default:
                 break;
         }
+
+
     });
 
     /**
@@ -342,11 +391,11 @@ $(document).ready(function() {
     /** Xiaomi Power Plug Action Contoller*/
     $('#xiaomiPowerController').on('click', function (e) {
         if (!$('#xiaomiPower').prop('checked')) {
-            console.log($('#xiaomiPower').prop('checked'));
+            // console.log($('#xiaomiPower').prop('checked'));
             xiaomiAction({plug: 'on'});
         }
         else {
-            console.log($('#xiaomiPower').prop('checked'));
+            // console.log($('#xiaomiPower').prop('checked'));
             xiaomiAction({plug: 'off'});
         }
     });
@@ -513,17 +562,22 @@ function updateLegacyStates(state) {
     // console.log(state);
     // todo: jaesil or not jaesil check
     if (state.mode === undefined || state.mode === null) {
-        state.mode = 0;
+        state.mode = 1;
+        currentState.mode = state.mode;
     }
 
-    state.led = 1;
-
-    // console.log(state.led);
     if (state.led === 0) {
+        $('#lightState').removeAttr('disabled');
         $('#lightState').prop("checked", false);
+        $('#lightStatus').text(OFF_STATUS);
+    }
+    else if (state.led === 1) {
+        $('#lightState').removeAttr('disabled');
+        $('#lightState').prop("checked", true);
+        $('#lightStatus').text(ON_STAUTS);
     }
     else {
-        $('#lightState').prop("checked", true);
+        $('#lightState').attr('disabled', 'disabled');
     }
 
     if (state.mode !== 0) {
@@ -564,7 +618,6 @@ function updateLegacyStates(state) {
     else {
         $('#gasBlocker').text("Blocked")
     }
-
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
@@ -628,17 +681,44 @@ function updateLegacyStates(state) {
 
 
 function xiaomiAction(action) {
-    $.ajax({
-        url: 'api/v1/xiaomi/action',
-        type: 'post',
-        data: action,
-        success: function (result) {
+    var data = {
+        eventType : 'service',
+        msg: undefined
+    };
+    console.log(action);
 
+    if (action.plug === 'on') {
+        data.msg = 'request plug outlet turn on.'
+    }
+    else {
+        data.msg = 'request plug outlet turn off.'
+    }
+
+    console.log(data);
+
+    $.ajax({
+        url: '/api/v1/logs',
+        type: 'post',
+        data : data,
+        success: function(result) {
+            $.ajax({
+                url: 'api/v1/xiaomi/action',
+                type: 'post',
+                data: action,
+                success: function (result) {
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         },
-        error: function (err) {
+        error : function(err) {
+            console.log('Error send Log!');
             console.log(err);
         }
-    })
+    });
+
 }
 
 function legacyDeviceAction(type, command) {
@@ -696,35 +776,16 @@ function sendLog(eventType, msg) {
         eventType : eventType,
         msg: msg
     };
-
+    console.log(data);
     $.ajax({
         url: '/api/v1/logs',
         type: 'post',
         data : data,
         success: function(result) {
-            console.log('success send Log!');
-            console.log(result);
+            // console.log(result);
         },
         error : function(err) {
             console.log('Error send Log!');
-            console.log(err);
-        }
-    });
-}
-
-
-
-function sendSensorLog() {
-    var log = {};
-
-    $.ajax({
-        url: 'api/v1/action/log',
-        type: 'post',
-        data: log,
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (err) {
             console.log(err);
         }
     });
@@ -855,7 +916,7 @@ function recordStart(index) {
 
     camSocket.emit('stop');
     camSocket.emit('record',videoName);
-    console.log("record start");
+    // console.log("record start");
 
 }
 
