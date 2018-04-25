@@ -35,6 +35,9 @@ $(document).ready(function() {
         ajax : {
             url: "/api/v1/logs/recentservice",
             dataSrc: function (result) {
+                $.each(result, (index, item) => {
+                    item.event_date = dateFormatter(item.event_date)
+                });
                 return result;
             }},
         columns : [
@@ -998,3 +1001,16 @@ function getHourTemp(value) {
 
 
 }
+
+function dateFormatter(date) {
+    var str = '';
+    str += date.substring(0,4) + '년 ';
+    str += date.substring(5,7) + '월 ';
+    str += date.substring(8,10) + '일 ';
+    str += date.substring(11,13) + '시 ';
+    str += date.substring(14,16) + '분 ';
+    return str;
+}
+
+
+

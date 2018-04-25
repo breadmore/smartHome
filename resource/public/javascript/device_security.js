@@ -58,7 +58,7 @@ $(document).ready(function () {
                     success: function (entities) {
                         entityList = entities;
                         $.each(jsonArray, function (index, item) {
-                            item.enforceDate = dateFormatter(item.policyID);
+                            item.enforceDate = dateFormatter(item.policyID,1);
                             item.fromName = findEntityById(item.FromID).Name;
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
@@ -95,8 +95,11 @@ $(document).ready(function () {
         ajax : {
             url: "/api/v1/logs",
             dataSrc: function (result) {
+                console.log(result);
 
                 $.each(result, (index, item) => {
+                    item.event_date = dateFormatter(item.event_date,2);
+                    // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
                 });
 
@@ -831,14 +834,27 @@ function operationJoiner(security) {
     return operation;
 }
 
-function dateFormatter(date) {
-    var str = '';
-    str += date.substring(0,4) + '년 ';
-    str += date.substring(4,6) + '월 ';
-    str += date.substring(6,8) + '일 ';
-    str += date.substring(8,10) + '시 ';
-    str += date.substring(10,12) + '분 ';
-    return str;
+function dateFormatter(date, type) {
+    if (type === 1) {
+        var str = '';
+        str += date.substring(0,4) + '년 ';
+        str += date.substring(4,6) + '월 ';
+        str += date.substring(6,8) + '일 ';
+        str += date.substring(8,10) + '시 ';
+        str += date.substring(10,12) + '분 ';
+        return str;
+    } else if (type === 2 ) {
+        var str = '';
+        str += date.substring(0,4) + '년 ';
+        str += date.substring(5,7) + '월 ';
+        str += date.substring(8,10) + '일 ';
+        str += date.substring(11,13) + '시 ';
+        str += date.substring(14,16) + '분 ';
+        return str;
+    } else {
+        console.log("What?");
+    }
+
 }
 
 
