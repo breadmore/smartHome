@@ -243,7 +243,7 @@ $(document).ready(function () {
             if ('<i class="far fa-eye-slash"></i>' === device.reg) {
                 $('#register').html(device.reg + ' Not Registered');
             } else
-                $('#register').html(device.auth + ' Authorized');
+                $('#register').html(device.reg + ' Registered');
         }
         else{
             $("#gateway-id").val('error');
