@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     // controller를 쓰지 않은 이유 : rest api attack(?) 보안 상, 내부에서 처리 해주는게 낫지 않을까
     // then => how to handle error during interaction between dao and web action?
-    $('#deleteButton').click(function () {
+    $('#delete-User').click(function () {
         console.log('asdasd');
         let delete_row_id = table.row('.selected').data().user_id;
         console.log(delete_row_id);
@@ -104,6 +104,11 @@ $(document).ready(function () {
         $("#add-name").val(null);
         $("#add-e-mail").val(null);
         $("#add-phone-number").val(null);
+    });
+
+    $('#DeleteModal').on('show.bs.modal', function (e) {
+        var data = table.row('.selected').data();
+        $("#delete-id").text(data.user_id)
     });
 
     $('#ModifyModal').on('show.bs.modal', function (e) {

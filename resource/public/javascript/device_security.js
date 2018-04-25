@@ -191,28 +191,31 @@ $(document).ready(function () {
     })
     $('#modifyModal').on('show.bs.modal', function (e) {
 
-        var device = findDeviceByDid(nowClick.getAttribute('data-did'))
-        $("#gateway-id").val(device.gwid);
-        $("#device-name").val(nowClick.getAttribute('data-did'));
-        $("#device-id").val(device.id);
-        $("#pre-shared-key").val(device.psk);
-        $("#entity-id").val(device.eid);
-        $("#object-id").val(device.oid);
-        $("#type").val(device.type);
-        $("#session-id").val(device.sid)
+        if(nowClick.getAttribute('data-did') !== null) {
+            var device = findDeviceByDid(nowClick.getAttribute('data-did'))
+            $("#gateway-id").val(device.gwid);
+            $("#device-name").val(nowClick.getAttribute('data-did'));
+            $("#device-id").val(device.id);
+            $("#pre-shared-key").val(device.psk);
+            $("#entity-id").val(device.eid);
+            $("#object-id").val(device.oid);
+            $("#type").val(device.type);
+            $("#session-id").val(device.sid)
 
-        if('<i class="fas fa-toggle-off"></i>'===device.conn){
-            $('#connected').html(device.conn + ' Not Connected');
+            if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
+                $('#connected').html(device.conn + ' Not Connected');
+            }
+            else $('#connected').html(device.conn + ' Connected');
+            if ('<i class="far fa-address-card"></i>' === device.auth) {
+                $('#authenticate').html(device.auth + ' Not Authorized');
+            }
+            else $('#authenticate').html(device.auth + ' Authorized');
+            if ('<i class="far fa-eye-slash"></i>' === device.reg) {
+                $('#regster').html(device.reg + ' Not Registered');
+            } else
+                $('#regster').html(device.reg + ' Registered');
         }
-        else $('#connected').html(device.conn + ' Connected');
-        if('<i class="far fa-address-card"></i>'===device.auth){
-            $('#authenticate').html(device.auth + ' Not Connected');
-        }
-        else  $('#authenticate').html(device.auth + ' Connected');
-        if('<i class="far fa-eye-slash"></i>'===device.reg){
-            $('#regster').html(device.reg + ' Not Registered');
-        }else
-            $('#regster').html(device.reg + ' Registered');
+
     });
     $("#policy-confirm").on("click", () => {
 
