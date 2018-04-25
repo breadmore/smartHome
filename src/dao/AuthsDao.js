@@ -53,12 +53,12 @@ var Auths = {
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
         var sql = 'insert into auths (did, psk, oid, eid, sid, type, conn, auth, reg, dname, gwid, created_at, updated_at) values ?';
         var values = [
-            ['12965934', 'AAAABBBBCCCCDDDD', null, 0, 0, 1, 0, 0, 0, 'kitchen', '12965901', now, now],
-            ['12965936', 'EEEEFFFFGGGGHHHH', null, 0, 0, 2, 0, 0, 0, 'kitchen', '12965901', now, now],
-            ['12965938', '1111222233334444', null, 0, 0, 3, 0, 0, 0, 'living room', '12965901', now, now],
-            ['12965940', '5555666677778888', null, 0, 0, 4, 0, 0, 0, 'main room', '12965901', now, now],
-            ['12965942', 'aaaabbbbccccdddd', null, 0, 0, 5, 0, 0, 0, 'entrance', '12965901', now, now],
-            ['12965944', 'eeeeffffgggghhhh', null, 0, 0, 6, 0, 0, 0, 'window', '12965901', now, now],
+            ['12965934', 'AAAABBBBCCCCDDDD', '0.2.481.1.10.100.3030.10011.65934', 1, 0, 1, 1, 0, 0, 'kitchen', '12965901', now, now],
+            ['12965936', 'EEEEFFFFGGGGHHHH', '0.2.481.1.10.100.3030.10011.65936', 2, 0, 2, 1, 1, 1, 'kitchen', '12965901', now, now],
+            ['12965938', '1111222233334444', '0.2.481.1.10.100.3030.10011.65938', 3, 0, 3, 1, 1, 0, 'living room', '12965901', now, now],
+            ['12965940', '5555666677778888', '0.2.481.1.10.100.3030.10011.65940', 4, 0, 4, 1, 1, 1, 'main room', '12965901', now, now],
+            ['12965942', 'aaaabbbbccccdddd', '0.2.481.1.10.100.3030.10011.65942', 5, 0, 5, 1, 0, 0, 'entrance', '12965901', now, now],
+            ['12965944', 'eeeeffffgggghhhh', '0.2.481.1.10.100.3030.10011.65944', 6, 0, 6, 1, 1, 1, 'window', '12965901', now, now],
         ];
         return db.query(sql, [values], callback);
     },
@@ -69,6 +69,10 @@ var Auths = {
 
     selectAuthByDid: function(did, callback) {
         return db.query('select * from auths where did = ?', did, callback);
+    },
+
+    selectAllDidByEid: function (data, callback) {
+        return db.query('select * from auths where eid = ?', Number(data.fromId), callback);
     }
 };
 

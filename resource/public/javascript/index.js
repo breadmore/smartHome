@@ -32,7 +32,6 @@ $(function () {
             "userId" : userId,
             "password" : password
         }
-        console.log(user);
         $.ajax({
             url : "api/login",
             type : "post",
@@ -46,6 +45,8 @@ $(function () {
                 console.log(data);
                 if (data.status === 404) {
                     alert('id not found');
+                } else if (data.status === 400) {
+                    alert('password error');
                 }
             }
         })

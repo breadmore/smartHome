@@ -26,8 +26,12 @@ var resourceList = [];
 var nowClick;
 var chkCheckBox; // ktw add
 var change; //ktw add
+var securityLogList;
 
 $(document).ready(function () {
+
+    // getAuthsList();
+
     //init device list & device detail
     createDeviceListView();
     createResourceName();
@@ -38,11 +42,6 @@ $(document).ready(function () {
         ordering: true,
         serverSide: false,
         searching: true,
-        autoWidth: false,
-        fixedHeader: {
-            header: false,
-            footer: false
-        },
         // dom: 't<"row no-gutters default-bottom-margin"<"col"><"col"p><"col">>',
         dom: '<"row no-gutters"t>',
         ajax: {
@@ -58,7 +57,7 @@ $(document).ready(function () {
                     success: function (entities) {
                         entityList = entities;
                         $.each(jsonArray, function (index, item) {
-                            item.enforceDate = dateFormatter(item.policyID);
+                            item.enforceDate = dateFormatter(item.policyID,1);
                             // item.fromName = findEntityById(item.FromID).Name
                             item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;
                             item.toName = findEntityById(item.ToID).Name;
@@ -107,8 +106,16 @@ $(document).ready(function () {
         searching: true,
         dom: '<"row no-gutters"t>',
         ajax: {
-            url: "/api/v1/logs/",
+            url: "/api/v1/logs",
             dataSrc: function (result) {
+                console.log(result);
+
+                $.each(result, (index, item) => {
+                    item.event_date = dateFormatter(item.event_date,2);
+                    // item.event_date = da(item.event_date);
+                    item.device_type = type2Icon(item.device_type);
+                });
+
                 return result;
             }
         },
@@ -127,8 +134,11 @@ $(document).ready(function () {
             { width: '38%', targets: 4 },
 
         ]
-
     });
+
+    setInterval(() => {
+        securityEventTable.ajax.reload();
+    }, 3000);
 
     var isLoading = true;
     var loading = setInterval(function () {
@@ -201,7 +211,7 @@ $(document).ready(function () {
     $("#policyButton").on("click", () => {
         chkCheckBox = '';
 
-        if (table.row('.selected').data().CreationYn === 'Y') {
+        if(table.row('.selected').data().CreationYn === 'Y'){
             $("#chkC").attr('checked', true);
             chkCheckBox += 'C';
         }
@@ -209,7 +219,7 @@ $(document).ready(function () {
         //     $("#chkC").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if (table.row('.selected').data().ReadYn === 'Y') {
+        if(table.row('.selected').data().ReadYn === 'Y'){
             $("#chkR").attr('checked', true);
             chkCheckBox += 'R';
         }
@@ -217,7 +227,7 @@ $(document).ready(function () {
         //     $("#chkR").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if (table.row('.selected').data().UpdateYn === 'Y') {
+        if(table.row('.selected').data().UpdateYn === 'Y'){
             $("#chkU").attr('checked', true);
             chkCheckBox += 'U';
         }
@@ -225,7 +235,7 @@ $(document).ready(function () {
         //     $("#chkU").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if (table.row('.selected').data().DeleteYn === 'Y') {
+        if(table.row('.selected').data().DeleteYn === 'Y'){
             $("#chkD").attr('checked', true);
             chkCheckBox += 'D';
         }
@@ -233,7 +243,7 @@ $(document).ready(function () {
         //     $("#chkD").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if (table.row('.selected').data().NotifyYn === 'Y') {
+        if(table.row('.selected').data().NotifyYn === 'Y'){
             $("#chkN").attr('checked', true);
             chkCheckBox += 'N';
         }
@@ -252,7 +262,7 @@ $(document).ready(function () {
 
         $("#policy-confirm").attr('disabled', true);
     });
-    $('#deployLogModal').on('show.bs.modal', function (e) {
+    $('#deployLogModal').on('show.bs.modal',function (e) {
         deployLogTable.ajax.reload();
 
     });
@@ -560,6 +570,7 @@ function enableButton(isEnabled) {
 // //var btn = $(e.relatedTarget);
 // //console.log(btn);
 // //console.log(table.row('.selected').data());
+
 
 
 /** add click listener to gateway title in device list view
@@ -888,14 +899,27 @@ function operationJoiner(security) {
     return operation;
 }
 
-function dateFormatter(date) {
-    var str = '';
-    str += date.substring(0, 4) + '년 ';
-    str += date.substring(4, 6) + '월 ';
-    str += date.substring(6, 8) + '일 ';
-    str += date.substring(8, 10) + '시 ';
-    str += date.substring(10, 12) + '분 ';
-    return str;
+function dateFormatter(date, type) {
+    if (type === 1) {
+        var str = '';
+        str += date.substring(0,4) + '년 ';
+        str += date.substring(4,6) + '월 ';
+        str += date.substring(6,8) + '일 ';
+        str += date.substring(8,10) + '시 ';
+        str += date.substring(10,12) + '분 ';
+        return str;
+    } else if (type === 2 ) {
+        var str = '';
+        str += date.substring(0,4) + '년 ';
+        str += date.substring(5,7) + '월 ';
+        str += date.substring(8,10) + '일 ';
+        str += date.substring(11,13) + '시 ';
+        str += date.substring(14,16) + '분 ';
+        return str;
+    } else {
+        console.log("What?");
+    }
+
 }
 
 
@@ -1011,6 +1035,83 @@ function crudnListner() {
 }
 
 
+function getAuthsList() {
+
+        $.ajax({
+            url:'/api/v1/devices',
+            success: function (result) {
+
+                // insertSecurityLog(result);
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+
+}
+
+var device_type = {
+    1 : "GasDetector",
+    2 : "GasBreaker",
+    3 : "ThermoHygrometer",
+    4 : "SmartLighting",
+    5 : "IntrusionDetector",
+    6 : "DoorSensor",
+    7 : "SmartPlug",
+    8 : "SmartCamera"
+}
+
+
+
+function insertSecurityLog(data) {
+
+    jsondata = {
+        eventType : "security",
+        deviceType : null,
+        deviceId : null,
+        msg : "authentication success"
+    };
+
+
+
+    $.each(data, (index, item) => {
+
+        if (item.auth == 1) {
+
+            /*if (item.type == 1) {
+                jsondata.device_type = "GasDetector";
+            } else if (item.type == 2) {
+                jsondata.device_type = "GasBreaker";
+            } else if (item.type == 3) {
+                jsondata.device_type = "ThermoHygrometer";
+            } else if (item.type == 4) {
+                jsondata.device_type = "SmartLighting";
+            } else if (item.type == 5) {
+                jsondata.device_type = "IntrusionDetector";
+            } else if (item.type == 6) {
+                jsondata.device_type = "DoorSensor";
+            } else if (item.type == 7) {
+                jsondata.device_type = "SmartPlug";
+            } else {
+                jsondata.device_type = "SmartCamera";
+            }*/
+            jsondata.deviceType = item.type;
+            jsondata.deviceId = item.did;
+            $.ajax({
+                url: '/api/v1/logs',
+                type: 'post',
+                data: jsondata,
+                success: function (result) {
+                    console.log("good");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+}
 
 
 
