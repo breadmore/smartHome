@@ -88,7 +88,7 @@ $(document).ready(function () {
         searching: true,
         dom : '<"row no-gutters"t>',
         ajax : {
-            url: "/api/v1/logs/event",
+            url: "/api/v1/logs/",
             dataSrc: function (result) {
                 return result;
             }},
