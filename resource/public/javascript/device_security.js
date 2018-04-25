@@ -93,7 +93,6 @@ $(document).ready(function () {
                 return result;
             }},
         columns : [
-            // {data: null},
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_type"},
@@ -101,12 +100,6 @@ $(document).ready(function () {
             {data: "msg"}
         ]
     });
-
-    // securityEventTable.on('order.dt search.dt', function () {
-    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-    //         cell.innerHTML = i+1;
-    //     } );
-    // } ).draw();
 
     var isLoading = true;
     var loading = setInterval(function () {

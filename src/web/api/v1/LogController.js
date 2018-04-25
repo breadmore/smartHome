@@ -52,7 +52,7 @@ router.route('/deviceall')
 
 router.route('/event')
     .get(function (req, res) {
-        logService.selectRecentAllLog(function(err, result) {
+        logService.selectAllSecurityEvent(function(err, result) {
             if (err) {
                 res.status(400).send(err);
             }
