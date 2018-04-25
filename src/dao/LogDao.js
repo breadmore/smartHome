@@ -56,12 +56,12 @@ var Log = {
     },
 
     selectAllSecurityEvent(callback) {
-        return db.query('select * from Security_Log where event_type = "security" or event_type = "critical"',
+        return db.query('select * from Security_Log where event_type = "security" or event_type = "critical" limit 10',
             callback);
     },
 
     selectAllEvent(callback) {
-        return db.query('select * from Security_Log order by id desc limit 6', callback);
+        return db.query('select * from Security_Log order by id desc limit 10', callback);
     },
 
     // Mark : PolicyHistory Dao.

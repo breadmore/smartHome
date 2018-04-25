@@ -48,6 +48,18 @@ router.route('/deviceall')
                 res.status(200).send(result);
             }
         })
+    });
+
+router.route('/event')
+    .get(function (req, res) {
+        logService.selectAllSecurityEvent(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
     })
 
 module.exports = router;
