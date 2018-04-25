@@ -55,8 +55,11 @@ router.route('/login')
                 req.session.userName = result[0].user_name;
                 req.session.authority = result[0].authority;
                 res.redirect('/dashboard');
+            }else if (req.body.password !== result[0].password){
+                console.log('password error');
+                res.status(400).send('password error');
             }else {
-                res.send("비밀번호 오류");
+                console.log("what error?");
             }
         }})
     });

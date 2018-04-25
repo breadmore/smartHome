@@ -95,6 +95,11 @@ $(document).ready(function () {
         ajax : {
             url: "/api/v1/logs",
             dataSrc: function (result) {
+
+                $.each(result, (index, item) => {
+                    item.device_type = type2Icon(item.device_type);
+                });
+
                 return result;
             }},
         columns : [
