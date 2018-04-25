@@ -85,7 +85,7 @@ function compareEntityId(entityId, policyDataList) {
     policyDataList.forEach(function (policyData, index) {
         if(policyData.EntityID == entityId){
             // console.log('apply ' + getPolicy(policyData));
-            msg = 'apply ' + getPolicy(policyData);
+            msg = 'Applied policy : ' + getPolicy(policyData);
         }
         else{
             // console.log('not apply.');
@@ -113,7 +113,7 @@ function policyApplyInitServicer() {
                     result.forEach(function (authRow, index) {
                         msg = compareEntityId(authRow.eid, policyDataList);
                         if(msg === null){
-                            msg = 'not apply.';
+                            msg = 'Not applied policy.';
                         }
                         securityLog = {
                             eventType: 'security',
