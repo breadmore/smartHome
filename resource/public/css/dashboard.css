@@ -23,10 +23,12 @@
 .card-text > div > span:nth-child(2) {
     display: inline-block;
     height: 20px;
-    width: 70px;
+    width: 65px;
+    margin-left: 5px;
 }
 
 .card-text > div > span:nth-child(3) {
+    font-weight: 500;
     color: #e74c3c;
 }
 
@@ -42,7 +44,7 @@
 }
 
 .temp-humi {
-    min-width: 24%;
+    min-width: 260px;
 }
 
 /*.temp-humi > .card-body {*/
@@ -80,7 +82,7 @@
 }
 
 .home-security-1 .card-text > div, .home-security-2 .card-text > div, .gas-mgnmt .card-text > div, .device-status .card-text > div{
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .luminance .card-title {
@@ -136,10 +138,10 @@
 }
 
 .camera-img {
-    padding-top: 13px;
-    padding-bottom: 10px;
+    /*padding-top: 13px;*/
+    /*padding-bottom: 10px;*/
     width: 100%;
-    max-height: 120px;
+    max-height: 98px;
 }
 
 td:nth-child(1) {
@@ -151,14 +153,19 @@ td:nth-child(1) {
 }
 
 .temp-humi .row {
-    margin: auto;
-    padding-top: 17px;
-    width: 240px;
+    /*margin: auto;*/
+    margin: 0px;
+    padding-top: 8px;
+    width: 100%;
     max-height: 50px;
 }
 
+.temp-humi .row > span:nth-child(1) {
+    /*margin-left: 10px;*/
+}
+
 .temp-humi .row > span:nth-child(1) > img {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     margin-top: 10px;
     margin-right: 5px;
 }
@@ -169,11 +176,13 @@ td:nth-child(1) {
     width: 60px;
     font-size: 24px;
     margin-top: 5px;
+    margin-left: 10px;
 }
 
 .temp-humi .row > span:nth-child(3) {
     width: 140px;
     height: 35px;
+    margin-left: 10px;
 }
 
 .card-title > span > span {
@@ -194,14 +203,9 @@ td:nth-child(1) {
     text-align: right;
 }
 
-.gas-mgnmt {
-    width: 190px;
-    height: 176px;
-}
 
-.gas-mgnmt > div > .card-text {
-    width: 190px;
-}
+
+
 
 /*.gas-mgnmt > div >.card-title , .gas-mgnmt > .card-body{*/
 /*width: 190px;*/
@@ -313,7 +317,11 @@ section {
 }
 
 .lumi.model-1 {
-    padding-top: 10px;
+    padding-top: 5px;
+}
+
+.lumi.model-1 > .row {
+    position: absolute;
 }
 
 .lumi.model-1 > .row > div {
@@ -409,13 +417,13 @@ input:checked + .slider:before {
 .security-service {
     width: 260px;
     height: 15px;
-    margin-left: 15px;
-    margin-top: 15px;
+    margin: 0px;
+    margin-top: 12px;
 }
 
 .security-service > p {
     margin-top: 4px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 400;
 }
 
@@ -428,11 +436,6 @@ input:checked + .slider:before {
     width: 35px;
 }
 
-.security-name {
-    width: 110px;
-    color: rgb(52, 152, 219);
-}
-
 .occupied_mode {
     text-align: center;
     color: white;
@@ -440,22 +443,26 @@ input:checked + .slider:before {
     font-weight: bold;
     width: 120px;
     margin-top: 15px;
-    margin-left: 15px;
+    margin-left: 8px;
     background-color: rgb(127, 127, 127);
 }
 
-.device-name {
-    width: 95px;
+.device-name, .security-name {
+    font-size: 11pt;
+    width: 100px;
+    margin-left: 7px;
+
 }
 
-.device-number {
-    width: 40px;
+.device-number, .security-number {
+    width: 35px;
+    font-size: 11pt;
 }
 
 .device-control-content {
     width: 293px;
     height: 28px;
-    margin: 12px 0 0 15px;
+    margin: 10px 0 0 12px;
 }
 
 .device-control-content > img {
@@ -465,12 +472,9 @@ input:checked + .slider:before {
 
 .device-control-content > p {
     margin-top: 4px;
-    font-size: 10px;
+    font-size: 11px;
 }
 
-.device-name {
-    margin-left: 7px;
-}
 
 @media (min-width: 640px) {
     .modal-dialog {
@@ -559,8 +563,8 @@ li .video-btn {
 }
 
 .device-monitor {
-    width: 17%;
-    margin-left: 17.67px;
+    width: 18%;
+    margin-left: 10px;
 }
 
 .device-monitor:first-child {
@@ -571,16 +575,16 @@ li .video-btn {
     margin-right: 15px;
 }
 .device-status{
-    width:22%
+    height: 135px;
+    width: 260px;
 }
-.device-status .card-text{
-    width: 90%;
-    margin: auto;
-}
+/*.device-status .card-text{*/
+    /*width: 100%;*/
+/*}*/
 .device-status .card-text > div > span:nth-child(2) {
     display: inline-block;
     height: 20px;
-    width: 95px;
+    width: 110px;
 }
 
 .environment_date {
@@ -632,4 +636,53 @@ div .dataTables_paginate > .pagination {
 #eventTable_wrapper {
     padding: 0;
     margin: auto;
+}
+
+.device-monitor > .card-body {
+    height: 150px;
+}
+
+.gas-mgnmt {
+    height: 135px;
+    width: 260px;
+}
+
+.gas-mgnmt .card-text, .device-status .card-text {
+    width: 260px;
+    margin: 0px;
+    font-size: 11pt;
+}
+
+.gas-mgnmt .card-text > div > span:nth-child(3), .device-status .card-text > div > span:nth-child(3) {
+    /*margin-left: 30px;*/
+}
+
+.gas-mgnmt .card-text > div, .device-status .card-text > div {
+    padding: 0px;
+    margin-top: 13px;
+    margin-left: 5px;
+}
+
+.top-margin {
+    margin-top: 8px;
+    font-size: 11pt;
+}
+
+.home-security-1 .card-text, .home-security-2 .card-text {
+    width: 100%;
+    margin: 0px;
+}
+
+.security-name {
+    margin-left: 10px;
+    font-weight: 500;
+    width: 130px;
+    color: rgb(52, 152, 219);
+}
+
+
+.gas-mgnmt .card-text > div > span:nth-child(2) {
+    display: inline-block;
+    height: 20px;
+    width: 110px;
 }

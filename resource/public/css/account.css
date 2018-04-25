@@ -26,18 +26,15 @@
     background-color: #fcf9f9;
 }
 
-div .dataTables_paginate {
-    float: right;
-    position: relative;
-    left: -50%; /* or right 50% */
-    text-align: left;
-}
-div .dataTables_paginate > .pagination {
-    position: relative;
-    left: 50%;
-}
 
 #userTable_wrapper {
     padding: 0;
     margin: auto;
+}
+
+.name {
+    margin-top: 0;
+    font-weight: 400;
+    /*height: 0;*/
+
 }

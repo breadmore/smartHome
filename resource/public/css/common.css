@@ -228,7 +228,7 @@ body *:focus, body *:active, body *:hover {
 
 .btn-action {
     float: right;
-    margin-left: 20px;
+    margin-left: 5px;
     background-color: #65c0c6;
     border-color: #65c0c6;
     /*height: 31px;*/

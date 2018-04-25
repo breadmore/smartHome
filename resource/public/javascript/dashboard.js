@@ -23,6 +23,39 @@ window.onbeforeunload = function () {
 };
 
 $(document).ready(function() {
+
+    var table = $('#eventTable').DataTable({
+        paging: true,
+        processing: true,
+        // ordering: true,
+        order: [[1, 'desc']],
+        serverSide: false,
+        searching: true,
+        dom : '<"row no-gutters"t>',
+        ajax : {
+            url: "/api/v1/logs",
+            dataSrc: function (result) {
+                return result;
+            }},
+        columns : [
+            {data: null},
+            {data: "event_date"},
+            {data: "event_type"},
+            // {data: "device_type"},
+            {data: "msg"}
+        ]
+    });
+    // add index.
+    table.on('order.dt search.dt', function () {
+        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    setInterval(function () {
+        table.ajax.reload();
+    }, 1000 * 2)
+
     $(".environment_date").change(function () {
         getHourTemp($(".environment_date option:selected").val());
     });
@@ -862,8 +895,10 @@ function getHourTemp(value) {
                     new_data.push(item.valueAvg);
                     if (item["min * " + hour_min.min] == 0) {
                         min = "00";
+                    } else if (item["min * " + hour_min.min] == 5){
+                        min = "05";
                     } else {
-                        min = "30";
+                        min = item["min * " + hour_min.min];
                     }
                     var time = '' + item.hour + ':' + min + '';
                     // console.log(time);
@@ -960,35 +995,5 @@ function getHourTemp(value) {
         });
     }
 
-    var table = $('#eventTable').DataTable({
-        paging: true,
-        processing: true,
-        // ordering: true,
-        order: [[1, 'desc']],
-        serverSide: false,
-        searching: true,
-        dom : '<"row no-gutters"t>',
-        ajax : {
-            url: "/api/v1/logs",
-            dataSrc: function (result) {
-                return result;
-            }},
-        columns : [
-            {data: null},
-            {data: "event_date"},
-            {data: "event_type"},
-            {data: "device_type"},
-            {data: "msg"}
-        ]
-    });
-    // add index.
-    table.on('order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
 
-    setInterval(function () {
-        table.ajax.reload();
-    }, 1000 * 2)
 }

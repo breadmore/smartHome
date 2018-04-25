@@ -53,7 +53,7 @@ block content
                     .row
                         span
                             img(src="/image/humidityWhite.png").card-img
-                        span#humidityValue(style='font-size:19px;')
+                        span#humidityValue
                         span
                             canvas#myChart2
 
@@ -72,7 +72,7 @@ block content
                             .start_value 0
                             .finish_value 100
                         .lux
-                            span.lux_value#luxValue
+                            span.lux_value#luxValue 100
                             span Lux
         .card.device-monitor.home-security-1
             .card-body
@@ -81,17 +81,17 @@ block content
                     span.small-title ome security
                     span 001
                 .card-text
-                    div
-                        span
-                            img(src="/image/alarmWhite.png").card-img
-                        span Siren
-                        span Triggered
-                    div
+                    //div
+                    //    span
+                    //        img(src="/image/alarmWhite.png").card-img
+                    //    span Siren
+                    //    span Triggered
+                    div.top-margin
                         span
                             img(src="/image/window.png").card-img
                         span Window
                         span#legacyWindow Opened
-                    div
+                    div.top-margin
                         span
                             img(src="/image/human.png").card-img
                         span Human
@@ -103,17 +103,17 @@ block content
                     span.small-title ome security
                     span 002
                 .card-text
-                    div
-                        span
-                            img(src="/image/alarmWhite.png").card-img
-                        span Siren
-                        span No event
-                    div
+                    //div
+                    //    span
+                    //        img(src="/image/alarmWhite.png").card-img
+                    //    span Siren
+                    //    span No event
+                    div.top-margin
                         span
                             img(src="/image/window.png").card-img
                         span Window
                         span#xiaomiWindow No event
-                    div
+                    div.top-margin
                         span
                             img(src="/image/human.png").card-img
                         span Human
@@ -134,11 +134,11 @@ block content
                     span.small-title as management
                     span 001
                 .card-text
-                    div
-                        span
-                            img(src="/image/alarmWhite.png").card-img
-                        span Siren
-                        span Triggered
+                    //div
+                    //    span
+                    //        img(src="/image/alarmWhite.png").card-img
+                    //    span Siren
+                    //    span Triggered
                     div
                         span
                             img(src="/image/leakage.png").card-img
@@ -157,20 +157,20 @@ block content
                     span.small-title evice Status
                     span 001
                 .card-text
+                    //div
+                    //    span
+                    //        img(src="/image/alarmWhite.png").card-img
+                    //    span Siren
+                    //    span No event
                     div
                         span
-                            img(src="/image/alarmWhite.png").card-img
-                        span Siren
-                        span No event
-                    div
-                        span
-                            img(src="/image/window.png").card-img
+                            img(src="/image/lightWhite.png").card-img
                         span Smart Light
                         span#statusblah1 Not Detected
                     div
                         span
-                            img(src="/image/human.png").card-img
-                        span power Outlet
+                            img(src="/image/PoweroutletWhite.png").card-img
+                        span Power Outlet
                         span#statusblah2 Not Detected
 
 
@@ -231,7 +231,7 @@ block content
                             td Index
                             td Event date
                             td Level
-                            td Sensor type / number
+                            //td Sensor type / number
                             td Activity message
                     //tbody
                         tr
