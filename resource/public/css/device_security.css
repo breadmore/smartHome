@@ -587,6 +587,10 @@ td.right .fa-address-card {
     text-align:left
 }
 
+#securityEventTable > tbody > tr > td:nth-child(3){
+    text-align:left
+}
+
 #securityEventTable_wrapper{
     padding:0px;
 }

@@ -694,3 +694,11 @@ div .dataTables_paginate > .pagination {
 #eventTable > tbody > tr > td:nth-child(4){
     text-align: left!important;
 }
+
+.safe-event {
+    color: rgb(46, 204, 113) !important;
+}
+
+.danger-event {
+    color : #e74c3c !important;
+}
