@@ -56,7 +56,7 @@ var Log = {
     },
 
     selectAllSecurityEvent(callback) {
-        return db.query('select * from Security_Log where event_type = security or critical',
+        return db.query('select * from Security_Log where event_type = "security" or event_type = "critical"',
             callback);
     },
 

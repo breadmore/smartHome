@@ -36,6 +36,18 @@ router.route('/policy')
                 res.status(201).send(result);
             }
         })
+    });
+
+router.route('/deviceall')
+    .get(function (req, res) {
+        logService.selectDeployAllLog(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
     })
 
 module.exports = router;

@@ -9,6 +9,9 @@ function selectRecentAllLog(callback) {
     return logDao.selectAllEvent(callback);
 }
 
+function selectDeployAllLog(callback) {
+    return logDao.selectAllSecurityEvent(callback);
+}
 
 
 function updateState(state, callback) {
@@ -23,5 +26,6 @@ function selectAllUsers(callback) {
 module.exports = {
     insertLog: insert,
     selectRecentAllLog: selectRecentAllLog,
-    selectAllUsers:selectAllUsers
+    selectAllUsers:selectAllUsers,
+    selectDeployAllLog:selectDeployAllLog
 };

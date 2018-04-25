@@ -1,27 +1,30 @@
 extends layout
 
 append head
+    script(src='/javascript/logger.js')
+    link(rel='stylesheet', type='text/css', href='/css/common.css')
+    link(rel='stylesheet', type='text/css', href='/css/logger.css')
     link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
-    script(src='/javascript/logger.js')
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
-    link(rel='stylesheet', type='text/css', href='/css/common.css')
-    script(src='/plugin/datepicker/combined/js/gijgo.js')
-    link(rel='stylesheet', type='text/css', href='/plugin/datepicker/combined/css/gijgo.css')
-    link(rel='stylesheet', type='text/css', href='/css/logger.css')
 
 append title
-    span.col-xl-2.content-title.no-padding LOG
+    span.col-xl-2.content-title.no-padding Device Log
 
 block content
-    .row
-        .col
-        .col
-        .col
-            input#datepicker(placeholder="Select Date")
-        .col
-        .col
-    .chart
-        canvas#myChart
+    .row.no-gutters(style='margin-bottom:20px')
+        .col-12.no-gutters
+            table#eventTable(style='width:100%')
+                thead
+                    tr
+                        th Index
+                        th Event date
+                        th Level
+                        th Activity message
+
+
+    .row.no-gutters(style='margin-bottom:0px')
+        span.col-xl-2.content-title.no-padding Deploy Log
+        .col-10.content-hr.no-padding
+            hr
+
