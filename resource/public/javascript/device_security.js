@@ -18,6 +18,7 @@
 //     }
 // ];
 
+
 var gatewayList;
 var deviceList;
 var securityList = [];
@@ -26,8 +27,12 @@ var resourceList = [];
 var nowClick;
 var chkCheckBox; // ktw add
 var change; //ktw add
+var securityLogList;
 
 $(document).ready(function () {
+
+    // getAuthsList();
+
     //init device list & device detail
     createDeviceListView();
     createResourceName();
@@ -88,7 +93,7 @@ $(document).ready(function () {
         searching: true,
         dom : '<"row no-gutters"t>',
         ajax : {
-            url: "/api/v1/logs/event",
+            url: "/api/v1/logs",
             dataSrc: function (result) {
                 return result;
             }},
@@ -100,6 +105,10 @@ $(document).ready(function () {
             {data: "msg"}
         ]
     });
+
+    setInterval(() => {
+        securityEventTable.ajax.reload();
+    }, 3000);
 
     var isLoading = true;
     var loading = setInterval(function () {
@@ -940,6 +949,83 @@ function crudnListner() {
 }
 
 
+function getAuthsList() {
+
+        $.ajax({
+            url:'/api/v1/devices',
+            success: function (result) {
+
+                // insertSecurityLog(result);
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+
+}
+
+var device_type = {
+    1 : "GasDetector",
+    2 : "GasBreaker",
+    3 : "ThermoHygrometer",
+    4 : "SmartLighting",
+    5 : "IntrusionDetector",
+    6 : "DoorSensor",
+    7 : "SmartPlug",
+    8 : "SmartCamera"
+}
+
+
+
+function insertSecurityLog(data) {
+
+    jsondata = {
+        eventType : "security",
+        deviceType : null,
+        deviceId : null,
+        msg : "authentication success"
+    };
+
+
+
+    $.each(data, (index, item) => {
+
+        if (item.auth == 1) {
+
+            /*if (item.type == 1) {
+                jsondata.device_type = "GasDetector";
+            } else if (item.type == 2) {
+                jsondata.device_type = "GasBreaker";
+            } else if (item.type == 3) {
+                jsondata.device_type = "ThermoHygrometer";
+            } else if (item.type == 4) {
+                jsondata.device_type = "SmartLighting";
+            } else if (item.type == 5) {
+                jsondata.device_type = "IntrusionDetector";
+            } else if (item.type == 6) {
+                jsondata.device_type = "DoorSensor";
+            } else if (item.type == 7) {
+                jsondata.device_type = "SmartPlug";
+            } else {
+                jsondata.device_type = "SmartCamera";
+            }*/
+            jsondata.deviceType = item.type;
+            jsondata.deviceId = item.did;
+            $.ajax({
+                url: '/api/v1/logs',
+                type: 'post',
+                data: jsondata,
+                success: function (result) {
+                    console.log("good");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+}
 
 
 

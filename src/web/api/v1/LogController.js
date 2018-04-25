@@ -17,6 +17,7 @@ router.route('/')
     })
     .post(function (req, res) {
         logService.insertLog(req.body, function(err, result) {
+            console.log(req.body);
             if (err) {
                 res.status(400).send(err);
             }
@@ -38,17 +39,17 @@ router.route('/policy')
         })
     });
 
-router.route('/deviceall')
-    .get(function (req, res) {
-        logService.selectAllSecurityEvent(function(err, result) {
-            if (err) {
-                res.status(400).send(err);
-            }
-            else {
-                res.status(200).send(result);
-            }
-        })
-    });
+// router.route('/deviceall')
+//     .get(function (req, res) {
+//         logService.selectAllSecurityEvent(function(err, result) {
+//             if (err) {
+//                 res.status(400).send(err);
+//             }
+//             else {
+//                 res.status(200).send(result);
+//             }
+//         })
+//     });
 
 router.route('/recentservice')
     .get(function (req, res) {

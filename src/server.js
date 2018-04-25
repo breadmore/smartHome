@@ -154,3 +154,9 @@ httpServer.listen(http_port, function () {
 RED.start().then(function () {
   console.info("------ Engine started! ------");
 });
+
+
+//Security Log Initialize.
+require('./service/api/v1/AuthsService').authInitService();
+require('./service/api/v1/AuthsService').policyApplyInitServicer();
+
