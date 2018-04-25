@@ -1,11 +1,54 @@
-#datepicker {
-    /*max-width: 250px;*/
-    /*margin-left: 420px;*/
-    /*margin: auto;*/
-    /*margin-right: 0px;*/
-    width: 80%;
+#eventTable {
+    border-collapse: separate;
+    border-spacing: 3px;
+    text-align: center;
+    line-height: 1.5;
 }
 
-.select_date {
-    text-align: center;
+#eventTable th {
+    padding: 10px;
+    font-size: 11px;
+}
+
+#eventTable td {
+    padding: 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #deceb2;
+    font-size: 10px;
+}
+
+#eventTable thead {
+    background-color: #ebeff5;
+    color: rgb(0, 0, 0);
+}
+
+#eventTable tbody .selected {
+    background-color: #fcf9f9;
+}
+
+div .dataTables_paginate {
+    float: right;
+    position: relative;
+    left: -50%; /* or right 50% */
+    text-align: left;
+}
+
+div .dataTables_paginate > .pagination {
+    position: relative;
+    left: 50%;
+}
+
+#eventTable_wrapper {
+    padding: 0;
+    margin: auto;
+}
+
+#deviceEvent {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px){
+    .col-md-7 {
+        display: grid;
+    }
 }
