@@ -321,7 +321,7 @@ $(document).ready(function () {
             dataSrc: function (result) {
                 var logs = [];
                 $.each(result, function(index, item){
-                    item.enforceDate = dateFormatter(item.enforce_date);
+                    item.enforceDate = item.enforce_date;
                     item.fromName = findEntityById(item.from_id.toString()).Name;
                     item.toName = findEntityById(item.to_id.toString()).Name;
                     logs.push(item);
