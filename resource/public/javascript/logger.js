@@ -12,7 +12,7 @@ $(function () {
         serverSide: false,
         searching: true,
         ajax : {
-            url: "/api/v1/logs/deviceall",
+            url: "/api/v1/logs/recentservice",
             dataSrc: function (result) {
                 return result;
             }},
