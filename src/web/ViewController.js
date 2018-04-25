@@ -15,10 +15,8 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    res.render('dashboard', {
-        userName : req.session.userName,
-        authority : req.session.authority
-    });
+    res.render('dashboard');
+    // authCheck(req, res, "dashboard");
 });
 
 router.get('/regist', function (req, res) {
@@ -50,10 +48,8 @@ router.get('/regist', function (req, res) {
 // });
 
 router.get('/device_security', function (req, res) {
-    res.render('device_security', {
-        userName : req.session.userName,
-        authority : req.session.authority
-    });
+    res.render('device_security');
+    // authCheck(req, res, "device_security");
 });
 
 // router.get('/gateway', function (req, res) {
@@ -69,17 +65,22 @@ router.get('/device_security', function (req, res) {
 // // });
 
 router.get('/account', function (req, res) {
-    res.render('account', {
-        userName : req.session.userName,
-        authority : req.session.authority
-    });
+    // if (req.session.authority == undefined){
+    //     res.redirect('/');
+    // } else if (req.session.authority != undefined) {
+    //     res.render('account', {
+    //         userName : req.session.userName,
+    //         authority : req.session.authority
+    //     });
+    // }
+    res.render('account');
+    // authCheck(req, res, "account");
 });
 
 router.get('/logger', function (req, res) {
-    res.render('logger', {
-        userName : req.session.userName,
-        authority : req.session.authority
-    });
+    res.render('logger');
+    // authCheck(req, res, "logger");
+
 });
 
 
@@ -119,6 +120,17 @@ router.get('/m/ipcamera', function (req, res) {
 router.get('/m/control', function (req, res) {
     res.render('mobile/control');
 });
+
+function authCheck(req, res, page) {
+    if (req.session.authority == undefined){
+        res.redirect('/');
+    } else if (req.session.authority != undefined) {
+        res.render(page, {
+            userName : req.session.userName,
+            authority : req.session.authority
+        });
+    }
+}
 
 module.exports = router;
 

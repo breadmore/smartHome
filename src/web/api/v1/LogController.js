@@ -63,6 +63,19 @@ router.route('/recentservice')
         })
     });
 
+router.route('/serviceall')
+    .get(function (req, res) {
+        logService.selectAllServiceLog(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    });
+
+
 router.route('/deployall')
     .get(function (req, res) {
         logService.selectAllDeployLog(function(err, result) {

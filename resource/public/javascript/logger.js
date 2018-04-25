@@ -12,7 +12,7 @@ $(function () {
         serverSide: false,
         searching: true,
         ajax : {
-            url: "/api/v1/logs/recentservice",
+            url: "/api/v1/logs/serviceall",
             dataSrc: function (result) {
                 $.each(result, function (index, item) {
                     item.event_date = dateFormatter(item.event_date);

@@ -14,12 +14,13 @@ append title
     span.col-xl-2.content-title.no-padding ACCOUNT
 
 block content
-    .row.no-gutters(style='margin-bottom:20px')#securityDiv
-        .col-12(style='margin-bottom:10px;')
-            input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#ModifyModal" data-toggle="modal")#modifyButton
-            input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#DeleteModal" data-toggle="modal")#deleteButton
-            input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#AddModal" data-toggle="modal")#addButton
-
+        .row.no-gutters(style='margin-bottom:20px')#securityDiv
+            //if authority == "admin"
+            .col-12(style='margin-bottom:10px;')
+                input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#ModifyModal" data-toggle="modal")#modifyButton
+                input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#DeleteModal" data-toggle="modal")#deleteButton
+                input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#AddModal" data-toggle="modal")#addButton
+            //else
         .col-12.no-gutters
             table#userTable(style='width:100%')
                 thead
@@ -30,82 +31,82 @@ block content
                         th E-mail
                         th Phone Number
                         th Created Time
-    #AddModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-            .modal-dialog(role='document')
-                .modal-content
-                    .modal-header
-                        .modal-title ADD USER
-                        button.close(type='button', data-dismiss='modal', aria-label='Close')
-                            span(aria-hidden='true') ×
-                    .modal-body
-                        .modal-body-content
-                            .user_id User ID
-                            input(type="text")#add-user-id
-                            .user_password User Password
-                            input(type="text" )#add-user-password
-                            .authority Authority
-                            select#add-authority
-                                option(value='admin') admin
-                                option(value='user') user
-                            .name Name
-                            input(type="text" value="")#add-name
-                            .e-mail E-mail
-                            input(type="text" value="")#add-e-mail
-                            .phone-number Phone Number
-                            input(type="text" value="")#add-phone-number
-                    .modal-footer
-                        //button.modal-cancel(data-dismiss="modal") Cancel
-                        .col-12.text-center.no-gutters
-                            button.btn.btn-primary.btn-action.modal-btn#save-User(data-dismiss="modal") Save User
-                            button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
-    #DeleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-            .modal-dialog(role='document')
-                .modal-content
-                    .modal-header
-                        .modal-title Delete?
-                        button.close(type='button', data-dismiss='modal', aria-label='Close')
-                            span(aria-hidden='true') ×
-                    .modal-body
-                        .modal-body-content
-                            span Do you want to Delete
-                            span#delete-id
-                            span  ?
-                    .modal-footer
-                        //button.modal-cancel(data-dismiss="modal") Cancel
-                        .col-12.text-center.no-gutters
-                            button.btn.btn-primary.btn-action.modal-btn#delete-User(data-dismiss="modal") Delete User
-                            button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+        #AddModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            .modal-title ADD USER
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                            .modal-body-content
+                                .user_id User ID
+                                input(type="text")#add-user-id
+                                .user_password User Password
+                                input(type="text" )#add-user-password
+                                .authority Authority
+                                select#add-authority
+                                    option(value='admin') admin
+                                    option(value='user') user
+                                .name Name
+                                input(type="text" value="")#add-name
+                                .e-mail E-mail
+                                input(type="text" value="")#add-e-mail
+                                .phone-number Phone Number
+                                input(type="text" value="")#add-phone-number
+                        .modal-footer
+                            //button.modal-cancel(data-dismiss="modal") Cancel
+                            .col-12.text-center.no-gutters
+                                button.btn.btn-primary.btn-action.modal-btn#save-User(data-dismiss="modal") Save User
+                                button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+        #DeleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            .modal-title Delete?
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                            .modal-body-content
+                                span Do you want to Delete
+                                span#delete-id
+                                span  ?
+                        .modal-footer
+                            //button.modal-cancel(data-dismiss="modal") Cancel
+                            .col-12.text-center.no-gutters
+                                button.btn.btn-primary.btn-action.modal-btn#delete-User(data-dismiss="modal") Delete User
+                                button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
 
-    #ModifyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-            .modal-dialog(role='document')
-                .modal-content
-                    .modal-header
-                        .modal-title MODIFY DEVICE
-                        button.close(type='button', data-dismiss='modal', aria-label='Close')
-                            span(aria-hidden='true') ×
-                    .modal-body
-                        .modal-body-content
-                            p User ID
-                            input(type="text" readonly )#user-id
-                            p User Password
-                            input(type="password" )#user-password
-                            p Authority
-                            select#authority
-                                option(value='admin') admin
-                                option(value='user') user
-                            //input(type="text")#authority
-                            p Name
-                            input(type="text" value="")#name
-                            p E-mail
-                            input(type="text" value="")#e-mail
-                            p Phone Number
-                            input(type="text" value="")#phone-number
+        #ModifyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            .modal-title MODIFY DEVICE
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                            .modal-body-content
+                                p User ID
+                                input(type="text" readonly )#user-id
+                                p User Password
+                                input(type="password" )#user-password
+                                p Authority
+                                select#authority
+                                    option(value='admin') admin
+                                    option(value='user') user
+                                //input(type="text")#authority
+                                p Name
+                                input(type="text" value="")#name
+                                p E-mail
+                                input(type="text" value="")#e-mail
+                                p Phone Number
+                                input(type="text" value="")#phone-number
 
-                    .modal-footer
-                        //button.modal-cancel(data-dismiss="modal") Cancel
-                        .col-12.text-center.no-gutters
-                            button.btn.btn-primary.btn-action.modal-btn#modify-User(data-dismiss="modal") Modify
-                            button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
+                        .modal-footer
+                            //button.modal-cancel(data-dismiss="modal") Cancel
+                            .col-12.text-center.no-gutters
+                                button.btn.btn-primary.btn-action.modal-btn#modify-User(data-dismiss="modal") Modify
+                                button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     //#addGatewayModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
     //    .modal-dialog(role='document')
     //        .modal-content

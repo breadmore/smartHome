@@ -19,11 +19,15 @@ function updateState(state, callback) {
 }
 
 function selectRecentServiceLog(callback) {
-    return logDao.selectAllServiceLog(callback);
+    return logDao.selectRecentServiceLog(callback);
 }
 
 function selectRecentDeployLog(callback) {
     logDao.selectRecentDeployLog(callback);
+}
+
+function selectAllServiceLog(callback) {
+    return logDao.selectAllServiceLog(callback);
 }
 
 function selectAllDeployLog(callback) {
@@ -36,5 +40,6 @@ module.exports = {
     selectRecentDeployLog:selectRecentDeployLog,
     // selectAllSecurityEvent:selectAllSecurityEvent,
     selectRecentServiceLog:selectRecentServiceLog,
-    selectAllDeployLog:selectAllDeployLog
+    selectAllDeployLog:selectAllDeployLog,
+    selectAllServiceLog:selectAllServiceLog
 };
