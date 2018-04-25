@@ -48,6 +48,7 @@ var Log = {
     },
 
     insert: function(log, callback) {
+        console.log(log);
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
         return db.query('insert into Security_Log (event_date, event_type, device_type, device_id, msg) values (?, ?, ?, ?, ? )',
             [now, log.eventType, log.deviceType, log.deviceId, log.msg],

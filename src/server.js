@@ -154,4 +154,7 @@ RED.start().then(function () {
 });
 
 
+//Security Log Initialize.
+require('./service/api/v1/AuthsService').authInitService();
+require('./service/api/v1/AuthsService').policyApplyInitServicer();
 
