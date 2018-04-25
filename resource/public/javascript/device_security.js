@@ -193,7 +193,7 @@ $(document).ready(function () {
     $('#modifyModal').on('show.bs.modal', function (e) {
 
         if(nowClick.getAttribute('data-did') !== null) {
-            var device = findDeviceByDid(nowClick.getAttribute('data-did'))
+            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
             $("#gateway-id").val(device.gwid);
             $("#device-name").val(nowClick.getAttribute('data-did'));
             $("#device-id").val(device.id);
@@ -201,7 +201,7 @@ $(document).ready(function () {
             $("#entity-id").val(device.eid);
             $("#object-id").val(device.oid);
             $("#type").val(device.type);
-            $("#session-id").val(device.sid)
+            $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
                 $('#connected').html(device.conn + ' Not Connected');
@@ -212,9 +212,23 @@ $(document).ready(function () {
             }
             else $('#authenticate').html(device.auth + ' Authorized');
             if ('<i class="far fa-eye-slash"></i>' === device.reg) {
-                $('#regster').html(device.reg + ' Not Registered');
+                $('#register').html(device.reg + ' Not Registered');
             } else
-                $('#regster').html(device.reg + ' Registered');
+                $('#register').html(device.auth + ' Authorized');
+        }
+        else{
+            $("#gateway-id").val('error');
+            $("#device-name").val('error');
+            $("#device-id").val('error');
+            $("#pre-shared-key").val('error');
+            $("#entity-id").val('error');
+            $("#object-id").val('error');
+            $("#type").val('error');
+            $("#session-id").val('error');
+
+            $('#connected').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
+            $('#authenticate').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
+            $('#register').html('<i class="fas fa-question"></i><span>Unknown</span>' + ' Undefined');
         }
 
     });

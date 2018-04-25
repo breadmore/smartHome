@@ -39,7 +39,7 @@ const bodyParser = require('body-parser');
 // const httpLogger = require('morgan');
 
 var log4js = require('log4js');
-log4js.configure('./config/logger/log4js.json');
+log4js.configure('../config/logger/log4js.json');
 
 
 // you can set a default credential secret for storing node's credentials within node red
