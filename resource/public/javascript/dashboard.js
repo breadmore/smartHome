@@ -821,7 +821,7 @@ function modal_list() {
 
     $.ajax({
         type:"get",
-        url:"http://localhost:1880/api/videos",
+        url:"/api/videos",
         success: function (data) {
             for(i=0; i<data.length; i++) {
                 $(".my-video-list").append("<li class='video-list'>"+" <button class='myBtn video-btn' data-name="+data[i]+">"+data[i]+" </button> " +"</li>");

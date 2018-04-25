@@ -90,10 +90,12 @@ app.use(express.static(resourcePath + '/public'));
 
 // Add a simple route for static content served from './public'
 
-// app.get('/*', function(req, res, next){
-//     res.setHeader('Last-Modified', (new Date()).toUTCString());
-//     next();
-// });
+app.use('/*', function(req, res, next){
+    res.setHeader('Last-Modified', (new Date()).toUTCString());
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 app.use("/", require('./web/ViewController'));
 app.use("/api", require('./web/ApiContoller'));
 app.use("/v1", require("./web/api/v1/V1Controller"));
