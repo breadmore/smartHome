@@ -77,7 +77,7 @@ router.route('/')
                enforcePoint: req.body.enforcePoint
            };
 
-           // insert into security_log set update_log
+           // insert into securityLog set update_log
            // {
            //     edate: now,
            //     etype: "security",
@@ -85,11 +85,10 @@ router.route('/')
            //     did: auth table -> ,
            //     msg: 'update operation ' + log.previous + ' to ' + log.operation + '.'
            // }
-           var security_log = {
-               edate: now,
-               etype: 'security',
-               dtype: req.body.fromId,
-               did: undefined,
+           var securityLog = {
+               eventType: 'security',
+               deviceType: req.body.fromId,
+               deviceId: undefined,
                msg: undefined
            };
 
@@ -115,7 +114,7 @@ router.route('/')
                                else{
                                    console.log(result[0].Operation);
                                    log.previous = result[0].Operation;
-                                   security_log.msg = 'update operation ' + log.previous + ' to ' + log.operation + '.'
+                                   securityLog.msg = 'update operation ' + log.previous + ' to ' + log.operation + '.'
                                    console.log(log);
 
                                    roleService.updateOperation(data, function (err, result) {
@@ -138,8 +137,8 @@ router.route('/')
                                                             res.status(500).send(err);
                                                         }
                                                         else {
-                                                             security_log.did = result[0].did;
-                                                             logDao.insertSecurityLog(security_log, function (err, result) {
+                                                            securityLog.deviceId = result[0].did;
+                                                             logDao.insert(securityLog, function (err, result) {
                                                                  if (err) {
                                                                      res.status(401).send(err);
                                                                  }
