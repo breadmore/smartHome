@@ -10,8 +10,11 @@ const DETECTED = 'Detected';
 const OPENED = 'Opened';
 const CLOSED = 'Closed';
 
-const ON_STAUTS = 'ON';
+const ON_STATUS = 'ON';
 const OFF_STATUS = 'OFF';
+
+const OCCUPIED = 'Occupied Mode';
+const OUTING = 'Outing Mode';
 
 var currentState = {
     window : undefined,
@@ -367,7 +370,7 @@ $(document).ready(function() {
 
                 if (data.event === 'on') {
                     $('#xiaomiPower').prop("checked", true);
-                    $('#plugStatus').text(ON_STAUTS);
+                    $('#plugStatus').text(ON_STATUS);
                 }
                 else if (data.event === 'off') {
                     $('#xiaomiPower').prop("checked", false);
@@ -584,7 +587,7 @@ function updateLegacyStates(state) {
     else if (state.led === 1) {
         $('#lightState').removeAttr('disabled');
         $('#lightState').prop("checked", true);
-        $('#lightStatus').text(ON_STAUTS);
+        $('#lightStatus').text(ON_STATUS);
     }
     else {
         $('#lightState').attr('disabled', 'disabled');
@@ -592,6 +595,7 @@ function updateLegacyStates(state) {
 
     if (state.mode !== 0) {
         $('#roomState').prop("checked", false);
+        $('#roomStatus').text(OCCUPIED);
 
         if (state.window_detector === 0) {
             $('#legacyWindow').text(NOT_DETECTED);
@@ -610,6 +614,7 @@ function updateLegacyStates(state) {
     }
     else {
         $('#roomState').prop("checked", true);
+        $('#roomStatus').text(OUTING);
 
         $('#legacyWindow').text(NOT_DETECTED);
         $('#legacyHuman').text(NOT_DETECTED);
