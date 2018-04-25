@@ -38,6 +38,11 @@ $(document).ready(function () {
         ordering: true,
         serverSide: false,
         searching: true,
+        autoWidth: false,
+        fixedHeader: {
+            header: false,
+            footer: false
+        },
         // dom: 't<"row no-gutters default-bottom-margin"<"col"><"col"p><"col">>',
         dom: '<"row no-gutters"t>',
         ajax: {
@@ -54,7 +59,8 @@ $(document).ready(function () {
                         entityList = entities;
                         $.each(jsonArray, function (index, item) {
                             item.enforceDate = dateFormatter(item.policyID);
-                            item.fromName = findEntityById(item.FromID).Name;
+                            // item.fromName = findEntityById(item.FromID).Name
+                            item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
                         });
@@ -78,6 +84,19 @@ $(document).ready(function () {
             {data: "DeleteYn"},
             {data: "NotifyYn"}
         ],
+
+        columnDefs: [
+            { width: '18%', targets: 0 },
+            { width: '10%', targets: 1 },
+            { width: '9%', targets: 2 },
+            { width: '18%', targets: 3 },
+            { width: '9%', targets: 4 },
+            { width: '9%', targets: 5 },
+            { width: '9%', targets: 6 },
+            { width: '9%', targets: 7 },
+            { width: '9%', targets: 8 }
+        ]
+
     });
 
     var securityEventTable = $('#securityEventTable').DataTable({
@@ -86,19 +105,29 @@ $(document).ready(function () {
         order: [[1, 'desc']],
         serverSide: false,
         searching: true,
-        dom : '<"row no-gutters"t>',
-        ajax : {
+        dom: '<"row no-gutters"t>',
+        ajax: {
             url: "/api/v1/logs/",
             dataSrc: function (result) {
                 return result;
-            }},
-        columns : [
+            }
+        },
+        columns: [
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_type"},
             {data: "device_id"},
             {data: "msg"}
+        ],
+        columnDefs: [
+            { width: '18%', targets: 0 },
+            { width: '15%', targets: 1 },
+            { width: '14%', targets: 2 },
+            { width: '15%', targets: 3 },
+            { width: '38%', targets: 4 },
+
         ]
+
     });
 
     var isLoading = true;
@@ -172,7 +201,7 @@ $(document).ready(function () {
     $("#policyButton").on("click", () => {
         chkCheckBox = '';
 
-        if(table.row('.selected').data().CreationYn === 'Y'){
+        if (table.row('.selected').data().CreationYn === 'Y') {
             $("#chkC").attr('checked', true);
             chkCheckBox += 'C';
         }
@@ -180,7 +209,7 @@ $(document).ready(function () {
         //     $("#chkC").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().ReadYn === 'Y'){
+        if (table.row('.selected').data().ReadYn === 'Y') {
             $("#chkR").attr('checked', true);
             chkCheckBox += 'R';
         }
@@ -188,7 +217,7 @@ $(document).ready(function () {
         //     $("#chkR").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().UpdateYn === 'Y'){
+        if (table.row('.selected').data().UpdateYn === 'Y') {
             $("#chkU").attr('checked', true);
             chkCheckBox += 'U';
         }
@@ -196,7 +225,7 @@ $(document).ready(function () {
         //     $("#chkU").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().DeleteYn === 'Y'){
+        if (table.row('.selected').data().DeleteYn === 'Y') {
             $("#chkD").attr('checked', true);
             chkCheckBox += 'D';
         }
@@ -204,7 +233,7 @@ $(document).ready(function () {
         //     $("#chkD").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().NotifyYn === 'Y'){
+        if (table.row('.selected').data().NotifyYn === 'Y') {
             $("#chkN").attr('checked', true);
             chkCheckBox += 'N';
         }
@@ -213,15 +242,23 @@ $(document).ready(function () {
         //     $("#chkC").attr('checked', false);
         // }
 
+
+        $("#from-Id").val(table.row('.selected').data().fromName);
+
+        $("#to-Id").val(table.row('.selected').data().toName);
+
+        $("#resource-Name").val(table.row('.selected').data().Resouce);
+
+
         $("#policy-confirm").attr('disabled', true);
     });
-    $('#deployLogModal').on('show.bs.modal',function (e) {
+    $('#deployLogModal').on('show.bs.modal', function (e) {
         deployLogTable.ajax.reload();
 
     });
     $('#modifyModal').on('show.bs.modal', function (e) {
 
-        if(nowClick.getAttribute('data-did') !== null) {
+        if (nowClick.getAttribute('data-did') !== null) {
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
             $("#gateway-id").val(device.gwid);
             $("#device-name").val(nowClick.getAttribute('data-did'));
@@ -245,7 +282,7 @@ $(document).ready(function () {
             } else
                 $('#register').html(device.reg + ' Registered');
         }
-        else{
+        else {
             $("#gateway-id").val('error');
             $("#device-name").val('error');
             $("#device-id").val('error');
@@ -263,12 +300,11 @@ $(document).ready(function () {
     });
     $("#policy-confirm").on("click", () => {
 
-        var tmp =  table.row('.selected').data();
+        var tmp = table.row('.selected').data();
         console.log(tmp);
         var policyEnforcementPoint = $('.policy-radio:checked');
 
-        var policy = {
-        };
+        var policy = {};
 
         var updateData = {
             fromId: tmp.FromID,
@@ -285,7 +321,7 @@ $(document).ready(function () {
             type: "PUT",
             data: updateData,
             dataType: 'json',
-            success: function(result) {
+            success: function (result) {
                 window.location.reload();
                 console.log(result);
             },
@@ -315,20 +351,21 @@ $(document).ready(function () {
         ordering: true,
         serverSide: false,
         searching: true,
-        dom : '<"row no-gutters"t>',
-        ajax : {
+        dom: '<"row no-gutters"t>',
+        ajax: {
             url: "/api/v1/Logs/policy",
             dataSrc: function (result) {
                 var logs = [];
-                $.each(result, function(index, item){
+                $.each(result, function (index, item) {
                     item.enforceDate = item.enforce_date;
                     item.fromName = findEntityById(item.from_id.toString()).Name;
                     item.toName = findEntityById(item.to_id.toString()).Name;
                     logs.push(item);
                 });
                 return logs;
-            }},
-        columns : [
+            }
+        },
+        columns: [
             {data: "enforceDate"},
             {data: "fromName"},
             {data: "toName"},
@@ -339,9 +376,12 @@ $(document).ready(function () {
     });
 
 
+    $('body > div:nth-child(3) > div > div:nth-child(4) > span').on('click', function (e) {
+        console.log(table.row('.selected').data());
+    })
+
+
 });
-
-
 
 
 // function sleep(milliseconds) {
@@ -367,9 +407,23 @@ function findEntityById(id) {
     return null;
 }
 
+function findDeviceByEid(eid) {
+    var idx = -1;
+    $.each(deviceList, function (index, item) {
+        if (item.eid === eid) {
+            idx = index;
+        }
+    });
+
+    if (idx !== -1) {
+        return deviceList[idx];
+    }
+    return null;
+}
+
 function findDeviceByDid(did) {
     var idx = -1;
-    $.each(deviceList,function (index, item){
+    $.each(deviceList, function (index, item) {
         if (item.did === did) {
             idx = index;
         }
@@ -380,10 +434,12 @@ function findDeviceByDid(did) {
     }
     return null;
 }
+
 function findOperationById() {
     $.each(deviceList, function (dIdx, device) {
         var count = 0;
         var entityName = [];
+        var entityId = [];
         var toName = [];
         var entityName_unique = [];
         var toName_unique = [];
@@ -391,6 +447,7 @@ function findOperationById() {
             if (dIdx == 0) {
                 count++;
                 entityName.push(security.EntityName);
+                entityId.push(security.EntityID);
                 toName.push(security.toName);
                 if (count = sIdx) {
                     // $.each(entityName, function(i, el){
@@ -406,7 +463,8 @@ function findOperationById() {
                     //     $("#to-Id").append("<option>" + toName_unique[i] +"</option>");
                     // }
                     $.each(entityName, function (i, el) {
-                        $("#from-Id").append("<option>" + entityName[i] + "</option>");
+                        // $("#from-Id").append("<option>" + entityName[i] + "</option>");
+                        $("#from-Id").append("<option>" + findDeviceByEid(Number(entityId[i])).dname + "</option>");
                     });
                     $.each(toName, function (i, el) {
                         $("#to-Id").append("<option>" + toName[i] + "</option>");
@@ -489,7 +547,6 @@ function enableButton(isEnabled) {
 // //var btn = $(e.relatedTarget);
 // //console.log(btn);
 // //console.log(table.row('.selected').data());
-
 
 
 /** add click listener to gateway title in device list view
@@ -644,6 +701,7 @@ function createDeviceListView() {
     $.ajax({
         url: '/api/v1/gateways',
         type: 'get',
+        async: false,
         success: function (gatewayResult) {
 
             $.each(gatewayResult, function (index, item) {
@@ -819,11 +877,11 @@ function operationJoiner(security) {
 
 function dateFormatter(date) {
     var str = '';
-    str += date.substring(0,4) + '년 ';
-    str += date.substring(4,6) + '월 ';
-    str += date.substring(6,8) + '일 ';
-    str += date.substring(8,10) + '시 ';
-    str += date.substring(10,12) + '분 ';
+    str += date.substring(0, 4) + '년 ';
+    str += date.substring(4, 6) + '월 ';
+    str += date.substring(6, 8) + '일 ';
+    str += date.substring(8, 10) + '시 ';
+    str += date.substring(10, 12) + '분 ';
     return str;
 }
 
@@ -926,15 +984,15 @@ function crudnListner() {
     var tmp = document.getElementsByClassName('form-check-input');
     change = '';
 
-    for ( let i = 0; i < tmp.length; i++){
-        if (tmp.item(i).checked == true){
+    for (let i = 0; i < tmp.length; i++) {
+        if (tmp.item(i).checked == true) {
             change += tmp.item(i).value;
         }
     }
     // console.log(change[0]);
-    if(chkCheckBox === change){
+    if (chkCheckBox === change) {
         $('#policy-confirm').attr('disabled', true);
-    }else{
+    } else {
         $('#policy-confirm').attr('disabled', false);
     }
 }

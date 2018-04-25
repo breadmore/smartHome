@@ -689,3 +689,11 @@ div .dataTables_paginate > .pagination {
     height: 20px;
     width: 110px;
 }
+
+#eventTable > thead > tr > td:nth-child(1){
+    width:80px;
+}
+
+#eventTable > thead > tr > td:nth-child(3){
+    width:80px;
+}
