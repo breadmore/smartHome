@@ -86,14 +86,14 @@ $(document).ready(function () {
 
         columnDefs: [
             { width: '18%', targets: 0 },
-            { width: '10%', targets: 1 },
+            { width: '12%', targets: 1 },
             { width: '9%', targets: 2 },
-            { width: '18%', targets: 3 },
-            { width: '9%', targets: 4 },
-            { width: '9%', targets: 5 },
-            { width: '9%', targets: 6 },
-            { width: '9%', targets: 7 },
-            { width: '9%', targets: 8 }
+            { width: '12%', targets: 3 },
+            { width: '11%', targets: 4 },
+            { width: '11%', targets: 5 },
+            { width: '11%', targets: 6 },
+            { width: '11%', targets: 7 },
+            { width: '11%', targets: 8 }
         ]
 
     });
@@ -128,10 +128,10 @@ $(document).ready(function () {
         ],
         columnDefs: [
             { width: '18%', targets: 0 },
-            { width: '15%', targets: 1 },
+            { width: '14%', targets: 1 },
             { width: '14%', targets: 2 },
-            { width: '15%', targets: 3 },
-            { width: '38%', targets: 4 },
+            { width: '14%', targets: 3 },
+            { width: '40%', targets: 4 },
 
         ]
     });
@@ -294,7 +294,7 @@ $(document).ready(function () {
             } else
                 $('#register').html(device.reg + ' Registered');
         }
-        else {
+        else if(nowClick.getAttribute('data-id')){
             $('.gateway-modify').show();
             $('.device-modify').hide();
             var device = findGatewayById(nowClick.getAttribute('data-id'));
@@ -307,6 +307,9 @@ $(document).ready(function () {
                 $('#gateway-conn').html(device.conn + ' Not Connected');
             }
             else $('#gateway-conn').html(device.conn + ' Connected');
+        }
+        else{
+            console.log('error!');
         }
 
     });

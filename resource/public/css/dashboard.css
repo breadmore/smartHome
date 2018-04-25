@@ -693,4 +693,21 @@ div .dataTables_paginate > .pagination {
 
 #eventTable > tbody > tr > td:nth-child(4){
     text-align: left!important;
+    text-indent: 20px;
+}
+
+.safe-event {
+    color: rgb(46, 204, 113) !important;
+}
+
+.danger-event {
+    color : #e74c3c !important;
+}
+
+#eventTable > tbody > tr > td {
+    font-size: 16px;
+}
+
+#eventTable > thead > tr > td {
+    font-size: 16px;
 }

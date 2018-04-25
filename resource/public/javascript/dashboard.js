@@ -65,9 +65,9 @@ $(document).ready(function() {
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '17%', targets: 0 },
-            { width: '35%', targets: 1 },
-            { width: '18%', targets: 2 },
+            { width: '13%', targets: 0 },
+            { width: '18.5%', targets: 1 },
+            { width: '17%', targets: 2 },
             // { width: '35%', targets: 3 },
 
         ]
