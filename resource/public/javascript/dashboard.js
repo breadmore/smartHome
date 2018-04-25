@@ -594,20 +594,20 @@ function updateLegacyStates(state) {
         console.log("gasB changed!");
         currentState.gasB = state.gas_blocker;
         if (currentState.gasB === 0) {
-            sendLog('log', 'gas blocked.');
+            sendLog('log', 'gas unblocked.');
         }
         else {
-            sendLog('log', 'gas unblocked.');
+            sendLog('log', 'gas blocked.');
         }
         // sendSensorLog();
     }
     if (currentState.gasD !== state.gas_detector) {
         console.log("gasD changed!");
         if (currentState.gasD === 0) {
-            sendLog('log', 'gas detected.');
+            sendLog('log', 'gas undetected.');
         }
         else {
-            sendLog('log', 'gas undetected.');
+            sendLog('log', 'gas detected.');
         }
         currentState.gasD = state.gas_detector;
         // sendSensorLog();
@@ -648,20 +648,21 @@ function legacyDeviceAction(type, command) {
     if (type === 1) {
         ip = '192.168.0.20';
         if (command === 0) {
-            msg = 'request jaesil mode off.';
-            msg = 'request led light off.';
+
+            msg = 'request led light on.';
         }
         else {
-            msg = 'request led light on.';
+            msg = 'request led light off.';
         }
     }
     else if (type === 2) {
         ip = '192.168.0.21'
         if (command === 0) {
-            msg = 'request jaesil mode off.';
+            msg = 'request jaesil mode on.';
         }
         else {
-            msg = 'request jaesil mode on.';
+            msg = 'request jaesil mode off.';
+
 
         }
     }
