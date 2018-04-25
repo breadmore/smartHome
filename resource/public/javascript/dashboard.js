@@ -311,23 +311,25 @@ $(document).ready(function() {
                     else {
                         console.error('event is undefined');
                     }
+
+                    if (currentXiaomi.magnet !== data.event) {
+                        console.log('magnet changed!');
+                        if (currentXiaomi.magnet === 'open') {
+                            sendLog('log', 'magnet closed.');
+                            currentXiaomi.magnet = 'close';
+                        }
+                        else {
+                            sendLog('log', 'magnet opened.');
+                            currentXiaomi.magnet = 'open';
+                        }
+                    }
                 }
                 else {
                     $('#xiaomiWindow').text(NOT_DETECTED);
                 }
 
                 console.log(currentXiaomi.magnet);
-                if (currentXiaomi.magnet !== data.event) {
-                    console.log('magnet changed!');
-                    if (currentXiaomi.magnet === 'open') {
-                        sendLog('log', 'magnet closed.');
-                        currentXiaomi.magnet = 'close';
-                    }
-                    else {
-                        sendLog('log', 'magnet opened.');
-                        currentXiaomi.magnet = 'open';
-                    }
-                }
+
 
                 break;
             case 'motion':

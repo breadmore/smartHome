@@ -15,7 +15,10 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    res.render('dashboard');
+    res.render('dashboard', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
     // authCheck(req, res, "dashboard");
 });
 
@@ -48,7 +51,10 @@ router.get('/regist', function (req, res) {
 // });
 
 router.get('/device_security', function (req, res) {
-    res.render('device_security');
+    res.render('device_security', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
     // authCheck(req, res, "device_security");
 });
 
@@ -73,12 +79,18 @@ router.get('/account', function (req, res) {
     //         authority : req.session.authority
     //     });
     // }
-    res.render('account');
+    res.render('account', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
     // authCheck(req, res, "account");
 });
 
 router.get('/logger', function (req, res) {
-    res.render('logger');
+    res.render('logger', {
+        userName : req.session.userName,
+        authority : req.session.authority
+    });
     // authCheck(req, res, "logger");
 
 });
