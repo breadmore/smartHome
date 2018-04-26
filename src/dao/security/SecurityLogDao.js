@@ -2,7 +2,7 @@
  * security policy log database.
  * todo : architect and impl...
  */
-var db = require('../../db/security');
+var db = require('../../db/gui');
 /**
  mysql> desc ResourceIDTbl;
  +----------+-------------+------+-----+---------+-------+

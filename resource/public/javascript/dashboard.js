@@ -20,7 +20,9 @@ var currentState = {
     window : undefined,
     human : undefined,
     gasB: undefined,
-    gasD: undefined
+    gasD: undefined,
+    mode: undefined,
+    light: undefined
 };
 
 var currentXiaomi = {
@@ -79,9 +81,9 @@ $(document).ready(function() {
         } );
     } ).draw();
 
-    setInterval(function () {
-        table.ajax.reload();
-    }, 500);
+    // setInterval(function () {
+    //     table.ajax.reload();
+    // }, 500);
 
     $(".environment_date").change(function () {
         getHourTemp($(".environment_date option:selected").val());
@@ -284,7 +286,7 @@ $(document).ready(function() {
         // console.log(data.humidity[0].value);
         // console.log(data.illuminaty.length);
         //todo [0].value addç
-        // $('#luxValue').text(data.illuminaty[0].value);
+        $('#luxValue').text(data.illuminaty[0].value);
 
     });
 
@@ -300,7 +302,7 @@ $(document).ready(function() {
                 if (currentXiaomi.magnet === undefined) {
                     currentXiaomi.magnet = data.event;
                 }
-                if (currentState.mode !== 0) {
+                if (currentState.mode === 1) {
                     if (data.event === 'open') {
                         $('#xiaomiWindow').text(OPENED);
                         // recordStart(1);
@@ -327,16 +329,14 @@ $(document).ready(function() {
                 else {
                     $('#xiaomiWindow').text(NOT_DETECTED);
                 }
-
                 console.log(currentXiaomi.magnet);
-
 
                 break;
             case 'motion':
                 if (currentXiaomi.motion === undefined) {
                     currentXiaomi.motion = data.event;
                 }
-                if (currentState.mode !== 0) {
+                if (currentState.mode === 1) {
                     if (data.event === 'motion') {
                         $('#xiaomiHuman').text(DETECTED);
                         // recordStart(2);
@@ -419,12 +419,12 @@ $(document).ready(function() {
     $('#roomModeController').on('click', function (e) {
         if (!$('#roomState').prop('checked')) {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, 0)
+            legacyDeviceAction(2, 1)
             // xiaomiAction({plug: 'on'});
         }
         else {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, 1);
+            legacyDeviceAction(2, 0);
             // xiaomiAction({plug: 'off'});
         }
     });
@@ -433,11 +433,11 @@ $(document).ready(function() {
     $('#lightController').on('click', function (e) {
         if (!$('#lightState').prop('checked')) {
             console.log($('#lightState').prop('checked'));
-            legacyDeviceAction(1, 0);
+            legacyDeviceAction(1, 1);
         }
         else {
             console.log($('#lightState').prop('checked'));
-            legacyDeviceAction(1, 1);
+            legacyDeviceAction(1, 0);
         }
     });
 
@@ -574,10 +574,8 @@ function updateChart(chart, chartData) {
 }
 
 function updateLegacyStates(state) {
-    // console.log(state);
-    // todo: jaesil or not jaesil check
-    if (state.mode === undefined || state.mode === null) {
-        state.mode = 1;
+    if (state.mode === undefined || currentState.mode === undefined) {
+        state.mode = 0;
         currentState.mode = state.mode;
     }
 
@@ -595,9 +593,17 @@ function updateLegacyStates(state) {
         $('#lightState').attr('disabled', 'disabled');
     }
 
-    if (state.mode !== 0) {
-        $('#roomState').prop("checked", false);
+    if (state.mode === 0) {
+        $('#roomState').prop("checked", true);
         $('#roomStatus').text(OCCUPIED);
+
+        $('#legacyWindow').text(NOT_DETECTED);
+        $('#legacyHuman').text(NOT_DETECTED);
+    }
+    else {
+
+        $('#roomState').prop("checked", false);
+        $('#roomStatus').text(OUTING);
 
         if (state.window_detector === 0) {
             $('#legacyWindow').text(NOT_DETECTED);
@@ -613,13 +619,6 @@ function updateLegacyStates(state) {
             // todo notify to detected state!
             $('#legacyHuman').text(DETECTED);
         }
-    }
-    else {
-        $('#roomState').prop("checked", true);
-        $('#roomStatus').text(OUTING);
-
-        $('#legacyWindow').text(NOT_DETECTED);
-        $('#legacyHuman').text(NOT_DETECTED);
     }
 
     if (state.gas_detector === 0) {
@@ -638,27 +637,30 @@ function updateLegacyStates(state) {
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
-        console.log("window changed!");
-        if (currentState.window === 0) {
-            sendLog('log', 'window opened.');
+        if (currentState.mode === 1) {
+            console.log("window changed!");
+            if (currentState.window === 0) {
+                sendLog('log', 'window opened.');
+            }
+            else {
+                sendLog('log', 'windows closed.');
+            }
+            currentState.window = state.window_detector;
         }
-        else {
-            sendLog('log', 'windows closed.');
-        }
-        currentState.window = state.window_detector;
-        // sendSensorLog();
     }
 
     if (currentState.human !== state.human_detector) {
-        console.log("human changed!");
-        if (currentState.human === 0) {
-            sendLog('log', 'human detected.');
+        if (currentState.mode === 1) {
+            console.log("human changed!");
+            if (currentState.human === 0) {
+                sendLog('log', 'human detected.');
+            }
+            else {
+                sendLog('log', 'human undetected.');
+            }
+            currentState.human = state.human_detector;
         }
-        else {
-            sendLog('log', 'human undetected.');
-        }
-        currentState.human = state.human_detector;
-        // sendSensorLog();
+
     }
     if (currentState.gasB !== state.gas_blocker) {
         console.log("gasB changed!");
@@ -669,7 +671,6 @@ function updateLegacyStates(state) {
         else {
             sendLog('log', 'gas blocked.');
         }
-        // sendSensorLog();
     }
     if (currentState.gasD !== state.gas_detector) {
         console.log("gasD changed!");
@@ -680,14 +681,20 @@ function updateLegacyStates(state) {
             sendLog('log', 'gas detected.');
         }
         currentState.gasD = state.gas_detector;
-        // sendSensorLog();
     }
 
-    // if (currentState.mode !== state.mode) {
-    //     console.log("mode changed!");
-    //     currentState.mode = state.mode;
-    //     sendSensorLog();
-    // }
+    if (currentState.mode !== state.mode) {
+        console.log("mode changed!");
+        if (currentState.mode === 0) {
+            sendLog('log', 'changed to outing mode');
+        }
+        else {
+            sendLog('log', 'changed to occupied mode')
+        }
+
+        currentState.mode = state.mode;
+
+    }
     //
     // if (currentState.led !== state.led) {
     //     console.log("led changed!");
@@ -743,7 +750,7 @@ function legacyDeviceAction(type, command) {
     var ip = undefined;
     var msg;
     if (type === 1) {
-        ip = '192.168.0.20';
+        ip = '192.168.0.100';
         if (command === 0) {
 
             msg = 'request led light on.';
@@ -753,14 +760,12 @@ function legacyDeviceAction(type, command) {
         }
     }
     else if (type === 2) {
-        ip = '192.168.0.21'
+        ip = '192.168.0.100';
         if (command === 0) {
             msg = 'request jaesil mode on.';
         }
         else {
             msg = 'request jaesil mode off.';
-
-
         }
     }
     else {
@@ -780,6 +785,7 @@ function legacyDeviceAction(type, command) {
         success: function (result) {
             console.log(result);
             sendLog('service', msg);
+
         },
         error: function (err) {
             console.log(err);

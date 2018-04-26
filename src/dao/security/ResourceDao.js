@@ -1,5 +1,5 @@
 
-var db = require('../../db/security');
+var db = require('../../db/gui');
 /**
  CREATE TABLE `test`.`ResourceIDTbl` (
  `ID` VARCHAR(32) NULL DEFAULT NULL,

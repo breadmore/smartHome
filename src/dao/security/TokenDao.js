@@ -1,4 +1,4 @@
-var db = require('../../db/security');
+var db = require('../../db/gui');
 /**
  CREATE TABLE `test`.`TokenIDTbl` (
  `ID` VARCHAR(16) NULL,

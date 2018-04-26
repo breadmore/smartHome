@@ -34,6 +34,34 @@ var States = {
 
     getLastState: function (callback) {
         return db.query('select * from states where id = 1',callback);
+    },
+
+    ledOff: function (callback) {
+        var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        return db.query('update states set led = 0, updated_at=? where id=1',
+            [now],
+            callback)
+    },
+
+    ledOn: function (callback) {
+        var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        return db.query('update states set led = 1, updated_at=? where id=1',
+            [now],
+            callback)
+    },
+
+    setOccupiedMode: function (callback) {
+        var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        return db.query('update states set mode = 0, updated_at=? where id=1',
+            [now],
+            callback)
+    },
+
+    setOutingMode: function (callback) {
+        var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        return db.query('update states set mode = 1, updated_at=? where id=1',
+            [now],
+            callback)
     }
 };
 

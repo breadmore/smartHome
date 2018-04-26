@@ -1,4 +1,4 @@
-var db = require('../../db/security');
+var db = require('../../db/gui');
 var moment = require('moment');
 /**
 

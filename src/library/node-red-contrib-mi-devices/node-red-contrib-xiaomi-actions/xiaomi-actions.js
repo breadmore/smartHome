@@ -235,8 +235,8 @@ module.exports = (RED) => {
     function encryptToken(token) {
         var aes = require('aes-js');
 
-        var key = "lg9ocmqwbhcojgd9";
-        // var key = "554C48F505464824";  //etri
+        // var key = "lg9ocmqwbhcojgd9";
+        var key = "554C48F505464824";  //etri
 
         var iv = "17996d093d28ddb3ba695a2e6f58562e";
 
