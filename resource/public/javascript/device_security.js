@@ -281,7 +281,7 @@ $(document).ready(function () {
             $("#pre-shared-key").val(device.psk);
             $("#entity-id").val(device.eid);
             $("#object-id").val(device.oid);
-            $("#add-type").val(device.type);
+            $("#modi-device-type").val(device.type);
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
@@ -312,6 +312,7 @@ $(document).ready(function () {
             else $('#gateway-conn').html(device.conn + ' Connected');
         }
         else{
+
             console.log('error!');
         }
 
@@ -321,11 +322,13 @@ $(document).ready(function () {
         if (nowClick.getAttribute('data-did') !== null) {
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
             console.log(device);
-            $("#del-type").text(device.type);
-            $("#del-name").text(device.dname);
+            $("#del-name").html(device.type + ' - ' + device.dname);
+            // $("#del-name").text(device.dname);
         }
-        else
-            ;
+        else if(nowClick.getAttribute('data-id')) {
+            var device = findGatewayById(nowClick.getAttribute('data-id'));
+            $("#del-name").html(device.name);
+        }
         // nowClick;
         // $("#delete-id").text(data.user_id)
     });
