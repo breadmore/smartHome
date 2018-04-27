@@ -283,17 +283,30 @@ $(document).ready(function () {
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
-                $('#connected').html(device.conn + ' Not Connected');
+                $('#conn-on').attr("checked",false);
+                $('#conn-off').attr("checked", true);
             }
-            else $('#connected').html(device.conn + ' Connected');
+            else {
+                $('#conn-on').attr("checked",true);
+                $('#conn-off').attr("checked",false);
+            }
+
             if ('<i class="far fa-address-card"></i>' === device.auth) {
-                $('#authenticate').html(device.auth + ' Not Authorized');
+                $('#auth-on').attr("checked",false);
+                $('#auth-off').attr("checked", true);
             }
-            else $('#authenticate').html(device.auth + ' Authorized');
+            else {
+                $('#auth-on').attr("checked",true);
+                $('#auth-off').attr("checked",false);
+            }
             if ('<i class="far fa-eye-slash"></i>' === device.reg) {
-                $('#register').html(device.reg + ' Not Registered');
-            } else
-                $('#register').html(device.reg + ' Registered');
+                $('#regi-on').attr("checked",false);
+                $('#regi-off').attr("checked", true);
+            }
+            else{
+                $('#regi-on').attr("checked",true);
+                $('#regi-off').attr("checked",false);
+            }
         }
         else if(nowClick.getAttribute('data-id')){
 
@@ -360,13 +373,14 @@ $(document).ready(function () {
 
     })
     $('#deleteModal').on('show.bs.modal', function (e) {
+        var device;
         if (nowClick.getAttribute('data-did') !== null) {
-            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            device = findDeviceByDid(nowClick.getAttribute('data-did'));
             console.log(device);
             $("#del-name").html(device.type + ' - ' + device.dname);
         }
         else if(nowClick.getAttribute('data-id')) {
-            var device = findGatewayById(nowClick.getAttribute('data-id'));
+            device = findGatewayById(nowClick.getAttribute('data-id'));
             $("#del-name").html(device.name);
         }
         $('#delete-User').click(function () {
@@ -503,6 +517,19 @@ function findEntityById(id) {
     });
     if (idx !== -1) {
         return entityList[idx];
+    }
+    return null;
+}
+
+function findDeviceByGwid(gwid) {
+    var idx = -1;
+    $.each(deviceList, function (index, item) {
+        if (item.gwid === gwid) {
+            idx = index;
+        }
+    });
+    if (idx !== -1) {
+        return deviceList[idx];
     }
     return null;
 }
@@ -697,13 +724,15 @@ function addClickListenerToGatewayTitle() {
                 $(deviceInfoList[i]).removeClass('selected');
             }
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
-            if(findGatewayByDid(nowClick.getAttribute('data-id')===null)){
-                enableManageButton(false);
+            if(findDeviceByGwid(nowClick.getAttribute('data-id')) === null){
+                enableManageButton(true);
             }
             else
-                enableManageButton(true);
+                enableManageButton(false);
         }
     });
+
+
 
     function findGatewayByDid(id) {
         var idx = -1;
