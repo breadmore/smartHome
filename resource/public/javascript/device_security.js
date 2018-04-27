@@ -108,7 +108,7 @@ $(document).ready(function () {
         ajax: {
             url: "/api/v1/logs",
             dataSrc: function (result) {
-                console.log(result);
+                // console.log(result);
 
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
@@ -274,14 +274,14 @@ $(document).ready(function () {
             $('.gateway-modify').hide();
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            console.log(device);
             $("#gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
             $("#pre-shared-key").val(device.psk);
             $("#entity-id").val(device.eid);
             $("#object-id").val(device.oid);
-            $("#modi-device-type").val(device.type);
+            var modiDtype = icon2Type(device.type);
+            $("#modi-device-type").val(modiDtype);
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
@@ -791,6 +791,7 @@ function createDeviceListView() {
                         $('.tree').append(deviceListForm(item, deviceList));
                         addClickListenerToGatewayTitle();
                         $("#add-gateway-id").append("<option value=" + item.id + ">" + item.name + "</option>");
+                        $("#gateway-id").append("<option value=" + item.id + ">" + item.name + "</option>");
                     });
                     addClickListenerToDeviceInfo();
                 },
@@ -876,6 +877,38 @@ function type2Icon(type) {
         return icon = '<i class="fas fa-question"></i><span>Unknown</span>'
     }
     return icon;
+}
+
+function icon2Type(icon) {
+    var type = 0;
+    if (icon === '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>') {
+        type = 1;
+    }
+    else if (icon === '<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>') {
+        type = 2;
+    }
+    else if (icon === '<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>') {
+        type = 3;
+    }
+    else if (icon === '<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>') {
+        type = 4;
+    }
+    else if (icon === '<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>') {
+        type = 5;
+    }
+    else if (icon === '<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>') {
+        type = 6;
+    }
+    else if (icon === '<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>') {
+        type = 7;
+    }
+    else if (icon === '<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>') {
+        type = 8;
+    }
+    else {
+        type = 0;
+    }
+    return type;
 }
 
 

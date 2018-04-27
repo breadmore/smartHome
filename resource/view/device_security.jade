@@ -168,18 +168,8 @@ block content
                     .modal-body-content
                         .gateway_id Gateway ID
                         select#add-gateway-id
-                        .device-name Device Name
-                        input(type="text" value="")#add-device-name
-                        .device-id Device ID
-                        input(type="text")#add-device-id
-                        .pre_shared_key Pre Shared Key
-                        input(type="text" value="")#add-pre-shared-key
-                        .entity-id Entity ID
+                        .entity-id Product ID(Entity ID)
                         input(type="text" value="")#add-entity-id
-                        .object-id Object ID
-                        input(type="text" value="")#add-object-id
-                        .session-id Session ID
-                        input(type="text" value="")#add-session-id
                         .select-device-type Device type
                         select#add-type
                             option(value=1, selected="selected") GasDetector
@@ -190,6 +180,16 @@ block content
                             option(value=6) DoorSensor
                             option(value=7) SmartPlug
                             option(value=8) SmartCamera
+                        .device-id Device ID
+                        input(type="text")#add-device-id
+                        .device-name Device Name
+                        input(type="text" value="")#add-device-name
+                        .pre_shared_key Pre Shared Key
+                        input(type="text" value="")#add-pre-shared-key
+                        .object-id Object ID
+                        input(type="text" value="")#add-object-id
+                        .session-id Session ID
+                        input(type="text" value="")#add-session-id
                         .connection Connection
                         .radio-group#add-connection
                             label.radio-inline
@@ -229,19 +229,9 @@ block content
                 .modal-body
                     .modal-body-content
                         p Gateway ID
-                        input(type="number")#gateway-id
-                        p Device Name
-                        input(type="text" value="")#device-name
-                        p Device ID
-                        input(type="text")#device-id
-                        p Pre Shared Key
-                        input(type="text")#pre-shared-key
-                        p Entity ID
+                        select#gateway-id
+                        p Product ID(Entity ID)
                         input(type="text")#entity-id
-                        p Object ID
-                        input(type="text")#object-id
-                        p Session ID
-                        input(type="text")#session-id
                         p Device type
                         //id change type -> modi-device-type
                         select#modi-device-type
@@ -253,6 +243,16 @@ block content
                             option(value=6) DoorSensor
                             option(value=7) SmartPlug
                             option(value=8) SmartCamera
+                        p Device ID
+                        input(type="text")#device-id
+                        p Device Name
+                        input(type="text" value="")#device-name
+                        p Pre Shared Key
+                        input(type="text")#pre-shared-key
+                        p Object ID
+                        input(type="text")#object-id
+                        p Session ID
+                        input(type="text")#session-id
                         p Connected
                         .radio-group#connected
                             label.radio-inline
@@ -280,7 +280,7 @@ block content
                 .modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters
-                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Delete
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Update
                         button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     #policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog(role='document')
