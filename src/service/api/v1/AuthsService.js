@@ -97,12 +97,13 @@ function policyApplyInitServicer() {
                         }
                         else {
                             securityLog = {
+                                eventDate: authRow.updated_at,
                                 eventType: 'security',
                                 deviceType: authRow.eid,
                                 deviceId: authRow.did,
                                 msg: msg
                             };
-                            logDao.insert(securityLog, function (err, result) {
+                            logDao.insertModifyLog(securityLog, function (err, result) {
                                 if (err) {
                                     console.log();
                                 }

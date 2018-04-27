@@ -200,6 +200,9 @@ $(document).ready(function () {
     $('#resource-Name').attr('disabled', true);
     $('#policy-confirm').attr('disabled', true);
     $('#policyButton').attr('disabled', true);
+    $('#modifyButton').attr('disabled', true);
+    $('#deleteButton').attr('disabled', true);
+
     $('.radio-server').attr('checked', true);
 
     $(".form-check-input").on("click", () => {
@@ -264,19 +267,21 @@ $(document).ready(function () {
         deployLogTable.ajax.reload();
 
     });
+
     $('#modifyModal').on('show.bs.modal', function (e) {
 
         if (nowClick.getAttribute('data-did') !== null) {
             $('.gateway-modify').hide();
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            $("#device-gateway-id").val(device.gwid);
+            console.log(device);
+            $("#gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
             $("#pre-shared-key").val(device.psk);
             $("#entity-id").val(device.eid);
             $("#object-id").val(device.oid);
-            $("#type").val(device.type);
+            $("#add-type").val(device.type);
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
@@ -349,7 +354,7 @@ $(document).ready(function () {
             data: updateData,
             dataType: 'json',
             success: function (result) {
-                window.location.reload();
+                securityEventTable.ajax.reload();
                 console.log(result);
             },
             error: function (err) {
@@ -531,12 +536,22 @@ function findOperationById() {
 function enableButton(isEnabled) {
     if (isEnabled) {
         $('#policyButton').removeAttr('disabled');
-        // $('#deleteButton').removeAttr('disabled');
     }
     else {
         $('#policyButton').attr('disabled', 'disabled');
-        // $('#deleteButton').attr('disabled', 'disabled');
     }
+}
+
+function enableManageButton(isEnabled) {
+    if (isEnabled) {
+        $('#modifyButton').removeAttr('disabled');
+        $('#deleteButton').removeAttr('disabled');
+    }
+    else {
+        $('#modifyButton').attr('disabled','disabled');
+        $('#deleteButton').attr('disabled', 'disabled');
+    }
+
 }
 
 // todo : modal data preset data example.
@@ -635,6 +650,7 @@ function addClickListenerToDeviceInfo() {
         item.addEventListener('click', function (e) {
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
+                enableManageButton(false);
             }
             else {
                 $(this).addClass('selected');
@@ -642,6 +658,8 @@ function addClickListenerToDeviceInfo() {
                     if (i != index) {
                         $(deviceInfoList[i]).removeClass('selected');
                         console.log('remove!');
+                        enableManageButton(true);
+
                     }
                 }
             }

@@ -55,6 +55,12 @@ var Log = {
 
     },
 
+    insertModifyLog: function(log, callback) {
+        return db.query('insert into Security_Log (event_date, event_type, device_type, device_id, msg) values (?, ?, ?, ?, ? )',
+            [log.eventDate, log.eventType, log.deviceType, log.deviceId, log.msg],
+            callback);
+    },
+
     // selectAllSecurityEvent(callback) {
     //     return db.query('select * from Security_Log where event_type = "security" or event_type = "critical"',
     //         callback);
