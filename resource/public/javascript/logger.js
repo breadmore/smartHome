@@ -24,7 +24,9 @@ $(function () {
             {data: null},
             {data: "event_date"},
             {data: "event_type"},
-            // {data: "device_type"},
+            {data: "device_name"},
+            {data: "device_type"},
+            {data: "device_id"},
             {data: "msg"}
         ]
     });
