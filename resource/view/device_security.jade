@@ -25,7 +25,7 @@ block content
                 span#refresh(style='float:left; background-color:#65c0c6;border: 6px solid #65c0c6; padding:5px;font-size:1rem; line-height:1; margin:auto 5px;color:white; border-radius: 0.25rem;') REFRESH
                     i.fas.fa-redo-alt(style='float:left; margin-left:5px; margin-right:5px;')
                 //span Refresh
-                input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton
+                input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#deleteModal" data-toggle="modal")#deleteButton
                 input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
                 input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
                 input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addButton
@@ -341,13 +341,32 @@ block content
                                     th resource_name
                                     th pre_operation
                                     th current_operation
-                //.modal-footer
+
+            //.modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters
                         button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Delete
                         button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
 
-
+    #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    .modal-title Delete?
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .modal-body-content
+                        span Do you want to Delete
+                        span#del-type
+                        span  -
+                        span#del-name
+                        span  ?
+                .modal-footer
+                    //button.modal-cancel(data-dismiss="modal") Cancel
+                    .col-12.text-center.no-gutters
+                        button.btn.btn-primary.btn-action.modal-btn#delete-User(data-dismiss="modal") Delete User
+                        button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
 
     //.col-12.no-padding
         input.btn.btn-primary.btn-action(type='button', value='Delete')#deleteButton

@@ -189,9 +189,7 @@ $(document).ready(function () {
     //     nowClick = this;
     //     console.log(nowClick);
     // });
-    $("#deleteButton").on("click", () => {
-        deleteResourceClicked();
-    });
+
     $("#refresh").on("click", () => {
         window.location.reload();
     });
@@ -273,7 +271,7 @@ $(document).ready(function () {
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
             $("#device-gateway-id").val(device.gwid);
-            $("#device-name").val(nowClick.getAttribute('data-did'));
+            $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
             $("#pre-shared-key").val(device.psk);
             $("#entity-id").val(device.eid);
@@ -313,6 +311,20 @@ $(document).ready(function () {
         }
 
     });
+
+    $('#deleteModal').on('show.bs.modal', function (e) {
+        if (nowClick.getAttribute('data-did') !== null) {
+            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            console.log(device);
+            $("#del-type").text(device.type);
+            $("#del-name").text(device.dname);
+        }
+        else
+            ;
+        // nowClick;
+        // $("#delete-id").text(data.user_id)
+    });
+
     $("#policy-confirm").on("click", () => {
 
         var tmp = table.row('.selected').data();
@@ -1005,10 +1017,7 @@ function createResourceName() {
     });
 }
 
-function deleteResourceClicked() {
-    console.log(nowClick);
-    nowClick;
-}
+
 
 //ktw add
 
