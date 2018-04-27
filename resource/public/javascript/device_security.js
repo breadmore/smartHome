@@ -108,6 +108,7 @@ $(document).ready(function () {
         ajax: {
             url: "/api/v1/logs",
             dataSrc: function (result) {
+                // console.log(result);
                 check(result);
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
@@ -136,7 +137,7 @@ $(document).ready(function () {
 
     setInterval(() => {
         securityEventTable.ajax.reload();
-    }, 5000);
+    }, 3000);
 
     var isLoading = true;
     var loading = setInterval(function () {
@@ -187,9 +188,7 @@ $(document).ready(function () {
     //     nowClick = this;
     //     console.log(nowClick);
     // });
-    $("#deleteButton").on("click", () => {
-        deleteResourceClicked();
-    });
+
     $("#refresh").on("click", () => {
         window.location.reload();
     });
@@ -200,6 +199,9 @@ $(document).ready(function () {
     $('#resource-Name').attr('disabled', true);
     $('#policy-confirm').attr('disabled', true);
     $('#policyButton').attr('disabled', true);
+    $('#modifyButton').attr('disabled', true);
+    $('#deleteButton').attr('disabled', true);
+
     $('.radio-server').attr('checked', true);
 
     $(".form-check-input").on("click", () => {
@@ -270,13 +272,14 @@ $(document).ready(function () {
             $('.gateway-modify').hide();
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            $("#device-gateway-id").val(device.gwid);
-            $("#device-name").val(nowClick.getAttribute('data-did'));
+            $("#gateway-id").val(device.gwid);
+            $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
             $("#pre-shared-key").val(device.psk);
             $("#entity-id").val(device.eid);
             $("#object-id").val(device.oid);
-            $("#type").val(device.type);
+            var modiDtype = icon2Type(device.type);
+            $("#modi-device-type").val(modiDtype);
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
@@ -307,10 +310,27 @@ $(document).ready(function () {
             else $('#gateway-conn').html(device.conn + ' Connected');
         }
         else{
+
             console.log('error!');
         }
 
     });
+
+    $('#deleteModal').on('show.bs.modal', function (e) {
+        if (nowClick.getAttribute('data-did') !== null) {
+            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            console.log(device);
+            $("#del-name").html(device.type + ' - ' + device.dname);
+            // $("#del-name").text(device.dname);
+        }
+        else if(nowClick.getAttribute('data-id')) {
+            var device = findGatewayById(nowClick.getAttribute('data-id'));
+            $("#del-name").html(device.name);
+        }
+        // nowClick;
+        // $("#delete-id").text(data.user_id)
+    });
+
     $("#policy-confirm").on("click", () => {
 
         var tmp = table.row('.selected').data();
@@ -517,12 +537,22 @@ function findOperationById() {
 function enableButton(isEnabled) {
     if (isEnabled) {
         $('#policyButton').removeAttr('disabled');
-        // $('#deleteButton').removeAttr('disabled');
     }
     else {
         $('#policyButton').attr('disabled', 'disabled');
-        // $('#deleteButton').attr('disabled', 'disabled');
     }
+}
+
+function enableManageButton(isEnabled) {
+    if (isEnabled) {
+        $('#modifyButton').removeAttr('disabled');
+        $('#deleteButton').removeAttr('disabled');
+    }
+    else {
+        $('#modifyButton').attr('disabled','disabled');
+        $('#deleteButton').attr('disabled', 'disabled');
+    }
+
 }
 
 // todo : modal data preset data example.
@@ -621,6 +651,7 @@ function addClickListenerToDeviceInfo() {
         item.addEventListener('click', function (e) {
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
+                enableManageButton(false);
             }
             else {
                 $(this).addClass('selected');
@@ -628,6 +659,8 @@ function addClickListenerToDeviceInfo() {
                     if (i != index) {
                         $(deviceInfoList[i]).removeClass('selected');
                         console.log('remove!');
+                        enableManageButton(true);
+
                     }
                 }
             }
@@ -756,6 +789,7 @@ function createDeviceListView() {
                         $('.tree').append(deviceListForm(item, deviceList));
                         addClickListenerToGatewayTitle();
                         $("#add-gateway-id").append("<option value=" + item.id + ">" + item.name + "</option>");
+                        $("#gateway-id").append("<option value=" + item.id + ">" + item.name + "</option>");
                     });
                     addClickListenerToDeviceInfo();
                 },
@@ -841,6 +875,38 @@ function type2Icon(type) {
         return icon = '<i class="fas fa-question"></i><span>Unknown</span>'
     }
     return icon;
+}
+
+function icon2Type(icon) {
+    var type = 0;
+    if (icon === '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>') {
+        type = 1;
+    }
+    else if (icon === '<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>') {
+        type = 2;
+    }
+    else if (icon === '<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>') {
+        type = 3;
+    }
+    else if (icon === '<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>') {
+        type = 4;
+    }
+    else if (icon === '<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>') {
+        type = 5;
+    }
+    else if (icon === '<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>') {
+        type = 6;
+    }
+    else if (icon === '<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>') {
+        type = 7;
+    }
+    else if (icon === '<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>') {
+        type = 8;
+    }
+    else {
+        type = 0;
+    }
+    return type;
 }
 
 
@@ -1003,10 +1069,7 @@ function createResourceName() {
     });
 }
 
-function deleteResourceClicked() {
-    console.log(nowClick);
-    nowClick;
-}
+
 
 //ktw add
 
