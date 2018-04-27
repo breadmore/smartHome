@@ -109,13 +109,12 @@ $(document).ready(function () {
             url: "/api/v1/logs",
             dataSrc: function (result) {
                 // console.log(result);
-
+                check(result);
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
                 });
-
                 return result;
             }
         },
@@ -267,7 +266,6 @@ $(document).ready(function () {
         deployLogTable.ajax.reload();
 
     });
-
     $('#modifyModal').on('show.bs.modal', function (e) {
         if (nowClick.getAttribute('data-did') !== null) {
             $('.gateway-modify').hide();
@@ -1249,16 +1247,53 @@ function insertSecurityLog(data) {
     });
 }
 
+var before_critical = [];
+var after_critical = [];
+var check_count = 0;
+
+function check(data) {
+
+    if (check_count === 0) {
+        check_count = 1;
+        $.each(data, (index, item) => {
+            if (item.event_type === "critical"){
+                before_critical.push(item.id);
+                // console.log(before_critical);
+            }
+        });
+    } else if (check_count === 1) {
+        $.each(data, (index, item) => {
+            if (item.event_type === "critical"){
+                after_critical.push(item.id);
+            }
+        });
+        $.each(before_critical, (index, item) => {
+            // console.log(before_critical.length);
+            $.each(after_critical, (sIndex, sItem) => {
+                tempar = [];
+                if (item === sItem) {
+                    before_critical.remove(item);
+                    after_critical.remove(sItem);
+                    // before_critical.splice($.inArray(item, before_critical), 1);
+                    // after_critical.splice($.inArray(sItem, after_critical), 1);
+                    tempar = [item];
+                    // before_critical.splice(index, 1);
+                    // after_critical.splice(sIndex, 1);
+                } else if (item != sItem) {
+                }
+            });
+            if (index === before_critical.length) {
+                console.log(after_critical);
+                before_critical = after_critical;
+                after_critical = [];
+            }
+        });
+
+    }
 
 
 
-
-
-
-
-
-
-
+}
 
 
 

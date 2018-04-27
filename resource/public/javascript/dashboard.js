@@ -54,8 +54,28 @@ $(document).ready(function() {
         ajax : {
             url: "/api/v1/logs/recentservice",
             dataSrc: function (result) {
+                console.log(result);
                 $.each(result, (index, item) => {
-                    item.event_date = dateFormatter(item.event_date)
+                    $.ajax({
+                        url: '/api/v1/devices/' + '12965942',   //change to item.device_id
+                        type: 'get',
+                        async: false,
+                        success: function (result) {
+                            item.device_name = result[0].dname;
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+
+                    if(item.device_id == null){     //error catch code
+                        item.device_id = '';
+                    }
+                    if(item.device_type == null){   //error catch code
+                        item.device_type = '';
+                    }
+
+                    item.event_date = dateFormatter(item.event_date);
                 });
                 return result;
             }},
@@ -63,13 +83,15 @@ $(document).ready(function() {
             {data: null},
             {data: "event_date"},
             {data: "event_type"},
-            // {data: "device_type"},
+            {data: "device_name"},
+            {data: "device_type"},
+            {data: "device_id"},
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '13%', targets: 0 },
-            { width: '18.5%', targets: 1 },
-            { width: '17%', targets: 2 },
+            // { width: '13%', targets: 0 },
+            // { width: '18.5%', targets: 1 },
+            // { width: '17%', targets: 2 },
             // { width: '35%', targets: 3 },
 
         ]
