@@ -59,7 +59,7 @@ $(document).ready(function () {
                         $.each(jsonArray, function (index, item) {
                             item.enforceDate = dateFormatter(item.policyID,1);
                             // item.fromName = findEntityById(item.FromID).Name
-                            item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;
+                            item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;      //this code is error. line 576 is same error.
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
                         });
