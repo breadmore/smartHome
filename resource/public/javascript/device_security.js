@@ -1178,50 +1178,82 @@ function insertSecurityLog(data) {
 }
 
 var before_critical = [];
-var after_critical = [];
 var check_count = 0;
+var test_array = [];
+var first_msg = [];
+var first_msg_count;
 
 function check(data) {
-
-    if (check_count === 0) {
-        check_count = 1;
-        $.each(data, (index, item) => {
-            if (item.event_type === "critical"){
-                before_critical.push(item.id);
-                // console.log(before_critical);
-            }
-        });
-    } else if (check_count === 1) {
-        $.each(data, (index, item) => {
-            if (item.event_type === "critical"){
-                after_critical.push(item.id);
-            }
-        });
-        $.each(before_critical, (index, item) => {
-            // console.log(before_critical.length);
-            $.each(after_critical, (sIndex, sItem) => {
-                tempar = [];
-                if (item === sItem) {
-                    before_critical.remove(item);
-                    after_critical.remove(sItem);
-                    // before_critical.splice($.inArray(item, before_critical), 1);
-                    // after_critical.splice($.inArray(sItem, after_critical), 1);
-                    tempar = [item];
-                    // before_critical.splice(index, 1);
-                    // after_critical.splice(sIndex, 1);
-                } else if (item != sItem) {
+    var after_critical = [];
+    var tempArray = [];
+    var overlapArray = [];
+    $.each(data, function (index, item) {
+        if (item.event_type === "critical"){
+            test_array.push(item.id);
+        }
+    });
+    if (test_array.length == 0) {
+    } else {
+        console.log("length 1111");
+        if (check_count === 0) {
+            check_count = 1;
+            $.each(data, (index, item) => {
+                if (item.event_type === "critical"){
+                    before_critical.push(item.id);
+                    first_msg.push(item.msg);
+                    first_msg_count = 0;
                 }
             });
-            if (index === before_critical.length) {
-                console.log(after_critical);
-                before_critical = after_critical;
-                after_critical = [];
+        } else if (check_count === 1) {
+            $.each(data, (index, item) => {
+                if (item.event_type === "critical"){
+                    after_critical.push(item.id);
+                }
+            });
+            console.log("before length"+before_critical.length);
+            if (before_critical.length == 1 && first_msg_count == 0) {
+                alert(first_msg[0]);
+                first_msg_count = 1;
             }
-        });
+            $.each(before_critical, (index, item) => {
+                $.each(after_critical, (sIndex, sItem) => {
+                    if (item === sItem) {
+                        tempArray.push(sItem);
+                    } else if (item != sItem) {}
+                });
+                if (index === (before_critical.length-1)) {
+                    // console.log("before_critical");
+                    // console.log(before_critical);
+                    before_critical.length = 0;
+                    $.each(after_critical, (aindex, aitem) => {
+                        before_critical.push(aitem);
+                    });
+                    // console.log("before_critical");
+                    // console.log(before_critical);
+                    // console.log("after_critical");
+                    // console.log(after_critical);
+                    $.each(tempArray, (tindex, tItem) => {
+                        after_critical.splice($.inArray(tItem, after_critical), 1);
+                    });
+                    // console.log("after_critical");
+                    // console.log(after_critical);
+                    overlapArray = after_critical;
+                    // console.log("등록된것");
+                    // console.log(overlapArray);
+                    if (overlapArray.length > 0) {
+                        $.each(data, (oindex, oitem) => {
+                            // console.log(oitem.id);
+                            if (overlapArray == oitem.id) {
+                                alert(oitem.msg);
+                            }
+                        })
+                        // alert(overlapArray);
+                    }
 
+                }
+            });
+        }
     }
-
-
 
 }
 
