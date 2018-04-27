@@ -337,7 +337,7 @@ $(document).ready(function () {
             data: updateData,
             dataType: 'json',
             success: function (result) {
-                window.location.reload();
+                securityEventTable.ajax.reload();
                 console.log(result);
             },
             error: function (err) {
