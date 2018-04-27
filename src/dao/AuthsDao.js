@@ -73,7 +73,33 @@ var Auths = {
 
     selectAllDidByEid: function (data, callback) {
         return db.query('select * from auths where eid = ?', Number(data.fromId), callback);
-    }
+    },
+
+    deleteDeviceById: function (id,callback) {
+        return db.query('delete from auths where id = ?',
+            id,
+            callback);
+    },
+    /**
+     * deleteGateway
+     */
+    // deleteGatewayByDId: function (did,callback) {
+    //     return db.query('delete from auths where did = ?',
+    //         did,
+    //         callback);
+    // },
+    updateDeviceById: function (id, callback) {
+        return db.query('update auths set gwid = ?, eid = ?, type =? , did = ?, dname = ?, psk = ?, oid = ?, sid = ? where id = ?',
+            [did.gwid, did.eid, did.type, did.did, did.dname, did.psk, did.oid, did.sid, did.id],
+            callback);
+        /**
+         * 영훈
+         conn, auth, reg 버튼 구현 후 아래 주석으로 실행
+         */
+        // return db.query('update auths set gwid = ?, eid = ?, type =? , did = ?, dname = ?, psk = ?, oid = ?, sid = ?,con = ?, auth=?,reg=? where id = ?',
+        //     [did.gwid, did.eid, did.type, did.did, did.dname, did.psk, did.oid, did.sid, did.id],
+        //     callback);
+    },
 };
 
 module.exports = Auths;

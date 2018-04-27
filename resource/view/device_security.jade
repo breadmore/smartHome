@@ -20,15 +20,15 @@ block content
             .col-12
     #loader
     .row.no-gutters(style='margin-bottom:30px; margin-top: -10px; display:none;')#deviceDiv
-        if authority == "admin"
-            .col-12(style='margin-bottom: 10px;')
-                span#refresh(style='float:left; background-color:#65c0c6;border: 6px solid #65c0c6; padding:5px;font-size:1rem; line-height:1; margin:auto 5px;color:white; border-radius: 0.25rem;') REFRESH
-                    i.fas.fa-redo-alt(style='float:left; margin-left:5px; margin-right:5px;')
-                //span Refresh
-                input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#deleteModal" data-toggle="modal")#deleteButton
-                input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
-                input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addButton
-                input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addButton
+        //if authority == "admin"
+        .col-12(style='margin-bottom: 10px;')
+            span#refresh(style='float:left; background-color:#65c0c6;border: 6px solid #65c0c6; padding:5px;font-size:1rem; line-height:1; margin:auto 5px;color:white; border-radius: 0.25rem;') REFRESH
+                i.fas.fa-redo-alt(style='float:left; margin-left:5px; margin-right:5px;')
+            //span Refresh
+            input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#deleteModal" data-toggle="modal")#deleteButton
+            input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
+            input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addDeviceButton
+            input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addGatewayButton
 
         .col-6.no-gutters.view-box
             .row.no-gutters.view-box-title
@@ -280,7 +280,7 @@ block content
                 .modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters
-                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal") Update
+                        button.btn.btn-primary.btn-action.modal-btn(data-dismiss="modal")#modi-button Update
                         button.btn.btn-default.modal-btn(data-dismiss="modal") Cancel
     #policyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
         .modal-dialog(role='document')
