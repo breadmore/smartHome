@@ -267,7 +267,6 @@ $(document).ready(function () {
 
     });
     $('#modifyModal').on('show.bs.modal', function (e) {
-
         if (nowClick.getAttribute('data-did') !== null) {
             $('.gateway-modify').hide();
             $('.device-modify').show();
@@ -299,7 +298,6 @@ $(document).ready(function () {
             $('.gateway-modify').show();
             $('.device-modify').hide();
             var device = findGatewayById(nowClick.getAttribute('data-id'));
-
             $("#gateway-id").val(device.id);
             $("#gateway-name").val(device.name);
             $("#gateway-ip").val(device.ip);
@@ -313,23 +311,78 @@ $(document).ready(function () {
 
             console.log('error!');
         }
+        $('#modi-button').click(function () {
+            var updateObj = {};
 
+                updateObj.gwid=$("#gateway-id").val();
+                updateObj.dname=$("#device-name").val();
+                updateObj.did=$("#device-id").val();
+                updateObj.psk=$("#pre-shared-key").val();
+                updateObj.eid=$("#entity-id").val();
+                updateObj.oid=$("#object-id").val();
+                updateObj.type=$("#modi-device-type").val();
+                updateObj.sid=$("#session-id").val();
+            /**
+             * 영훈
+             conn, auth, reg 버튼 구현 후 아래 주석 해제
+             */
+                // updateObj.conn= $('#connected').val();
+                // updateObj.auth=$('#authenticate').val();
+                // updateObj.auth=$('#register').val();
+
+            $.ajax({
+                type: 'PUT',
+                url: '/api/v1/devices/' + device.id,
+                data: updateObj,
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                }, error: function (err) {
+                    console.log(err);
+                }
+            });
+        })
     });
+    $('#modifyModal').on('hide.bs.modal', function (e) {
+        $("#gateway-id").val(null);
+        $("#device-name").val(null);
+        $("#device-id").val(null);
+        $("#pre-shared-key").val(null);
+        $("#entity-id").val(null);
+        $("#object-id").val(null);
+        $("#modi-device-type").val(null);
+        $("#session-id").val(null);
+        $("#connected").val(null);
+        $("#authenticate").val(null);
+        $("#register").val(null);
 
+    })
     $('#deleteModal').on('show.bs.modal', function (e) {
         if (nowClick.getAttribute('data-did') !== null) {
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            console.log(device);
             $("#del-name").html(device.type + ' - ' + device.dname);
-            // $("#del-name").text(device.dname);
         }
         else if(nowClick.getAttribute('data-id')) {
             var device = findGatewayById(nowClick.getAttribute('data-id'));
             $("#del-name").html(device.name);
         }
-        // nowClick;
-        // $("#delete-id").text(data.user_id)
+        $('#delete-User').click(function () {
+            $.ajax({
+                            type: 'DELETE',
+                            url: '/api/v1/devices/' + device.id,
+                            dataType: 'json',
+                            success: function(result) {
+                                console.log(result);
+                            }, error: function(err) {
+                                console.log(err);
+                            }
+                        });
+            enableManageButton(false);
+        })
     });
+    $('#deleteModal').on('hide.bs.modal', function (e) {
+
+    })
 
     $("#policy-confirm").on("click", () => {
 
@@ -464,7 +517,19 @@ function findDeviceByEid(eid) {
     }
     return null;
 }
+function findGateWayeBydid(did) {
+    var idx = -1;
+    $.each(deviceList, function (index, item) {
+        if (item.did === did) {
+            idx = index;
+        }
+    });
 
+    if (idx !== -1) {
+        return deviceList[idx];
+    }
+    return null;
+}
 function findDeviceByDid(did) {
     var idx = -1;
     $.each(deviceList, function (index, item) {
@@ -620,10 +685,16 @@ function addClickListenerToGatewayTitle() {
             for (var i = 0; i < opensubs.length; i++) {
                 opensubs[i].classList.remove('open');
             }
+            enableManageButton(false);
         } else {
             $('.open').removeClass('open');
             classList.add('open');
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
+            if(findGatewayByDid(nowClick.getAttribute('data-id')===null)){
+                enableManageButton(false);
+            }
+            else
+                enableManageButton(true);
         }
     });
 
@@ -1068,7 +1139,6 @@ function createResourceName() {
         }
     });
 }
-
 
 
 //ktw add
