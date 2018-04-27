@@ -271,6 +271,7 @@ $(document).ready(function () {
             $('.gateway-modify').hide();
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            console.log(device);
             $("#gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
@@ -295,6 +296,7 @@ $(document).ready(function () {
                 $('#register').html(device.reg + ' Registered');
         }
         else if(nowClick.getAttribute('data-id')){
+
             $('.gateway-modify').show();
             $('.device-modify').hide();
             var device = findGatewayById(nowClick.getAttribute('data-id'));
@@ -360,6 +362,7 @@ $(document).ready(function () {
     $('#deleteModal').on('show.bs.modal', function (e) {
         if (nowClick.getAttribute('data-did') !== null) {
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            console.log(device);
             $("#del-name").html(device.type + ' - ' + device.dname);
         }
         else if(nowClick.getAttribute('data-id')) {
@@ -675,6 +678,7 @@ function enableManageButton(isEnabled) {
  * */
 function addClickListenerToGatewayTitle() {
     var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+    var deviceInfoList = $('.device-info');
     tree[tree.length - 1].addEventListener('click', function (e) {
         nowClick = e.target;
         var parent = e.target.parentElement;
@@ -689,6 +693,9 @@ function addClickListenerToGatewayTitle() {
         } else {
             $('.open').removeClass('open');
             classList.add('open');
+            for (var i = 0; i < deviceInfoList.length; i++) {
+                $(deviceInfoList[i]).removeClass('selected');
+            }
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
             if(findGatewayByDid(nowClick.getAttribute('data-id')===null)){
                 enableManageButton(false);
