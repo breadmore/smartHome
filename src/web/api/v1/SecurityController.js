@@ -114,7 +114,8 @@ router.route('/')
                                else{
                                    console.log(result[0].Operation);
                                    log.previous = result[0].Operation;
-                                   securityLog.msg = 'update operation ' + log.previous + ' to ' + log.operation + '.'
+                                   // securityLog.msg = 'update operation ' + log.previous + ' to ' + log.operation + '.';
+                                   securityLog.msg = 'policy modification: resource('+ req.body.resourceName +'), modified operation(' + log.operation + ')';
                                    console.log(log);
 
                                    roleService.updateOperation(data, function (err, result) {

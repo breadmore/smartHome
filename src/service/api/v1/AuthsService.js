@@ -60,32 +60,12 @@ function authInitService() {
     })
 }
 
-function getPolicy(policyData){
-    var policy = '';
-    if(policyData.CreationYn === 'Y'){
-        policy += 'C';
-    }
-    if(policyData.ReadYn === 'Y'){
-        policy += 'R';
-    }
-    if(policyData.UpdateYn === 'Y'){
-        policy += 'U';
-    }
-    if(policyData.DeleteYn === 'Y'){
-        policy += 'D';
-    }
-    if(policyData.NotifyYn === 'Y'){
-        policy += 'N';
-    }
-    return policy;
-}
-
 function compareEntityId(entityId, policyDataList) {
     var msg = null;
     policyDataList.forEach(function (policyData, index) {
         if(policyData.EntityID == entityId){
-            // console.log('apply ' + getPolicy(policyData));
-            msg = 'Applied policy : ' + getPolicy(policyData);
+            //resouce 자리에 EntityId 테이블의 '/' + Name + '_' + auths.did 인가?
+            msg = 'policy enforcement: resource(' + policyData.Resouce + '), operation(' + policyData.Operation + ')';
         }
         else{
             // console.log('not apply.');
@@ -104,7 +84,7 @@ function policyApplyInitServicer() {
         }
         else{
             policyDataList = result;
-            // console.log(policyDataList);
+            console.log(policyDataList);
             authDao.selectAllAuth(function (err, result) {
                 if (err) {
                     console.log(err);
@@ -113,22 +93,24 @@ function policyApplyInitServicer() {
                     result.forEach(function (authRow, index) {
                         msg = compareEntityId(authRow.eid, policyDataList);
                         if(msg === null){
-                            msg = 'Not applied policy.';
+                            // msg = 'Not applied policy.';
                         }
-                        securityLog = {
-                            eventType: 'security',
-                            deviceType: authRow.eid,
-                            deviceId: authRow.did,
-                            msg: msg
-                        };
-                        logDao.insert(securityLog, function (err, result) {
-                            if(err){
-                                console.log();
-                            }
-                            else{
-                                console.log(result);
-                            }
-                        });
+                        else {
+                            securityLog = {
+                                eventType: 'security',
+                                deviceType: authRow.eid,
+                                deviceId: authRow.did,
+                                msg: msg
+                            };
+                            logDao.insert(securityLog, function (err, result) {
+                                if (err) {
+                                    console.log();
+                                }
+                                else {
+                                    console.log(result);
+                                }
+                            });
+                        }
                     });
 
 
