@@ -42,7 +42,7 @@ router.route('/gas')
             default:
                 break;
         }
-        console.log(state);
+        // console.log(state);
         stateService.updateState(state, function(err, result) {
             if (err) {
                 res.status(400).send(err);
@@ -74,7 +74,7 @@ router.route('/detect')
             default:
                 break;
         }
-        console.log(state);
+        // console.log(state);
         stateService.updateState(state, function(err, result) {
             if (err) {
                 res.status(400).send(err);
