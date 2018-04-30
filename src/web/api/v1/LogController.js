@@ -38,17 +38,18 @@ router.route('/policy')
         })
     });
 
-// router.route('/deviceall')
-//     .get(function (req, res) {
-//         logService.selectAllSecurityEvent(function(err, result) {
-//             if (err) {
-//                 res.status(400).send(err);
-//             }
-//             else {
-//                 res.status(200).send(result);
-//             }
-//         })
-//     });
+router.route('/securityall')
+    .get(function (req, res) {
+        logService.selectAllSecurityEvent(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                console.log(result[0]);
+                res.status(200).send(result);
+            }
+        })
+    });
 
 router.route('/recentservice')
     .get(function (req, res) {
