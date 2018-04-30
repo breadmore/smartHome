@@ -54,7 +54,11 @@ div .dataTables_paginate > .pagination {
 }
 
 #eventTable > tbody > tr > td:nth-child(4){
-    text-align: left!important;
+    /*text-align: left!important;*/
+}
+
+.securitylog  > tbody > tr > td:nth-child(4){
+    /*text-align: center!important;*/
 }
 
 .logger {

@@ -43,6 +43,7 @@ window.onbeforeunload = function () {
 
 $(document).ready(function() {
 
+
     var table = $('#eventTable').DataTable({
         paging: true,
         processing: true,
@@ -53,6 +54,7 @@ $(document).ready(function() {
         dom : '<"row no-gutters"t>',
         ajax : {
             url: "/api/v1/logs/recentservice",
+            // async: false,
             dataSrc: function (result) {
                 console.log(result);
                 $.each(result, (index, item) => {
@@ -62,6 +64,7 @@ $(document).ready(function() {
                         type: 'get',
                         async: false,
                         success: function (result) {
+                            console.log(result);
                             item.device_name = result[0].dname;
                         },
                         error: function (error) {
@@ -315,13 +318,15 @@ $(document).ready(function() {
         $('#humidityValue').text(data.humidity[0].value + '%');
         recentHumidity.shift();
         recentHumidity.push(data.humidity[0].value);
-        console.log(recentHumidity);
+        // console.log(recentHumidity);
         updateChart(humidityChart, recentHumidity);
         // console.log(data.temperature[0].value);
         // console.log(data.humidity[0].value);
         // console.log(data.illuminaty.length);
         //todo [0].value addç
         $('#luxValue').text(data.illuminaty[0].value);
+        console.log(data.illuminaty[0].value * 0.6);
+        $(".graph").before("<style> .model-1 .graph:before { transform: rotate(" + (data.illuminaty[0].value * 0.6) +"deg)} </style>");
 
     });
 
@@ -331,7 +336,7 @@ $(document).ready(function() {
      *                                              ------> database
      */
     socket.on('/xiaomi/states', function (data) {
-        console.log(data);
+        // console.log(data);
         switch (data.type) {
             case 'magnet':
                 if (currentXiaomi.magnet === undefined) {
@@ -586,7 +591,7 @@ function initEnvironmentData() {
         url: '/api/v1/environments/humidity?number=24',
         type: 'get',
         success: function (result) {
-            console.log(result);
+            // console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentHumidity.push(item.value);
             });
@@ -599,9 +604,9 @@ function initEnvironmentData() {
         }
     });
 
-    //get Recent Illumination Values.
+    // get Recent Illumination Values.
     // $.ajax({
-    //     url: '/api/v1/environments/humidity?number=24',
+    //     url: '/api/v1/environments/',
     //     type: 'get',
     //     success: function (result) {
     //         $.each(result.reverse(), function (index, item) {
@@ -1070,7 +1075,7 @@ function getHourTemp(value) {
             type : 'post',
             data : hour_min,
             success: function (result) {
-                console.log(result);
+                // console.log(result);
                 var new_data = [];
                 var min;
                 $.each(result, function (index, item) {

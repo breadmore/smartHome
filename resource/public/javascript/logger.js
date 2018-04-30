@@ -21,8 +21,8 @@ $(function () {
     var table = $('.devicelog').DataTable({
         paging: true,
         processing: true,
-        // ordering: true,
-        order: [[1, 'desc']],
+        ordering: false,
+        // order: [[1, 'desc']],
         serverSide: false,
         searching: true,
         ajax : {
@@ -31,7 +31,14 @@ $(function () {
                 $.each(result, function (index, item) {
                     item.event_date = dateFormatter(item.event_date);
                     item.device_name = findAuthByDid(item.device_id);
-                    item.device_type = type2Icon(item.device_type);
+                    if (item.device_type == null) {
+                        item.device_type = "";
+                    } else if (item.device_type === 0){
+                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                    } else {
+                        item.device_type = type2Icon(item.device_type);
+                    }
+
                 });
                 return result;
             }},
@@ -81,7 +88,7 @@ $(function () {
                 });
     }
 
-    var deployLogTable = $('.securitylog').DataTable({          // add by ktw
+    var securityLogTable = $('.securitylog').DataTable({          // add by ktw
         paging: true,
         processing: true,
         ordering: false,
@@ -119,7 +126,8 @@ $(function () {
     var deployLogTable = $('.deploylog').DataTable({
         paging: true,
         processing: true,
-        ordering: true,
+        ordering: false,
+        // order: [[0, 'desc']],
         serverSide: false,
         searching: true,
         ajax : {
