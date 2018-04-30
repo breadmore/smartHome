@@ -58,8 +58,8 @@ $(document).ready(function () {
                         entityList = entities;
                         $.each(jsonArray, function (index, item) {
                             item.enforceDate = dateFormatter(item.policyID,1);
-                            // item.fromName = findEntityById(item.FromID).Name
-                            item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;      //this code is error. line 576 is same error.
+                            item.fromName = findEntityById(item.FromID).Name;
+                            // item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;      //this code is error. line 576 is same error.
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
                         });
@@ -614,8 +614,8 @@ function findOperationById() {
                     //     $("#to-Id").append("<option>" + toName_unique[i] +"</option>");
                     // }
                     $.each(entityName, function (i, el) {
-                        // $("#from-Id").append("<option>" + entityName[i] + "</option>");
-                        $("#from-Id").append("<option>" + findDeviceByEid(Number(entityId[i])).dname + "</option>");
+                        $("#from-Id").append("<option>" + entityName[i] + "</option>");
+                        // $("#from-Id").append("<option>" + findDeviceByEid(Number(entityId[i])).dname + "</option>");
                     });
                     $.each(toName, function (i, el) {
                         $("#to-Id").append("<option>" + toName[i] + "</option>");
