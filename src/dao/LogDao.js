@@ -61,10 +61,10 @@ var Log = {
             callback);
     },
 
-    // selectAllSecurityEvent(callback) {
-    //     return db.query('select * from Security_Log where event_type = "security" or event_type = "critical"',
-    //         callback);
-    // },
+    selectAllSecurityEvent(callback) {
+        return db.query('select * from Security_Log where event_type = "security" or event_type = "critical" order by id desc',
+            callback);
+    },
 
     selectRecentSecurityEvent(callback) {
         return db.query('select * from Security_Log where event_type = "security" or event_type = "critical" order by id desc limit 10', callback);

@@ -58,7 +58,7 @@ $(document).ready(function() {
                 $.each(result, (index, item) => {
                     item.device_name = undefined;
                     $.ajax({
-                        url: '/api/v1/devices/' + item.device_id,   //change to item.device_id
+                        url: '/api/v1/devices/' + item.device_id,
                         type: 'get',
                         async: false,
                         success: function (result) {
