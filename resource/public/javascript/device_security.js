@@ -328,7 +328,11 @@ $(document).ready(function () {
         }
         $('#modi-button').click(function () {
             var updateObj = {};
-
+            var url;
+            if(gatewayCheck==true){
+                url= '/api/v1/gateways/' + device.id;
+            }
+            else  url='/api/v1/devices/' + device.id;
                 updateObj.gwid=$("#gateway-id").val();
                 updateObj.dname=$("#device-name").val();
                 updateObj.did=$("#device-id").val();
@@ -341,13 +345,13 @@ $(document).ready(function () {
              * 영훈
              conn, auth, reg 버튼 구현 후 아래 주석 해제
              */
-                // updateObj.conn= $('#connected').val();
-                // updateObj.auth=$('#authenticate').val();
-                // updateObj.auth=$('#register').val();
+                updateObj.conn= $('#connected').val();
+                updateObj.auth=$('#authenticate').val();
+                updateObj.auth=$('#register').val();
 
             $.ajax({
                 type: 'PUT',
-                url: '/api/v1/devices/' + device.id,
+                url: url,
                 data: updateObj,
                 dataType: 'json',
                 success: function (result) {
@@ -743,6 +747,7 @@ function addClickListenerToGatewayTitle() {
                 console.log("data here");
                 console.log(gatewayCheck);
                 enableManageButton(false);
+                $('#modifyButton').removeAttr('disabled');
             }
         }
     });

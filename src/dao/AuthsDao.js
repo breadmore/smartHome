@@ -82,7 +82,7 @@ var Auths = {
     },
     updateDeviceById: function (id, callback) {
         return db.query('update auths set gwid = ?, eid = ?, type =? , did = ?, dname = ?, psk = ?, oid = ?, sid = ?,conn = ?, auth=?,reg=? where id = ?',
-            [did.gwid, did.eid, did.type, did.did, did.dname, did.psk, did.oid, did.sid,did.conn,did.auth,did.reg, did.id],
+            [id.gwid, id.eid, id.type, id.did, id.dname, id.psk, id.oid, id.sid,id.conn,id.auth,id.reg, id.id],
             callback);
     },
 };
