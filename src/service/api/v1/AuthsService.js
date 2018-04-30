@@ -33,10 +33,6 @@ function insertDummyData(callback) {
 function deleteDeviceById(id,callback) {
     authDao.deleteDeviceById(id,callback);
 }
-function deleteGatewayByDId(did,callback) {
-    authDao.deleteDeviceById(did,callback);
-}
-
 
 function updateDeviceById(id,callback){
     authDao.updateDeviceById(id,callback);
@@ -139,6 +135,5 @@ module.exports = {
     authInitService: authInitService,
     policyApplyInitServicer, policyApplyInitServicer,
     deleteDeviceById:deleteDeviceById,
-    updateDeviceById:updateDeviceById,
-    deleteGatewayByDId:deleteGatewayByDId
+    updateDeviceById:updateDeviceById
 };

@@ -69,7 +69,6 @@ router.route('/:deviceId')
  *
  */
     .delete(function (req, res) {
-        console.log("ID: "+req.params.deviceId);
         authService.deleteDeviceById(req.params.deviceId,function (err, result){
             if(err){
                 res.status(401).send(err);
@@ -93,19 +92,4 @@ router.route('/:deviceId')
         })
     })
 
-/**
- * gatewaydelete
- */
-router.route('/did/:deviceId')
-    .delete(function (req, res) {
-        authService.deleteGatewayByDId(req.params.deviceId,function (err, result){
-            if(err){
-                res.status(401).send(err);
-            }
-            else{
-                res.status(200).send(result);
-            }
-        })
-        // res.status(200).send(userService.deleteUserByUserId(req.params.id));
-    })
 module.exports = router;

@@ -27,7 +27,7 @@ var nowClick;
 var chkCheckBox; // ktw add
 var change; //ktw add
 var securityLogList;
-
+var gatewayCheck;
 $(document).ready(function () {
 
     // getAuthsList();
@@ -374,6 +374,8 @@ $(document).ready(function () {
     })
     $('#deleteModal').on('show.bs.modal', function (e) {
         var device;
+        var url;
+
         if (nowClick.getAttribute('data-did') !== null) {
             device = findDeviceByDid(nowClick.getAttribute('data-did'));
             console.log(device);
@@ -383,10 +385,17 @@ $(document).ready(function () {
             device = findGatewayById(nowClick.getAttribute('data-id'));
             $("#del-name").html(device.name);
         }
+        if(gatewayCheck==true){
+            console.log("true");
+            url='/api/v1/gateways/' + device.id;
+        }
+        else url = '/api/v1/devices/' + device.id
+
+        console.log(device);
         $('#delete-User').click(function () {
             $.ajax({
                             type: 'DELETE',
-                            url: '/api/v1/devices/' + device.id,
+                            url: url,
                             dataType: 'json',
                             success: function(result) {
                                 console.log(result);
@@ -707,6 +716,7 @@ function addClickListenerToGatewayTitle() {
     var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
     var deviceInfoList = $('.device-info');
     tree[tree.length - 1].addEventListener('click', function (e) {
+        gatewayCheck=true;
         nowClick = e.target;
         var parent = e.target.parentElement;
         var classList = parent.classList;
@@ -725,10 +735,15 @@ function addClickListenerToGatewayTitle() {
             }
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
             if(findDeviceByGwid(nowClick.getAttribute('data-id')) === null){
+                console.log("no -data");
+                console.log(gatewayCheck);
                 enableManageButton(true);
             }
-            else
+            else {
+                console.log("data here");
+                console.log(gatewayCheck);
                 enableManageButton(false);
+            }
         }
     });
 
@@ -753,7 +768,6 @@ function addClickListenerToGatewayTitle() {
  * */
 function addClickListenerToDeviceInfo() {
     var deviceInfoList = $('.device-info');
-
     $.each(deviceInfoList, function (index, item) {
         item.addEventListener('click', function (e) {
             if ($(this).hasClass('selected')) {
@@ -762,10 +776,13 @@ function addClickListenerToDeviceInfo() {
             }
             else {
                 $(this).addClass('selected');
+                gatewayCheck=false;
+                console.log(gatewayCheck);
                 for (var i = 0; i < deviceInfoList.length; i++) {
                     if (i != index) {
                         $(deviceInfoList[i]).removeClass('selected');
                         console.log('remove!');
+
                         enableManageButton(true);
 
                     }
