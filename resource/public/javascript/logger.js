@@ -43,6 +43,16 @@ $(function () {
             {data: "device_type"},
             {data: "device_id"},
             {data: "msg"}
+        ],
+        columnDefs: [
+            { width: '260', targets: 0 },
+            { width: '145', targets: 1 },
+            { width: '160', targets: 2 },
+            { width: '200', targets: 3 },
+            { width: '125', targets: 4 },
+            { width: '280', targets: 5 },
+            // { width: '390', targets: 6 },
+
         ]
     });
 
@@ -106,12 +116,11 @@ $(function () {
             {data: "msg"}
         ],
         columnDefs: [
-        { width: '18%', targets: 0 },
-        { width: '14%', targets: 1 },
-        { width: '14%', targets: 2 },
-        { width: '14%', targets: 3 },
-        { width: '40%', targets: 4 },
-
+        { width: '260', targets: 0 },
+        { width: '145', targets: 1 },
+        { width: '200', targets: 2 },
+        { width: '125', targets: 3 },
+        { width: '440', targets: 4 },
     ]
     });
 
@@ -141,6 +150,14 @@ $(function () {
             {data: "resource_name"},
             {data: "pre_operation"},
             {data: "current_operation"}
+        ],
+        columnDefs: [
+            { width: '260', targets: 0 },
+            { width: '200', targets: 1 },
+            { width: '120', targets: 2 },
+            { width: '190', targets: 3 },
+            { width: '160', targets: 4 },
+            { width: '240', targets: 4 },
         ]
     });
 

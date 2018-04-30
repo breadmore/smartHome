@@ -56,7 +56,12 @@ div .dataTables_paginate > .pagination {
 #deployEventTable > tbody > tr > td:nth-child(4){
     text-align: left!important;
 }
-#eventTable > tbody > tr > td:nth-child(4), #eventTable > tbody > tr > td:nth-child(3), #eventTable > tbody > tr > td:nth-child(6){
+
+.devicelog > tbody > tr > td:nth-child(4), .devicelog > tbody > tr > td:nth-child(3), .devicelog > tbody > tr > td:nth-child(6){
+    text-align: left!important;
+    text-indent: 10px;
+}
+.securitylog  > tbody > tr > td:nth-child(5), .securitylog  > tbody > tr > td:nth-child(3){
     text-align: left!important;
     text-indent: 10px;
 }
