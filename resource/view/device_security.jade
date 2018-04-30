@@ -171,8 +171,9 @@ block content
                         .entity-id Product ID(Entity ID)
                         input(type="text" value="")#add-entity-id
                         .select-device-type Device type
-                        select#add-type
-                            option(value=1, selected="selected") GasDetector
+                        select#add-type(onchange='autoWriteDeviceName("#add-type","#add-device-id","#add-device-name")')
+                            option(value=0) select the device type
+                            option(value=1) GasDetector
                             option(value=2) GasBreaker
                             option(value=3) ThermoHygrometer
                             option(value=4) SmartLighting
@@ -181,7 +182,7 @@ block content
                             option(value=7) SmartPlug
                             option(value=8) SmartCamera
                         .device-id Device ID
-                        input(type="text")#add-device-id
+                        input(type="text")#add-device-id(onchange='autoWriteDeviceName("#add-type","#add-device-id","#add-device-name")')
                         .device-name Device Name
                         input(type="text" value="")#add-device-name
                         .pre_shared_key Pre Shared Key
@@ -227,14 +228,14 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    .modal-body-content
+                    .modal-body-content.device-modify
                         p Gateway ID
-                        select#gateway-id
+                        select#device-gateway-id
                         p Product ID(Entity ID)
                         input(type="text")#entity-id
                         p Device type
                         //id change type -> modi-device-type
-                        select#modi-device-type
+                        select#modi-device-type(onchange='autoWriteDeviceName("#modi-device-type","#device-id","#device-name")')
                             option(value=1) GasDetector
                             option(value=2) GasBreaker
                             option(value=3) ThermoHygrometer
@@ -244,7 +245,7 @@ block content
                             option(value=7) SmartPlug
                             option(value=8) SmartCamera
                         p Device ID
-                        input(type="text")#device-id
+                        input(type="text")#device-id(onchange='autoWriteDeviceName("#modi-device-type","#device-id","#device-name")')
                         p Device Name
                         input(type="text" value="")#device-name
                         p Pre Shared Key
@@ -277,6 +278,25 @@ block content
                             label.radio-inline(style="margin-left:12px").radio-off
                                 input(type='radio', name='moptradio3')#regi-off
                                 | &nbsp;Not Registered
+                    .modal-body-content.gateway-modify
+                        p Gateway ID
+                        input(type="number")#gateway-id
+                        p Gateway Name
+                        input(type="text" value="")#gateway-name
+                        p IP
+                        input(type="text")#gateway-ip
+                        p Port
+                        input(type="text")#gateway-port
+                        p Connected
+                        .radio-group#gateway-conn
+                            label.radio-inline
+                                input(type='radio', name='moptradio')#gateway-conn-on
+                                | &nbsp;Connected
+                            label.radio-inline(style="margin-left:12px")#gateway-conn-off
+                                input(type='radio', name='moptradio')
+                                | &nbsp;Not Connected
+                    .modal-body-content.error-modify
+                        p ERROR! There is no data.
                 .modal-footer
                     //button.modal-cancel(data-dismiss="modal") Cancel
                     .col-12.text-center.no-gutters

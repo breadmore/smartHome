@@ -9,9 +9,9 @@ function selectRecentSecurityLog(callback) {
     return logDao.selectRecentSecurityEvent(callback);
 }
 
-// function selectAllSecurityEvent(callback) {
-//     return logDao.selectAllSecurityEvent(callback);
-// }
+function selectAllSecurityEvent(callback) {
+    return logDao.selectAllSecurityEvent(callback);
+}
 
 
 function updateState(state, callback) {
@@ -38,7 +38,7 @@ module.exports = {
     insertLog: insert,
     selectRecentSecurityLog: selectRecentSecurityLog,
     selectRecentDeployLog:selectRecentDeployLog,
-    // selectAllSecurityEvent:selectAllSecurityEvent,
+    selectAllSecurityEvent:selectAllSecurityEvent,
     selectRecentServiceLog:selectRecentServiceLog,
     selectAllDeployLog:selectAllDeployLog,
     selectAllServiceLog:selectAllServiceLog

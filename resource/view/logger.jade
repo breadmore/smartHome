@@ -7,6 +7,7 @@ append head
     link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.bootstrap4.js')
+    script(defer='', src='https://use.fontawesome.com/releases/v5.0.10/js/all.js', integrity='sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+', crossorigin='anonymous')
 
 append title
     span.col-xl-2.content-title.no-padding Device Log
@@ -24,6 +25,20 @@ block content
                         th Device type
                         th Device id
                         th Activity message
+    .row.no-gutters(style='margin-bottom:20px')
+        span.col-xl-2.content-title.no-padding Security Log
+        .col-10.content-hr.no-padding
+            hr
+    .row.no-gutters(style='margin-bottom:20px')
+        .col-12.no-gutters
+            table#eventTable.securitylog(style='width:100%')
+                thead
+                    tr
+                        th Event Date
+                        th Event Type
+                        th Device Type
+                        th Device ID
+                        th Message
     .row.no-gutters(style='margin-bottom:20px')
         span.col-xl-2.content-title.no-padding Deploy Log
         .col-10.content-hr.no-padding
