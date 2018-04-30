@@ -351,13 +351,14 @@ $(document).ready(function() {
                         else {
                             sendLog('log', 'magnet opened.');
                             currentXiaomi.magnet = 'open';
+                            console.log('record Start!!');
+                            recordStart(1);
                         }
                     }
                 }
                 else {
                     $('#xiaomiWindow').text(NOT_DETECTED);
                 }
-                console.log(currentXiaomi.magnet);
 
                 break;
             case 'motion':
@@ -376,21 +377,26 @@ $(document).ready(function() {
                         console.error('event is undefined');
                         $('#xiaomiWindow').text(NOT_DETECTED);
                     }
+
+                    if (currentXiaomi.motion !== data.event) {
+                        console.log('motion changed!');
+                        if (currentXiaomi.motion === 'no_motion') {
+                            sendLog('log', 'motion is detected.');
+                            console.log('Motion Record Start!');
+                            recordStart(2);
+                            currentXiaomi.motion = 'motion';
+                        }
+                        else {
+                            sendLog('log', 'motion is disappeared.');
+                            currentXiaomi.motion = 'no_motion';
+                        }
+                    }
                 }
                 else {
                     $('#xiaomiWindow').text(NOT_DETECTED);
                 }
 
-                if (currentXiaomi.motion !== data.event) {
-                    console.log('motion changed!');
-                    if (currentXiaomi.motion === 'no_motion') {
-                        sendLog('log', 'motion is detected.');
-                    }
-                    else {
-                        sendLog('log', 'motion is disappeared.');
-                    }
-                    currentXiaomi.motion = undefined;
-                }
+
 
                 break;
             case 'plug':
@@ -615,14 +621,19 @@ function updateLegacyStates(state) {
     }
 
     if (state.led === 0) {
-        $('#lightState').removeAttr('disabled');
         $('#lightState').prop("checked", false);
-        $('#lightStatus').text(OFF_STATUS);
+        setTimeout(function () {
+            $('#lightState').removeAttr('disabled');
+            $('#lightStatus').text(OFF_STATUS);
+        },7 * 1000)
+
     }
     else if (state.led === 1) {
-        $('#lightState').removeAttr('disabled');
         $('#lightState').prop("checked", true);
-        $('#lightStatus').text(ON_STATUS);
+        setTimeout(function() {
+            $('#lightState').removeAttr('disabled');
+            $('#lightStatus').text(ON_STATUS);
+        }, 7 * 1000)
     }
     else {
         $('#lightState').attr('disabled', 'disabled');
@@ -793,6 +804,7 @@ function xiaomiAction(action) {
 
 function legacyDeviceAction(type, command) {
     // todo : ip address?
+    console.log(location.host);
     var ip = undefined;
     var msg;
     var data = {

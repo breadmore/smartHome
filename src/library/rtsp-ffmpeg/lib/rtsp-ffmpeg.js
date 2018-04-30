@@ -119,10 +119,10 @@ FFMpeg.prototype._args = function (option,data) {
                 '-loglevel', 'quiet'
                 , '-i', this.input
                 , '-r', this.rate.toString()],
-            this.quality ? ['-q:v', this.quality.toString()] : [],
+            // this.quality ? ['-q:v', this.quality.toString()] : [],
             [
                 '-vf', 'scale=' + this.resolution,
-                //  '-b:v', '512k',
+                 '-b:v', '512k',
                 '-f', 'image2'
                 , '-updatefirst', '1'
                 , '-'
@@ -146,7 +146,7 @@ FFMpeg.prototype._args = function (option,data) {
             ],
             ['-loglevel', 'quiet', '-y', '-i',
                 this.input, '-vcodec', 'copy', '-ss', '0',
-                '-t', '10', recordFilePath]);
+                '-t', '10', '-strict', '-2', recordFilePath]);
     }
 
     // var thumbnail = [
