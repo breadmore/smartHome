@@ -283,29 +283,23 @@ $(document).ready(function () {
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
-                $('#conn-on').attr("checked",false);
                 $('#conn-off').attr("checked", true);
             }
             else {
                 $('#conn-on').attr("checked",true);
-                $('#conn-off').attr("checked",false);
             }
 
             if ('<i class="far fa-address-card"></i>' === device.auth) {
-                $('#auth-on').attr("checked",false);
                 $('#auth-off').attr("checked", true);
             }
             else {
                 $('#auth-on').attr("checked",true);
-                $('#auth-off').attr("checked",false);
             }
             if ('<i class="far fa-eye-slash"></i>' === device.reg) {
-                $('#regi-on').attr("checked",false);
                 $('#regi-off').attr("checked", true);
             }
             else{
                 $('#regi-on').attr("checked",true);
-                $('#regi-off').attr("checked",false);
             }
         }
         else if(nowClick.getAttribute('data-id')){
@@ -323,7 +317,7 @@ $(document).ready(function () {
             else $('#gateway-conn').html(device.conn + ' Connected');
         }
         else{
-
+            $('#modifyModal').modal('hide');
             console.log('error!');
         }
         $('#modi-button').click(function () {
@@ -341,9 +335,9 @@ $(document).ready(function () {
              * 영훈
              conn, auth, reg 버튼 구현 후 아래 주석 해제
              */
-                // updateObj.conn= $('#connected').val();
-                // updateObj.auth=$('#authenticate').val();
-                // updateObj.auth=$('#register').val();
+                updateObj.conn= $('#connected').val();
+                updateObj.auth=$('#authenticate').val();
+                updateObj.auth=$('#register').val();
 
             $.ajax({
                 type: 'PUT',
