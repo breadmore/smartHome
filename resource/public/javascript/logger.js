@@ -16,12 +16,14 @@ $(function () {
             dataSrc: function (result) {
                 $.each(result, function (index, item) {
                     item.event_date = dateFormatter(item.event_date);
-                })
+                    item.device_name = findAuthByDid(item.device_id);
+                    item.device_type = type2Icon(item.device_type);
+                });
                 // console.log(result);
                 return result;
             }},
         columns : [
-            {data: null},
+            // {data: null},
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_name"},
@@ -31,11 +33,11 @@ $(function () {
         ]
     });
 
-    table.on('order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    // table.on('order.dt search.dt', function () {
+    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();
 
     getEntityList();
 
@@ -119,3 +121,13 @@ function findEntityById(id) {
     }
     return null;
 }
+function findAuthByDid(did) {
+    var dname = '';
+    deviceList.forEach(function (item, index) {
+        if (item.did === did) {
+            dname = item.dname;
+            return dname;
+        }
+    });
+    return dname;
+};

@@ -691,11 +691,10 @@ div .dataTables_paginate > .pagination {
 }
 
 
-#eventTable > tbody > tr > td:nth-child(4){
+#eventTable > tbody > tr > td:nth-child(4), #eventTable > tbody > tr > td:nth-child(3), #eventTable > tbody > tr > td:nth-child(6){
     text-align: left!important;
-    text-indent: 20px;
+    text-indent: 10px;
 }
-
 .safe-event {
     color: rgb(46, 204, 113) !important;
 }
