@@ -55,8 +55,6 @@ router.route('/:id')
         })
     })
     .delete(function (req, res) {
-        console.log("delete did");
-        console.log(req.params.deviceId);
         gatewayService.deleteById(req.params.id,function (err, result){
             if(err){
                 res.status(401).send(err);
