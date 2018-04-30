@@ -17,7 +17,6 @@
 //         conn: 0
 //     }
 // ];
-
 var gatewayList;
 var deviceList;
 var securityList = [];
@@ -57,7 +56,7 @@ $(document).ready(function () {
                     success: function (entities) {
                         entityList = entities;
                         $.each(jsonArray, function (index, item) {
-                            item.enforceDate = dateFormatter(item.policyID,1);
+                            item.enforceDate = dateFormatter(item.policyID, 1);
                             // item.fromName = findEntityById(item.FromID).Name
                             item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;      //this code is error. line 576 is same error.
                             item.toName = findEntityById(item.ToID).Name;
@@ -85,15 +84,15 @@ $(document).ready(function () {
         ],
 
         columnDefs: [
-            { width: '18%', targets: 0 },
-            { width: '12%', targets: 1 },
-            { width: '9%', targets: 2 },
-            { width: '12%', targets: 3 },
-            { width: '11%', targets: 4 },
-            { width: '11%', targets: 5 },
-            { width: '11%', targets: 6 },
-            { width: '11%', targets: 7 },
-            { width: '11%', targets: 8 }
+            {width: '18%', targets: 0},
+            {width: '12%', targets: 1},
+            {width: '9%', targets: 2},
+            {width: '12%', targets: 3},
+            {width: '11%', targets: 4},
+            {width: '11%', targets: 5},
+            {width: '11%', targets: 6},
+            {width: '11%', targets: 7},
+            {width: '11%', targets: 8}
         ]
 
     });
@@ -111,7 +110,7 @@ $(document).ready(function () {
                 // console.log(result);
                 check(result);
                 $.each(result, (index, item) => {
-                    item.event_date = dateFormatter(item.event_date,2);
+                    item.event_date = dateFormatter(item.event_date, 2);
                     // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
                 });
@@ -126,11 +125,11 @@ $(document).ready(function () {
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '18%', targets: 0 },
-            { width: '14%', targets: 1 },
-            { width: '14%', targets: 2 },
-            { width: '14%', targets: 3 },
-            { width: '40%', targets: 4 },
+            {width: '18%', targets: 0},
+            {width: '14%', targets: 1},
+            {width: '14%', targets: 2},
+            {width: '14%', targets: 3},
+            {width: '40%', targets: 4},
 
         ]
     });
@@ -182,6 +181,9 @@ $(document).ready(function () {
             gwid: $("#add-gateway-id option:selected").val()
         };
         saveDevice(data);
+        if (data.id !== null) {
+
+        }
     });
 
     // $(document).on('click','.device-list', function (e) {
@@ -211,7 +213,7 @@ $(document).ready(function () {
     $("#policyButton").on("click", () => {
         chkCheckBox = '';
 
-        if(table.row('.selected').data().CreationYn === 'Y'){
+        if (table.row('.selected').data().CreationYn === 'Y') {
             $("#chkC").attr('checked', true);
             chkCheckBox += 'C';
         }
@@ -219,7 +221,7 @@ $(document).ready(function () {
         //     $("#chkC").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().ReadYn === 'Y'){
+        if (table.row('.selected').data().ReadYn === 'Y') {
             $("#chkR").attr('checked', true);
             chkCheckBox += 'R';
         }
@@ -227,7 +229,7 @@ $(document).ready(function () {
         //     $("#chkR").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().UpdateYn === 'Y'){
+        if (table.row('.selected').data().UpdateYn === 'Y') {
             $("#chkU").attr('checked', true);
             chkCheckBox += 'U';
         }
@@ -235,7 +237,7 @@ $(document).ready(function () {
         //     $("#chkU").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().DeleteYn === 'Y'){
+        if (table.row('.selected').data().DeleteYn === 'Y') {
             $("#chkD").attr('checked', true);
             chkCheckBox += 'D';
         }
@@ -243,7 +245,7 @@ $(document).ready(function () {
         //     $("#chkD").removeAttr('checked');
         //     $("#chkC").attr('checked', false);
         // }
-        if(table.row('.selected').data().NotifyYn === 'Y'){
+        if (table.row('.selected').data().NotifyYn === 'Y') {
             $("#chkN").attr('checked', true);
             chkCheckBox += 'N';
         }
@@ -262,16 +264,17 @@ $(document).ready(function () {
 
         $("#policy-confirm").attr('disabled', true);
     });
-    $('#deployLogModal').on('show.bs.modal',function (e) {
+    $('#deployLogModal').on('show.bs.modal', function (e) {
         deployLogTable.ajax.reload();
 
     });
     $('#modifyModal').on('show.bs.modal', function (e) {
+        var device;
         if (nowClick.getAttribute('data-did') !== null) {
             $('.gateway-modify').hide();
             $('.device-modify').show();
-            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            console.log(device);
+            device = findDeviceByDid(nowClick.getAttribute('data-did'));
+
             $("#gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
@@ -286,27 +289,27 @@ $(document).ready(function () {
                 $('#conn-off').attr("checked", true);
             }
             else {
-                $('#conn-on').attr("checked",true);
+                $('#conn-on').attr("checked", true);
             }
 
             if ('<i class="far fa-address-card"></i>' === device.auth) {
                 $('#auth-off').attr("checked", true);
             }
             else {
-                $('#auth-on').attr("checked",true);
+                $('#auth-on').attr("checked", true);
             }
             if ('<i class="far fa-eye-slash"></i>' === device.reg) {
                 $('#regi-off').attr("checked", true);
             }
-            else{
-                $('#regi-on').attr("checked",true);
+            else {
+                $('#regi-on').attr("checked", true);
             }
         }
-        else if(nowClick.getAttribute('data-id')){
+        else if (nowClick.getAttribute('data-id')) {
 
             $('.gateway-modify').show();
             $('.device-modify').hide();
-            var device = findGatewayById(nowClick.getAttribute('data-id'));
+            device = findGatewayById(nowClick.getAttribute('data-id'));
             $("#gateway-id").val(device.id);
             $("#gateway-name").val(device.name);
             $("#gateway-ip").val(device.ip);
@@ -316,44 +319,59 @@ $(document).ready(function () {
             }
             else $('#gateway-conn').html(device.conn + ' Connected');
         }
-        else{
+        else {
             $('#modifyModal').modal('hide');
             console.log('error!');
         }
         $('#modi-button').click(function () {
             var updateObj = {};
             var url;
-            if(gatewayCheck==true){
-                url= '/api/v1/gateways/' + device.id;
+            if (gatewayCheck == true) {
+                url = '/api/v1/gateways/' + device.id;
             }
-            else  url='/api/v1/devices/' + device.id;
-                updateObj.gwid=$("#gateway-id").val();
-                updateObj.dname=$("#device-name").val();
-                updateObj.did=$("#device-id").val();
-                updateObj.psk=$("#pre-shared-key").val();
-                updateObj.eid=$("#entity-id").val();
-                updateObj.oid=$("#object-id").val();
-                updateObj.type=$("#modi-device-type").val();
-                updateObj.sid=$("#session-id").val();
+            else url = '/api/v1/devices/' + device.id;
+
+            updateObj.gwid = $("#gateway-id").val();
+            updateObj.dname = $("#device-name").val();
+            updateObj.did = $("#device-id").val();
+            updateObj.psk = $("#pre-shared-key").val();
+            updateObj.eid = $("#entity-id").val();
+            updateObj.oid = $("#object-id").val();
+            updateObj.type = $("#modi-device-type").val();
+            updateObj.sid = $("#session-id").val();
             /**
              * 영훈
              conn, auth, reg 버튼 구현 후 아래 주석 해제
              */
-                updateObj.conn= $('#connected').val();
-                updateObj.auth=$('#authenticate').val();
-                updateObj.auth=$('#register').val();
+            // updateObj.conn= $('#connected').val();
+            // updateObj.auth=$('#authenticate').val();
+            // updateObj.auth=$('#register').val();
 
-            $.ajax({
-                type: 'PUT',
-                url: url,
-                data: updateObj,
-                dataType: 'json',
-                success: function (result) {
-                    console.log(result);
-                }, error: function (err) {
-                    console.log(err);
-                }
-            });
+            // $.each(updateObj, function (index, item) {
+            //     // console.log(index+":"+item);
+            //     for(var i=0; i<item.length; i++) {
+            //         if (item[i] == " " || item[i] == null)
+            //             alert("공백문자는 사용하실수 없습니다");
+            //     }
+            //     if(item.length==0)
+            //         alert("공백문자는 사용하실수 없습니다");
+            // });
+            nullcheck((updateObj));
+            if( nullcheck((updateObj))){
+                alert("공백문자 사용 불가능");
+            }
+            else
+                $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    data: updateObj,
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log(result);
+                    }, error: function (err) {
+                        console.log(err);
+                    }
+                });
         })
     });
     $('#modifyModal').on('hide.bs.modal', function (e) {
@@ -376,31 +394,30 @@ $(document).ready(function () {
 
         if (nowClick.getAttribute('data-did') !== null) {
             device = findDeviceByDid(nowClick.getAttribute('data-did'));
-            console.log(device);
             $("#del-name").html(device.type + ' - ' + device.dname);
         }
-        else if(nowClick.getAttribute('data-id')) {
+        else if (nowClick.getAttribute('data-id')) {
             device = findGatewayById(nowClick.getAttribute('data-id'));
             $("#del-name").html(device.name);
         }
-        if(gatewayCheck==true){
+        if (gatewayCheck == true) {
             console.log("true");
-            url='/api/v1/gateways/' + device.id;
+            url = '/api/v1/gateways/' + device.id;
         }
         else url = '/api/v1/devices/' + device.id
 
         console.log(device);
         $('#delete-User').click(function () {
             $.ajax({
-                            type: 'DELETE',
-                            url: url,
-                            dataType: 'json',
-                            success: function(result) {
-                                console.log(result);
-                            }, error: function(err) {
-                                console.log(err);
-                            }
-                        });
+                type: 'DELETE',
+                url: url,
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                }, error: function (err) {
+                    console.log(err);
+                }
+            });
             enableManageButton(false);
         })
     });
@@ -554,6 +571,7 @@ function findDeviceByEid(eid) {
     }
     return null;
 }
+
 function findGateWayeBydid(did) {
     var idx = -1;
     $.each(deviceList, function (index, item) {
@@ -567,6 +585,7 @@ function findGateWayeBydid(did) {
     }
     return null;
 }
+
 function findDeviceByDid(did) {
     var idx = -1;
     $.each(deviceList, function (index, item) {
@@ -651,7 +670,7 @@ function enableManageButton(isEnabled) {
         $('#deleteButton').removeAttr('disabled');
     }
     else {
-        $('#modifyButton').attr('disabled','disabled');
+        $('#modifyButton').attr('disabled', 'disabled');
         $('#deleteButton').attr('disabled', 'disabled');
     }
 
@@ -705,7 +724,6 @@ function enableManageButton(isEnabled) {
 // //console.log(table.row('.selected').data());
 
 
-
 /** add click listener to gateway title in device list view
  * 1. folding gateway title
  * 2. gateway detail information beside detail view
@@ -714,7 +732,7 @@ function addClickListenerToGatewayTitle() {
     var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
     var deviceInfoList = $('.device-info');
     tree[tree.length - 1].addEventListener('click', function (e) {
-        gatewayCheck=true;
+        gatewayCheck = true;
         nowClick = e.target;
         var parent = e.target.parentElement;
         var classList = parent.classList;
@@ -732,7 +750,7 @@ function addClickListenerToGatewayTitle() {
                 $(deviceInfoList[i]).removeClass('selected');
             }
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
-            if(findDeviceByGwid(nowClick.getAttribute('data-id')) === null){
+            if (findDeviceByGwid(nowClick.getAttribute('data-id')) === null) {
                 console.log("no -data");
                 console.log(gatewayCheck);
                 enableManageButton(true);
@@ -745,7 +763,6 @@ function addClickListenerToGatewayTitle() {
             }
         }
     });
-
 
 
     function findGatewayByDid(id) {
@@ -775,7 +792,7 @@ function addClickListenerToDeviceInfo() {
             }
             else {
                 $(this).addClass('selected');
-                gatewayCheck=false;
+                gatewayCheck = false;
                 console.log(gatewayCheck);
                 for (var i = 0; i < deviceInfoList.length; i++) {
                     if (i != index) {
@@ -1092,19 +1109,19 @@ function operationJoiner(security) {
 function dateFormatter(date, type) {
     if (type === 1) {
         var str = '';
-        str += date.substring(0,4) + '년 ';
-        str += date.substring(4,6) + '월 ';
-        str += date.substring(6,8) + '일 ';
-        str += date.substring(8,10) + '시 ';
-        str += date.substring(10,12) + '분 ';
+        str += date.substring(0, 4) + '년 ';
+        str += date.substring(4, 6) + '월 ';
+        str += date.substring(6, 8) + '일 ';
+        str += date.substring(8, 10) + '시 ';
+        str += date.substring(10, 12) + '분 ';
         return str;
-    } else if (type === 2 ) {
+    } else if (type === 2) {
         var str = '';
-        str += date.substring(0,4) + '년 ';
-        str += date.substring(5,7) + '월 ';
-        str += date.substring(8,10) + '일 ';
-        str += date.substring(11,13) + '시 ';
-        str += date.substring(14,16) + '분 ';
+        str += date.substring(0, 4) + '년 ';
+        str += date.substring(5, 7) + '월 ';
+        str += date.substring(8, 10) + '일 ';
+        str += date.substring(11, 13) + '시 ';
+        str += date.substring(14, 16) + '분 ';
         return str;
     } else {
         console.log("What?");
@@ -1123,21 +1140,40 @@ function saveGateway(data) {
             "conn": data.conn
         }
     };
-    $.ajax({
-        url: '/api/v1/gateways',
-        type: 'post',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(gateway_data),
-        // datatype : "json",
-        success: function (result) {
-            // console.log(data);
-            // console.log(result);
-            // console.log("success");
-        },
-        error: function (err) {
-            console.log(err);
+    // $.each(gateway_data.gateway, function (index, item) {
+    //     // console.log(index+":"+item);
+    //     for(var i=0; i<item.length; i++) {
+    //         if (item[i] == " " || item[i] == null)
+    //             alert("공백문자는 사용하실수 없습니다");
+    //     }
+    //     if(item.length==0)
+    //         alert("공백문자는 사용하실수 없습니다");
+    // });
+    //     if(nullcheck(gateway_data.gateway)==true){
+    //         alert("asdasd");
+    //     }
+    //     else
+    //         alert("ni");
+        nullcheck((gateway_data.gateway));
+        if( nullcheck((gateway_data.gateway))){
+            alert("공백문자 사용 불가능");
         }
-    });
+        else
+        $.ajax({
+            url: '/api/v1/gateways',
+            type: 'post',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(gateway_data),
+            // datatype : "json",
+            success: function (result) {
+                // console.log(data);
+                // console.log(result);
+                // console.log("success");
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
 }
 
 function saveDevice(data) {
@@ -1157,21 +1193,25 @@ function saveDevice(data) {
         }
     };
 
-    // console.log(device_data);
-    $.ajax({
-        url: '/api/v1/devices',
-        type: 'post',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(device_data),
-        success: function (result) {
-            // console.log(data);
-            console.log(result);
-            console.log("success");
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
+    nullcheck((device_data.auth));
+    if( nullcheck((device_data.auth))){
+        alert("공백문자 사용 불가능");
+    }
+    else
+        $.ajax({
+            url: '/api/v1/devices',
+            type: 'post',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(device_data),
+            success: function (result) {
+                // console.log(data);
+                console.log(result);
+                console.log("success");
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
 }
 
 function createResourceName() {
@@ -1223,42 +1263,40 @@ function crudnListner() {
 
 function getAuthsList() {
 
-        $.ajax({
-            url:'/api/v1/devices',
-            success: function (result) {
+    $.ajax({
+        url: '/api/v1/devices',
+        success: function (result) {
 
-                // insertSecurityLog(result);
+            // insertSecurityLog(result);
 
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        })
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
 
 }
 
 var device_type = {
-    1 : "GasDetector",
-    2 : "GasBreaker",
-    3 : "ThermoHygrometer",
-    4 : "SmartLighting",
-    5 : "IntrusionDetector",
-    6 : "DoorSensor",
-    7 : "SmartPlug",
-    8 : "SmartCamera"
+    1: "GasDetector",
+    2: "GasBreaker",
+    3: "ThermoHygrometer",
+    4: "SmartLighting",
+    5: "IntrusionDetector",
+    6: "DoorSensor",
+    7: "SmartPlug",
+    8: "SmartCamera"
 }
-
 
 
 function insertSecurityLog(data) {
 
     jsondata = {
-        eventType : "security",
-        deviceType : null,
-        deviceId : null,
-        msg : "authentication success"
+        eventType: "security",
+        deviceType: null,
+        deviceId: null,
+        msg: "authentication success"
     };
-
 
 
     $.each(data, (index, item) => {
@@ -1310,7 +1348,7 @@ function check(data) {
     var tempArray = [];
     var overlapArray = [];
     $.each(data, function (index, item) {
-        if (item.event_type === "critical"){
+        if (item.event_type === "critical") {
             test_array.push(item.id);
         }
     });
@@ -1320,7 +1358,7 @@ function check(data) {
         if (check_count === 0) {
             check_count = 1;
             $.each(data, (index, item) => {
-                if (item.event_type === "critical"){
+                if (item.event_type === "critical") {
                     before_critical.push(item.id);
                     first_msg.push(item.msg);
                     first_msg_count = 0;
@@ -1328,11 +1366,11 @@ function check(data) {
             });
         } else if (check_count === 1) {
             $.each(data, (index, item) => {
-                if (item.event_type === "critical"){
+                if (item.event_type === "critical") {
                     after_critical.push(item.id);
                 }
             });
-            console.log("before length"+before_critical.length);
+            console.log("before length" + before_critical.length);
             if (before_critical.length == 1 && first_msg_count == 0) {
                 alert(first_msg[0]);
                 first_msg_count = 1;
@@ -1341,9 +1379,10 @@ function check(data) {
                 $.each(after_critical, (sIndex, sItem) => {
                     if (item === sItem) {
                         tempArray.push(sItem);
-                    } else if (item != sItem) {}
+                    } else if (item != sItem) {
+                    }
                 });
-                if (index === (before_critical.length-1)) {
+                if (index === (before_critical.length - 1)) {
                     // console.log("before_critical");
                     // console.log(before_critical);
                     before_critical.length = 0;
@@ -1379,8 +1418,29 @@ function check(data) {
 
 }
 
+function nullcheck(data) {
+    var checkdata=false;
+    $.each(data, function (index, item) {
+        for (var i = 0; i < item.length; i++) {
+            if (item[i] == " " || item[i] == null) {
+                checkdata = true;
+                return false;
+            }
 
-
+        }
+        if(item.length==0){
+            checkdata=true;
+            console.log("sadasdasd");
+            return false;
+        }
+    });
+    return checkdata;
+}
+function tim(data) {
+    $.each(data, function (index, item) {
+        console.log(index + ":" + item);
+    });
+}
 
 
 
