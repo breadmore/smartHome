@@ -5,6 +5,11 @@ var app = require('../../server');
 
 const rtsp = require('rtsp-ffmpeg');
 
+/** Dev Cam Address*/
+// const camAddress = 'rtsp://10.0.254.1:554/unicast';
+/** Etri Cam Address*/
+const camAddress = 'rtsp://192.168.0.202:554/unicast';
+
 //todo : remove test code.
 // function testService(socket, url, data) {
 //     socketComponent.responseToTargetSocket(socket, url, data);
@@ -16,12 +21,11 @@ function legacyStatesService(socket, url) {
     });
 }
 
-const cams = ['rtsp://10.0.254.1:554/unicast'].map(function (uri, i) {
+const cams = [camAddress].map(function (uri, i) {
     var stream = new rtsp.FFMpeg({
-        rate: 10,
-        resolution: '640:440',
+        resolution: '660X440',
         input: uri,
-        quality: 20,
+        quality: 3,
     });
     stream.on('start', function () {
         console.log('stream ' + i + ' started');
