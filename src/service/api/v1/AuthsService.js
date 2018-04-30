@@ -33,10 +33,6 @@ function insertDummyData(callback) {
 function deleteDeviceById(id,callback) {
     authDao.deleteDeviceById(id,callback);
 }
-function deleteGatewayByDId(did,callback) {
-    authDao.deleteDeviceById(did,callback);
-}
-
 
 function updateDeviceById(id,callback){
     authDao.updateDeviceById(id,callback);
@@ -52,21 +48,29 @@ function authInitService() {
                 var log;
                 if (item.auth === 0) {
                     log = new Log(item.type, item.did, failureMsg);
+                    logDao.insert(log, function (err, result) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+
+                        }
+                    })
                 }
                 else if (item.auth === 1){
                     log = new Log(item.type, item.did, successMsg);
+                    logDao.insert(log, function (err, result) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+
+                        }
+                    })
                 }
                 else {
                     console.log('???Error');
                 }
-                logDao.insert(log, function (err, result) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    else {
-
-                    }
-                })
             })
         }
     })
@@ -139,6 +143,5 @@ module.exports = {
     authInitService: authInitService,
     policyApplyInitServicer, policyApplyInitServicer,
     deleteDeviceById:deleteDeviceById,
-    updateDeviceById:updateDeviceById,
-    deleteGatewayByDId:deleteGatewayByDId
+    updateDeviceById:updateDeviceById
 };
