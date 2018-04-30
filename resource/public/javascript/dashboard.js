@@ -147,6 +147,9 @@ $(document).ready(function() {
                     }],
                     yAxes: [{
                         ticks: {
+                            min : 0,
+                            max : 40,
+                            stepSize: 10,
                             display: false
                         }
                     }]
@@ -179,6 +182,9 @@ $(document).ready(function() {
                     }],
                     yAxes: [{
                         ticks: {
+                            min : 0,
+                            max : 100,
+                            stepSize: 25,
                             display: false
                         }
                     }]
@@ -309,6 +315,7 @@ $(document).ready(function() {
         $('#humidityValue').text(data.humidity[0].value + '%');
         recentHumidity.shift();
         recentHumidity.push(data.humidity[0].value);
+        console.log(recentHumidity);
         updateChart(humidityChart, recentHumidity);
         // console.log(data.temperature[0].value);
         // console.log(data.humidity[0].value);
@@ -573,6 +580,7 @@ function initEnvironmentData() {
         url: '/api/v1/environments/humidity?number=24',
         type: 'get',
         success: function (result) {
+            console.log(result);
             $.each(result.reverse(), function (index, item) {
                 recentHumidity.push(item.value);
             });
@@ -586,21 +594,21 @@ function initEnvironmentData() {
     });
 
     //get Recent Illumination Values.
-    $.ajax({
-        url: '/api/v1/environments/humidity?number=24',
-        type: 'get',
-        success: function (result) {
-            $.each(result.reverse(), function (index, item) {
-                recentHumidity.push(item.value);
-            });
-            $('#humidityValue').text(recentHumidity[result.length - 1] + '%');
-            humidityChart.data.datasets[0].data = recentHumidity;
-            humidityChart.update();
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    })
+    // $.ajax({
+    //     url: '/api/v1/environments/humidity?number=24',
+    //     type: 'get',
+    //     success: function (result) {
+    //         $.each(result.reverse(), function (index, item) {
+    //             recentHumidity.push(item.value);
+    //         });
+    //         $('#humidityValue').text(recentHumidity[result.length - 1] + '%');
+    //         humidityChart.data.datasets[0].data = recentHumidity;
+    //         humidityChart.update();
+    //     },
+    //     error: function (err) {
+    //         console.log(err);
+    //     }
+    // })
 }
 
 function updateChart(chart, chartData) {
@@ -1050,6 +1058,7 @@ function getHourTemp(value) {
             type : 'post',
             data : hour_min,
             success: function (result) {
+                console.log(result);
                 var new_data = [];
                 var min;
                 $.each(result, function (index, item) {

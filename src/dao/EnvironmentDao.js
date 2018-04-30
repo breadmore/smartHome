@@ -53,7 +53,7 @@ var Environment = {
         return db.query('select * from illuminations order by id desc limit ?', [count], callback);
     },
     selecthourTemperature: function (value, callback) {
-        return db.query('SELECT date\n' +
+        /*return db.query('SELECT date\n' +
             ', hour\n' +
             '    , min * '+ value.min +'\n' +
             '    , valueAvg\n' +
@@ -68,10 +68,26 @@ var Environment = {
             'WHERE created_at > DATE_SUB(now(),INTERVAL '+ value.hour +' hour)\n' +
             'GROUP BY DATE(created_at), HOUR(created_at), FLOOR(MINUTE(created_at) / '+ value.min +')\n' +
             ') A\n' +
-            'ORDER BY HOUR, MIN ASC', callback);
+            'ORDER BY HOUR, MIN ASC', callback);*/
+        return db.query('SELECT date\n' +
+            ', hour\n' +
+            ', min * ' + value.min + '\n' +
+            ', valueAvg\n' +
+            ', count\n' +
+            'FROM (\n' +
+            'SELECT DATE(created_at) AS date\n' +
+            ', date_format(created_at, \'%H\') AS hour\n' +
+            ', FLOOR(MINUTE(created_at) / ' + value.min + ') AS min\n' +
+            ', avg(value) AS valueAvg\n' +
+            ', count(*) AS count\n' +
+            'FROM temperatures\n' +
+            'WHERE created_at > DATE_SUB(now(),INTERVAL ' + value.hour + ' hour)\n' +
+            'GROUP BY DATE(created_at), date_format(created_at, \'%H\'), FLOOR(MINUTE(created_at) / ' + value.min + ')\n' +
+            ') A\n' +
+            'ORDER BY date, hour, min ASC;', callback);
     },
     selecthourHumidities: function (value, callback) {
-        return db.query('SELECT date\n' +
+        /*return db.query('SELECT date\n' +
             ', hour\n' +
             '    , min * '+ value.min +'\n' +
             '    , valueAvg\n' +
@@ -86,10 +102,26 @@ var Environment = {
             'WHERE created_at > DATE_SUB(now(),INTERVAL '+ value.hour +' hour)\n' +
             'GROUP BY DATE(created_at), HOUR(created_at), FLOOR(MINUTE(created_at) / '+ value.min +')\n' +
             ') A\n' +
-            'ORDER BY HOUR, MIN ASC', callback);
+            'ORDER BY HOUR, MIN ASC', callback);*/
+        return db.query('SELECT date\n' +
+            ', hour\n' +
+            ', min * ' + value.min + '\n' +
+            ', valueAvg\n' +
+            ', count\n' +
+            'FROM (\n' +
+            'SELECT DATE(created_at) AS date\n' +
+            ', date_format(created_at, \'%H\') AS hour\n' +
+            ', FLOOR(MINUTE(created_at) / ' + value.min + ') AS min\n' +
+            ', avg(value) AS valueAvg\n' +
+            ', count(*) AS count\n' +
+            'FROM humidities\n' +
+            'WHERE created_at > DATE_SUB(now(),INTERVAL ' + value.hour + ' hour)\n' +
+            'GROUP BY DATE(created_at), date_format(created_at, \'%H\'), FLOOR(MINUTE(created_at) / ' + value.min + ')\n' +
+            ') A\n' +
+            'ORDER BY date, hour, min ASC;', callback)
     },
     selecthourIlluminations: function (value, callback) {
-        return db.query('SELECT date\n' +
+        /*return db.query('SELECT date\n' +
             ', hour\n' +
             '    , min * '+ value.min +'\n' +
             '    , valueAvg\n' +
@@ -104,7 +136,23 @@ var Environment = {
             'WHERE created_at > DATE_SUB(now(),INTERVAL '+ value.hour +' hour)\n' +
             'GROUP BY DATE(created_at), HOUR(created_at), FLOOR(MINUTE(created_at) / '+ value.min +')\n' +
             ') A\n' +
-            'ORDER BY HOUR, MIN ASC', callback);
+            'ORDER BY HOUR, MIN ASC', callback);*/
+        return db.query('SELECT date\n' +
+            ', hour\n' +
+            ', min * ' + value.min + '\n' +
+            ', valueAvg\n' +
+            ', count\n' +
+            'FROM (\n' +
+            'SELECT DATE(created_at) AS date\n' +
+            ', date_format(created_at, \'%H\') AS hour\n' +
+            ', FLOOR(MINUTE(created_at) / ' + value.min + ') AS min\n' +
+            ', avg(value) AS valueAvg\n' +
+            ', count(*) AS count\n' +
+            'FROM illuminations\n' +
+            'WHERE created_at > DATE_SUB(now(),INTERVAL ' + value.hour + ' hour)\n' +
+            'GROUP BY DATE(created_at), date_format(created_at, \'%H\'), FLOOR(MINUTE(created_at) / ' + value.min + ')\n' +
+            ') A\n' +
+            'ORDER BY date, hour, min ASC;', callback)
     },
     selectdayTemperature: function (value, callback) {
         return db.query('SELECT year\n' +

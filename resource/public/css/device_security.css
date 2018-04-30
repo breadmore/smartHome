@@ -594,3 +594,7 @@ td.right .fa-address-card {
 #securityEventTable_wrapper{
     padding:0px;
 }
+
+.device_security {
+    background: rgb(90,153,157);
+}
