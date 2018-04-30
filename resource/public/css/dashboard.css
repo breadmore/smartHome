@@ -710,3 +710,7 @@ div .dataTables_paginate > .pagination {
 #eventTable > thead > tr > td {
     font-size: 16px;
 }
+
+.dashboard {
+    background: rgb(90,153,157);
+}
