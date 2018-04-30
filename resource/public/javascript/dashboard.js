@@ -54,8 +54,33 @@ $(document).ready(function() {
         ajax : {
             url: "/api/v1/logs/recentservice",
             dataSrc: function (result) {
+                console.log(result);
                 $.each(result, (index, item) => {
-                    item.event_date = dateFormatter(item.event_date)
+                    item.device_name = undefined;
+                    $.ajax({
+                        url: '/api/v1/devices/' + item.device_id,   //change to item.device_id
+                        type: 'get',
+                        async: false,
+                        success: function (result) {
+                            item.device_name = result[0].dname;
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+
+                    if(item.device_name == undefined){  //error catch code
+                        item.device_name = '';
+                    }
+
+                    if(item.device_id == null){     //error catch code
+                        item.device_id = '';
+                    }
+                    if(item.device_type == null){   //error catch code
+                        item.device_type = '';
+                    }
+
+                    item.event_date = dateFormatter(item.event_date);
                 });
                 return result;
             }},
@@ -63,13 +88,15 @@ $(document).ready(function() {
             {data: null},
             {data: "event_date"},
             {data: "event_type"},
-            // {data: "device_type"},
+            {data: "device_name"},
+            {data: "device_type"},
+            {data: "device_id"},
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '13%', targets: 0 },
-            { width: '18.5%', targets: 1 },
-            { width: '17%', targets: 2 },
+            // { width: '13%', targets: 0 },
+            // { width: '18.5%', targets: 1 },
+            // { width: '17%', targets: 2 },
             // { width: '35%', targets: 3 },
 
         ]
@@ -518,6 +545,10 @@ $(document).ready(function() {
     //     return base64;
     // }
 
+    // #xiaomiPowerController
+    // #lightController
+    // #roomModeController
+
 });
 
 function initEnvironmentData() {
@@ -706,11 +737,22 @@ function updateLegacyStates(state) {
     //     sendSensorLog();
     // }
 }
-
+// var device_type = {
+// //     1 : "GasDetector",
+// //     2 : "GasBreaker",
+// //     3 : "ThermoHygrometer",
+// //     4 : "SmartLighting",
+// //     5 : "IntrusionDetector",
+// //     6 : "DoorSensor",
+// //     7 : "SmartPlug",
+// //     8 : "SmartCamera"
+// // }
 
 function xiaomiAction(action) {
     var data = {
-        eventType : 'service',
+        eventType : 'log',
+        deviceType: '2',
+        deviceId: '12965946',
         msg: undefined
     };
     console.log(action);
@@ -734,7 +776,7 @@ function xiaomiAction(action) {
                 type: 'post',
                 data: action,
                 success: function (result) {
-
+                    $('#eventTable').DataTable().ajax.reload();
                 },
                 error: function (err) {
                     console.log(err);
@@ -753,23 +795,39 @@ function legacyDeviceAction(type, command) {
     // todo : ip address?
     var ip = undefined;
     var msg;
-    if (type === 1) {
+    var data = {
+        eventType : undefined,
+        deviceType: undefined,
+        deviceId: undefined,
+        msg: undefined
+    };
+    if (type === 1) {           //smart light
         ip = '192.168.0.100';
+        data.eventType = 'log';
+        data.deviceType = '4';
+        data.deviceId = '12965940';
         if (command === 0) {
 
             msg = 'request led light on.';
+            data.msg = 'request led light on.';
         }
         else {
             msg = 'request led light off.';
+            data.msg = 'request led light off.';
         }
     }
-    else if (type === 2) {
+    else if (type === 2) {      //security service
         ip = '192.168.0.100';
+        data.eventType = 'service';
+        data.deviceType = '0';          //service is what type?
+        data.deviceId = '12965932';     //service is what Id?
         if (command === 0) {
             msg = 'request jaesil mode on.';
+            data.msg = 'request jaesil mode on.';
         }
         else {
             msg = 'request jaesil mode off.';
+            data.msg = 'request jaesil mode off.';
         }
     }
     else {
@@ -782,14 +840,28 @@ function legacyDeviceAction(type, command) {
         'turnOn': command
     };
 
+    console.log('data test');
+    console.log(data);
+
     $.ajax({
         url: 'api/v1/action',
         type: 'post',
         data: action,
         success: function (result) {
             console.log(result);
-            sendLog('service', msg);
 
+            $.ajax({
+                url: '/api/v1/logs',
+                type: 'post',
+                data : data,
+                success: function (result) {
+                    $('#eventTable').DataTable().ajax.reload();
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            // sendLog('service', msg);
         },
         error: function (err) {
             console.log(err);

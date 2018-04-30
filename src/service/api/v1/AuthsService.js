@@ -30,6 +30,14 @@ function insertDummyData(callback) {
     authDao.insertDummyData(callback);
 }
 
+function deleteDeviceById(id,callback) {
+    authDao.deleteDeviceById(id,callback);
+}
+
+function updateDeviceById(id,callback){
+    authDao.updateDeviceById(id,callback);
+}
+
 function authInitService() {
     authDao.selectAllAuth(function (err, result) {
         if (err) {
@@ -113,8 +121,6 @@ function policyApplyInitServicer() {
                             });
                         }
                     });
-
-
                 }
             })
         }
@@ -127,5 +133,7 @@ module.exports = {
     insertAuth: insertAuth,
     insertDummyData: insertDummyData,
     authInitService: authInitService,
-    policyApplyInitServicer, policyApplyInitServicer
+    policyApplyInitServicer, policyApplyInitServicer,
+    deleteDeviceById:deleteDeviceById,
+    updateDeviceById:updateDeviceById
 };

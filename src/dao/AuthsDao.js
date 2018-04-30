@@ -73,7 +73,18 @@ var Auths = {
 
     selectAllDidByEid: function (data, callback) {
         return db.query('select * from auths where eid = ?', Number(data.fromId), callback);
-    }
+    },
+
+    deleteDeviceById: function (id,callback) {
+        return db.query('delete from auths where id = ?',
+            id,
+            callback);
+    },
+    updateDeviceById: function (id, callback) {
+        return db.query('update auths set gwid = ?, eid = ?, type =? , did = ?, dname = ?, psk = ?, oid = ?, sid = ?,conn = ?, auth=?,reg=? where id = ?',
+            [did.gwid, did.eid, did.type, did.did, did.dname, did.psk, did.oid, did.sid,did.conn,did.auth,did.reg, did.id],
+            callback);
+    },
 };
 
 module.exports = Auths;

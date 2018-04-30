@@ -68,8 +68,28 @@ router.route('/:deviceId')
 /**
  *
  */
-    .post(function (req, res) {
+    .delete(function (req, res) {
+        authService.deleteDeviceById(req.params.deviceId,function (err, result){
+            if(err){
+                res.status(401).send(err);
+            }
+            else{
+                res.status(200).send(result);
+            }
+        })
+    })
 
-    });
+    .put(function (req,res) {
+        req.body.id = req.params.deviceId;
+        authService.updateDeviceById(req.body, function (err,result) {
+            if(err){
+                console.log(err);
+                res.status(400).send(err);
+            }else{
+                res.status(200).send(result);
+
+            }
+        })
+    })
 
 module.exports = router;

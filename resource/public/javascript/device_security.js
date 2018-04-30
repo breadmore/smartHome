@@ -27,7 +27,7 @@ var nowClick;
 var chkCheckBox; // ktw add
 var change; //ktw add
 var securityLogList;
-
+var gatewayCheck;
 $(document).ready(function () {
 
     // getAuthsList();
@@ -59,7 +59,7 @@ $(document).ready(function () {
                         $.each(jsonArray, function (index, item) {
                             item.enforceDate = dateFormatter(item.policyID,1);
                             // item.fromName = findEntityById(item.FromID).Name
-                            item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;
+                            item.fromName = findDeviceByEid(Number(findEntityById(item.FromID).ID)).dname;      //this code is error. line 576 is same error.
                             item.toName = findEntityById(item.ToID).Name;
                             securityList.push(item);
                         });
@@ -109,13 +109,12 @@ $(document).ready(function () {
             url: "/api/v1/logs",
             dataSrc: function (result) {
                 // console.log(result);
-
+                check(result);
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
                 });
-
                 return result;
             }
         },
@@ -267,13 +266,12 @@ $(document).ready(function () {
         deployLogTable.ajax.reload();
 
     });
-
     $('#modifyModal').on('show.bs.modal', function (e) {
-
         if (nowClick.getAttribute('data-did') !== null) {
             $('.gateway-modify').hide();
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            console.log(device);
             $("#gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
             $("#device-id").val(device.id);
@@ -285,23 +283,36 @@ $(document).ready(function () {
             $("#session-id").val(device.sid);
 
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
-                $('#connected').html(device.conn + ' Not Connected');
+                $('#conn-on').attr("checked",false);
+                $('#conn-off').attr("checked", true);
             }
-            else $('#connected').html(device.conn + ' Connected');
+            else {
+                $('#conn-on').attr("checked",true);
+                $('#conn-off').attr("checked",false);
+            }
+
             if ('<i class="far fa-address-card"></i>' === device.auth) {
-                $('#authenticate').html(device.auth + ' Not Authorized');
+                $('#auth-on').attr("checked",false);
+                $('#auth-off').attr("checked", true);
             }
-            else $('#authenticate').html(device.auth + ' Authorized');
+            else {
+                $('#auth-on').attr("checked",true);
+                $('#auth-off').attr("checked",false);
+            }
             if ('<i class="far fa-eye-slash"></i>' === device.reg) {
-                $('#register').html(device.reg + ' Not Registered');
-            } else
-                $('#register').html(device.reg + ' Registered');
+                $('#regi-on').attr("checked",false);
+                $('#regi-off').attr("checked", true);
+            }
+            else{
+                $('#regi-on').attr("checked",true);
+                $('#regi-off').attr("checked",false);
+            }
         }
         else if(nowClick.getAttribute('data-id')){
+
             $('.gateway-modify').show();
             $('.device-modify').hide();
             var device = findGatewayById(nowClick.getAttribute('data-id'));
-
             $("#gateway-id").val(device.id);
             $("#gateway-name").val(device.name);
             $("#gateway-ip").val(device.ip);
@@ -315,23 +326,89 @@ $(document).ready(function () {
 
             console.log('error!');
         }
+        $('#modi-button').click(function () {
+            var updateObj = {};
 
+                updateObj.gwid=$("#gateway-id").val();
+                updateObj.dname=$("#device-name").val();
+                updateObj.did=$("#device-id").val();
+                updateObj.psk=$("#pre-shared-key").val();
+                updateObj.eid=$("#entity-id").val();
+                updateObj.oid=$("#object-id").val();
+                updateObj.type=$("#modi-device-type").val();
+                updateObj.sid=$("#session-id").val();
+            /**
+             * 영훈
+             conn, auth, reg 버튼 구현 후 아래 주석 해제
+             */
+                // updateObj.conn= $('#connected').val();
+                // updateObj.auth=$('#authenticate').val();
+                // updateObj.auth=$('#register').val();
+
+            $.ajax({
+                type: 'PUT',
+                url: '/api/v1/devices/' + device.id,
+                data: updateObj,
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                }, error: function (err) {
+                    console.log(err);
+                }
+            });
+        })
     });
+    $('#modifyModal').on('hide.bs.modal', function (e) {
+        $("#gateway-id").val(null);
+        $("#device-name").val(null);
+        $("#device-id").val(null);
+        $("#pre-shared-key").val(null);
+        $("#entity-id").val(null);
+        $("#object-id").val(null);
+        $("#modi-device-type").val(null);
+        $("#session-id").val(null);
+        $("#connected").val(null);
+        $("#authenticate").val(null);
+        $("#register").val(null);
 
+    })
     $('#deleteModal').on('show.bs.modal', function (e) {
+        var device;
+        var url;
+
         if (nowClick.getAttribute('data-did') !== null) {
-            var device = findDeviceByDid(nowClick.getAttribute('data-did'));
+            device = findDeviceByDid(nowClick.getAttribute('data-did'));
             console.log(device);
             $("#del-name").html(device.type + ' - ' + device.dname);
-            // $("#del-name").text(device.dname);
         }
         else if(nowClick.getAttribute('data-id')) {
-            var device = findGatewayById(nowClick.getAttribute('data-id'));
+            device = findGatewayById(nowClick.getAttribute('data-id'));
             $("#del-name").html(device.name);
         }
-        // nowClick;
-        // $("#delete-id").text(data.user_id)
+        if(gatewayCheck==true){
+            console.log("true");
+            url='/api/v1/gateways/' + device.id;
+        }
+        else url = '/api/v1/devices/' + device.id
+
+        console.log(device);
+        $('#delete-User').click(function () {
+            $.ajax({
+                            type: 'DELETE',
+                            url: url,
+                            dataType: 'json',
+                            success: function(result) {
+                                console.log(result);
+                            }, error: function(err) {
+                                console.log(err);
+                            }
+                        });
+            enableManageButton(false);
+        })
     });
+    $('#deleteModal').on('hide.bs.modal', function (e) {
+
+    })
 
     $("#policy-confirm").on("click", () => {
 
@@ -453,6 +530,19 @@ function findEntityById(id) {
     return null;
 }
 
+function findDeviceByGwid(gwid) {
+    var idx = -1;
+    $.each(deviceList, function (index, item) {
+        if (item.gwid === gwid) {
+            idx = index;
+        }
+    });
+    if (idx !== -1) {
+        return deviceList[idx];
+    }
+    return null;
+}
+
 function findDeviceByEid(eid) {
     var idx = -1;
     $.each(deviceList, function (index, item) {
@@ -466,7 +556,19 @@ function findDeviceByEid(eid) {
     }
     return null;
 }
+function findGateWayeBydid(did) {
+    var idx = -1;
+    $.each(deviceList, function (index, item) {
+        if (item.did === did) {
+            idx = index;
+        }
+    });
 
+    if (idx !== -1) {
+        return deviceList[idx];
+    }
+    return null;
+}
 function findDeviceByDid(did) {
     var idx = -1;
     $.each(deviceList, function (index, item) {
@@ -612,7 +714,9 @@ function enableManageButton(isEnabled) {
  * */
 function addClickListenerToGatewayTitle() {
     var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+    var deviceInfoList = $('.device-info');
     tree[tree.length - 1].addEventListener('click', function (e) {
+        gatewayCheck=true;
         nowClick = e.target;
         var parent = e.target.parentElement;
         var classList = parent.classList;
@@ -622,12 +726,28 @@ function addClickListenerToGatewayTitle() {
             for (var i = 0; i < opensubs.length; i++) {
                 opensubs[i].classList.remove('open');
             }
+            enableManageButton(false);
         } else {
             $('.open').removeClass('open');
             classList.add('open');
+            for (var i = 0; i < deviceInfoList.length; i++) {
+                $(deviceInfoList[i]).removeClass('selected');
+            }
             detailViewUpdate(findGatewayByDid(tree[tree.length - 1].dataset.id), null);
+            if(findDeviceByGwid(nowClick.getAttribute('data-id')) === null){
+                console.log("no -data");
+                console.log(gatewayCheck);
+                enableManageButton(true);
+            }
+            else {
+                console.log("data here");
+                console.log(gatewayCheck);
+                enableManageButton(false);
+            }
         }
     });
+
+
 
     function findGatewayByDid(id) {
         var idx = -1;
@@ -648,7 +768,6 @@ function addClickListenerToGatewayTitle() {
  * */
 function addClickListenerToDeviceInfo() {
     var deviceInfoList = $('.device-info');
-
     $.each(deviceInfoList, function (index, item) {
         item.addEventListener('click', function (e) {
             if ($(this).hasClass('selected')) {
@@ -657,10 +776,13 @@ function addClickListenerToDeviceInfo() {
             }
             else {
                 $(this).addClass('selected');
+                gatewayCheck=false;
+                console.log(gatewayCheck);
                 for (var i = 0; i < deviceInfoList.length; i++) {
                     if (i != index) {
                         $(deviceInfoList[i]).removeClass('selected');
                         console.log('remove!');
+
                         enableManageButton(true);
 
                     }
@@ -1072,7 +1194,6 @@ function createResourceName() {
 }
 
 
-
 //ktw add
 
 function test1() {
@@ -1179,16 +1300,85 @@ function insertSecurityLog(data) {
     });
 }
 
+var before_critical = [];
+var check_count = 0;
+var test_array = [];
+var first_msg = [];
+var first_msg_count;
 
+function check(data) {
+    var after_critical = [];
+    var tempArray = [];
+    var overlapArray = [];
+    $.each(data, function (index, item) {
+        if (item.event_type === "critical"){
+            test_array.push(item.id);
+        }
+    });
+    if (test_array.length == 0) {
+    } else {
+        console.log("length 1111");
+        if (check_count === 0) {
+            check_count = 1;
+            $.each(data, (index, item) => {
+                if (item.event_type === "critical"){
+                    before_critical.push(item.id);
+                    first_msg.push(item.msg);
+                    first_msg_count = 0;
+                }
+            });
+        } else if (check_count === 1) {
+            $.each(data, (index, item) => {
+                if (item.event_type === "critical"){
+                    after_critical.push(item.id);
+                }
+            });
+            console.log("before length"+before_critical.length);
+            if (before_critical.length == 1 && first_msg_count == 0) {
+                alert(first_msg[0]);
+                first_msg_count = 1;
+            }
+            $.each(before_critical, (index, item) => {
+                $.each(after_critical, (sIndex, sItem) => {
+                    if (item === sItem) {
+                        tempArray.push(sItem);
+                    } else if (item != sItem) {}
+                });
+                if (index === (before_critical.length-1)) {
+                    // console.log("before_critical");
+                    // console.log(before_critical);
+                    before_critical.length = 0;
+                    $.each(after_critical, (aindex, aitem) => {
+                        before_critical.push(aitem);
+                    });
+                    // console.log("before_critical");
+                    // console.log(before_critical);
+                    // console.log("after_critical");
+                    // console.log(after_critical);
+                    $.each(tempArray, (tindex, tItem) => {
+                        after_critical.splice($.inArray(tItem, after_critical), 1);
+                    });
+                    // console.log("after_critical");
+                    // console.log(after_critical);
+                    overlapArray = after_critical;
+                    // console.log("등록된것");
+                    // console.log(overlapArray);
+                    if (overlapArray.length > 0) {
+                        $.each(data, (oindex, oitem) => {
+                            // console.log(oitem.id);
+                            if (overlapArray == oitem.id) {
+                                alert(oitem.msg);
+                            }
+                        })
+                        // alert(overlapArray);
+                    }
 
+                }
+            });
+        }
+    }
 
-
-
-
-
-
-
-
+}
 
 
 
