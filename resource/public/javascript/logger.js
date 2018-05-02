@@ -21,8 +21,8 @@ $(function () {
     var table = $('.devicelog').DataTable({
         paging: true,
         processing: true,
-        ordering: false,
-        // order: [[1, 'desc']],
+        ordering: true,
+        order: [[0, 'desc']],
         serverSide: false,
         searching: true,
         ajax : {
@@ -136,7 +136,7 @@ $(function () {
         paging: true,
         processing: true,
         ordering: false,
-        // order: [[0, 'desc']],
+        // order: [[0, 'asc']],
         serverSide: false,
         searching: true,
         ajax : {

@@ -79,9 +79,15 @@ $(document).ready(function() {
                     if(item.device_id == null){     //error catch code
                         item.device_id = '';
                     }
-                    if(item.device_type == null){   //error catch code
-                        item.device_type = '';
+                    if (item.device_type == null) {
+                        item.device_type = "";
+                    } else if (item.device_type === 0){
+                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                    } else {
+                        item.device_type = type2Icon(item.device_type);
                     }
+
+
 
                     item.event_date = dateFormatter(item.event_date);
                 });
@@ -1284,4 +1290,36 @@ function initDeviceInfo() {
                 break;
         }
     }
+}
+
+function type2Icon(type) {
+    var icon;
+    if (type === 1) {
+        return icon = '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>'
+    }
+    else if (type === 2) {
+        return icon = '<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>'
+    }
+    else if (type === 3) {
+        return icon = '<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>'
+    }
+    else if (type === 4) {
+        return icon = '<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>'
+    }
+    else if (type === 5) {
+        return icon = '<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>'
+    }
+    else if (type === 6) {
+        return icon = '<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>'
+    }
+    else if (type === 7) {
+        return icon = '<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>'
+    }
+    else if (type === 8) {
+        return icon = '<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>'
+    }
+    else {
+        return icon = '<i class="fas fa-question"></i><span>Unknown</span>'
+    }
+    return icon;
 }
