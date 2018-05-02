@@ -56,40 +56,61 @@ $(document).ready(function() {
             url: "/api/v1/logs/recentservice",
             // async: false,
             dataSrc: function (result) {
-                console.log(result);
                 $.each(result, (index, item) => {
-                    item.device_name = undefined;
-                    $.ajax({
-                        url: '/api/v1/devices/' + item.device_id,
-                        type: 'get',
-                        async: false,
-                        success: function (result) {
-                            console.log(result);
-                            item.device_name = result[0].dname;
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-                    });
-
-                    if(item.device_name == undefined){  //error catch code
+                    // item.device_name = undefined;
+                    if (item.device_id) {
+                        $.ajax({
+                            url: '/api/v1/devices/' + item.device_id,
+                            type: 'get',
+                            async: false,
+                            success: function (result) {
+                                // device information already deleted!
+                                if (result.length === 0) {
+                                    item.device_name = '';
+                                    item.device_id = '';
+                                    item.device_type = '';
+                                }
+                                else {
+                                    item.device_name = result[0].dname;
+                                    if (item.device_type === 0){
+                                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                                    }
+                                    else {
+                                        item.device_type = type2Icon(item.device_type);
+                                    }
+                                    item.event_date = dateFormatter(item.event_date);
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+                    // device id isn't exist.
+                    else {
                         item.device_name = '';
-                    }
-
-                    if(item.device_id == null){     //error catch code
                         item.device_id = '';
-                    }
-                    if (item.device_type == null) {
-                        item.device_type = "";
-                    } else if (item.device_type === 0){
-                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
-                    } else {
-                        item.device_type = type2Icon(item.device_type);
+                        item.device_type = '';
                     }
 
-
-
-                    item.event_date = dateFormatter(item.event_date);
+                    // if(item.device_name == undefined){  //error catch code
+                    //     item.device_name = '';
+                    // }
+                    //
+                    // if(item.device_id == null){     //error catch code
+                    //     item.device_id = '';
+                    // }
+                    // if (item.device_type == null) {
+                    //     item.device_type = "";
+                    // } else if (item.device_type === 0){
+                    //     item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                    // } else {
+                    //     item.device_type = type2Icon(item.device_type);
+                    // }
+                    //
+                    //
+                    //
+                    // item.event_date = dateFormatter(item.event_date);
                 });
                 return result;
             }},
@@ -334,7 +355,7 @@ $(document).ready(function() {
         // console.log(data.illuminaty.length);
         //todo [0].value addç
         $('#luxValue').text(data.illuminaty[0].value);
-        console.log(data.illuminaty[0].value * 0.6);
+        // console.log(data.illuminaty[0].value * 0.6);
         $(".graph").before("<style> .model-1 .graph:before { transform: rotate(" + (data.illuminaty[0].value * 0.6) +"deg)} </style>");
 
     });
