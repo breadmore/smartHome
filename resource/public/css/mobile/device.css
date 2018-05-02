@@ -12,19 +12,19 @@
 }
 
 .content-connect {
-    width: 12rem;
+    width: 9rem;
 }
 
 .content-connect-value {
-    width: 7rem;
+    width: 9rem;
 }
 
 .content-auth {
-    width: 15rem;
+    width: 13rem;
 }
 
 .content-auth-value {
-    width: 7rem;
+    width: 10rem;
 }
 
 .content-policy {
@@ -43,12 +43,29 @@
     border-radius: 5px;
 }
 
-.smart-light {
+.GasDetector {
+    background-color: rgb(243, 22, 77);
+}
+.GasBreaker {
+    background-color: rgb(62, 156, 18);
+}
+.ThermoHygrometer {
+    background-color: rgb(22, 156, 156);
+}
+.SmartLighting {
     background-color: rgb(243, 156, 18);
 }
-
-.temperature {
-    background-color: rgb(52, 152, 219);
+.IntrusionDetector {
+    background-color: rgb(18, 156, 18);
+}
+.DoorSensor {
+    background-color: rgb(18, 18, 18);
+}
+.SmartPlug {
+    background-color: rgb(18, 18, 156);
+}
+.SmartCamera {
+    background-color: rgb(182, 152, 219);
 }
 
 .device {

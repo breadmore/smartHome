@@ -3,7 +3,7 @@
 var gatewayList;
 
 $(document).ready(function () {
-    createDeviceListView();
+    createGatewayListView();
     console.log(gatewayList);
 
     $(".input-img").on("click", function () {
@@ -49,7 +49,7 @@ function searchGateways(name) {
 
 
 
-function createDeviceListView() {
+function createGatewayListView() {
     $.ajax({
         url: '/api/v1/gateways',
         type: 'get',
@@ -57,8 +57,8 @@ function createDeviceListView() {
         success: function (gatewayResult) {
             gatewayList = gatewayResult;
             $.each(gatewayList, function (index, item) {
+
                 $('.gateway-page').append(gatewayListForm(item));
-                // $('.device-section').append(selectSortList(item));
             });
         },
         error: function (err) {
