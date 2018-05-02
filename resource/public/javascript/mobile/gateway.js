@@ -30,8 +30,8 @@ function gatewayListForm(gateway) {
     var dom='<div class="device-card">';
         dom+='<div class="col-12 device-card-top"><div class="col-4 device-left"></div></div>';
         dom+='<div class="device-card-body"><div class="device-card-body-title">'+gateway.name+'</div>';
-        dom+='<div class="row device-card-body-content"><div class="content-title">IP Address</div>';
-        dom+='<div class="content-ip">'+gateway.ip+'</div><div class="content-port">PORT Address '+gateway.port+'</div>';
+        dom+='<div class="row device-card-body-content"><div class="content-ipAddress">IP Address</div>';
+        dom+='<div class="content-ip">'+gateway.ip+'</div><div class="content-portAddress">PORT Address</div><div class="content-port">'+gateway.port+'</div>';
         dom+='</div></div>';
 
     return dom;
