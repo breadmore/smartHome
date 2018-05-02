@@ -1,4 +1,11 @@
-.content-ipAddress, .content-ip, .content-portAddress, .content-port {
+.content-ipAddress{
+    width: 20%;
+}
+.content-ip{
+    width: 30%;
+
+}
+.content-portAddress, .content-port {
     width: 25%;
 }
 
