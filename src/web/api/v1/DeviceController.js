@@ -81,11 +81,14 @@ router.route('/:deviceId')
 
     .put(function (req,res) {
         req.body.id = req.params.deviceId;
+        console.log(req.body.id);
         authService.updateDeviceById(req.body, function (err,result) {
             if(err){
                 console.log(err);
                 res.status(400).send(err);
             }else{
+                console.log(req.body);
+                console.log("what?");
                 res.status(200).send(result);
 
             }

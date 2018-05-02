@@ -25,7 +25,7 @@ function searchGateways(name) {
         "name" : name
     };
     $.ajax({
-        url: '/api/v1/gateways/search',
+        url: '/api/v1/gateways/gateway',
         type: 'post',
         data: dataJson,
         success: function (searchResult) {
