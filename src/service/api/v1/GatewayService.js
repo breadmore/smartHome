@@ -20,10 +20,25 @@ function deleteById(id, callback) {
     gatewayDao.deleteById(id, callback);
 }
 
+function searchName(name, callback){
+    gatewayDao.searchName(name, callback);
+}
+
+function searchDeviceId(id, callback){
+    gatewayDao.searchDevice(id, callback);
+}
+
+function getPolicy(id, callback) {
+    gatewayDao.getPolicy(id, callback);
+}
+
 module.exports = {
     findAllGateway : findAllGateway,
     findGatewayById : findGatewayById,
     insertGateway : insertGateway,
     updateGateway : updateGateway,
-    deleteById: deleteById
+    deleteById: deleteById,
+    searchName: searchName,
+    searchDeviceId: searchDeviceId,
+    getPolicy: getPolicy
 };

@@ -66,9 +66,20 @@ var Gateway = {
             [gateway.name, gateway.ip, gateway.port, gateway.conn, id],
             callback)
     },
+    searchName: function(name, callback) {
+        return db.query('select * from gateway where name like "%' + name + '%"', callback);
+    },
+
+    getPolicy: function(id, callback) {
+        return db.query('select a.eid, e.TokenID, t.RoleID, r.Operation from auths as a left join EntityIDTbl as e on a.eid = e.ID left join TokenIDTbl as t on e.TokenID = t.ID left join RoleIDTbl as r on t.RoleID = r.ID where a.eid = ' + id + '', callback);
+    },
 
     deleteById: function (id, callback) {
         return db.query('delete  from gateway where id = ?', id, callback);
+    },
+
+    searchDevice: function (id, callback) {
+        return db.query('select a.did, a.conn, a.auth, g.name from auths as a left join gateway as g on a.gwid = g.id where a.did like "%' + id + '%"', callback);
     }
 
 };
