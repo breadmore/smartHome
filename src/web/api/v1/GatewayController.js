@@ -66,5 +66,18 @@ router.route('/:id')
         // res.status(200).send(userService.deleteUserByUserId(req.params.id));
     })
 
+router.route('/search')
+    .post(function (req, res) {
+        console.log(req.body.name);
+        gatewayService.searchName(req.body.name, function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    });
+
 
 module.exports = router;

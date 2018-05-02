@@ -20,10 +20,15 @@ function deleteById(id, callback) {
     gatewayDao.deleteById(id, callback);
 }
 
+function searchName(name, callback){
+    gatewayDao.searchName(name, callback);
+}
+
 module.exports = {
     findAllGateway : findAllGateway,
     findGatewayById : findGatewayById,
     insertGateway : insertGateway,
     updateGateway : updateGateway,
-    deleteById: deleteById
+    deleteById: deleteById,
+    searchName: searchName
 };

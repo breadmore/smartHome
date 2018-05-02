@@ -30,29 +30,52 @@ $(function () {
 
     initXiaomiDeviceData(socket);
     // todo : fix socket!
-    socket.on('/environments/', function (data) {
+    /*socket.on('/environment', function (data) {
         console.log(data);
         switch (data.type) {
             case 'temperature':
-                $('#temperatureValue').text(data.value + '℃');
+                $('#temperatureValue').text(data.temperature[0].value + '℃');
                 recentTemperature.shift();
-                recentTemperature.push(data.value);
+                recentTemperature.push(data.temperature[0].value);
                 // updateChart(temperatureChart, recentTemperature);
                 break;
             case 'humidity':
-                $('#humidityValue').text(data.value + '%');
+                $('#humidityValue').text(data.humidity[0].value + '%');
                 recentHumidity.shift();
-                recentHumidity.push(data.value);
+                recentHumidity.push(data.humidity[0].value);
                 // updateChart(humidityChart, recentHumidity);
                 break;
             case 'illuminati':
-                console.log(data.value);
-                $('#luxValue').text(data.value + 'Lux');
+                console.log(data.illuminaty[0].value);
+                $('#luxValue').text(data.illuminaty[0].value + 'Lux');
                 break;
             default:
                 console.error(data);
                 break;
         }
+    });*/
+    setInterval(function () {
+        socket.emit('/environment');
+    }, 1500);
+    socket.on('/environment', function (data) {
+        $('#temperatureValue').text(data.temperature[0].value + '℃');
+        recentTemperature.shift();
+        recentTemperature.push(data.temperature[0].value);
+        // updateChart(temperatureChart, recentTemperature);
+
+        $('#humidityValue').text(data.humidity[0].value + '%');
+        recentHumidity.shift();
+        recentHumidity.push(data.humidity[0].value);
+        // console.log(recentHumidity);
+        // updateChart(humidityChart, recentHumidity);
+        // console.log(data.temperature[0].value);
+        // console.log(data.humidity[0].value);
+        // console.log(data.illuminaty.length);
+        //todo [0].value addç
+        $('#luxValue').text(data.illuminaty[0].value + ' Lux');
+        // console.log(data.illuminaty[0].value * 0.6);
+        // $(".graph").before("<style> .model-1 .graph:before { transform: rotate(" + (data.illuminaty[0].value * 0.6) +"deg)} </style>");
+
     });
 
     socket.on('/xiaomi/states', function (data) {

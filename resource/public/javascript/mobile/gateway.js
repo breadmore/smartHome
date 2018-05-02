@@ -5,7 +5,48 @@ var gatewayList;
 $(document).ready(function () {
     createDeviceListView();
     console.log(gatewayList);
-})
+
+    $(".input-img").on("click", function () {
+       var name = $(".search-bar").val();
+       searchGateways(name);
+    });
+
+    $(".search-bar").keypress(function(e) {
+        if (e.keyCode == 13){
+            var name = $(".search-bar").val();
+            searchGateways(name);
+        }
+    });
+
+});
+
+function searchGateways(name) {
+    var dataJson = {
+        "name" : name
+    };
+    $.ajax({
+        url: '/api/v1/gateways/search',
+        type: 'post',
+        data: dataJson,
+        success: function (searchResult) {
+            if (searchResult.length === 0) {
+                alert("Gateway not found")
+            } else if (searchResult.length > 0) {
+                gatewayList = searchResult;
+                $(".gateway-page").empty();
+                $.each(gatewayList, function (index, item) {
+                    $('.gateway-page').append(gatewayListForm(item));
+                });
+            } else {
+                console.log("What error????");
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
 
 
 function createDeviceListView() {

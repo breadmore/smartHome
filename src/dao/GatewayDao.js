@@ -66,6 +66,9 @@ var Gateway = {
             [gateway.name, gateway.ip, gateway.port, gateway.conn, id],
             callback)
     },
+    searchName: function(name, callback) {
+        return db.query('select * from gateway where name like "%' + name + '%"', callback);
+    },
 
     deleteById: function (id, callback) {
         return db.query('delete  from gateway where id = ?', id, callback);
