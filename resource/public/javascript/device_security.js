@@ -32,6 +32,54 @@ $(document).ready(function () {
 
     // getAuthsList();
 
+    $("#modi-button").on("click", function () {
+        var updateObj = {};
+
+
+        updateObj.conn = $(':input:radio[name=moptradio1]:checked').val();
+        updateObj.auth = $(':input:radio[name=moptradio2]:checked').val();
+        // updateObj.reg = $(':input:radio[name=moptradio3]:checked').val();
+
+        // console.log(conn, auth);
+        // if ($(':input:radio[name=moptradio1]:checked').val() === "on") {
+        //     updateObj.conn = "1";
+        // } else if ($(':input:radio[name=moptradio1]:checked').val() === "off") {
+        //     updateObj.conn = "0";
+        // }
+        //
+        // if ($(':input:radio[name=moptradio2]:checked').val() === "on") {
+        //     updateObj.auth = "1";
+        // } else if ($(':input:radio[name=moptradio2]:checked').val() === "off") {
+        //     updateObj.auth = "0";
+        // }
+
+        // if ($(':input:radio[name=moptradio3]:checked').val() === "on") {
+        //     updateObj.reg = "1";
+        // } else if ($(':input:radio[name=moptradio3]:checked').val() === "off") {
+        //     updateObj.reg = "0";
+        // }
+
+
+
+        updateObj.id = $("#auth-id").val();
+        updateObj.gwid=$("#device-gateway-id").val();
+        updateObj.dname=$("#device-name").val();
+        updateObj.did=$("#device-id").val();
+        updateObj.psk=$("#pre-shared-key").val();
+        updateObj.eid=$("#entity-id").val();
+        updateObj.oid=$("#object-id").val();
+        updateObj.type=$("#modi-device-type").val();
+        updateObj.sid=$("#session-id").val();
+        // updateObj.conn= dataJson2.conn;
+        // updateObj.auth= dataJson2.auth;
+        // updateObj.auth= dataJson2.reg;
+        console.log(updateObj);
+
+        deviceModify(updateObj);
+
+
+    })
+
     //init device list & device detail
     createDeviceListView();
     createResourceName();
@@ -266,6 +314,7 @@ $(document).ready(function () {
         deployLogTable.ajax.reload();
 
     });
+
     $('#modifyModal').on('show.bs.modal', function (e) {
         if (nowClick.getAttribute('data-did') !== null) {
             console.log('devicemodi');
@@ -274,9 +323,10 @@ $(document).ready(function () {
             $('.device-modify').show();
             var device = findDeviceByDid(nowClick.getAttribute('data-did'));
             console.log(device);
+            $("#auth-id").val(device.id);
             $("#device-gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
-            $("#device-id").val(device.id);
+            $("#device-id").val(device.did);
             $("#pre-shared-key").val(device.psk);
             $("#entity-id").val(device.eid);
             $("#object-id").val(device.oid);
@@ -323,55 +373,6 @@ $(document).ready(function () {
             $('.device-modify').hide();
             $('#modi-button').hide();
         }
-        $('#modi-button').click(function () {
-            var updateObj = {};
-            var url;
-            if(gatewayCheck==true){
-                url= '/api/v1/gateways/' + device.id;
-            }
-            else  url='/api/v1/devices/' + device.id;
-                updateObj.gwid=$("#device-gateway-id").val();
-                updateObj.dname=$("#device-name").val();
-                updateObj.did=$("#device-id").val();
-                updateObj.psk=$("#pre-shared-key").val();
-                updateObj.eid=$("#entity-id").val();
-                updateObj.oid=$("#object-id").val();
-                updateObj.type=$("#modi-device-type").val();
-                updateObj.sid=$("#session-id").val();
-            /**
-             * 영훈
-             conn, auth, reg 버튼 구현 후 아래 주석 해제
-             */
-                updateObj.conn= $('#connected').val();
-                updateObj.auth=$('#authenticate').val();
-                updateObj.auth=$('#register').val();
-
-            // $.each(updateObj, function (index, item) {
-            //     // console.log(index+":"+item);
-            //     for(var i=0; i<item.length; i++) {
-            //         if (item[i] == " " || item[i] == null)
-            //             alert("공백문자는 사용하실수 없습니다");
-            //     }
-            //     if(item.length==0)
-            //         alert("공백문자는 사용하실수 없습니다");
-            // });
-            nullcheck((updateObj));
-            if( nullcheck((updateObj))){
-                alert("공백문자 사용 불가능");
-            }
-            else
-                $.ajax({
-                    type: 'PUT',
-                    url: url,
-                    data: updateObj,
-                    dataType: 'json',
-                    success: function (result) {
-                        console.log(result);
-                    }, error: function (err) {
-                        console.log(err);
-                    }
-                });
-        })
     });
     $('#modifyModal').on('hide.bs.modal', function (e) {
         $("#device-gateway-id").val(null);
@@ -848,7 +849,6 @@ function addClickListenerToDeviceInfo() {
         return null;
     }
 }
-
 /** detail view table update
  * 1. toggle table(gateway table & device table)
  * 2. value change
@@ -1166,40 +1166,21 @@ function saveGateway(data) {
             "conn": data.conn
         }
     };
-    // $.each(gateway_data.gateway, function (index, item) {
-    //     // console.log(index+":"+item);
-    //     for(var i=0; i<item.length; i++) {
-    //         if (item[i] == " " || item[i] == null)
-    //             alert("공백문자는 사용하실수 없습니다");
-    //     }
-    //     if(item.length==0)
-    //         alert("공백문자는 사용하실수 없습니다");
-    // });
-    //     if(nullcheck(gateway_data.gateway)==true){
-    //         alert("asdasd");
-    //     }
-    //     else
-    //         alert("ni");
-        nullcheck((gateway_data.gateway));
-        if( nullcheck((gateway_data.gateway))){
-            alert("공백문자 사용 불가능");
+    $.ajax({
+        url: '/api/v1/gateways',
+        type: 'post',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(gateway_data),
+        // datatype : "json",
+        success: function (result) {
+            // console.log(data);
+            // console.log(result);
+            // console.log("success");
+        },
+        error: function (err) {
+            console.log(err);
         }
-        else
-        $.ajax({
-            url: '/api/v1/gateways',
-            type: 'post',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(gateway_data),
-            // datatype : "json",
-            success: function (result) {
-                // console.log(data);
-                // console.log(result);
-                // console.log("success");
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+    });
 }
 
 function saveDevice(data) {
@@ -1219,25 +1200,21 @@ function saveDevice(data) {
         }
     };
 
-    nullcheck((device_data.auth));
-    if( nullcheck((device_data.auth))){
-        alert("공백문자 사용 불가능");
-    }
-    else
-        $.ajax({
-            url: '/api/v1/devices',
-            type: 'post',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(device_data),
-            success: function (result) {
-                // console.log(data);
-                console.log(result);
-                console.log("success");
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+    // console.log(device_data);
+    $.ajax({
+        url: '/api/v1/devices',
+        type: 'post',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(device_data),
+        success: function (result) {
+            // console.log(data);
+            console.log(result);
+            console.log("success");
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 }
 
 function createResourceName() {
@@ -1445,29 +1422,25 @@ function check(data) {
 
 }
 
-function nullcheck(data) {
-    var checkdata=false;
-    $.each(data, function (index, item) {
-        for (var i = 0; i < item.length; i++) {
-            if (item[i] == " " || item[i] == null) {
-                checkdata = true;
-                return false;
-            }
+function deviceModify(device) {
 
-        }
-        if(item.length==0){
-            checkdata=true;
-            console.log("sadasdasd");
-            return false;
+
+    $.ajax({
+        url: '/api/v1/devices/' + device.id,
+        type: 'put',
+        data: device,
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (error) {
+            console.log(error);
         }
     });
-    return checkdata;
+
 }
-function tim(data) {
-    $.each(data, function (index, item) {
-        console.log(index + ":" + item);
-    });
-}
+
+
+
 
 
 

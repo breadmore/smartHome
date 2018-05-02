@@ -81,8 +81,8 @@ var Auths = {
             callback);
     },
     updateDeviceById: function (id, callback) {
-        return db.query('update auths set gwid = ?, eid = ?, type =? , did = ?, dname = ?, psk = ?, oid = ?, sid = ?,conn = ?, auth=?,reg=? where id = ?',
-            [id.gwid, id.eid, id.type, id.did, id.dname, id.psk, id.oid, id.sid,id.conn,id.auth,id.reg, id.id],
+        return db.query('update auths set gwid = ?, eid = ?, type =? , did = ?, dname = ?, psk = ?, oid = ?, sid = ?,conn = ?, auth=? where id = ?',
+            [id.gwid, id.eid, id.type, id.did, id.dname, id.psk, id.oid, id.sid,id.conn,id.auth, id.id],
             callback);
     },
 };

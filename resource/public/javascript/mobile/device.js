@@ -5,6 +5,20 @@ var deviceList;
 $(document).ready(function () {
     createDeviceListView();
     console.log(deviceList);
+    $(".input-img").on("click", function () {
+        var id = $(".search-bar").val();
+        searchDevices(id);
+        console.log(id);
+    });
+
+    $(".search-bar").keypress(function(e) {
+        if (e.keyCode == 13){
+            var id = $(".search-bar").val();
+            searchDevices(id);
+            console.log(id);
+
+        }
+    });
 })
 
 
@@ -56,7 +70,7 @@ function deviceListForm(device){
     dom+='<div class="col-12 device-card-top">';
     dom+='<div class="col-4 device-left"></div></div>';
     dom+='<div class="row col-12 device-card-body">';
-    dom+='<div class="col-7 device-card-body-title">Device '+device.dname+'</div>';
+    dom+='<div class="col-7 device-card-body-title">Device '+device.did+'</div>';
     dom+=typeLabel(device.type);
     // dom+='<div class="col-5 device-card-body-title-right">'+type+'</div>';
     dom+='<div class="row device-card-body-content">';
@@ -154,4 +168,52 @@ function authDefine(auth) {
 
     }
     return myAuth;
+}
+
+function searchDevices(id) {
+    var dataJson = {
+        "id" : id
+    };
+    $.ajax({
+        url: '/api/v1/gateways/device',
+        type: 'post',
+        data: dataJson,
+        success: function (searchResult) {
+            deviceList=searchResult;
+            console.log(searchResult);
+            $(".device-page").empty();
+            $.each(deviceList, function (index, item) {
+                console.log(index);
+                var dataJson = {
+                    id : item.eid
+                }
+                $.ajax({
+                    url:'/api/v1/gateways/policy',
+                    type:'post',
+                    async: false,
+                    data: dataJson,
+                    success: function (result) {
+                        $.each(result, (rindex, ritem) => {
+                            if (ritem.Operation === null) {
+                                item.reg = "";
+                            } else if (ritem.Operation !== null) {
+                                item.reg = ritem.Operation;
+                            }
+
+                        });
+                        $('.device-page').append(deviceListForm(item));
+
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
 }

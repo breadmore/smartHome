@@ -79,7 +79,7 @@ var Gateway = {
     },
 
     searchDevice: function (id, callback) {
-        return db.query('select a.did, a.conn, a.auth, g.name from auths as a left join gateway as g on a.gwid = g.id where a.did like "%' + id + '%"', callback);
+        return db.query('select a.did, a.conn, a.auth, a.type, a.eid from auths as a left join gateway as g on a.gwid = g.id where a.did like "%' + id + '%"', callback);
     }
 
 };

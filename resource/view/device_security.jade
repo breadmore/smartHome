@@ -69,10 +69,10 @@ block content
                             td.right#dtype
                         tr
                             td Device ID
-                            td.right#eid
+                            td.right#did
                         tr
                             td Product ID
-                            td.right#did
+                            td.right#eid
                         tr
                             td Pre Shared Key
                             td.right#psk
@@ -229,6 +229,7 @@ block content
                         span(aria-hidden='true') ×
                 .modal-body
                     .modal-body-content.device-modify
+                        input(type="hidden")#auth-id
                         p Gateway ID
                         select#device-gateway-id
                         p Product ID(Entity ID)
@@ -257,26 +258,26 @@ block content
                         p Connected
                         .radio-group#connected
                             label.radio-inline
-                                input(type='radio', name='moptradio1')#conn-on
+                                input(type='radio', name='moptradio1' value=1)#conn-on
                                 | &nbsp;Connected
                             label.radio-inline(style="margin-left:12px")
-                                input(type='radio', name='moptradio1')#conn-off
+                                input(type='radio', name='moptradio1' value=0)#conn-off
                                 | &nbsp;Not Connected
                         p Authenticate
                         .radio-group#authenticate
                             label.radio-inline.radio-on
-                                input(type='radio', name='moptradio2')#auth-on
+                                input(type='radio', name='moptradio2' value=1)#auth-on
                                 | &nbsp;Authenticated
                             label.radio-inline(style="margin-left:12px").radio-off
-                                input(type='radio', name='moptradio2')#auth-off
+                                input(type='radio', name='moptradio2' value=0)#auth-off
                                 | &nbsp;Not Authenticated
                         p Registered
                         .radio-group#register
                             label.radio-inline.radio-on
-                                input(type='radio', name='moptradio3')#regi-on
+                                input(type='radio', name='moptradio3' value=1)#regi-on
                                 | &nbsp;Registered
                             label.radio-inline(style="margin-left:12px").radio-off
-                                input(type='radio', name='moptradio3')#regi-off
+                                input(type='radio', name='moptradio3' value=0)#regi-off
                                 | &nbsp;Not Registered
                     .modal-body-content.gateway-modify
                         p Gateway ID
