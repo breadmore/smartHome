@@ -32,9 +32,13 @@
     margin: auto;
 }
 
-.name {
+.name_account {
     margin-top: 0;
     font-weight: 400;
     /*height: 0;*/
 
+}
+
+.account {
+    background: rgb(90,153,157);
 }

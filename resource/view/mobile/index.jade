@@ -2,6 +2,7 @@ extends layout
 
 append css
     link(href='/css/mobile/index.css' rel='stylesheet')
+    script(src="/javascript/mobile/index.js")
 
 append left
     .col-md-6.title.text-left.no-padding LOG IN
@@ -18,9 +19,9 @@ block content
         .input-group
             span.input-img
                 img(src="/image/user.png")
-            input(placeholder="Username").form-control
+            input(placeholder="Username").form-control.id
         .input-group
             span.input-img
                 img(src="/image/pass.png")
-            input(type="password" placeholder="Password").form-control
-        button(onclick="location.href='/m/dashboard'").confirm-btn CONFIRM
+            input(type="password" placeholder="Password").form-control.pw
+        button.confirm-btn CONFIRM

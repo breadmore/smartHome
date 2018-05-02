@@ -21,8 +21,8 @@ $(function () {
     var table = $('.devicelog').DataTable({
         paging: true,
         processing: true,
-        // ordering: true,
-        order: [[1, 'desc']],
+        ordering: true,
+        order: [[0, 'desc']],
         serverSide: false,
         searching: true,
         ajax : {
@@ -31,26 +31,43 @@ $(function () {
                 $.each(result, function (index, item) {
                     item.event_date = dateFormatter(item.event_date);
                     item.device_name = findAuthByDid(item.device_id);
-                    item.device_type = type2Icon(item.device_type);
+                    if (item.device_type == null) {
+                        item.device_type = "";
+                    } else if (item.device_type === 0){
+                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                    } else {
+                        item.device_type = type2Icon(item.device_type);
+                    }
+
                 });
                 return result;
             }},
         columns : [
-            {data: null},
+            // {data: null},
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_name"},
             {data: "device_type"},
             {data: "device_id"},
             {data: "msg"}
+        ],
+        columnDefs: [
+            { width: '260', targets: 0 },
+            { width: '145', targets: 1 },
+            { width: '160', targets: 2 },
+            { width: '200', targets: 3 },
+            { width: '125', targets: 4 },
+            { width: '280', targets: 5 },
+            // { width: '390', targets: 6 },
+
         ]
     });
 
-    table.on('order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    // table.on('order.dt search.dt', function () {
+    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();
 
     getEntityList();
 
@@ -81,7 +98,7 @@ $(function () {
                 });
     }
 
-    var deployLogTable = $('.securitylog').DataTable({          // add by ktw
+    var securityLogTable = $('.securitylog').DataTable({          // add by ktw
         paging: true,
         processing: true,
         ordering: false,
@@ -106,12 +123,11 @@ $(function () {
             {data: "msg"}
         ],
         columnDefs: [
-        { width: '18%', targets: 0 },
-        { width: '14%', targets: 1 },
-        { width: '14%', targets: 2 },
-        { width: '14%', targets: 3 },
-        { width: '40%', targets: 4 },
-
+        { width: '260', targets: 0 },
+        { width: '145', targets: 1 },
+        { width: '200', targets: 2 },
+        { width: '125', targets: 3 },
+        { width: '440', targets: 4 },
     ]
     });
 
@@ -119,7 +135,8 @@ $(function () {
     var deployLogTable = $('.deploylog').DataTable({
         paging: true,
         processing: true,
-        ordering: true,
+        ordering: false,
+        // order: [[0, 'asc']],
         serverSide: false,
         searching: true,
         ajax : {
@@ -141,6 +158,14 @@ $(function () {
             {data: "resource_name"},
             {data: "pre_operation"},
             {data: "current_operation"}
+        ],
+        columnDefs: [
+            { width: '260', targets: 0 },
+            { width: '200', targets: 1 },
+            { width: '120', targets: 2 },
+            { width: '190', targets: 3 },
+            { width: '160', targets: 4 },
+            { width: '240', targets: 4 },
         ]
     });
 

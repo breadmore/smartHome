@@ -15,7 +15,7 @@ $(function () {
     })
 
 
-    var para = document.location.href.split("/");
+    /*var para = document.location.href.split("/");
 
     // console.log(para[3])
 
@@ -27,7 +27,7 @@ $(function () {
         $(".account").css("background-color", "rgb(90,153,157)");
     } else if (para[3] == "logger") {
         $(".logger").css("background-color", "rgb(90,153,157)");
-    }
+    }*/
 
     $(".logout").on("click", () => {
         $.ajax({
