@@ -68,7 +68,6 @@ router.route('/:id')
 
 router.route('/gateway')
     .post(function (req, res) {
-        console.log(req.body.name);
         gatewayService.searchName(req.body.name, function(err, result) {
             if (err) {
                 res.status(400).send(err);
@@ -81,7 +80,6 @@ router.route('/gateway')
 
 router.route('/device')
     .post(function (req, res) {
-        console.log(req.body.id);
         gatewayService.searchDeviceId(req.body.id, function(err, result) {
             if (err) {
                 res.status(400).send(err);
@@ -94,7 +92,6 @@ router.route('/device')
 
 router.route('/policy')
     .post(function (req, res) {
-        console.log(req.body.id);
         gatewayService.getPolicy(req.body.id, function(err, result) {
             if (err) {
                 res.status(400).send(err);
