@@ -27,11 +27,11 @@ block content
                 hr
         .row.col-md-12.service-list
             .col-md-5.no-padding Occupied Mode
-            .col-md-4.no-padding 거실
+            .col-md-4.no-padding
             .row.col-md-3.no-padding
                 label.switch
-                    input(type="checkbox" checked=1)
-                    div.slider.round
+                    input(type="checkbox" checked=1)#roomState
+                    div.slider.round#roomModeController
                 p ON
         .row.col-md-12.label-.device
             .col-md-4.label-name Device Control
@@ -39,25 +39,17 @@ block content
                 hr
         .row.col-md-12.service-list
             .col-md-5.no-padding Smart Light
-            .col-md-4.no-padding 거실 001
+            .col-md-4.no-padding
             .row.col-md-3.no-padding
                 label.switch
-                    input(type="checkbox" checked=1)
-                    div.slider.round
+                    input(type="checkbox" checked=1)#lightState
+                    div.slider.round#lightController
                 p ON
         .row.col-md-12.service-list
             .col-md-5.no-padding Power Outlet
-            .col-md-4.no-padding 안방 001
+            .col-md-4.no-padding
             .row.col-md-3.no-padding
                 label.switch
                     input#xiaomiPower(type="checkbox" checked=1)
                     div.slider.round#xiaomiPowerController
-                p ON
-        .row.col-md-12.service-list
-            .col-md-5.no-padding IP Camera
-            .col-md-4.no-padding 거실 001
-            .row.col-md-3.no-padding
-                label.switch
-                    input(type="checkbox" checked=1)
-                    div.slider.round
                 p ON

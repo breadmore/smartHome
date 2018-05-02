@@ -1,9 +1,5 @@
-.content-title {
-    width: 11rem;
-}
-
-.content-ip {
-    width: 16rem;
+.content-ipAddress, .content-ip, .content-portAddress, .content-port {
+    width: 25%;
 }
 
 .gateway {
