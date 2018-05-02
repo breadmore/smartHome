@@ -98,6 +98,7 @@ router.route('/hourtemp')
                 console.log(err);
                 res.status(500).send('Internal Server Error');
             } else {
+                // console.log(result);
                 res.status(200).send(result);
             }
         });
