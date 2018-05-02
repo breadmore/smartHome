@@ -4,18 +4,18 @@ var deviceList;
 
 $(document).ready(function () {
     createDeviceListView();
-    console.log(deviceList);
+    // console.log(deviceList);
     $(".input-img").on("click", function () {
         var id = $(".search-bar").val();
         searchDevices(id);
-        console.log(id);
+        // console.log(id);
     });
 
     $(".search-bar").keypress(function(e) {
         if (e.keyCode == 13){
             var id = $(".search-bar").val();
             searchDevices(id);
-            console.log(id);
+            // console.log(id);
 
         }
     });
@@ -46,7 +46,7 @@ function createDeviceListView(){
                                 item.reg = ritem.Operation;
                             }
                         });
-                        console.log(result);
+                        // console.log(result);
                         $('.device-page').append(deviceListForm(item));
 
                     },
@@ -63,6 +63,7 @@ function createDeviceListView(){
 }
 
 function deviceListForm(device){
+    // console.log("1231231232132323232323");
     device.type=typeDefine(device.type);
     device.conn=connDefine(device.conn);
     device.auth=authDefine(device.auth);
@@ -118,7 +119,6 @@ function typeDefine(type) {
 function typeLabel(type) {
     var dom;
     if (type === "GasDetector") {
-        console.log("asdasd");
         dom='<div class="col-5 device-card-body-title-right GasDetector">'+type+'</div>';
     }
     if (type === "GasBreaker") {
@@ -179,14 +179,14 @@ function searchDevices(id) {
         type: 'post',
         data: dataJson,
         success: function (searchResult) {
-            if (searchResult.length === 0) {
+            if (searchResult.length === 0){
                 alert("Device not found");
-            } else if (searchResult > 0) {
+            } else {
                 deviceList=searchResult;
-                console.log(searchResult);
+                // console.log(searchResult);
                 $(".device-page").empty();
                 $.each(deviceList, function (index, item) {
-                    console.log(index);
+                    // console.log(index);
                     var dataJson = {
                         id : item.eid
                     }
@@ -214,6 +214,8 @@ function searchDevices(id) {
 
                 });
             }
+
+
         },
         error: function (error) {
             console.log(error);
