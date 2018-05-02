@@ -21,8 +21,8 @@ $(function () {
     var table = $('.devicelog').DataTable({
         paging: true,
         processing: true,
-        ordering: false,
-        // order: [[1, 'desc']],
+        ordering: true,
+        order: [[0, 'desc']],
         serverSide: false,
         searching: true,
         ajax : {
@@ -43,21 +43,31 @@ $(function () {
                 return result;
             }},
         columns : [
-            {data: null},
+            // {data: null},
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_name"},
             {data: "device_type"},
             {data: "device_id"},
             {data: "msg"}
+        ],
+        columnDefs: [
+            { width: '260', targets: 0 },
+            { width: '145', targets: 1 },
+            { width: '160', targets: 2 },
+            { width: '200', targets: 3 },
+            { width: '125', targets: 4 },
+            { width: '280', targets: 5 },
+            // { width: '390', targets: 6 },
+
         ]
     });
 
-    table.on('order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    // table.on('order.dt search.dt', function () {
+    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();
 
     getEntityList();
 
@@ -113,12 +123,11 @@ $(function () {
             {data: "msg"}
         ],
         columnDefs: [
-        { width: '18%', targets: 0 },
-        { width: '14%', targets: 1 },
-        { width: '14%', targets: 2 },
-        { width: '14%', targets: 3 },
-        { width: '40%', targets: 4 },
-
+        { width: '260', targets: 0 },
+        { width: '145', targets: 1 },
+        { width: '200', targets: 2 },
+        { width: '125', targets: 3 },
+        { width: '440', targets: 4 },
     ]
     });
 
@@ -127,7 +136,7 @@ $(function () {
         paging: true,
         processing: true,
         ordering: false,
-        // order: [[0, 'desc']],
+        // order: [[0, 'asc']],
         serverSide: false,
         searching: true,
         ajax : {
@@ -149,6 +158,14 @@ $(function () {
             {data: "resource_name"},
             {data: "pre_operation"},
             {data: "current_operation"}
+        ],
+        columnDefs: [
+            { width: '260', targets: 0 },
+            { width: '200', targets: 1 },
+            { width: '120', targets: 2 },
+            { width: '190', targets: 3 },
+            { width: '160', targets: 4 },
+            { width: '240', targets: 4 },
         ]
     });
 

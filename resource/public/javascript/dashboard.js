@@ -79,16 +79,22 @@ $(document).ready(function() {
                     if(item.device_id == null){     //error catch code
                         item.device_id = '';
                     }
-                    if(item.device_type == null){   //error catch code
-                        item.device_type = '';
+                    if (item.device_type == null) {
+                        item.device_type = "";
+                    } else if (item.device_type === 0){
+                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                    } else {
+                        item.device_type = type2Icon(item.device_type);
                     }
+
+
 
                     item.event_date = dateFormatter(item.event_date);
                 });
                 return result;
             }},
         columns : [
-            {data: null},
+            // {data: null},
             {data: "event_date"},
             {data: "event_type"},
             {data: "device_name"},
@@ -97,19 +103,22 @@ $(document).ready(function() {
             {data: "msg"}
         ],
         columnDefs: [
-            // { width: '13%', targets: 0 },
-            // { width: '18.5%', targets: 1 },
-            // { width: '17%', targets: 2 },
-            // { width: '35%', targets: 3 },
+            { width: '260', targets: 0 },
+            { width: '145', targets: 1 },
+            { width: '160', targets: 2 },
+            { width: '200', targets: 3 },
+            { width: '125', targets: 4 },
+            { width: '280', targets: 5 },
+            // { width: '390', targets: 6 },
 
         ]
     });
     // add index.
-    table.on('order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    // table.on('order.dt search.dt', function () {
+    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();
 
     // setInterval(function () {
     //     table.ajax.reload();
@@ -345,10 +354,14 @@ $(document).ready(function() {
                 if (currentState.mode === 1) {
                     if (data.event === 'open') {
                         $('#xiaomiWindow').text(OPENED);
+                        $('#xiaomiWindow').removeClass('safe-event');
+                        $('#xiaomiWindow').addClass('danger-event');
                         // recordStart(1);
                     }
                     else if (data.event === 'close') {
                         $('#xiaomiWindow').text(CLOSED);
+                        $('#xiaomiWindow').removeClass('danger-event');
+                        $('#xiaomiWindow').addClass('safe-event');
                     }
                     else {
                         console.error('event is undefined');
@@ -370,6 +383,8 @@ $(document).ready(function() {
                 }
                 else {
                     $('#xiaomiWindow').text(NOT_DETECTED);
+                    $('#xiaomiWindow').removeClass('danger-event');
+                    $('#xiaomiWindow').addClass('safe-event');
                 }
 
                 break;
@@ -380,14 +395,20 @@ $(document).ready(function() {
                 if (currentState.mode === 1) {
                     if (data.event === 'motion') {
                         $('#xiaomiHuman').text(DETECTED);
+                        $('#xiaomiHuman').addClass('danger-event');
+                        $('#xiaomiHuman').removeClass('safe-event');
                         // recordStart(2);
                     }
                     else if (data.event === 'no_motion') {
                         $('#xiaomiHuman').text(NOT_DETECTED);
+                        $('#xiaomiHuman').removeClass('danger-event');
+                        $('#xiaomiHuman').addClass('safe-event');
                     }
                     else {
                         console.error('event is undefined');
                         $('#xiaomiWindow').text(NOT_DETECTED);
+                        $('#xiaomiWindow').addClass('safe-event');
+                        $('#xiaomiWindow').removeClass('danger-event');
                     }
 
                     if (currentXiaomi.motion !== data.event) {
@@ -406,6 +427,8 @@ $(document).ready(function() {
                 }
                 else {
                     $('#xiaomiWindow').text(NOT_DETECTED);
+                    $('#xiaomiWindow').addClass('safe-event');
+                    $('#xiaomiWindow').removeClass('danger-event');
                 }
 
 
@@ -419,10 +442,15 @@ $(document).ready(function() {
                 if (data.event === 'on') {
                     $('#xiaomiPower').prop("checked", true);
                     $('#plugStatus').text(ON_STATUS);
+                    $('#plugStatus').addClass('safe-event');
+                    $('#plugStatus').removeClass('danger-event');
+
                 }
                 else if (data.event === 'off') {
                     $('#xiaomiPower').prop("checked", false);
                     $('#plugStatus').text(OFF_STATUS);
+                    $('#plugStatus').removeClass('safe-event');
+                    $('#plugStatus').addClass('danger-event');
                 }
 
                 if (currentXiaomi.plug !== data.event) {
@@ -638,6 +666,9 @@ function updateLegacyStates(state) {
         setTimeout(function () {
             $('#lightState').removeAttr('disabled');
             $('#lightStatus').text(OFF_STATUS);
+            $('#lightStatus').addClass('danger-event');
+            $('#lightStatus').removeClass('safe-event');
+
         },7 * 1000)
 
     }
@@ -646,6 +677,8 @@ function updateLegacyStates(state) {
         setTimeout(function() {
             $('#lightState').removeAttr('disabled');
             $('#lightStatus').text(ON_STATUS);
+            $('#lightStatus').removeClass('danger-event');
+            $('#lightStatus').addClass('safe-event');
         }, 7 * 1000)
     }
     else {
@@ -657,7 +690,12 @@ function updateLegacyStates(state) {
         $('#roomStatus').text(OCCUPIED);
 
         $('#legacyWindow').text(NOT_DETECTED);
+        $('#legacyWindow').addClass('safe-event');
+        $('#legacyWindow').removeClass('danger-event');
         $('#legacyHuman').text(NOT_DETECTED);
+        $('#legacyHuman').addClass('safe-event');
+        $('#legacyHuman').removeClass('danger-event');
+
     }
     else {
 
@@ -666,32 +704,49 @@ function updateLegacyStates(state) {
 
         if (state.window_detector === 0) {
             $('#legacyWindow').text(NOT_DETECTED);
+            $('#legacyWindow').addClass('safe-event');
+            $('#legacyWindow').removeClass('danger-event');
         }
         else {
             // todo notify to detected state!
             $('#legacyWindow').text(DETECTED);
+            $('#legacyWindow').removeClass('safe-event');
+            $('#legacyWindow').addClass('danger-event');
         }
         if (state.human_detector === 0) {
             $('#legacyHuman').text(NOT_DETECTED);
+            $('#legacyHuman').addClass('safe-event');
+            $('#legacyHuman').removeClass('danger-event');
         }
         else {
             // todo notify to detected state!
             $('#legacyHuman').text(DETECTED);
+            $('#legacyHuman').removeClass('safe-event');
+            $('#legacyHuman').addClass('danger-event');
         }
     }
 
     if (state.gas_detector === 0) {
-        $('#gasDetector').text(NOT_DETECTED)
+        $('#gasDetector').text(NOT_DETECTED);
+        $('#gasDetector').addClass('safe-event');
+        $('#gasDetector').removeClass('danger-event');
+
     }
     else {
-        $('#gasDetector').text(DETECTED)
+        $('#gasDetector').text(DETECTED);
+        $('#gasDetector').addClass('danger-event');
+        $('#gasDetector').removeClass('safe-event');
     }
 
     if (state.gas_blocker === 0) {
-        $('#gasBlocker').text("Not Blocked")
+        $('#gasBlocker').text("Not Blocked");
+        $('#gasBlocker').addClass('danger-event');
+        $('#gasBlocker').removeClass('safe-event');
     }
     else {
-        $('#gasBlocker').text("Blocked")
+        $('#gasBlocker').text("Blocked");
+        $('#gasBlocker').addClass('safe-event');
+        $('#gasBlocker').removeClass('danger-event');
     }
 
     // todo : if currentState has been changed then insert sensor log!
@@ -1235,4 +1290,36 @@ function initDeviceInfo() {
                 break;
         }
     }
+}
+
+function type2Icon(type) {
+    var icon;
+    if (type === 1) {
+        return icon = '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>'
+    }
+    else if (type === 2) {
+        return icon = '<i class="fas fa-ban device-type-icon" ></i><span>GasBreaker</span>'
+    }
+    else if (type === 3) {
+        return icon = '<i class="fas fa-thermometer-half device-type-icon" ></i><span>ThermoHytgrometer</span>'
+    }
+    else if (type === 4) {
+        return icon = '<i class="far fa-lightbulb device-type-icon" ></i><span>SmartLighting</span>'
+    }
+    else if (type === 5) {
+        return icon = '<i class="fas fa-video device-type-icon" ></i><span>IntrusionDetector</span>'
+    }
+    else if (type === 6) {
+        return icon = '<i class="fas fa-home device-type-icon" ></i><span>DoorSensor</span>'
+    }
+    else if (type === 7) {
+        return icon = '<i class="fas fa-plug device-type-icon" ></i><span>SmartPlug</span>'
+    }
+    else if (type === 8) {
+        return icon = '<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>'
+    }
+    else {
+        return icon = '<i class="fas fa-question"></i><span>Unknown</span>'
+    }
+    return icon;
 }
