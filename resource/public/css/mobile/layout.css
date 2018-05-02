@@ -80,25 +80,23 @@ body, li, p {
 }
 
 .input-img {
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    border-right:1px solid darkgray;
     background-color: rgb(237, 237, 237);
     width: 6rem;
     height: 6rem;
     text-align: center;
 }
 
-.input-img > img {
-    margin-top: 6px;
-    width: 5rem;
-    height: 5rem;
-}
-
 .form-control {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
     font-size: 2.5rem;
     width: 100%;
     height: 6rem;
     padding-left: 25px;
+    border:none;
 }
 
 .confirm-btn {

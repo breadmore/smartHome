@@ -81,10 +81,19 @@
 .ip-camera > .dashboard-card-title{
     float: left;
 }
+
 .ip-camera > .dashboard-card-location{
     float: right;
     text-align: right;
 }
+.dashboard-no-location{
+    margin-top: 5rem;
+}
+
+.lumi, .temp {
+    height: 13.5rem;
+}
+
 .ip-camera > .dashboard-card-title, .ip-camera > .dashboard-card-location {
     background: rgba(33, 33, 33, 0.5);
     border:1rem solid rgba(0, 0, 0, 0);
@@ -111,13 +120,14 @@
 }
 
 .center-hr {
-    margin-top: 5.5rem;
-    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
     background: white;
     height: 0.5rem;
 }
 .center-hr:nth-child(2){
     margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 .dashboard-card-location {
     font-weight: 400;

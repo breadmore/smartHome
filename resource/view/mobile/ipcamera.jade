@@ -27,16 +27,26 @@ block content
                 .col-md-3.label-name IP Camera
                 .col-md-9
                     hr
-            .row.col-md-12.label-two
-                .col-md-4 거실 001
-                .row.col-md-8
-                    label.switch
-                        input(type="checkbox" checked=1)
-                        div.slider.round
-                    p ON
+            //.row.col-md-12.label-two
+            //    .col-md-4 거실 001
+            //    .row.col-md-8
+            //        label.switch
+            //            input(type="checkbox" checked=1)
+            //            div.slider.round
+            //        p ON
             .camera-video
-                #ipcamera(style='width: 100%')
-                    .on-air On Air
-                    canvas(width='640', height='360' style='width:100%;')
+                .on-air On Air
+                video#myVideo(controls, style='display:none;')
+                    source(id="vid", type='video/mp4')
+                #ipcamera
+                    canvas
+                .video-list-box
+                    div.stream
+                        hr.list-hr
+                        button#change.video-btn Stream
+                        hr.list-hr
+                    div.video
+                        ul.my-video-list
+
 
 

@@ -16,12 +16,10 @@ select {
 }
 
 .input-img {
-    height: 5rem;
-}
-
-.input-img > img {
+    background-image: url(/image/glass.png);
+    background-size:4rem 5rem;
     width: 4rem;
-    height: 4rem;
+    height: 4.9rem;
 }
 
 .device-card {
@@ -59,7 +57,7 @@ select {
 }
 
 .form-control {
-    height: 5rem;
+    height: 4.9rem;
     width: 5rem;
 }
 .select-list {
