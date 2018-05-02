@@ -1,5 +1,6 @@
 select {
-    border: 1px solid black;
+    border: 1px solid darkgray;
+    border-radius: 8px;
     height: 5rem;
     width: 50%;
     font-size: 1.7rem;
@@ -15,13 +16,12 @@ select {
     height: 5rem;
 }
 
-.input-img {
-    height: 5rem;
-}
-
-.input-img > img {
+.input-img{
     background-image: url(/image/glass.png);
     background-size:4rem 5rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-right: 1px solid darkgray;
     width: 4rem;
     height: 4rem;
     height: 4.9rem;

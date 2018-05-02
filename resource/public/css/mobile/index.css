@@ -40,6 +40,9 @@
     background-image: url('/image/pass.png');
 }
 .input-img{
+    background-size:5rem 5rem;
+    background-repeat: no-repeat;
+    background-position: center center;
     width:5rem;
     height: 5rem;
     border-right: 1px solid darkgray;
