@@ -33,3 +33,14 @@
     background: rgb(0, 135, 135);
     border-radius: 15px;
 }
+.user-img{
+    background-image: url('/image/user.png');
+}
+.pass-img{
+    background-image: url('/image/pass.png');
+}
+.input-img{
+    width:5rem;
+    height: 5rem;
+    border-right: 1px solid darkgray;
+}

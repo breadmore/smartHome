@@ -18,9 +18,11 @@ select {
 
 .input-img {
     background-image: url(/image/glass.png);
-    background-size:4rem 5rem;
-    width: 4rem;
+    background-size:5rem 5rem;
+    width: 4.5rem;
     height: 4.9rem;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .device-card {
