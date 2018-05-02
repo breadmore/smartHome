@@ -1,7 +1,10 @@
 extends layout
 
+
 append css
     link(href='/css/mobile/gateway.css' rel='stylesheet')
+    script(src='/javascript/mobile/gateway.js')
+
 
 append left
     .col-md-6.title.text-left.no-padding GATEWAY
@@ -13,27 +16,25 @@ append right
 block content
     .row.select-list
         select.device-section
-            option SORT BY Gateway Name
+            option(selected='', disabled='', hidden='') SORT BY Gateway Name
             option SORT BY Gateway Name
         .input-group
             span.input-img
                 img(src="/image/glass.png")
-            input(type="password").form-control
-    .device-card
-        .col-12.device-card-top
-            .col-4.device-left
-        .device-card-body
-            .device-card-body-title Gateway_안방
-            .row.device-card-body-content
-                .content-title IP Address
-                .content-ip 192.168.0.11
-                .content-port PORT Address 3000
-    .device-card
-        .col-12.device-card-top
-            .col-4.device-left
-        .device-card-body
-            .device-card-body-title Gateway_거실
-            .row.device-card-body-content
-                .content-title IP Address
-                .content-ip 192.168.0.11
-                .content-port PORT Address 3001
+            input(type="text").form-control
+    .gateway-page
+        //.device-card-body
+        //    .device-card-body-title Gateway_안방
+        //    .row.device-card-body-content
+        //        .content-title IP Address
+        //        .content-ip 192.168.0.11
+        //        .content-port PORT Address 3000
+    //.device-card
+    //    .col-12.device-card-top
+    //        .col-4.device-left
+    //    .device-card-body
+    //        .device-card-body-title Gateway_거실
+    //        .row.device-card-body-content
+    //            .content-title IP Address
+    //            .content-ip 192.168.0.11
+    //            .content-port PORT Address 3001
