@@ -34,31 +34,8 @@ $(document).ready(function () {
 
     $("#modi-button").on("click", function () {
         var updateObj = {};
-
-
         updateObj.conn = $(':input:radio[name=moptradio1]:checked').val();
         updateObj.auth = $(':input:radio[name=moptradio2]:checked').val();
-        // updateObj.reg = $(':input:radio[name=moptradio3]:checked').val();
-
-        // console.log(conn, auth);
-        // if ($(':input:radio[name=moptradio1]:checked').val() === "on") {
-        //     updateObj.conn = "1";
-        // } else if ($(':input:radio[name=moptradio1]:checked').val() === "off") {
-        //     updateObj.conn = "0";
-        // }
-        //
-        // if ($(':input:radio[name=moptradio2]:checked').val() === "on") {
-        //     updateObj.auth = "1";
-        // } else if ($(':input:radio[name=moptradio2]:checked').val() === "off") {
-        //     updateObj.auth = "0";
-        // }
-
-        // if ($(':input:radio[name=moptradio3]:checked').val() === "on") {
-        //     updateObj.reg = "1";
-        // } else if ($(':input:radio[name=moptradio3]:checked').val() === "off") {
-        //     updateObj.reg = "0";
-        // }
-
 
 
         updateObj.id = $("#auth-id").val();
@@ -156,13 +133,30 @@ $(document).ready(function () {
         ajax: {
             url: "/api/v1/logs",
             dataSrc: function (result) {
-                // console.log(result);
+                //console.log(result);
                 check(result);
+
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
+                    var dataDid = {did: ''};
+                    dataDid.did = item.device_id;
+                    $.ajax({
+                        url:'/api/v1/logs/authseid',
+                        type:'post',
+                        async: false,
+                        data: dataDid,
+                        success: function (auths) {
+                            item.device_id = auths[0].eid;
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
                 });
+
+
                 return result;
             }
         },
@@ -174,15 +168,14 @@ $(document).ready(function () {
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '18%', targets: 0 },
-            { width: '14%', targets: 1 },
-            { width: '14%', targets: 2 },
-            { width: '14%', targets: 3 },
-            { width: '40%', targets: 4 },
+            { width: '260', targets: 0 },
+            { width: '150', targets: 1 },
+            { width: '160', targets: 2 },
+            { width: '150', targets: 3 },
+            { width: '450', targets: 4 },
 
         ]
     });
-
     setInterval(() => {
         securityEventTable.ajax.reload();
     }, 3000);
@@ -217,10 +210,10 @@ $(document).ready(function () {
 
     $("#save-Device").on("click", () => {
         var data = {
-            did: $("#add-device-id").val(),
+            eid: $("#add-device-id").val(),
             psk: $("#add-pre-shared-key").val(),
             oid: $("#add-object-id").val(),
-            eid: $("#add-entity-id").val(),
+            did: $("#add-entity-id").val(),
             sid: $("#add-session-id").val(),
             type: $("#add-type option:selected").val(),
             conn: $("#add-connection input:radio[name=optradio]:checked").val(),
@@ -317,7 +310,6 @@ $(document).ready(function () {
 
     $('#modifyModal').on('show.bs.modal', function (e) {
         if (nowClick.getAttribute('data-did') !== null) {
-            console.log('devicemodi');
             $('.error-modify').hide();
             $('.gateway-modify').hide();
             $('.device-modify').show();
@@ -326,14 +318,13 @@ $(document).ready(function () {
             $("#auth-id").val(device.id);
             $("#device-gateway-id").val(device.gwid);
             $("#device-name").val(device.dname);
-            $("#device-id").val(device.did);
+            $("#device-id").val(device.eid);
             $("#pre-shared-key").val(device.psk);
-            $("#entity-id").val(device.eid);
+            $("#entity-id").val(device.did);
             $("#object-id").val(device.oid);
             var modiDtype = icon2Type(device.type);
             $("#modi-device-type").val(modiDtype);
             $("#session-id").val(device.sid);
-
             if ('<i class="fas fa-toggle-off"></i>' === device.conn) {
                 $('#conn-off').attr("checked", true);
             }
@@ -831,7 +822,6 @@ function addClickListenerToDeviceInfo() {
                     }
                 }
             }
-
             detailViewUpdate(null, findDeviceByDid(item.dataset.did));
         });
     });
@@ -868,6 +858,32 @@ function detailViewUpdate(gateway, device) {
     }
     else if (device) {
         toggleTable(gateway, device);
+        console.log(device);
+        var dataJson = {
+            id : device.eid
+        }
+        $.ajax({
+            url:'/api/v1/gateways/policy',
+            type:'post',
+            async: false,
+            data: dataJson,
+            success: function (result) {
+                $.each(result, (index, item) => {
+                    if (item.Operation === null) {
+                        device.operation="";
+                    }
+                    else if(item.Operation!==null){
+                        device.operation=item.Operation;
+                    }
+                    // console.log(index+" "+item.operation);
+                })
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+
         $('#gwid').html(device.gwid);
         $('#dname').html(device.dname);
         $('#dtype').html(device.type);
@@ -888,6 +904,7 @@ function detailViewUpdate(gateway, device) {
             $('#auth').html(device.auth + ' Authorized');
 
         $('#operation').html(device.operation);
+        // console.log("ope : "+device.operation);
     }
     else {
         console.log('error');
@@ -948,6 +965,9 @@ function createDeviceListView() {
                         item.auth = auth2Icon(item.auth);
                         item.reg = regi2Icon(item.reg);
                         item.type = type2Icon(item.type);
+
+
+
                     });
                     deviceList = deviceResult;
                     // console.log(deviceList);
@@ -1423,10 +1443,14 @@ function check(data) {
 }
 
 function deviceModify(device) {
-
+    var url;
+    if(gatewayCheck==false)
+        url = '/api/v1/devices/';
+    else if(gatewayCheck==true)
+        url = '/api/v1/gateways/';
 
     $.ajax({
-        url: '/api/v1/devices/' + device.id,
+        url: url + device.id,
         type: 'put',
         data: device,
         success: function (result) {
