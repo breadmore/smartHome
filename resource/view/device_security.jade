@@ -182,7 +182,7 @@ block content
                             option(value=7) SmartPlug
                             option(value=8) SmartCamera
                         .device-id Device ID
-                        input(type="text")#add-device-id(onchange='autoWriteDeviceName("#add-type","#add-device-id","#add-device-name")')
+                        input(type="text" onchange='autoWriteDeviceName("#add-type","#add-device-id","#add-device-name")')#add-device-id
                         .device-name Device Name
                         input(type="text" value="")#add-device-name
                         .pre_shared_key Pre Shared Key
@@ -246,7 +246,7 @@ block content
                             option(value=7) SmartPlug
                             option(value=8) SmartCamera
                         p Device ID
-                        input(type="text")#device-id(onchange='autoWriteDeviceName("#modi-device-type","#device-id","#device-name")')
+                        input(type="text" onchange='autoWriteDeviceName("#modi-device-type","#device-id","#device-name")')#device-id
                         p Device Name
                         input(type="text" value="")#device-name
                         p Pre Shared Key

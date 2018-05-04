@@ -168,11 +168,11 @@ $(document).ready(function () {
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '260', targets: 0 },
-            { width: '150', targets: 1 },
-            { width: '160', targets: 2 },
-            { width: '150', targets: 3 },
-            { width: '450', targets: 4 },
+            { width: '200', targets: 0 },
+            { width: '110', targets: 1 },
+            { width: '115', targets: 2 },
+            { width: '110', targets: 3 },
+            // { width: '502', targets: 4 },
 
         ]
     });
