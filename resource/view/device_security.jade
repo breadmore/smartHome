@@ -281,20 +281,20 @@ block content
                                 | &nbsp;Not Registered
                     .modal-body-content.gateway-modify
                         p Gateway ID
-                        input(type="number")#gateway-id
+                        input(type="text" readonly)#gateway-id
                         p Gateway Name
                         input(type="text" value="")#gateway-name
                         p IP
                         input(type="text")#gateway-ip
                         p Port
-                        input(type="text")#gateway-port
+                        input(type="number")#gateway-port
                         p Connected
                         .radio-group#gateway-conn
                             label.radio-inline
-                                input(type='radio', name='moptradio')#gateway-conn-on
+                                input(type='radio', name='moptradio' value=1)#gateway-conn-on
                                 | &nbsp;Connected
-                            label.radio-inline(style="margin-left:12px")#gateway-conn-off
-                                input(type='radio', name='moptradio')
+                            label.radio-inline(style="margin-left:12px" )#gateway-conn-off
+                                input(type='radio', name='moptradio' value=0)
                                 | &nbsp;Not Connected
                     .modal-body-content.error-modify
                         p ERROR! There is no data.

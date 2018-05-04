@@ -45,8 +45,10 @@ router.route('/:id')
         });
     })
     .put(function (req, res) {
+       console.log(req.body);
         gatewayService.updateGateway(req.params.id ,req.body, function (err, result) {
             if (err) {
+                console.log(err);
                 res.status(400).send(err);
             }
             else {
