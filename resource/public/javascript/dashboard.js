@@ -48,7 +48,7 @@ $(document).ready(function() {
         paging: true,
         processing: true,
         // ordering: true,
-        order: [[1, 'desc']],
+        order: [[0, 'desc']],
         serverSide: false,
         searching: true,
         dom : '<"row no-gutters"t>',
@@ -57,6 +57,7 @@ $(document).ready(function() {
             // async: false,
             dataSrc: function (result) {
                 $.each(result, (index, item) => {
+                    item.event_date = dateFormatter(item.event_date);
                     // item.device_name = undefined;
                     if (item.device_id) {
                         $.ajax({
@@ -64,7 +65,6 @@ $(document).ready(function() {
                             type: 'get',
                             async: false,
                             success: function (result) {
-                                item.event_date = dateFormatter(item.event_date);
                                 // device information already deleted!
                                 if (result.length === 0) {
                                     // item.event_date = dateFormatter(item.event_date);
