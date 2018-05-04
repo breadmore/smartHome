@@ -732,9 +732,9 @@ function updateLegacyStates(state) {
         $('#lightState').attr('disabled', 'disabled');
     }
 
-    if (state.mode === 0) {
+    if (state.mode === 1) {
         $('#roomState').prop("checked", true);
-        $('#roomStatus').text(OUTING);
+        $('#roomStatus').text(OCCUPIED);
 
         $('#legacyWindow').text(NOT_DETECTED);
         $('#legacyWindow').addClass('safe-event');
@@ -747,30 +747,30 @@ function updateLegacyStates(state) {
     else {
 
         $('#roomState').prop("checked", false);
-        $('#roomStatus').text(OCCUPIED);
+        $('#roomStatus').text(OUTING);
 
-        // if (state.window_detector === 0) {
-        //     $('#legacyWindow').text(NOT_DETECTED);
-        //     $('#legacyWindow').addClass('safe-event');
-        //     $('#legacyWindow').removeClass('danger-event');
-        // }
-        // else {
-        //     // todo notify to detected state!
-        //     $('#legacyWindow').text(DETECTED);
-        //     $('#legacyWindow').removeClass('safe-event');
-        //     $('#legacyWindow').addClass('danger-event');
-        // }
-        // if (state.human_detector === 0) {
-        //     $('#legacyHuman').text(NOT_DETECTED);
-        //     $('#legacyHuman').addClass('safe-event');
-        //     $('#legacyHuman').removeClass('danger-event');
-        // }
-        // else {
-        //     // todo notify to detected state!
-        //     $('#legacyHuman').text(DETECTED);
-        //     $('#legacyHuman').removeClass('safe-event');
-        //     $('#legacyHuman').addClass('danger-event');
-        // }
+        if (state.window_detector === 0) {
+            $('#legacyWindow').text(NOT_DETECTED);
+            $('#legacyWindow').addClass('safe-event');
+            $('#legacyWindow').removeClass('danger-event');
+        }
+        else {
+            // todo notify to detected state!
+            $('#legacyWindow').text(DETECTED);
+            $('#legacyWindow').removeClass('safe-event');
+            $('#legacyWindow').addClass('danger-event');
+        }
+        if (state.human_detector === 0) {
+            $('#legacyHuman').text(NOT_DETECTED);
+            $('#legacyHuman').addClass('safe-event');
+            $('#legacyHuman').removeClass('danger-event');
+        }
+        else {
+            // todo notify to detected state!
+            $('#legacyHuman').text(DETECTED);
+            $('#legacyHuman').removeClass('safe-event');
+            $('#legacyHuman').addClass('danger-event');
+        }
     }
 
     if (state.gas_detector === 0) {
@@ -797,31 +797,40 @@ function updateLegacyStates(state) {
     }
 
     // todo : if currentState has been changed then insert sensor log!
-    // if (currentState.window !== state.window_detector) {
-    //     if (currentState.mode === 1) {
-    //         console.log("window changed!");
-    //         if (currentState.window === 0) {
-    //             sendLog('log', 'window opened.');
-    //         }
-    //         else {
-    //             sendLog('log', 'windows closed.');
-    //         }
-    //         currentState.window = state.window_detector;
-    //     }
-    // }
-    //
-    // if (currentState.human !== state.human_detector) {
-    //     if (currentState.mode === 1) {
-    //         console.log("human changed!");
-    //         if (currentState.human === 0) {
-    //             sendLog('log', 'human detected.');
-    //         }
-    //         else {
-    //             sendLog('log', 'human undetected.');
-    //         }
-    //         currentState.human = state.human_detector;
-    //     }
-    // }
+    if (currentState.window !== state.window_detector) {
+        if (currentState.mode === 0) {
+            console.log("window changed!");
+            log.deviceId = '12965944';
+            log.deviceType = '6';
+            if (currentState.window === 0) {
+                log.msg = 'window opened.';
+                sendLog(log);
+            }
+            else {
+                log.msg = 'windows closed.';
+                sendLog(log);
+            }
+            currentState.window = state.window_detector;
+        }
+    }
+
+    if (currentState.human !== state.human_detector) {
+        if (currentState.mode === 0) {
+            console.log("human changed!");
+            log.deviceId = '12965942';
+            log.deviceType = '5';
+            if (currentState.human === 0) {
+                log.msg = 'human detected.';
+                sendLog(log);
+            }
+            else {
+                log.msg = 'human undetected.';
+                sendLog(log);
+            }
+            currentState.human = state.human_detector;
+        }
+    }
+
     if (currentState.gasB !== state.gas_blocker) {
         console.log("gasB changed!");
         currentState.gasB = state.gas_blocker;
@@ -854,7 +863,7 @@ function updateLegacyStates(state) {
     if (currentState.mode !== state.mode) {
         console.log("mode changed!");
         log.deviceId = '';
-        log.deviceType = '0';
+        log.deviceType = '';
         if (currentState.mode === 0) {
             log.msg = 'changed to outing mode';
             sendLog(log);
