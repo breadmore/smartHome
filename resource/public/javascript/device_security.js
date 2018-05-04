@@ -33,26 +33,30 @@ $(document).ready(function () {
     // getAuthsList();
 
     $("#modi-button").on("click", function () {
-        var updateObj = {};
-        updateObj.conn = $(':input:radio[name=moptradio1]:checked').val();
-        updateObj.auth = $(':input:radio[name=moptradio2]:checked').val();
+        var updateDeviceObj = {};
+        var updateGatewayObj={};
 
-
-        updateObj.id = $("#auth-id").val();
-        updateObj.gwid=$("#device-gateway-id").val();
-        updateObj.dname=$("#device-name").val();
-        updateObj.did=$("#device-id").val();
-        updateObj.psk=$("#pre-shared-key").val();
-        updateObj.eid=$("#entity-id").val();
-        updateObj.oid=$("#object-id").val();
-        updateObj.type=$("#modi-device-type").val();
-        updateObj.sid=$("#session-id").val();
-        // updateObj.conn= dataJson2.conn;
-        // updateObj.auth= dataJson2.auth;
-        // updateObj.auth= dataJson2.reg;
-        console.log(updateObj);
-
-        deviceModify(updateObj);
+        if(gatewayCheck==true){
+            updateGatewayObj.id=$("#gateway-id").val();
+            updateGatewayObj.name=$("#gateway-name").val();
+            updateGatewayObj.ip=$("#gateway-ip").val();
+            updateGatewayObj.port=$("#gateway-port").val();
+            updateGatewayObj.conn=$(':input:radio[name=moptradio]:checked').val();
+            gatewayModify(updateGatewayObj);
+        }else if(gatewayCheck==false){
+            updateDeviceObj.conn = $(':input:radio[name=moptradio1]:checked').val();
+            updateDeviceObj.auth = $(':input:radio[name=moptradio2]:checked').val();
+            updateDeviceObj.id = $("#auth-id").val();
+            updateDeviceObj.gwid=$("#device-gateway-id").val();
+            updateDeviceObj.dname=$("#device-name").val();
+            updateDeviceObj.did=$("#device-id").val();
+            updateDeviceObj.psk=$("#pre-shared-key").val();
+            updateDeviceObj.eid=$("#entity-id").val();
+            updateDeviceObj.oid=$("#object-id").val();
+            updateDeviceObj.type=$("#modi-device-type").val();
+            updateDeviceObj.sid=$("#session-id").val();
+            deviceModify(updateDeviceObj);
+        }
 
 
     })
@@ -168,11 +172,11 @@ $(document).ready(function () {
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '260', targets: 0 },
-            { width: '150', targets: 1 },
-            { width: '160', targets: 2 },
-            { width: '150', targets: 3 },
-            { width: '450', targets: 4 },
+            { width: '200', targets: 0 },
+            { width: '110', targets: 1 },
+            { width: '115', targets: 2 },
+            { width: '110', targets: 3 },
+            // { width: '502', targets: 4 },
 
         ]
     });
@@ -1443,11 +1447,8 @@ function check(data) {
 }
 
 function deviceModify(device) {
-    var url;
-    if(gatewayCheck==false)
-        url = '/api/v1/devices/';
-    else if(gatewayCheck==true)
-        url = '/api/v1/gateways/';
+    var url = '/api/v1/devices/';
+
 
     $.ajax({
         url: url + device.id,
@@ -1463,6 +1464,22 @@ function deviceModify(device) {
 
 }
 
+function gatewayModify(gateway) {
+    var url = '/api/v1/gateways/';
+
+    $.ajax({
+        url: url + gateway.id,
+        type: 'put',
+        data: gateway,
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+}
 
 
 
