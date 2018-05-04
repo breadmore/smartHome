@@ -479,9 +479,10 @@ $(document).ready(function () {
         ajax: {
             url: "/api/v1/Logs/policy",
             dataSrc: function (result) {
+                console.log(result);
                 var logs = [];
                 $.each(result, function (index, item) {
-                    item.enforceDate = item.enforce_date;
+                    item.enforceDate = dateFormatter(item.enforce_date,2);
                     item.fromName = findEntityById(item.from_id.toString()).Name;
                     item.toName = findEntityById(item.to_id.toString()).Name;
                     logs.push(item);

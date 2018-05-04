@@ -138,7 +138,7 @@ router.route('/')
                                                             res.status(500).send(err);
                                                         }
                                                         else {
-                                                            securityLog.deviceId = result[0].did;
+                                                             // securityLog.deviceId = result[0].did;
                                                              logDao.insert(securityLog, function (err, result) {
                                                                  if (err) {
                                                                      res.status(401).send(err);
