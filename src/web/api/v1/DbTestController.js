@@ -1,9 +1,9 @@
 var router = require('express').Router();
-var dbDevice = require('../../../dao/old/DeviceDao');
-var dbGateway = require('../../../dao/old/GatewayDao');
-var dbPolicy = require('../../../dao/old/PolicyDao');
-var dbUser = require('../../../dao/old/UserDao');
-var dbSensorLog = require('../../../dao/old/SensorLogDao');
+// var dbDevice = require('../../../dao/old/DeviceDao');
+// var dbGateway = require('../../../dao/old/GatewayDao');
+// var dbPolicy = require('../../../dao/old/PolicyDao');
+// var dbUser = require('../../../dao/old/UserDao');
+// var dbSensorLog = require('../../../dao/old/SensorLogDao');
 
 
 

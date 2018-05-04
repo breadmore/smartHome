@@ -14,6 +14,21 @@ body *:focus, body *:active, body *:hover {
     box-shadow: none !important;
 }
 
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 370px;
+        margin: 1.75rem auto;
+    }
+}
+
+@media (min-width: 576px) {
+    #deployLogModal .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
+}
+
+
 
 .no-padding {
     padding-right: 0 !important;
@@ -169,8 +184,9 @@ body *:focus, body *:active, body *:hover {
     padding:0;
     margin:0;
     height: auto;
-    font-size: 16px;
+    font-size: 10pt;
     font-weight: normal;
+    font-weight: 600;
 }
 
 .modal-body-content {
@@ -185,7 +201,8 @@ body *:focus, body *:active, body *:hover {
 /*}*/
 
 .modal-body-content p {
-    font-weight: 500 !important;
+    font-weight: 700 !important;
+    font-size: 10pt;
     /*margin-left: -10px;*/
 }
 
@@ -196,13 +213,13 @@ body *:focus, body *:active, body *:hover {
 
 .modal-body {
     padding-top: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .modal-footer {
-    padding-left: 50px;
-    padding-right: 50px;
+    /*padding-left: 50px;*/
+    /*padding-right: 50px;*/
 }
 
 
@@ -284,7 +301,12 @@ body *:focus, body *:active, body *:hover {
 }
 
 .radio-group > label:nth-child(1) {
+    font-weight: 400;
     width: 50%;
+}
+
+.radio-group > label:nth-child(2) {
+    font-weight: 400;
 }
 
 .btn-default {
@@ -341,3 +363,4 @@ body *:focus, body *:active, body *:hover {
 #securityTable > thead > tr > th, #securityEventTable > thead > tr > th, #eventTable > thead > tr > th, #userTable > thead > tr > th, #eventTable > thead > tr > td, #deployEventTable > thead > tr > th{
     font-size: 14px;
 }
+

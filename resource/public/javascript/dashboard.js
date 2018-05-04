@@ -64,8 +64,10 @@ $(document).ready(function() {
                             type: 'get',
                             async: false,
                             success: function (result) {
+                                item.event_date = dateFormatter(item.event_date);
                                 // device information already deleted!
                                 if (result.length === 0) {
+                                    // item.event_date = dateFormatter(item.event_date);
                                     item.device_name = '';
                                     item.device_id = '';
                                     item.device_type = '';
@@ -78,7 +80,7 @@ $(document).ready(function() {
                                     else {
                                         item.device_type = type2Icon(item.device_type);
                                     }
-                                    item.event_date = dateFormatter(item.event_date);
+                                    // item.event_date = dateFormatter(item.event_date);
                                 }
                             },
                             error: function (error) {
