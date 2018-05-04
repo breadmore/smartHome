@@ -733,7 +733,7 @@ function updateLegacyStates(state) {
     }
 
     if (state.mode === 1) {
-        $('#roomState').prop("checked", true);
+        $('#roomState').prop("checked", false);
         $('#roomStatus').text(OCCUPIED);
 
         $('#legacyWindow').text(NOT_DETECTED);
@@ -746,7 +746,7 @@ function updateLegacyStates(state) {
     }
     else {
 
-        $('#roomState').prop("checked", false);
+        $('#roomState').prop("checked", true);
         $('#roomStatus').text(OUTING);
 
         if (state.window_detector === 0) {
@@ -862,8 +862,8 @@ function updateLegacyStates(state) {
 
     if (currentState.mode !== state.mode) {
         console.log("mode changed!");
-        log.deviceId = '';
-        log.deviceType = '';
+        log.deviceId = undefined;
+        log.deviceType = undefined;
         if (currentState.mode === 0) {
             log.msg = 'changed to outing mode';
             sendLog(log);
