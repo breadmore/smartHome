@@ -326,7 +326,8 @@ li label {
 }
 
 #securityTable tbody .selected {
-    background-color: #fcf9f9;
+    /*background-color: #fcf9f9;*/
+    background-color: #f4f0f0;
 }
 
 #securityEventTable {
