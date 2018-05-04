@@ -174,15 +174,14 @@ $(document).ready(function () {
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '18%', targets: 0 },
-            { width: '14%', targets: 1 },
-            { width: '14%', targets: 2 },
-            { width: '14%', targets: 3 },
-            { width: '40%', targets: 4 },
+            { width: '260', targets: 0 },
+            { width: '150', targets: 1 },
+            { width: '160', targets: 2 },
+            { width: '150', targets: 3 },
+            { width: '450', targets: 4 },
 
         ]
     });
-
     setInterval(() => {
         securityEventTable.ajax.reload();
     }, 3000);

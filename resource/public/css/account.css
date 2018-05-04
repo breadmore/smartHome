@@ -23,7 +23,10 @@
 }
 
 #userTable tbody .selected {
-    background-color: #fcf9f9;
+    /*background-color: #fcf9f9;*/
+    /*background-color: #f8f4f4;*/
+    background-color: #f4f0f0;
+
 }
 
 

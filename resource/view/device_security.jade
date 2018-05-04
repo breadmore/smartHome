@@ -119,7 +119,7 @@ block content
             hr
     .row.no-gutters(style='margin-bottom:20px; display: none;')#securityEvent
         .col-12.no-gutters
-            table#securityEventTable(style='width:100%')
+            table#securityEventTable(style="width: 100%")
                 thead
                     tr
                         th Event Date
@@ -168,7 +168,7 @@ block content
                     .modal-body-content
                         .gateway_id Gateway ID
                         select#add-gateway-id
-                        .entity-id Product ID(Entity ID)
+                        .entity-id Product ID
                         input(type="text" value="")#add-entity-id
                         .select-device-type Device type
                         select#add-type(onchange='autoWriteDeviceName("#add-type","#add-device-id","#add-device-name")')
@@ -232,7 +232,7 @@ block content
                         input(type="hidden")#auth-id
                         p Gateway ID
                         select#device-gateway-id
-                        p Product ID(Entity ID)
+                        p Product ID
                         input(type="text")#entity-id
                         p Device type
                         //id change type -> modi-device-type
