@@ -106,6 +106,9 @@ var Log = {
 
     selectXiaomiLog: function (callback) {
         return db.query('select * from event_log where device_group = xiaomi', callback)
+    },
+    selectAuthsEid: function (did, callback) {
+        return db.query('select distinct(s.device_id), a.eid from Security_Log as s left join auths as a on a.did = s.device_id where a.did like "%' + did + '%"', callback);
     }
 
 };

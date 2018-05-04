@@ -88,4 +88,16 @@ router.route('/deployall')
         })
     })
 
+router.route('/authseid')
+    .post(function (req, res) {
+        logService.selectAuthsEid(req.body.did, function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    })
+
 module.exports = router;
