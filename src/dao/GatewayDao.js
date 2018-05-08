@@ -62,8 +62,8 @@ var Gateway = {
 
     update: function (id, gateway, callback) {
 
-        return db.query('update gateway set name = ?, ip = ? port = ? conn = ? where id = ?',
-            [gateway.name, gateway.ip, gateway.port, gateway.conn, id],
+        return db.query('update gateway set name = ?, ip = ?, port = ?,conn=? where id = ?',
+            [gateway.name, gateway.ip, gateway.port, gateway.conn,id],
             callback)
     },
     searchName: function(name, callback) {

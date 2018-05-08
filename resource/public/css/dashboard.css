@@ -704,11 +704,11 @@ div .dataTables_paginate > .pagination {
 }
 
 #eventTable > tbody > tr > td {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #eventTable > thead > tr > td {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .dashboard {

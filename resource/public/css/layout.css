@@ -107,16 +107,16 @@ body, li, p {
     padding-top: 22px;
     float: right;
     text-align: center;
-    width: 80px;
+    width: 95px;
     height: 60px;
     /*background-color: rgb(52, 63, 75);*/
 }
 
 .menu-text {
     margin: 0px;
-    padding-left: 90px;
+    padding-left: 0px;
     /*padding-top: 15px;*/
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 700;
     width: 100%;
 }
@@ -126,5 +126,5 @@ body, li, p {
 }
 
 .menu-text > .device_security {
-    width: 160px;
+    width: 200px;
 }

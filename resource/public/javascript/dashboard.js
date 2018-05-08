@@ -48,7 +48,7 @@ $(document).ready(function() {
         paging: true,
         processing: true,
         // ordering: true,
-        order: [[1, 'desc']],
+        order: [[0, 'desc']],
         serverSide: false,
         searching: true,
         dom : '<"row no-gutters"t>',
@@ -57,6 +57,7 @@ $(document).ready(function() {
             // async: false,
             dataSrc: function (result) {
                 $.each(result, (index, item) => {
+                    item.event_date = dateFormatter(item.event_date);
                     // item.device_name = undefined;
                     if (item.device_id) {
                         $.ajax({
@@ -66,6 +67,7 @@ $(document).ready(function() {
                             success: function (result) {
                                 // device information already deleted!
                                 if (result.length === 0) {
+                                    // item.event_date = dateFormatter(item.event_date);
                                     item.device_name = '';
                                     item.device_id = '';
                                     item.device_type = '';
@@ -78,7 +80,7 @@ $(document).ready(function() {
                                     else {
                                         item.device_type = type2Icon(item.device_type);
                                     }
-                                    item.event_date = dateFormatter(item.event_date);
+                                    // item.event_date = dateFormatter(item.event_date);
                                 }
                             },
                             error: function (error) {
@@ -367,12 +369,18 @@ $(document).ready(function() {
      */
     socket.on('/xiaomi/states', function (data) {
         // console.log(data);
+        var log = {
+            eventType : 'log',
+            deviceType: undefined,
+            deviceId: undefined,
+            msg: undefined
+        };
         switch (data.type) {
             case 'magnet':
                 if (currentXiaomi.magnet === undefined) {
                     currentXiaomi.magnet = data.event;
                 }
-                if (currentState.mode === 1) {
+                if (currentState.mode === 0) {
                     if (data.event === 'open') {
                         $('#xiaomiWindow').text(OPENED);
                         $('#xiaomiWindow').removeClass('safe-event');
@@ -390,12 +398,16 @@ $(document).ready(function() {
 
                     if (currentXiaomi.magnet !== data.event) {
                         console.log('magnet changed!');
+                        log.deviceId = '12965944';
+                        log.deviceType = '6';
                         if (currentXiaomi.magnet === 'open') {
-                            sendLog('log', 'magnet closed.');
+                            log.msg = 'magnet closed.';
+                            sendLog(log);
                             currentXiaomi.magnet = 'close';
                         }
                         else {
-                            sendLog('log', 'magnet opened.');
+                            log.msg = 'magnet opend.';
+                            sendLog(log);
                             currentXiaomi.magnet = 'open';
                             console.log('record Start!!');
                             recordStart(1);
@@ -413,7 +425,7 @@ $(document).ready(function() {
                 if (currentXiaomi.motion === undefined) {
                     currentXiaomi.motion = data.event;
                 }
-                if (currentState.mode === 1) {
+                if (currentState.mode === 0) {
                     if (data.event === 'motion') {
                         $('#xiaomiHuman').text(DETECTED);
                         $('#xiaomiHuman').addClass('danger-event');
@@ -434,14 +446,18 @@ $(document).ready(function() {
 
                     if (currentXiaomi.motion !== data.event) {
                         console.log('motion changed!');
+                        log.deviceId = '12965946';
+                        log.deviceType = '5';
                         if (currentXiaomi.motion === 'no_motion') {
-                            sendLog('log', 'motion is detected.');
+                            log.msg = 'motion is detected.';
+                            sendLog(log);
                             console.log('Motion Record Start!');
                             recordStart(2);
                             currentXiaomi.motion = 'motion';
                         }
                         else {
-                            sendLog('log', 'motion is disappeared.');
+                            log.msg = 'motion is disappeared.';
+                            sendLog(log);
                             currentXiaomi.motion = 'no_motion';
                         }
                     }
@@ -476,11 +492,15 @@ $(document).ready(function() {
 
                 if (currentXiaomi.plug !== data.event) {
                     console.log('plug changed!');
+                    log.deviceId = '12965948';
+                    log.deviceType = '7';
                     if (currentXiaomi.plug === 'on') {
-                        sendLog('log', 'plug outlet is turned off.');
+                        log.msg = 'plug outlet is turned off.';
+                        sendLog(log);
                     }
                     else {
-                        sendLog('log', 'plug outlet is turned on.');
+                        log.msg = 'plug outlet is turned on.';
+                        sendLog(log);
                     }
                     currentXiaomi.plug = undefined;
                 }
@@ -677,6 +697,12 @@ function updateChart(chart, chartData) {
 }
 
 function updateLegacyStates(state) {
+    var log = {
+        eventType : 'log',
+        deviceType: null,
+        deviceId: null,
+        msg: undefined
+    };
     if (state.mode === undefined || currentState.mode === undefined) {
         state.mode = 0;
         currentState.mode = state.mode;
@@ -706,8 +732,8 @@ function updateLegacyStates(state) {
         $('#lightState').attr('disabled', 'disabled');
     }
 
-    if (state.mode === 0) {
-        $('#roomState').prop("checked", true);
+    if (state.mode === 1) {
+        $('#roomState').prop("checked", false);
         $('#roomStatus').text(OCCUPIED);
 
         $('#legacyWindow').text(NOT_DETECTED);
@@ -720,7 +746,7 @@ function updateLegacyStates(state) {
     }
     else {
 
-        $('#roomState').prop("checked", false);
+        $('#roomState').prop("checked", true);
         $('#roomStatus').text(OUTING);
 
         if (state.window_detector === 0) {
@@ -772,59 +798,79 @@ function updateLegacyStates(state) {
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
-        if (currentState.mode === 1) {
+        if (currentState.mode === 0) {
             console.log("window changed!");
+            log.deviceId = '12965944';
+            log.deviceType = '6';
             if (currentState.window === 0) {
-                sendLog('log', 'window opened.');
+                log.msg = 'window opened.';
+                sendLog(log);
             }
             else {
-                sendLog('log', 'windows closed.');
+                log.msg = 'windows closed.';
+                sendLog(log);
             }
             currentState.window = state.window_detector;
         }
     }
 
     if (currentState.human !== state.human_detector) {
-        if (currentState.mode === 1) {
+        if (currentState.mode === 0) {
             console.log("human changed!");
+            log.deviceId = '12965942';
+            log.deviceType = '5';
             if (currentState.human === 0) {
-                sendLog('log', 'human detected.');
+                log.msg = 'human detected.';
+                sendLog(log);
             }
             else {
-                sendLog('log', 'human undetected.');
+                log.msg = 'human undetected.';
+                sendLog(log);
             }
             currentState.human = state.human_detector;
         }
-
     }
+
     if (currentState.gasB !== state.gas_blocker) {
         console.log("gasB changed!");
         currentState.gasB = state.gas_blocker;
+        log.deviceId = '12965932';
+        log.deviceType = '2';
         if (currentState.gasB === 0) {
-            sendLog('log', 'gas unblocked.');
+            log.msg = 'gas unblocked.';
+            sendLog(log);
         }
         else {
-            sendLog('log', 'gas blocked.');
+            log.msg = 'gas blocked.';
+            sendLog(log);
         }
     }
     if (currentState.gasD !== state.gas_detector) {
         console.log("gasD changed!");
+        log.deviceId = '12965934';
+        log.deviceType = '1';
         if (currentState.gasD === 0) {
-            sendLog('log', 'gas undetected.');
+            log.msg = 'gas undetected.';
+            sendLog(log);
         }
         else {
-            sendLog('log', 'gas detected.');
+            log.msg = 'gas detected.';
+            sendLog(log);
         }
         currentState.gasD = state.gas_detector;
     }
 
     if (currentState.mode !== state.mode) {
         console.log("mode changed!");
+        log.deviceId = undefined;
+        log.deviceType = undefined;
         if (currentState.mode === 0) {
-            sendLog('log', 'changed to outing mode');
+            log.msg = 'changed to outing mode';
+            sendLog(log);
         }
         else {
-            sendLog('log', 'changed to occupied mode')
+            log.msg = 'changed to occupied mode';
+            sendLog(log);
         }
 
         currentState.mode = state.mode;
@@ -971,16 +1017,12 @@ function legacyDeviceAction(type, command) {
 
 }
 
-function sendLog(eventType, msg) {
-    var data = {
-        eventType : eventType,
-        msg: msg
-    };
-    console.log(data);
+function sendLog(log) {
+    // console.log(data);
     $.ajax({
         url: '/api/v1/logs',
         type: 'post',
-        data : data,
+        data : log,
         success: function(result) {
             // console.log(result);
         },

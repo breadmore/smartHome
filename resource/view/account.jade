@@ -15,11 +15,11 @@ append title
 
 block content
         .row.no-gutters(style='margin-bottom:20px')#securityDiv
-            //if authority == "admin"
-            .col-12(style='margin-bottom:10px;')
-                input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#ModifyModal" data-toggle="modal")#modifyButton
-                input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#DeleteModal" data-toggle="modal")#deleteButton
-                input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#AddModal" data-toggle="modal")#addButton
+            if authority == "admin"
+                .col-12(style='margin-bottom:10px;')
+                    input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#ModifyModal" data-toggle="modal")#modifyButton
+                    input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#DeleteModal" data-toggle="modal")#deleteButton
+                    input.btn.btn-primary.btn-action(type='button', value='Add' data-target="#AddModal" data-toggle="modal")#addButton
             //else
         .col-12.no-gutters
             table#userTable(style='width:100%')

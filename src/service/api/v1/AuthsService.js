@@ -12,7 +12,7 @@ const Log = function ( deviceType, deviceId, msg) {
 };
 
 const successMsg = "authentication success.";
-const failureMsg = "authentication failure.";
+// const failureMsg = "authentication failure.";
 
 function getAllAuths(callback) {
   authDao.selectAllAuth(callback);
@@ -47,15 +47,15 @@ function authInitService() {
             result.forEach(function(item, index) {
                 var log;
                 if (item.auth === 0) {
-                    log = new Log(item.type, item.did, failureMsg);
-                    logDao.insert(log, function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        else {
-
-                        }
-                    })
+                    // log = new Log(item.type, item.did, failureMsg);
+                    // logDao.insert(log, function (err, result) {
+                    //     if (err) {
+                    //         console.log(err);
+                    //     }
+                    //     else {
+                    //
+                    //     }
+                    // })
                 }
                 else if (item.auth === 1){
                     log = new Log(item.type, item.did, successMsg);

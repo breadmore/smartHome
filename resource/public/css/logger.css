@@ -65,3 +65,6 @@ div .dataTables_paginate > .pagination {
     text-align: left!important;
     text-indent: 10px;
 }
+.logger{
+    background: rgb(90,153,157);
+}
