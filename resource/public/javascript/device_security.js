@@ -63,6 +63,7 @@ $(document).ready(function () {
 
 
     $(".input-remove").click(function () {
+        // $("#modifyModal input[type=radio]").prop("checked", false);
         $("#addGatewayModal input[type=text]").val("");
         $("#addDeviceModal input[type=text]").val("");
         $("#addGatewayModal input[type=radio]").prop("checked", false);
@@ -455,7 +456,8 @@ $(document).ready(function () {
             data: updateData,
             dataType: 'json',
             success: function (result) {
-                securityEventTable.ajax.reload();
+                // deployLogTable.ajax.reload;
+                window.location.reload();
                 console.log(result);
             },
             error: function (err) {
@@ -873,7 +875,7 @@ function detailViewUpdate(gateway, device) {
     }
     else if (device) {
         toggleTable(gateway, device);
-        console.log(device);
+        // console.log(device);
         var dataJson = {
             id : device.eid
         }
