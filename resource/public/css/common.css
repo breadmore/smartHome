@@ -260,7 +260,7 @@ body *:focus, body *:active, body *:hover {
     border-color: #65c0c6;
     /*height: 31px;*/
     line-height: 1;
-    padding:10px;
+    padding:5px;
 }
 
 .btn-action:disabled {
@@ -357,7 +357,9 @@ body *:focus, body *:active, body *:hover {
     margin: 0;
     border-radius: 50%
 }
-
+.btn{
+    padding: 5px;
+}
 #securityTable > tbody > tr > td, #securityEventTable > tbody > tr > td, #eventTable > tbody > tr > td, #userTable > tbody > tr > td, #deployEventTable > tbody > tr > td{
     font-size: 14px;
 }

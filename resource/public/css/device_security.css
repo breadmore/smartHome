@@ -314,7 +314,7 @@ li label {
 }
 
 #securityTable td {
-    padding: 10px;
+    padding: 5px;
     vertical-align: middle;
     border-bottom: 1px solid #deceb2;
     font-size: 10px;
@@ -343,7 +343,7 @@ li label {
 }
 
 #securityEventTable td {
-    padding: 10px;
+    padding: 5px;
     vertical-align: middle;
     border-bottom: 1px solid #deceb2;
     font-size: 10px;
@@ -487,7 +487,7 @@ td.right {
 }
 
 #logTable td {
-    padding: 10px;
+    padding: 5px;
     vertical-align: middle;
     border-bottom: 1px solid #deceb2;
     font-size: 10px;
@@ -598,4 +598,8 @@ td.right .fa-address-card {
 
 .device_security {
     background: rgb(90,153,157);
+}
+
+.btn {
+    padding:5px;
 }

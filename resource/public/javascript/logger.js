@@ -33,10 +33,12 @@ $(function () {
                     item.device_name = findAuthByDid(item.device_id);
                     if (item.device_type == null) {
                         item.device_type = "";
-                    } else if (item.device_type === 0){
+                    } else if (item.device_type === "0"){
                         item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
+                        console.log("jasil");
                     } else {
                         item.device_type = type2Icon(item.device_type);
+                        console.log("else");
                     }
 
                 });
@@ -107,12 +109,17 @@ $(function () {
         ajax : {
             url: "/api/v1/logs/securityall",
             dataSrc: function (result) {
+                console.log(result);
                 var logs = [];
                 $.each(result, function(index, item){
+
                     item.event_date = dateFormatter(item.event_date);
                     item.device_type = type2Icon(item.device_type);
                     logs.push(item);
+
+
                 });
+
                 return logs;
             }},
         columns : [
@@ -122,13 +129,13 @@ $(function () {
             {data: "device_id"},
             {data: "msg"}
         ],
-        columnDefs: [
-        { width: '230', targets: 0 },
-        // { width: '145', targets: 1 },
-        // { width: '200', targets: 2 },
-        // { width: '125', targets: 3 },
-        // { width: '440', targets: 4 },
-    ]
+    //     columnDefs: [
+    //     { width: '260', targets: 0 },
+    //     { width: '145', targets: 1 },
+    //     { width: '200', targets: 2 },
+    //     { width: '125', targets: 3 },
+    //     { width: '440', targets: 4 },
+    // ]
     });
 
 
@@ -194,8 +201,9 @@ function findEntityById(id) {
     return null;
 }
 
-function type2Icon(type) {
+function type2Icon(parseType) {
     var icon;
+    var type = parseInt(parseType);
     if (type === 1) {
         return icon = '<i class="fab fa-stumbleupon device-type-icon" ></i><span>GasDetector</span>'
     }
@@ -221,7 +229,7 @@ function type2Icon(type) {
         return icon = '<i class="fas fa-camera device-type-icon" ></i><span>SmartCamera</span>'
     }
     else {
-        return icon = '<i class="fas fa-question"></i><span>Unknown</span>'
+        return icon = '<i class="fas fa-question"></i><span></span>'
     }
     return icon;
 }
