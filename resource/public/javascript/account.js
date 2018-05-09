@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    $(".modal-btn").click(function () {
+        $("input[type=text]").val("");
+    });
+
     var table = $('#userTable').DataTable({
         paging: true,
         processing: true,
@@ -86,6 +91,7 @@ $(document).ready(function () {
                 data: insertObj,
                 dataType: 'json',
                 success: function(result) {
+                    $("input[type=text]").val("");
                     console.log(result);
                 }, error: function(err) {
                     console.log(err);

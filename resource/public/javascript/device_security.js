@@ -61,6 +61,14 @@ $(document).ready(function () {
 
     })
 
+
+    $(".input-remove").click(function () {
+        $("#addGatewayModal input[type=text]").val("");
+        $("#addDeviceModal input[type=text]").val("");
+        $("#addGatewayModal input[type=radio]").prop("checked", false);
+        $("#addDeviceModal input[type=radio]").prop("checked", false);
+    })
+
     //init device list & device detail
     createDeviceListView();
     createResourceName();
@@ -137,13 +145,13 @@ $(document).ready(function () {
         ajax: {
             url: "/api/v1/logs",
             dataSrc: function (result) {
-                //console.log(result);
+                console.log(result);
                 check(result);
 
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
-                    item.device_type = type2Icon(item.device_type);
+                    // item.device_type = type2Icon(item.device_type);
                     var dataDid = {did: ''};
                     dataDid.did = item.device_id;
                     $.ajax({
@@ -411,6 +419,7 @@ $(document).ready(function () {
                             dataType: 'json',
                             success: function(result) {
                                 console.log(result);
+                                window.location.reload();
                             }, error: function(err) {
                                 console.log(err);
                             }
@@ -1201,6 +1210,7 @@ function saveGateway(data) {
             // console.log(data);
             // console.log(result);
             // console.log("success");
+            window.location.reload();
         },
         error: function (err) {
             console.log(err);
@@ -1235,6 +1245,7 @@ function saveDevice(data) {
             // console.log(data);
             console.log(result);
             console.log("success");
+            window.location.reload();
         },
         error: function (err) {
             console.log(err);
@@ -1457,6 +1468,7 @@ function deviceModify(device) {
         data: device,
         success: function (result) {
             console.log(result);
+            window.location.reload();
         },
         error: function (error) {
             console.log(error);
@@ -1473,6 +1485,7 @@ function gatewayModify(gateway) {
         type: 'put',
         data: gateway,
         success: function (result) {
+            window.location.reload();
             console.log(result);
         },
         error: function (error) {

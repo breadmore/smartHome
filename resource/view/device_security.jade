@@ -27,8 +27,8 @@ block content
                 //span Refresh
                 input.btn.btn-primary.btn-action(type='button', value='Delete' data-target="#deleteModal" data-toggle="modal")#deleteButton
                 input.btn.btn-primary.btn-action(type='button', value='Modify' data-target="#modifyModal" data-toggle="modal")#modifyButton
-                input.btn.btn-primary.btn-action(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addDeviceButton
-                input.btn.btn-primary.btn-action(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addGatewayButton
+                input.btn.btn-primary.btn-action.input-remove(type='button', value='Add Device' data-target="#addDeviceModal" data-toggle="modal")#addDeviceButton
+                input.btn.btn-primary.btn-action.input-remove(type='button', value='Add Gateway' data-target="#addGatewayModal" data-toggle="modal")#addGatewayButton
 
         .col-6.no-gutters.view-box
             .row.no-gutters.view-box-title
@@ -69,10 +69,10 @@ block content
                             td.right#dtype
                         tr
                             td Device ID
-                            td.right#did
+                            td.right#eid
                         tr
                             td Product ID
-                            td.right#eid
+                            td.right#did
                         tr
                             td Pre Shared Key
                             td.right#psk
