@@ -28,17 +28,18 @@ $(function () {
         ajax : {
             url: "/api/v1/logs/serviceall",
             dataSrc: function (result) {
+                // console.log(result);
                 $.each(result, function (index, item) {
                     item.event_date = dateFormatter(item.event_date);
-                    item.device_name = findAuthByDid(item.device_id);
+                    // item.device_name = findAuthByDid(item.device_id);
                     if (item.device_type == null) {
                         item.device_type = "";
                     } else if (item.device_type === "0"){
                         item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
-                        console.log("jasil");
+                        // console.log("jasil");
                     } else {
                         item.device_type = type2Icon(item.device_type);
-                        console.log("else");
+                        // console.log("else");
                     }
 
                 });
@@ -109,7 +110,7 @@ $(function () {
         ajax : {
             url: "/api/v1/logs/securityall",
             dataSrc: function (result) {
-                console.log(result);
+                // console.log(result);
                 var logs = [];
                 $.each(result, function(index, item){
 

@@ -71,7 +71,7 @@ $(document).ready(function () {
 
     //init device list & device detail
     createDeviceListView();
-    createResourceName();
+    // createResourceName();
     // Security DataTable.
     var table = $('#securityTable').DataTable({
         paging: false,
@@ -604,7 +604,6 @@ function findDeviceByDid(did) {
     }
     return null;
 }
-
 function findOperationById() {
     $.each(deviceList, function (dIdx, device) {
         var count = 0;
@@ -632,13 +631,13 @@ function findOperationById() {
                     // for (var i=0; i<toName_unique.length; i++) {
                     //     $("#to-Id").append("<option>" + toName_unique[i] +"</option>");
                     // }
-                    $.each(entityName, function (i, el) {
-                        $("#from-Id").append("<option>" + entityName[i] + "</option>");
-                        // $("#from-Id").append("<option>" + findDeviceByEid(Number(entityId[i])).dname + "</option>");
-                    });
-                    $.each(toName, function (i, el) {
-                        $("#to-Id").append("<option>" + toName[i] + "</option>");
-                    });
+                    // $.each(entityName, function (i, el) {
+                    //     $("#from-Id").append("<option>" + entityName[i] + "</option>");
+                    //     // $("#from-Id").append("<option>" + findDeviceByEid(Number(entityId[i])).dname + "</option>");
+                    // });
+                    // $.each(toName, function (i, el) {
+                    //     $("#to-Id").append("<option>" + toName[i] + "</option>");
+                    // });
                 }
             }
             ;
@@ -650,6 +649,7 @@ function findOperationById() {
                 device.operation = "";
             }
         });
+        console.log(entityName)
     });
 }
 
@@ -824,8 +824,9 @@ function addClickListenerToDeviceInfo() {
                     }
                 }
             }
+            nowClick = e.target;
             if(nowClick.getAttribute('data-did') === null) {
-                nowClick = e.target.parentElement;
+                nowClick = nowClick.parentElement;
                 if (nowClick.getAttribute('data-did') === null) {
                     nowClick = nowClick.parentElement;
                     if (nowClick.getAttribute('data-did') === null) {
@@ -1253,23 +1254,23 @@ function saveDevice(data) {
     });
 }
 
-function createResourceName() {
-    $.ajax({
-        url: '/api/v1/security/resources',
-        type: 'get',
-        // contentType: "application/json; charset=utf-8",
-        // data: JSON.stringify(device_data),
-        success: function (result) {
-            resourceList = result;
-            $.each(resourceList, function (index, item) {
-                $("#resource-Name").append("<option>" + item.Resource + "</option>")
-            });
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-}
+// function createResourceName() {
+//     $.ajax({
+//         url: '/api/v1/security/resources',
+//         type: 'get',
+//         // contentType: "application/json; charset=utf-8",
+//         // data: JSON.stringify(device_data),
+//         success: function (result) {
+//             resourceList = result;
+//             $.each(resourceList, function (index, item) {
+//                 $("#resource-Name").append("<option>" + item.Resource + "</option>")
+//             });
+//         },
+//         error: function (err) {
+//             console.log(err);
+//         }
+//     });
+// }
 
 
 //ktw add
