@@ -16,7 +16,6 @@ router.use('/logs', require('./LogController'));
 
 /** Test Controller*/
 router.use('/demo', require('./DemoContoller'));
-router.use('/db', require('./DbTestController'));
 
 module.exports = router;
 
