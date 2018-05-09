@@ -62,7 +62,7 @@ var Log = {
     },
 
     selectAllSecurityEvent(callback) {
-        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid,"") as device_id, s.msg from Security_Log as s left join auths as a on s.device_id = a.did;',
+        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid,"") as device_id, s.msg from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "security" or s.event_type = "critical"',
             callback);
     },
 
@@ -75,7 +75,7 @@ var Log = {
     },
 
     selectAllServiceLog(callback) {
-        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid, "") as device_id , ifnull(a.dname,"") as dname, s.msg from Security_Log as s left join auths as a on s.device_id = a.did;', callback);
+        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid, "") as device_id , ifnull(a.dname, "") as device_name, s.msg from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "log" or s.event_type = "service" order by s.id ASC', callback);
     },
 
     // Mark : PolicyHistory Dao.
