@@ -338,7 +338,7 @@ $(document).ready(function() {
             currentState.gasD = data.gas_detector;
             currentState.gasB = data.gas_blocker;
 
-            if (data.mode) {
+            if (data.mode == 0) {
                 currentState.mode = data.mode;
             }
             else {
@@ -721,7 +721,7 @@ function updateLegacyStates(state) {
         msg: undefined
     };
     if (state.mode === undefined || currentState.mode === undefined) {
-        state.mode = 0;
+        state.mode = 1;
         currentState.mode = state.mode;
     }
 
@@ -881,6 +881,7 @@ function updateLegacyStates(state) {
         console.log("mode changed!");
         log.deviceId = undefined;
         log.deviceType = undefined;
+        log.eventType = 'service';
         if (currentState.mode === 0) {
             log.msg = 'changed to outing mode';
             sendLog(log);
