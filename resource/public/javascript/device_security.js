@@ -151,7 +151,7 @@ $(document).ready(function () {
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
-                    // item.device_type = type2Icon(item.device_type);
+                    item.device_type = type2Icon(item.device_type);
                     var dataDid = {did: ''};
                     dataDid.did = item.device_id;
                     $.ajax({
