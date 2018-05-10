@@ -440,10 +440,19 @@ $(document).ready(function() {
                 break;
             case 'motion':
                 if (currentXiaomi.motion === undefined) {
+                    console.log(data.event);
                     currentXiaomi.motion = data.event;
+                    if (data.event === 'motion') {
+                        console.log('First Motion Record Start!');
+                        recordStart(2);
+                    }
+                    else {
+                        console.log('First No Motion');
+                    }
                 }
                 if (currentState.mode === 0) {
                     if (data.event === 'motion') {
+                        console.log("asdasd");
                         $('#xiaomiHuman').text(DETECTED);
                         $('#xiaomiHuman').addClass('danger-event');
                         $('#xiaomiHuman').removeClass('safe-event');
@@ -463,8 +472,8 @@ $(document).ready(function() {
 
                     if (currentXiaomi.motion !== data.event) {
                         console.log('motion changed!');
-                        log.deviceId = '12965946';
-                        log.deviceType = '5';
+                        // log.deviceId = '';
+                        // log.deviceType = '';
                         if (currentXiaomi.motion === 'no_motion') {
                             log.msg = 'motion is detected.';
                             sendLog(log);
