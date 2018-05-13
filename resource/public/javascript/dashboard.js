@@ -923,7 +923,7 @@ function updateLegacyStates(state) {
 
 function xiaomiAction(action) {
     var data = {
-        eventType : 'log',
+        eventType : 'service',
         deviceType: '2',
         deviceId: '12965946',
         msg: undefined
@@ -977,7 +977,7 @@ function legacyDeviceAction(type, command) {
     };
     if (type === 1) {           //smart light
         ip = '192.168.0.100';
-        data.eventType = 'log';
+        data.eventType = 'service';
         data.deviceType = '4';
         data.deviceId = '12965940';
         if (command === 0) {
