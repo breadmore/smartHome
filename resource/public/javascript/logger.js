@@ -110,7 +110,7 @@ $(function () {
         ajax : {
             url: "/api/v1/logs/securityall",
             dataSrc: function (result) {
-                // console.log(result);
+                console.log(result);
                 var logs = [];
                 $.each(result, function(index, item){
 

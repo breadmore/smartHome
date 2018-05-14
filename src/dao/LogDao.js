@@ -55,6 +55,14 @@ var Log = {
 
     },
 
+    insertAuthInit: function(log, callback) {
+
+        return db.query('insert into Security_Log (event_date, event_type, device_type, device_id, msg) values (?, ?, ?, ?, ? )',
+            [log.eventDate, log.eventType, log.deviceType, log.deviceId, log.msg],
+            callback);
+
+    },
+
     insertModifyLog: function(log, callback) {
         return db.query('insert into Security_Log (event_date, event_type, device_type, device_id, msg) values (?, ?, ?, ?, ? )',
             [log.eventDate, log.eventType, log.deviceType, log.deviceId, log.msg],
@@ -62,7 +70,7 @@ var Log = {
     },
 
     selectAllSecurityEvent(callback) {
-        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid,"") as device_id, s.msg from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "security" or s.event_type = "critical"',
+        return db.query('select s.event_date, s.event_type, ifnull(a.type,"") as device_type , ifnull(a.eid, "") as device_id, ifnull(a.dname, "") as device_name , s.msg from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "security" or s.event_type = "critical" order by s.id DESC',
             callback);
     },
 
@@ -75,7 +83,7 @@ var Log = {
     },
 
     selectAllServiceLog(callback) {
-        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid, "") as device_id , ifnull(a.dname, "") as device_name, s.msg from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "log" or s.event_type = "service" order by s.id ASC', callback);
+        return db.query('select s.event_date, s.event_type, ifnull(s.device_type,"") as device_type, ifnull(a.eid, "") as device_id , ifnull(a.dname, "") as device_name, s.msg from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "log" or s.event_type = "service" order by s.id DESC', callback);
     },
 
     // Mark : PolicyHistory Dao.
@@ -109,6 +117,11 @@ var Log = {
     },
     selectAuthsEid: function (did, callback) {
         return db.query('select distinct(s.device_id), a.eid from Security_Log as s left join auths as a on a.did = s.device_id where a.did like "%' + did + '%"', callback);
+    },
+
+    selectSecurityEvent: function (callback) {
+        return db.query('select s.event_date, s.event_type, a.type as device_type , a.eid as device_id , s.msg\n' +
+            'from Security_Log as s left join auths as a on s.device_id = a.did where s.event_type = "security" or s.event_type = "critical" order by s.id desc limit 10', callback);
     }
 
 };

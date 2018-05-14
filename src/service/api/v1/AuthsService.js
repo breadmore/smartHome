@@ -1,10 +1,18 @@
 var authDao = require('../../../dao/AuthsDao');
 var logDao = require('../../../dao/LogDao');
 var securityLogDao = require('../../../dao/security/SecurityLogDao');
-
+var moment = require('moment');
 
 
 const Log = function ( deviceType, deviceId, msg) {
+    this.eventType = 'security';
+    this.deviceType = deviceType;
+    this.deviceId = deviceId;
+    this.msg = msg;
+};
+
+const LogInit = function (eventDate, deviceType, deviceId, msg) {
+    this.eventDate = eventDate;
     this.eventType = 'security';
     this.deviceType = deviceType;
     this.deviceId = deviceId;
@@ -58,8 +66,8 @@ function authInitService() {
                     // })
                 }
                 else if (item.auth === 1){
-                    log = new Log(item.type, item.did, successMsg);
-                    logDao.insert(log, function (err, result) {
+                    log = new LogInit(item.updated_at, item.type, item.did, successMsg);
+                    logDao.insertAuthInit(log, function (err, result) {
                         if (err) {
                             console.log(err);
                         }
@@ -76,18 +84,39 @@ function authInitService() {
     })
 }
 
+var updatedTime = null;
+
 function compareEntityId(entityId, policyDataList) {
     var msg = null;
     policyDataList.forEach(function (policyData, index) {
         if(policyData.EntityID == entityId){
             //resouce 자리에 EntityId 테이블의 '/' + Name + '_' + auths.did 인가?
             msg = 'policy enforcement: resource(' + policyData.Resouce + '), operation(' + policyData.Operation + ')';
+            updatedTime = updateTimeConverter(policyData.policyID);
         }
         else{
             // console.log('not apply.');
         }
     });
     return msg;
+}
+
+function updateTimeConverter(inputTime) {
+    console.log(inputTime);
+    var str = '';
+    str += inputTime.substring(0, 4) + '-';
+    str += inputTime.substring(4, 6) + '-';
+    str += inputTime.substring(6, 8) + ' ';
+    str += inputTime.substring(8, 10) + ':';
+    str += inputTime.substring(10, 12) + ':';
+    str += inputTime.substring(12,14);
+
+    console.log(str);
+    var time = Date.parse(str);
+    console.log(time);
+    console.log(moment(time).format('YYYY-MM-DD HH:mm:ss'));
+    return moment(time).format('YYYY-MM-DD HH:mm:ss');
+
 }
 
 function policyApplyInitServicer() {
@@ -100,7 +129,7 @@ function policyApplyInitServicer() {
         }
         else{
             policyDataList = result;
-            console.log(policyDataList);
+            // console.log(policyDataList);
             authDao.selectAllAuth(function (err, result) {
                 if (err) {
                     console.log(err);
@@ -113,12 +142,14 @@ function policyApplyInitServicer() {
                         }
                         else {
                             securityLog = {
-                                eventDate: authRow.updated_at,
+                                eventDate: updatedTime,
                                 eventType: 'security',
-                                deviceType: authRow.eid,
+                                deviceType: authRow.type,
                                 deviceId: authRow.did,
                                 msg: msg
                             };
+                            console.log(authRow);
+                            console.log(securityLog);
                             logDao.insertModifyLog(securityLog, function (err, result) {
                                 if (err) {
                                     console.log();

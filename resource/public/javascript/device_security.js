@@ -144,7 +144,7 @@ $(document).ready(function () {
         searching: true,
         dom: '<"row no-gutters"t>',
         ajax: {
-            url: "/api/v1/logs",
+            url: "/api/v1/logs/securityevent",
             dataSrc: function (result) {
                 console.log(result);
                 check(result);
@@ -153,20 +153,20 @@ $(document).ready(function () {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
-                    var dataDid = {did: ''};
-                    dataDid.did = item.device_id;
-                    $.ajax({
-                        url:'/api/v1/logs/authseid',
-                        type:'post',
-                        async: false,
-                        data: dataDid,
-                        success: function (auths) {
-                            item.device_id = auths[0].eid;
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-                    })
+                    // var dataDid = {did: ''};
+                    // dataDid.did = item.device_id;
+                    // $.ajax({
+                    //     url:'/api/v1/logs/authseid',
+                    //     type:'post',
+                    //     async: false,
+                    //     data: dataDid,
+                    //     success: function (auths) {
+                    //         item.device_id = auths[0].eid;
+                    //     },
+                    //     error: function (error) {
+                    //         console.log(error);
+                    //     }
+                    // })
                 });
 
 
