@@ -36,6 +36,7 @@ append title
     span.col-xl-2.content-title.no-padding DASHBOARD
 
 block content
+    .loader(style="display:none")
     .col-12.content-head-2.no-padding Device Monitor
     .row.card-box
         .card.device-monitor.temp-humi
@@ -232,9 +233,6 @@ block content
                             //td Index
                             td Event Date
                             td Event Type
-                            td Device Name
-                            td Device Type
-                            td Device ID
                             td Message
                     //tbody
                         tr
@@ -297,8 +295,9 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
+                    .loader(style="display:none")
                     .modal-body-content.video-content
-                        .row
+                        .row(style="margin-bottom:0px")
                             .video-player(style='float:left;')
                                 p#nowPlay(style="color:white;font-size:6px;margin-bottom:3px;margin-top:7px;text-align:center; display:block") ON AIR...
                                 //input#videoName(type='text', placeholder='Rewrite this file name', style="margin-bottom:1px;display:block")
@@ -306,11 +305,13 @@ block content
                                     source(id="vid", type='video/mp4')
                                 #ipcamera(style='width: 640px')
                                     canvas#myCanvas(width='640', height='440' style='width:640px; height:440px;')
-                            .video-list-box(style='float:right;width:30%')
-                                div(style="border-bottom:white solid 3px;padding-left:10px;font-size:30px;height:50px;")
+                            .video-list-box(style='float:right;width:30.5%')
+                                div(style="border-bottom:white solid 3px;padding-left:10px;font-size:30px;height:50px;width:283px")
                                     button#change.video-btn Stream
-                                div.video(style="overflow:auto;height:415px;")
+                                div.video(style="overflow:auto;height:365px;width:283px")
                                     ul.my-video-list
+                                div(style="border-top:white solid 3px;font-size:30px;height:50px;width:283px")
+                                    button.btn.btn-primary.btn-action#videoDeleteBtn(style="border-radius:0px;font-size:30px;height:50px;width:100%" disabled=true) Delete Video
                         .col-12(style='clear=both; margin:auto;')
 
                 //.modal-footer

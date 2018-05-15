@@ -119,28 +119,28 @@ function typeDefine(type) {
 function typeLabel(type) {
     var dom;
     if (type === "GasDetector") {
-        dom='<div class="col-5 device-card-body-title-right GasDetector">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right GasDetector"><i class="fab fa-stumbleupon device-type-icon" ></i><span> GasDetector</span></div>';
     }
     if (type === "GasBreaker") {
-        dom='<div class="col-5 device-card-body-title-right GasBreaker">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right GasBreaker"><i class="fas fa-ban device-type-icon" ></i><span> GasBreaker</span></div>';
     }
     if (type === "ThermoHygrometer") {
-        dom='<div class="col-5 device-card-body-title-right ThermoHygrometer">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right ThermoHygrometer"><i class="fas fa-thermometer-half device-type-icon" ></i><span> ThermoHytgrometer</span></div>';
     }
     if (type === "SmartLighting") {
-        dom='<div class="col-5 device-card-body-title-right SmartLighting">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right SmartLighting"><i class="far fa-lightbulb device-type-icon" ></i><span> SmartLighting</span></div>';
     }
     if (type === "IntrusionDetector") {
-        dom='<div class="col-5 device-card-body-title-right IntrusionDetector">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right IntrusionDetector"><i class="fas fa-video device-type-icon" ></i><span> IntrusionDetector</span></div>';
     }
     if (type === "DoorSensor") {
-        dom='<div class="col-5 device-card-body-title-right DoorSensor">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right DoorSensor"><i class="fas fa-home device-type-icon" ></i><span> DoorSensor</span></div>';
     }
     if (type === "SmartPlug") {
-        dom='<div class="col-5 device-card-body-title-right SmartPlug">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right SmartPlug"><i class="fas fa-plug device-type-icon" ></i><span> SmartPlug</span></div>';
     }
     if (type === "SmartCamera") {
-        dom='<div class="col-5 device-card-body-title-right SmartCamera">'+type+'</div>';
+        dom='<div class="col-5 device-card-body-title-right SmartCamera"><i class="fas fa-camera device-type-icon" ></i><span> SmartCamera</span></div>';
     }
 
     return dom;
@@ -149,10 +149,10 @@ function typeLabel(type) {
 function connDefine(conn) {
     var myConn=conn;
     if (myConn === 0) {
-        return myConn = "Not Conn";
+        return myConn = '<i class="fas fa-toggle-off"></i>'
     }
     else {
-        return myConn = "Conn";
+        return myConn = '<i class="fas fa-toggle-on icon-on"></i>'
 
     }
     return myConn;
@@ -161,10 +161,10 @@ function connDefine(conn) {
 function authDefine(auth) {
     var myAuth=auth;
     if (myAuth === 0) {
-        return myAuth = "Not Auth";
+        return myAuth = '<i class="far fa-address-card"></i>';
     }
     else {
-        return myAuth = "Auth";
+        return myAuth = '<i class="far fa-address-card icon-on"></i>';
 
     }
     return myAuth;

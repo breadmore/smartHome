@@ -5,6 +5,11 @@ var mobilecheck = function () {
             console.log(a);
             check = true
         }
+
+        if(navigator.userAgent.match(/SAMSUNG|Samsung|SGH-[I|N|T]|GT-[I|N]|SM-[N|P|T|Z]|SHV-E|SCH-[I|J|R|S]|SPH-L/i)) {
+            check = true;
+        }
+
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
 }

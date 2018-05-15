@@ -38,6 +38,10 @@ function selectAuthsEid(did, callback){
     logDao.selectAuthsEid(did, callback);
 }
 
+function selectSecurityEvent(callback){
+    logDao.selectSecurityEvent(callback);
+}
+
 module.exports = {
     insertLog: insert,
     selectRecentSecurityLog: selectRecentSecurityLog,
@@ -46,5 +50,6 @@ module.exports = {
     selectRecentServiceLog:selectRecentServiceLog,
     selectAllDeployLog:selectAllDeployLog,
     selectAllServiceLog:selectAllServiceLog,
-    selectAuthsEid:selectAuthsEid
+    selectAuthsEid:selectAuthsEid,
+    selectSecurityEvent:selectSecurityEvent
 };

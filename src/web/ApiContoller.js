@@ -11,26 +11,45 @@ router.route('/')
 });
 
 router.use('/v1', require('./api/v1/V1Controller'));
+const videoPath = path.join(__dirname, "../../resource/public/video");
 
 router.route('/videos')
     .get(function(req, res) {
-        const videoPath = path.join(__dirname, "../../resource/public/video");
-
         fs.readdir(videoPath, function (err, files) {
             if (err) {
                 console.log(err);
                 res.status(500).send('Internal Server Error');
             }
-
-            // for (var i = 0; i < files.length, i++) {
-            //     var filename = files[i];
-            //
-            // }
-
             res.status(200).send(files);
         });
     });
+    // .delete(function(req, res) {
+    //     for (var i = 0; i < req.body.length; i++) {
+    //         var file = path.join(videoPath, req.body[i]);
+    //         // fs.unlinkSync(file);
+    //         fs.unlink(file, function (err) {
+    //             if (err) {
+    //                 console.log(err);
+    //                 res.status(400).send(err);
+    //             }
+    //         });
+    //     }
+    //     res.status(204).send();
+    // });
 
+router.route('/videos/:name')
+    .delete(function (req, res) {
+        console.log(req.params.name);
+        var file = path.join(videoPath, req.params.name);
+        fs.unlink(file, function (err) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(204).send();
+            }
+        });
+    });
 
 var user = {
     user_name : null,

@@ -63,6 +63,7 @@ $(document).ready(function () {
 
 
     $(".input-remove").click(function () {
+        // $("#modifyModal input[type=radio]").prop("checked", false);
         $("#addGatewayModal input[type=text]").val("");
         $("#addDeviceModal input[type=text]").val("");
         $("#addGatewayModal input[type=radio]").prop("checked", false);
@@ -138,12 +139,13 @@ $(document).ready(function () {
     var securityEventTable = $('#securityEventTable').DataTable({
         paging: true,
         processing: true,
-        order: [[1, 'desc']],
+        ordering: false,
+        // order: [[1, 'desc']],
         serverSide: false,
         searching: true,
         dom: '<"row no-gutters"t>',
         ajax: {
-            url: "/api/v1/logs",
+            url: "/api/v1/logs/securityevent",
             dataSrc: function (result) {
                 console.log(result);
                 check(result);
@@ -152,20 +154,20 @@ $(document).ready(function () {
                     item.event_date = dateFormatter(item.event_date,2);
                     // item.event_date = da(item.event_date);
                     item.device_type = type2Icon(item.device_type);
-                    var dataDid = {did: ''};
-                    dataDid.did = item.device_id;
-                    $.ajax({
-                        url:'/api/v1/logs/authseid',
-                        type:'post',
-                        async: false,
-                        data: dataDid,
-                        success: function (auths) {
-                            item.device_id = auths[0].eid;
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-                    })
+                    // var dataDid = {did: ''};
+                    // dataDid.did = item.device_id;
+                    // $.ajax({
+                    //     url:'/api/v1/logs/authseid',
+                    //     type:'post',
+                    //     async: false,
+                    //     data: dataDid,
+                    //     success: function (auths) {
+                    //         item.device_id = auths[0].eid;
+                    //     },
+                    //     error: function (error) {
+                    //         console.log(error);
+                    //     }
+                    // })
                 });
 
 
@@ -455,7 +457,8 @@ $(document).ready(function () {
             data: updateData,
             dataType: 'json',
             success: function (result) {
-                securityEventTable.ajax.reload();
+                // deployLogTable.ajax.reload;
+                window.location.reload();
                 console.log(result);
             },
             error: function (err) {
@@ -873,7 +876,7 @@ function detailViewUpdate(gateway, device) {
     }
     else if (device) {
         toggleTable(gateway, device);
-        console.log(device);
+        // console.log(device);
         var dataJson = {
             id : device.eid
         }

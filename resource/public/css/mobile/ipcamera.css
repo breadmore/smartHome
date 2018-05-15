@@ -47,6 +47,8 @@ hr {
 }
 
 .on-air {
+    margin-left: 1rem;
+    border-radius: 1rem;
     display: inline-block;
     color: white;
     font-weight: bolder;
@@ -79,11 +81,49 @@ hr {
 
 .stream {
     margin-left: 40px;
+    margin-right: 3rem;
+    margin-bottom: 0.5rem;
+    border-bottom: rgb(0, 135, 135) 2px solid;
 }
 
 .list-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     margin-right: 3rem;
     background: black;
+}
+.video-btn {
+    background:none;
+    color: black;
+    border:none;
+    margin-top: 0.3rem;
+    cursor: pointer;
+}
+.video-btn-active{
+    background-color: #008CBA;
+    color: white;
+}
+.video-list-active{
+    border: 2px solid #008CBA;
+    border-radius: 0.5rem;
+    background-color: #008CBA;
+    color: white;
+}
+.video-list.video-list-active:before {
+    content: "●"!important;
+    color: white!important;
+
+}
+.video-list {
+    margin-top: 0.3rem;
+    width: 95%;
+    text-align: left;
+    height: 4rem;
+    line-height: 2rem;
+    overflow: auto;
+    word-wrap: normal;
+}
+.video-list:before {
+    content:"◎";
+    color: black;
 }

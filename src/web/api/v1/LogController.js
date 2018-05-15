@@ -99,5 +99,16 @@ router.route('/authseid')
             }
         })
     })
+router.route('/securityevent')
+    .get(function (req, res) {
+        logService.selectSecurityEvent(function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    })
 
 module.exports = router;

@@ -2,7 +2,8 @@
     background-color: rgb(255, 51, 102);
     height: 3rem;
     font-size: 2rem;
-    text-align: center;
+    text-align: left;
+    text-indent: 0.5rem;
     color: white;
     font-weight: bolder;
 }
@@ -70,4 +71,10 @@
 
 .device {
     background-color: rgba(33, 33, 33, 0.8);
+}
+.icon-on {
+    color: rgb(0, 135, 135);
+}
+.fa-toggle-off, .fa-toggle-on, .fa-address-card {
+    font-size: 2.6rem;
 }

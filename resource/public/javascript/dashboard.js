@@ -1,9 +1,12 @@
 var recentTemperature = [];
 var recentHumidity = [];
+var deleteList = [];
+var deleteSucces = [];
+var deleteFail = [];
+
 var temperatureChart;
 var humidityChart;
 var myChart_modal;
-
 const NOT_DETECTED = 'Not Detected';
 const DETECTED = 'Detected';
 
@@ -17,18 +20,18 @@ const OCCUPIED = 'Occupied Mode';
 const OUTING = 'Outing Mode';
 
 var currentState = {
-    window : undefined,
-    human : undefined,
+    window: undefined,
+    human: undefined,
     gasB: undefined,
     gasD: undefined,
     mode: undefined,
-    light: undefined
+    led: undefined
 };
 
 var currentXiaomi = {
-    magnet : undefined,
-    motion : undefined,
-    plug : undefined
+    magnet: undefined,
+    motion: undefined,
+    plug: undefined
 };
 
 
@@ -41,9 +44,8 @@ window.onbeforeunload = function () {
     }
 };
 
-$(document).ready(function() {
 
-
+$(document).ready(function () {
     var table = $('#eventTable').DataTable({
         paging: true,
         processing: true,
@@ -51,104 +53,26 @@ $(document).ready(function() {
         order: [[0, 'desc']],
         serverSide: false,
         searching: true,
-        dom : '<"row no-gutters"t>',
-        ajax : {
+        dom: '<"row no-gutters"t>',
+        ajax: {
             url: "/api/v1/logs/recentservice",
-            // async: false,
             dataSrc: function (result) {
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date);
-                    // item.device_name = undefined;
-                    if (item.device_id) {
-                        $.ajax({
-                            url: '/api/v1/devices/' + item.device_id,
-                            type: 'get',
-                            async: false,
-                            success: function (result) {
-                                var dataDid = {did: ''};
-                                // device information already deleted!
-                                if (result.length === 0) {
-                                    // item.event_date = dateFormatter(item.event_date);
-                                    item.device_name = '';
-                                    item.device_id = '';
-                                    item.device_type = '';
-                                }
-                                else {
-                                    dataDid.did = item.device_id;
-                                    $.ajax({
-                                        url:'/api/v1/logs/authseid',
-                                        type:'post',
-                                        async: false,
-                                        data: dataDid,
-                                        success: function (auths) {
-                                            item.device_id = auths[0].eid;
-                                        },
-                                        error: function (error) {
-                                            console.log(error);
-                                        }
-                                    })
-                                    item.device_name = result[0].dname;
-                                    if (item.device_type === 0){
-                                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
-                                    }
-                                    else {
-                                        item.device_type = type2Icon(item.device_type);
-                                    }
-                                    // item.event_date = dateFormatter(item.event_date);
-                                }
-
-
-
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
-                        });
-                    }
-                    // device id isn't exist.
-                    else {
-                        item.device_name = '';
-                        item.device_id = '';
-                        item.device_type = '';
-                    }
-
-                    // if(item.device_name == undefined){  //error catch code
-                    //     item.device_name = '';
-                    // }
-                    //
-                    // if(item.device_id == null){     //error catch code
-                    //     item.device_id = '';
-                    // }
-                    // if (item.device_type == null) {
-                    //     item.device_type = "";
-                    // } else if (item.device_type === 0){
-                    //     item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
-                    // } else {
-                    //     item.device_type = type2Icon(item.device_type);
-                    // }
-                    //
-                    //
-                    //
-                    // item.event_date = dateFormatter(item.event_date);
                 });
                 return result;
-            }},
-        columns : [
+            }
+        },
+        columns: [
             // {data: null},
             {data: "event_date"},
             {data: "event_type"},
-            {data: "device_name"},
-            {data: "device_type"},
-            {data: "device_id"},
             {data: "msg"}
         ],
         columnDefs: [
-            { width: '260', targets: 0 },
-            { width: '145', targets: 1 },
-            { width: '160', targets: 2 },
-            { width: '200', targets: 3 },
-            { width: '125', targets: 4 },
-            { width: '280', targets: 5 },
+            {width: '260', targets: 0},
+            {width: '145', targets: 1},
+            {width: '260', targets: 2},
             // { width: '390', targets: 6 },
 
         ]
@@ -185,7 +109,7 @@ $(document).ready(function() {
                 radius: 0,
                 label: 'apples',
                 borderColor: "rgba(35, 189, 252)",
-                data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
                 backgroundColor: "transparent"
             }]
         },
@@ -199,8 +123,8 @@ $(document).ready(function() {
                     }],
                     yAxes: [{
                         ticks: {
-                            min : 0,
-                            max : 40,
+                            min: 0,
+                            max: 40,
                             stepSize: 10,
                             display: false
                         }
@@ -234,8 +158,8 @@ $(document).ready(function() {
                     }],
                     yAxes: [{
                         ticks: {
-                            min : 0,
-                            max : 100,
+                            min: 0,
+                            max: 100,
                             stepSize: 25,
                             display: false
                         }
@@ -248,7 +172,7 @@ $(document).ready(function() {
     myChart_modal = new Chart(ctx_modal, {
         type: 'line',
         data: {
-            labels: [5,10,15,20,25,30,35,40,45,50,55,60],
+            labels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
             datasets: [
                 {
                     label: 'Temperature',
@@ -332,13 +256,15 @@ $(document).ready(function() {
         socket.emit('/legacy/states');
     }, 1000);
     socket.on('/legacy/states', function (data) {
+        // console.log(currentState.gasD);
+        // console.log(data.gas_detector);
         if (currentState.window === undefined || currentState.human === undefined || currentState.gasB === undefined || currentState.gasD === undefined) {
             currentState.window = data.window_detector;
             currentState.human = data.human_detector;
             currentState.gasD = data.gas_detector;
             currentState.gasB = data.gas_blocker;
 
-            if (data.mode == 0) {
+            if (data.mode) {
                 currentState.mode = data.mode;
             }
             else {
@@ -375,7 +301,7 @@ $(document).ready(function() {
         //todo [0].value addç
         $('#luxValue').text(data.illuminaty[0].value);
         // console.log(data.illuminaty[0].value * 0.6);
-        $(".graph").before("<style> .model-1 .graph:before { transform: rotate(" + (data.illuminaty[0].value * 0.6) +"deg)} </style>");
+        $(".graph").before("<style> .model-1 .graph:before { transform: rotate(" + (data.illuminaty[0].value * 0.6) + "deg)} </style>");
 
     });
 
@@ -387,7 +313,7 @@ $(document).ready(function() {
     socket.on('/xiaomi/states', function (data) {
         // console.log(data);
         var log = {
-            eventType : 'log',
+            eventType: 'log',
             deviceType: undefined,
             deviceId: undefined,
             msg: undefined
@@ -396,8 +322,15 @@ $(document).ready(function() {
             case 'magnet':
                 if (currentXiaomi.magnet === undefined) {
                     currentXiaomi.magnet = data.event;
+                    if (data.event == 'open') {
+                        log.msg = 'magnet opend.';
+                        sendLog(log);
+                        currentXiaomi.magnet = 'open';
+                        console.log('Magent First record Start!!');
+                        recordStart(1);
+                    }
                 }
-                if (currentState.mode === 0) {
+                if (currentState.mode === 1) {
                     if (data.event === 'open') {
                         $('#xiaomiWindow').text(OPENED);
                         $('#xiaomiWindow').removeClass('safe-event');
@@ -417,6 +350,7 @@ $(document).ready(function() {
                         console.log('magnet changed!');
                         log.deviceId = '12965944';
                         log.deviceType = '6';
+
                         if (currentXiaomi.magnet === 'open') {
                             log.msg = 'magnet closed.';
                             sendLog(log);
@@ -439,10 +373,21 @@ $(document).ready(function() {
 
                 break;
             case 'motion':
+                console.log(currentState);
+                console.log(data);
+                console.log(currentXiaomi);
                 if (currentXiaomi.motion === undefined) {
+                    console.log(data.event);
                     currentXiaomi.motion = data.event;
+                    if (data.event === 'motion') {
+                        console.log('First Motion Record Start!');
+                        recordStart(2);
+                    }
+                    else {
+                        console.log('First No Motion');
+                    }
                 }
-                if (currentState.mode === 0) {
+                if (currentState.mode === 1) {
                     if (data.event === 'motion') {
                         $('#xiaomiHuman').text(DETECTED);
                         $('#xiaomiHuman').addClass('danger-event');
@@ -463,8 +408,8 @@ $(document).ready(function() {
 
                     if (currentXiaomi.motion !== data.event) {
                         console.log('motion changed!');
-                        log.deviceId = '12965946';
-                        log.deviceType = '5';
+                        // log.deviceId = '';
+                        // log.deviceType = '';
                         if (currentXiaomi.motion === 'no_motion') {
                             log.msg = 'motion is detected.';
                             sendLog(log);
@@ -484,7 +429,6 @@ $(document).ready(function() {
                     $('#xiaomiWindow').addClass('safe-event');
                     $('#xiaomiWindow').removeClass('danger-event');
                 }
-
 
 
                 break;
@@ -525,8 +469,6 @@ $(document).ready(function() {
             default:
                 break;
         }
-
-
     });
 
     /**
@@ -551,13 +493,15 @@ $(document).ready(function() {
     $('#roomModeController').on('click', function (e) {
         if (!$('#roomState').prop('checked')) {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, 1)
-            // xiaomiAction({plug: 'on'});
+            legacyDeviceAction(2, 0);
+
         }
         else {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, 0);
-            // xiaomiAction({plug: 'off'});
+            legacyDeviceAction(2, 1);
+            $('#xiaomiHuman').text(NOT_DETECTED);
+            $('#xiaomiHuman').addClass('safe-event');
+            $('#xiaomiHuman').removeClass('danger-event');
         }
     });
 
@@ -652,7 +596,60 @@ $(document).ready(function() {
     // #xiaomiPowerController
     // #lightController
     // #roomModeController
+    $('#videoDeleteBtn').on('click', function () {
+        $('.loader').attr('style','display:display');
+        var count = deleteList.length;
+        // console.log('Videodeletebtnclick');
+        for (; deleteList.length;) {
+            var tmp = deleteList.pop();
+            console.log(tmp);
+            $.ajax({
+                url: '/api/videos/' + tmp,
+                type: 'delete',
+                success: function () {
+                    deleteSucces.push(tmp);
+                    console.log(tmp + 'deleteS')
+                },
+                error: function () {
+                    deleteFail.push(tmp);
+                    console.log(tmp + 'deleteF')
+                }
+            });
+        }
 
+        var isLoading = true;
+        var loading = setInterval(function () {
+            if (isLoading) {
+                if (count === deleteList.length+deleteFail.length+deleteSucces.length) {
+
+                    console.log('S : '+deleteSucces.length);
+                    console.log('F : '+deleteFail.length);
+                    console.log('L : '+deleteList.length);
+
+                    modal_list();
+                    $('#videoDeleteBtn').attr('disabled', true);
+
+                    var msg = 'Delete Sucess(' + deleteSucces.length + ' files) : ';
+                    if (deleteSucces.length) {
+                        for (; deleteSucces.length - 1;)
+                            msg += deleteSucces.pop() + ', ';
+                        msg += deleteSucces.pop();
+                    }
+                    msg+='\nDelete fail('+deleteFail.length+' files) : ';
+                    if (deleteFail.length) {
+                        for (; deleteFail.length - 1;)
+                            msg += deleteFail.pop() + ', ';
+                        msg += deleteFail.pop();
+                    }
+                    alert(msg);
+                    isLoading = false;
+                    clearInterval(loading);
+                    $('.loader').attr('style','display:none');
+                }
+            }
+        }, 1000);
+
+    });
 });
 
 function initEnvironmentData() {
@@ -715,7 +712,7 @@ function updateChart(chart, chartData) {
 
 function updateLegacyStates(state) {
     var log = {
-        eventType : 'log',
+        eventType: 'log',
         deviceType: null,
         deviceId: null,
         msg: undefined
@@ -733,12 +730,12 @@ function updateLegacyStates(state) {
             $('#lightStatus').addClass('danger-event');
             $('#lightStatus').removeClass('safe-event');
 
-        },7 * 1000)
+        }, 7 * 1000)
 
     }
     else if (state.led === 1) {
         $('#lightState').prop("checked", true);
-        setTimeout(function() {
+        setTimeout(function () {
             $('#lightState').removeAttr('disabled');
             $('#lightStatus').text(ON_STATUS);
             $('#lightStatus').removeClass('danger-event');
@@ -749,7 +746,7 @@ function updateLegacyStates(state) {
         $('#lightState').attr('disabled', 'disabled');
     }
 
-    if (state.mode === 1) {
+    if (state.mode === 0) {
         $('#roomState').prop("checked", false);
         $('#roomStatus').text(OCCUPIED);
 
@@ -815,7 +812,7 @@ function updateLegacyStates(state) {
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
-        if (currentState.mode === 0) {
+        if (currentState.mode === 1) {
             console.log("window changed!");
             log.deviceId = '12965944';
             log.deviceType = '6';
@@ -832,7 +829,7 @@ function updateLegacyStates(state) {
     }
 
     if (currentState.human !== state.human_detector) {
-        if (currentState.mode === 0) {
+        if (currentState.mode === 1) {
             console.log("human changed!");
             log.deviceId = '12965942';
             log.deviceType = '5';
@@ -901,6 +898,7 @@ function updateLegacyStates(state) {
     //     sendSensorLog();
     // }
 }
+
 // var device_type = {
 // //     1 : "GasDetector",
 // //     2 : "GasBreaker",
@@ -914,12 +912,12 @@ function updateLegacyStates(state) {
 
 function xiaomiAction(action) {
     var data = {
-        eventType : 'log',
+        eventType : 'service',
         deviceType: '2',
         deviceId: '12965946',
         msg: undefined
     };
-    console.log(action);
+    // console.log(action);
 
     if (action.plug === 'on') {
         data.msg = 'request plug outlet turn on.'
@@ -928,13 +926,13 @@ function xiaomiAction(action) {
         data.msg = 'request plug outlet turn off.'
     }
 
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         url: '/api/v1/logs',
         type: 'post',
-        data : data,
-        success: function(result) {
+        data: data,
+        success: function (result) {
             $.ajax({
                 url: 'api/v1/xiaomi/action',
                 type: 'post',
@@ -947,7 +945,7 @@ function xiaomiAction(action) {
                 }
             });
         },
-        error : function(err) {
+        error: function (err) {
             console.log('Error send Log!');
             console.log(err);
         }
@@ -961,14 +959,14 @@ function legacyDeviceAction(type, command) {
     var ip = undefined;
     var msg;
     var data = {
-        eventType : undefined,
+        eventType: undefined,
         deviceType: undefined,
         deviceId: undefined,
         msg: undefined
     };
     if (type === 1) {           //smart light
         ip = '192.168.0.100';
-        data.eventType = 'log';
+        data.eventType = 'service';
         data.deviceType = '4';
         data.deviceId = '12965940';
         if (command === 0) {
@@ -1018,7 +1016,7 @@ function legacyDeviceAction(type, command) {
             $.ajax({
                 url: '/api/v1/logs',
                 type: 'post',
-                data : data,
+                data: data,
                 success: function (result) {
                     $('#eventTable').DataTable().ajax.reload();
                 },
@@ -1040,11 +1038,11 @@ function sendLog(log) {
     $.ajax({
         url: '/api/v1/logs',
         type: 'post',
-        data : log,
-        success: function(result) {
+        data: log,
+        success: function (result) {
             // console.log(result);
         },
-        error : function(err) {
+        error: function (err) {
             console.log('Error send Log!');
             console.log(err);
         }
@@ -1073,6 +1071,7 @@ function initXiaomiDeviceData() {
     }, 1500);
 
 }
+
 // function canvasDisplay(){
 //     if ($("#myCanvas").css("display") == "none") {
 //         $("canvas").toggle();
@@ -1097,13 +1096,13 @@ function initXiaomiDeviceData() {
 // }
 
 function display(isCan) {
-    if(isCan === true && $("canvas").css("display") === "none") {           //streaming
+    if (isCan === true && $("canvas").css("display") === "none") {           //streaming
         $("canvas").toggle();
         // $("#videoName").toggle();
         $("video").toggle();
         $("#nowPlay").text("ON AIR...");
     }
-    else if(isCan === false && $("canvas").css("display") !== "none") {     //videoplay
+    else if (isCan === false && $("canvas").css("display") !== "none") {     //videoplay
         $("canvas").toggle();
         // $("#videoName").toggle();
         $("video").toggle();
@@ -1111,6 +1110,7 @@ function display(isCan) {
     }
 
 }
+
 function videoPlayer() {
     var video = document.getElementById('myVideo');
     var src = document.getElementById('vid');
@@ -1141,16 +1141,18 @@ function modal_list() {
     $(".video-list").remove();
 
     $.ajax({
-        type:"get",
-        url:"/api/videos",
+        type: "get",
+        url: "/api/videos",
         success: function (data) {
-            for(i=0; i<data.length; i++) {
-                $(".my-video-list").append("<li class='video-list'>"+" <button class='myBtn video-btn' data-name="+data[i]+">"+data[i]+" </button> " +"</li>");
+            for (i = 0; i < data.length; i++) {
+                $(".my-video-list").append("<li class='video-list'>" + " <button class='myBtn video-btn' data-name=\"" + data[i] + "\">" + data[i] + " </button> " +
+                    "<input type='checkbox' name='delete-chk' data-name=\"" + data[i] + "\" style='float:right;width:20px;height:20px' class='videoDeleteChk''>" + "</li>");
             }
         }
     })
 
 }
+
 /**
  *
  *
@@ -1162,30 +1164,29 @@ function modal_list() {
 function recordStart(index) {
     var videoName;
     var dd = new Date()
-    var ss = '' + dd.getUTCFullYear() + 0+(dd.getMonth()+1) + dd.getDate() + dd.getHours()+ dd.getMinutes()+ dd.getSeconds()
+    var ss = '' + dd.getUTCFullYear() + 0 + (dd.getMonth() + 1) + dd.getDate() + dd.getHours() + dd.getMinutes() + dd.getSeconds()
 
-    if(index==1){
-        videoName='window_'+ss;
+    if (index == 1) {
+        videoName = 'door_' + ss;
     }
-    else if(index==2){
-        videoName='human_'+ss;
+    else if (index == 2) {
+        videoName = 'motion_' + ss;
     }
-    else if(index==3){
-        videoName=$("#videoName").val();
+    else if (index == 3) {
+        videoName = $("#videoName").val();
     }
 
     camSocket.emit('stop');
-    camSocket.emit('record',videoName);
+    camSocket.emit('record', videoName);
     // console.log("record start");
 
 }
 
 
-
 function getHourTemp(value) {
     var hour_min = {
-        "min" : null,
-        "hour" : null
+        "min": null,
+        "hour": null
     };
     var label = [];
     // console.log("value " + value);
@@ -1193,7 +1194,7 @@ function getHourTemp(value) {
         hour_min.min = 5;
         hour_min.hour = 1;
         getDataHour();
-    } else if ( value == 2) {
+    } else if (value == 2) {
         hour_min.min = 30;
         hour_min.hour = 6;
         getDataHour();
@@ -1207,9 +1208,9 @@ function getHourTemp(value) {
 
     function getDataHour() {
         $.ajax({
-            url : "api/hourtemp",
-            type : 'post',
-            data : hour_min,
+            url: "api/hourtemp",
+            type: 'post',
+            data: hour_min,
             success: function (result) {
                 // console.log(result);
                 var new_data = [];
@@ -1218,7 +1219,7 @@ function getHourTemp(value) {
                     new_data.push(item.valueAvg);
                     if (item["min * " + hour_min.min] == 0) {
                         min = "00";
-                    } else if (item["min * " + hour_min.min] == 5){
+                    } else if (item["min * " + hour_min.min] == 5) {
                         min = "05";
                     } else {
                         min = item["min * " + hour_min.min];
@@ -1269,8 +1270,8 @@ function getHourTemp(value) {
 
     function getDateDay() {
         $.ajax({
-            url : "api/daytemp",
-            type : 'post',
+            url: "api/daytemp",
+            type: 'post',
             success: function (result) {
                 var new_data = [];
                 var min;
@@ -1323,16 +1324,32 @@ function getHourTemp(value) {
 
 function dateFormatter(date) {
     var str = '';
-    str += date.substring(0,4) + '년 ';
-    str += date.substring(5,7) + '월 ';
-    str += date.substring(8,10) + '일 ';
-    str += date.substring(11,13) + '시 ';
-    str += date.substring(14,16) + '분 ';
+    str += date.substring(0, 4) + '년 ';
+    str += date.substring(5, 7) + '월 ';
+    str += date.substring(8, 10) + '일 ';
+    str += date.substring(11, 13) + '시 ';
+    str += date.substring(14, 16) + '분 ';
     return str;
 }
 
-
-
+$(document).on('change', '.videoDeleteChk', function () {
+    var i;
+    console.log('chkboxclick');
+    console.log($(this).attr('data-name'));
+    for (i = 0; i < deleteList.length; i++) {
+        if (deleteList[i] == $(this).attr('data-name')) {
+            console.log('deletelist-out');
+            deleteList.splice(i, 1);
+            if (deleteList.length === 0)
+                $('#videoDeleteBtn').attr('disabled', true);
+            return;
+        }
+    }
+    console.log('deletelist-in');
+    // console.log($(this).attr('data-name'));
+    deleteList.push($(this).attr('data-name'));
+    $('#videoDeleteBtn').attr('disabled', false);
+});
 
 
 function initDeviceInfo() {
