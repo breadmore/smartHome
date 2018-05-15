@@ -36,14 +36,15 @@ block content
             //        p ON
             .camera-video
                 .on-air On Air
-                video#myVideo(controls, style='display:none;')
+                video#myVideo(controls, style='display:none;' autoplay=true)
                     source(id="vid", type='video/mp4')
                 #ipcamera
                     canvas
                 .video-list-box
                     div.stream
                         hr.list-hr
-                        button#change.video-btn Stream
+                        div.video-list
+                            button#change.video-btn Stream
                         hr.list-hr
                     div.video
                         ul.my-video-list

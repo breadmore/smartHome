@@ -82,8 +82,32 @@ hr {
 }
 
 .list-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     margin-right: 3rem;
     background: black;
+}
+.video-btn {
+    background:none;
+    color: black;
+    border:none;
+    margin-top: 0.3rem;
+    cursor: pointer;
+}
+.video-btn-active{
+    border: 2px solid #008CBA;
+    background-color: #008CBA;
+    color: white;
+}
+.video-list-active{
+    border: 2px solid #008CBA;
+    border-radius: 0.5rem;
+    background-color: #008CBA;
+    color: white;
+}
+.video-list {
+    width: 95%;
+    text-align: left;
+    overflow: auto;
+    word-wrap: normal;
 }

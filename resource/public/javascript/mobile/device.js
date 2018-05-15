@@ -149,10 +149,10 @@ function typeLabel(type) {
 function connDefine(conn) {
     var myConn=conn;
     if (myConn === 0) {
-        return myConn = "Not Conn";
+        return myConn = '<i class="fas fa-toggle-off"></i>'
     }
     else {
-        return myConn = "Conn";
+        return myConn = '<i class="fas fa-toggle-on icon-on"></i>'
 
     }
     return myConn;
@@ -161,10 +161,10 @@ function connDefine(conn) {
 function authDefine(auth) {
     var myAuth=auth;
     if (myAuth === 0) {
-        return myAuth = "Not Auth";
+        return myAuth = '<i class="far fa-address-card"></i>';
     }
     else {
-        return myAuth = "Auth";
+        return myAuth = '<i class="far fa-address-card icon-on"></i>';
 
     }
     return myAuth;

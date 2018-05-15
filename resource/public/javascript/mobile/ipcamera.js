@@ -122,6 +122,17 @@ function videoPlayer() {
 
     });
 
+    $(document).on('click', '.video-btn', function () {
+        var parent = this.parentElement;
+        $('.video-btn-active').removeClass('video-btn-active');
+        $('.video-list-active').removeClass('video-list-active');
+        $(this).addClass('video-btn-active');
+        $(parent).addClass('video-list-active');
+
+        video.load();
+
+    });
+
     $(document).ready(function () {
         change.onclick = function () {
             display(true);
@@ -131,7 +142,7 @@ function videoPlayer() {
 }
 
 function modal_list() {
-    $(".video-list").remove();
+    // $(".video-list").remove();
 
     $.ajax({
         type:"get",
@@ -139,7 +150,7 @@ function modal_list() {
         success: function (data) {
             for(i=0; i<data.length; i++) {
                 $(".my-video-list").append("<li class='video-list'>"+"" +
-                    "<button class='myBtn video-btn' data-name="+data[i]+">"+
+                    "<button class='myBtn video-btn' data-name=\'"+data[i]+"\'>"+
                     data[i]+
                     "</button>" +
                     "</li>" +
