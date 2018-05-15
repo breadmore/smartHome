@@ -153,8 +153,7 @@ function modal_list() {
                     "<button class='myBtn video-btn' data-name=\'"+data[i]+"\'>"+
                     data[i]+
                     "</button>" +
-                    "</li>" +
-                    "<hr class='list-hr'>");
+                    "</li>");
             }
         }
     })

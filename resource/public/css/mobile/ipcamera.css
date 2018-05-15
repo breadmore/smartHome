@@ -47,6 +47,8 @@ hr {
 }
 
 .on-air {
+    margin-left: 1rem;
+    border-radius: 1rem;
     display: inline-block;
     color: white;
     font-weight: bolder;
@@ -79,6 +81,9 @@ hr {
 
 .stream {
     margin-left: 40px;
+    margin-right: 3rem;
+    margin-bottom: 0.5rem;
+    border-bottom: rgb(0, 135, 135) 2px solid;
 }
 
 .list-hr {
@@ -95,7 +100,6 @@ hr {
     cursor: pointer;
 }
 .video-btn-active{
-    border: 2px solid #008CBA;
     background-color: #008CBA;
     color: white;
 }
@@ -105,9 +109,21 @@ hr {
     background-color: #008CBA;
     color: white;
 }
+.video-list.video-list-active:before {
+    content: "●"!important;
+    color: white!important;
+
+}
 .video-list {
+    margin-top: 0.3rem;
     width: 95%;
     text-align: left;
+    height: 4rem;
+    line-height: 2rem;
     overflow: auto;
     word-wrap: normal;
+}
+.video-list:before {
+    content:"◎";
+    color: black;
 }

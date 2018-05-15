@@ -2,7 +2,8 @@
     background-color: rgb(255, 51, 102);
     height: 3rem;
     font-size: 2rem;
-    text-align: center;
+    text-align: left;
+    text-indent: 0.5rem;
     color: white;
     font-weight: bolder;
 }
