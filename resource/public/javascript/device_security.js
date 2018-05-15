@@ -139,7 +139,8 @@ $(document).ready(function () {
     var securityEventTable = $('#securityEventTable').DataTable({
         paging: true,
         processing: true,
-        order: [[1, 'desc']],
+        ordering: false,
+        // order: [[1, 'desc']],
         serverSide: false,
         searching: true,
         dom: '<"row no-gutters"t>',
