@@ -25,7 +25,7 @@ var currentState = {
     gasB: undefined,
     gasD: undefined,
     mode: undefined,
-    light: undefined
+    led: undefined
 };
 
 var currentXiaomi = {
@@ -334,13 +334,15 @@ $(document).ready(function () {
         socket.emit('/legacy/states');
     }, 1000);
     socket.on('/legacy/states', function (data) {
+        // console.log(currentState.gasD);
+        // console.log(data.gas_detector);
         if (currentState.window === undefined || currentState.human === undefined || currentState.gasB === undefined || currentState.gasD === undefined) {
             currentState.window = data.window_detector;
             currentState.human = data.human_detector;
             currentState.gasD = data.gas_detector;
             currentState.gasB = data.gas_blocker;
 
-            if (data.mode == 0) {
+            if (data.mode) {
                 currentState.mode = data.mode;
             }
             else {
@@ -398,8 +400,15 @@ $(document).ready(function () {
             case 'magnet':
                 if (currentXiaomi.magnet === undefined) {
                     currentXiaomi.magnet = data.event;
+                    if (data.event == 'open') {
+                        log.msg = 'magnet opend.';
+                        sendLog(log);
+                        currentXiaomi.magnet = 'open';
+                        console.log('Magent First record Start!!');
+                        recordStart(1);
+                    }
                 }
-                if (currentState.mode === 0) {
+                if (currentState.mode === 1) {
                     if (data.event === 'open') {
                         $('#xiaomiWindow').text(OPENED);
                         $('#xiaomiWindow').removeClass('safe-event');
@@ -419,6 +428,7 @@ $(document).ready(function () {
                         console.log('magnet changed!');
                         log.deviceId = '12965944';
                         log.deviceType = '6';
+
                         if (currentXiaomi.magnet === 'open') {
                             log.msg = 'magnet closed.';
                             sendLog(log);
@@ -441,6 +451,9 @@ $(document).ready(function () {
 
                 break;
             case 'motion':
+                console.log(currentState);
+                console.log(data);
+                console.log(currentXiaomi);
                 if (currentXiaomi.motion === undefined) {
                     console.log(data.event);
                     currentXiaomi.motion = data.event;
@@ -452,9 +465,8 @@ $(document).ready(function () {
                         console.log('First No Motion');
                     }
                 }
-                if (currentState.mode === 0) {
+                if (currentState.mode === 1) {
                     if (data.event === 'motion') {
-                        console.log("asdasd");
                         $('#xiaomiHuman').text(DETECTED);
                         $('#xiaomiHuman').addClass('danger-event');
                         $('#xiaomiHuman').removeClass('safe-event');
@@ -535,8 +547,6 @@ $(document).ready(function () {
             default:
                 break;
         }
-
-
     });
 
     /**
@@ -561,13 +571,15 @@ $(document).ready(function () {
     $('#roomModeController').on('click', function (e) {
         if (!$('#roomState').prop('checked')) {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, 1)
-            // xiaomiAction({plug: 'on'});
+            legacyDeviceAction(2, 0);
+
         }
         else {
             console.log($('#roomState').prop('checked'));
-            legacyDeviceAction(2, 0);
-            // xiaomiAction({plug: 'off'});
+            legacyDeviceAction(2, 1);
+            $('#xiaomiHuman').text(NOT_DETECTED);
+            $('#xiaomiHuman').addClass('safe-event');
+            $('#xiaomiHuman').removeClass('danger-event');
         }
     });
 
@@ -812,7 +824,7 @@ function updateLegacyStates(state) {
         $('#lightState').attr('disabled', 'disabled');
     }
 
-    if (state.mode === 1) {
+    if (state.mode === 0) {
         $('#roomState').prop("checked", false);
         $('#roomStatus').text(OCCUPIED);
 
@@ -878,7 +890,7 @@ function updateLegacyStates(state) {
 
     // todo : if currentState has been changed then insert sensor log!
     if (currentState.window !== state.window_detector) {
-        if (currentState.mode === 0) {
+        if (currentState.mode === 1) {
             console.log("window changed!");
             log.deviceId = '12965944';
             log.deviceType = '6';
@@ -895,7 +907,7 @@ function updateLegacyStates(state) {
     }
 
     if (currentState.human !== state.human_detector) {
-        if (currentState.mode === 0) {
+        if (currentState.mode === 1) {
             console.log("human changed!");
             log.deviceId = '12965942';
             log.deviceType = '5';
@@ -983,7 +995,7 @@ function xiaomiAction(action) {
         deviceId: '12965946',
         msg: undefined
     };
-    console.log(action);
+    // console.log(action);
 
     if (action.plug === 'on') {
         data.msg = 'request plug outlet turn on.'
@@ -992,7 +1004,7 @@ function xiaomiAction(action) {
         data.msg = 'request plug outlet turn off.'
     }
 
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         url: '/api/v1/logs',
@@ -1233,10 +1245,10 @@ function recordStart(index) {
     var ss = '' + dd.getUTCFullYear() + 0 + (dd.getMonth() + 1) + dd.getDate() + dd.getHours() + dd.getMinutes() + dd.getSeconds()
 
     if (index == 1) {
-        videoName = 'window_' + ss;
+        videoName = 'door_' + ss;
     }
     else if (index == 2) {
-        videoName = 'human_' + ss;
+        videoName = 'motion_' + ss;
     }
     else if (index == 3) {
         videoName = $("#videoName").val();

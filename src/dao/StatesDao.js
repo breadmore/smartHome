@@ -27,6 +27,7 @@ var States = {
 
     updateState: function(state, callback) {
         var now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        console.log(state);
         return db.query('update states set gas_blocker=?, gas_detector=?, human_detector=?, window_detector=?, updated_at=? where id=1'
         ,[state.gas_blocker, state.gas_detector, state.human_detector, state.window_detector, now]
         ,callback)
