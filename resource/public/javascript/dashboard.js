@@ -56,81 +56,9 @@ $(document).ready(function () {
         dom: '<"row no-gutters"t>',
         ajax: {
             url: "/api/v1/logs/recentservice",
-            // async: false,
             dataSrc: function (result) {
                 $.each(result, (index, item) => {
                     item.event_date = dateFormatter(item.event_date);
-                    // item.device_name = undefined;
-                    if (item.device_id) {
-                        $.ajax({
-                            url: '/api/v1/devices/' + item.device_id,
-                            type: 'get',
-                            async: false,
-                            success: function (result) {
-                                var dataDid = {did: ''};
-                                // device information already deleted!
-                                if (result.length === 0) {
-                                    // item.event_date = dateFormatter(item.event_date);
-                                    item.device_name = '';
-                                    item.device_id = '';
-                                    item.device_type = '';
-                                }
-                                else {
-                                    dataDid.did = item.device_id;
-                                    $.ajax({
-                                        url: '/api/v1/logs/authseid',
-                                        type: 'post',
-                                        async: false,
-                                        data: dataDid,
-                                        success: function (auths) {
-                                            item.device_id = auths[0].eid;
-                                        },
-                                        error: function (error) {
-                                            console.log(error);
-                                        }
-                                    })
-                                    item.device_name = result[0].dname;
-                                    if (item.device_type === 0) {
-                                        item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
-                                    }
-                                    else {
-                                        item.device_type = type2Icon(item.device_type);
-                                    }
-                                    // item.event_date = dateFormatter(item.event_date);
-                                }
-
-
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
-                        });
-                    }
-                    // device id isn't exist.
-                    else {
-                        item.device_name = '';
-                        item.device_id = '';
-                        item.device_type = '';
-                    }
-
-                    // if(item.device_name == undefined){  //error catch code
-                    //     item.device_name = '';
-                    // }
-                    //
-                    // if(item.device_id == null){     //error catch code
-                    //     item.device_id = '';
-                    // }
-                    // if (item.device_type == null) {
-                    //     item.device_type = "";
-                    // } else if (item.device_type === 0){
-                    //     item.device_type = '<i class="fas fa-user-circle device-type-icon" ></i><span>Jaesil mode</span>';
-                    // } else {
-                    //     item.device_type = type2Icon(item.device_type);
-                    // }
-                    //
-                    //
-                    //
-                    // item.event_date = dateFormatter(item.event_date);
                 });
                 return result;
             }
@@ -139,18 +67,12 @@ $(document).ready(function () {
             // {data: null},
             {data: "event_date"},
             {data: "event_type"},
-            {data: "device_name"},
-            {data: "device_type"},
-            {data: "device_id"},
             {data: "msg"}
         ],
         columnDefs: [
             {width: '260', targets: 0},
             {width: '145', targets: 1},
-            {width: '160', targets: 2},
-            {width: '200', targets: 3},
-            {width: '125', targets: 4},
-            {width: '280', targets: 5},
+            {width: '260', targets: 2},
             // { width: '390', targets: 6 },
 
         ]

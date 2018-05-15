@@ -79,7 +79,7 @@ var Log = {
     },
 
     selectRecentServiceLog(callback) {
-        return db.query('select * from Security_Log where event_type = "service" or event_type = "log" order by id desc limit 10', callback);
+        return db.query('select event_date, event_type, msg from Security_Log where event_type = "service" or event_type = "log" order by id desc limit 10', callback);
     },
 
     selectAllServiceLog(callback) {
